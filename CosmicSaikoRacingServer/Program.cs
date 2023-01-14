@@ -7,7 +7,7 @@ using System.Text.Json;
 
 
 
-namespace EdenServer
+namespace CSRServer
 {
     class Program
     {

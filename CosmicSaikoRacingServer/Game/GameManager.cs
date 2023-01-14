@@ -71,6 +71,17 @@ namespace CSRServer
                 }
             });
 
+            //test
+            server.AddReceiveEvent("csString", (string client_id, EdenData d) =>
+            {
+                server.Send("scString", client_id, "server : " + d.Get<string>());
+            });
+            server.AddReceiveEvent("csDict", (string client_id, EdenData d) =>
+            {
+                server.Send("scDict", client_id, d);
+            });
+            //
+
             scenes.Enqueue(new LobbyScene(this, server));
 
             overlayScene = new ChatScene(this, server);

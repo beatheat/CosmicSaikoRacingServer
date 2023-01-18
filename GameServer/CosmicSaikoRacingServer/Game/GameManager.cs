@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EdenNetwork;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace CSRServer
 {
@@ -18,6 +19,7 @@ namespace CSRServer
 
         private StreamWriter logStream;
         private Thread logThread;
+
 
         public GameManager(EdenNetServer server)
         {
@@ -80,15 +82,35 @@ namespace CSRServer
             {
                 server.Send("scDict", client_id, d);
             });
-            //
+
+            server.AddResponse("CreateGame", (string client_id, EdenData d) =>
+            {
+                EdenNetClient client = new EdenNetClient(Program.config.matchingServerAddress, Program.config.matchingServerPort);
+                if (client.Connect() == ConnectionState.OK)
+                {
+                    EdenData data = client.Request("CreateLobby", 10);
+                    if(data.type == EdenData.Type.ERROR)
+                    {
+                        return new EdenData(0, "Cannot Create Game : cannot create lobby");
+                    }
+                    int roomNumber = data.Get<int>();
+                    Scene scene = scenes.Peek();
+                    scene.passingData.Add("hostplayer", new LobbyPlayer(client_id, d.Get<string>(), 0, true));
+                    scene.passingData.Add("roomNumber", roomNumber);
+                    overlayScene = new ChatScene(this, server);
+                    overlayScene.Load();
+                    return new EdenData(1, "OK");
+                }
+                return new EdenData(0, "Cannot Create Game : cannot connect Matching Server");
+            });
+
+            server.AddReceiveEvent("CreateLobby", (string client_id, EdenData data) =>
+            {
+                Scene scene = scenes.Peek();
+                scene.Load();
+            });
 
             scenes.Enqueue(new LobbyScene(this, server));
-
-            overlayScene = new ChatScene(this, server);
-            overlayScene.Load();
-
-            Scene scene = scenes.Peek();
-            scene.Load();
         }
 
         public void Close()

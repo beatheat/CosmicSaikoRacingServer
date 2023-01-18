@@ -1,0 +1,104 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "EdenNetwork/1.1.4": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/EdenNetwork.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/EdenNetwork.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "EdenNetwork/1.1.4": {
+      "sha512": "moqah8E34rYbNKSpIg56RjlVRFfoI8wAyPOK4IYBtzjVardPG9tRnQXgGbp0WuH3bZ13zZtY0ztxDnjrU1dIQw==",
+      "type": "package",
+      "path": "edennetwork/1.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "edennetwork.1.1.4.nupkg.sha512",
+        "edennetwork.nuspec",
+        "lib/net6.0/EdenNetwork.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "EdenNetwork >= 1.1.4"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\parks\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "E:\\Dev\\ComsmicSaikoRacingServer\\MatchingServer\\MatchingServer\\MatchingServer.csproj",
+      "projectName": "MatchingServer",
+      "projectPath": "E:\\Dev\\ComsmicSaikoRacingServer\\MatchingServer\\MatchingServer\\MatchingServer.csproj",
+      "packagesPath": "C:\\Users\\parks\\.nuget\\packages\\",
+      "outputPath": "E:\\Dev\\ComsmicSaikoRacingServer\\MatchingServer\\MatchingServer\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\parks\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "EdenNetwork": {
+            "target": "Package",
+            "version": "[1.1.4, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

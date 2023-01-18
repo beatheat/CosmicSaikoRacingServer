@@ -8,13 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="EdenNetwork" Version="1.1.4" />
   </ItemGroup>
 
 </Project>

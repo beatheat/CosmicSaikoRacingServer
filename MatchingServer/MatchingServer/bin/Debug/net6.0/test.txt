@@ -1,0 +1,9 @@
+[2023-01-18 15:18:36.53|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-18 15:28:01.25|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-18 16:43:22.07|EdenNetServer]127.0.0.1:62703 is rejected by SERVER FULL STATE
+[2023-01-18 17:47:21.40|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-18 17:47:38.67|EdenNetServer]
+[2023-01-18 18:01:35.52|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-18 18:01:59.44|EdenNetServer]Remote client connected 127.0.0.1:57712
+[2023-01-18 18:01:59.47|EdenNetServer]127.0.0.1:57712  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-18 18:01:59.53|EdenNetServer]127.0.0.1:57712 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":12345}}

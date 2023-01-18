@@ -17,6 +17,9 @@ namespace CSRServer
             public int port;
             public string gamelogPath;
             public string networklogPath;
+
+            public string matchingServerAddress;
+            public int matchingServerPort;
         }
         public static Config config;
         static void LoadConfig()

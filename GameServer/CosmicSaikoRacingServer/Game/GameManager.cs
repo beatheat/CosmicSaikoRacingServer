@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EdenNetwork;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace CSRServer
 {
@@ -65,6 +64,11 @@ namespace CSRServer
         {
             server.Listen(MAX_PLAYER, (string client_id) =>
             {
+                if(scenes.Count == 0)
+                {
+                    //준비안됨
+                    //server.DisconnectClient(client_id);
+                }
                 if (!clients.ContainsKey(client_id))
                     clients.Add(client_id, new GameClient(client_id));
                 else //클라 재접속
@@ -82,8 +86,29 @@ namespace CSRServer
             {
                 server.Send("scDict", client_id, d);
             });
+            //
+            server.AddResponse("IsGameReady", (string client_id, EdenData d) => 
+            {
+                return new EdenData(scenes.Count > 0);
+            });
 
             server.AddResponse("CreateGame", (string client_id, EdenData d) =>
+            {
+
+                //Scene scene = scenes.Peek();
+                //scene.passingData.Add("hostplayer", new LobbyPlayer(client_id, d.Get<string>(), 0, true));
+                //scene.passingData.Add("roomNumber", roomNumber);
+                //overlayScene = new ChatScene(this, server);
+                //overlayScene.Load();
+                //return new EdenData(1, "OK");
+                Task.Run(() => 
+                { 
+                    //while(server.Client)
+                });
+                return new EdenData();
+            });
+
+            server.AddResponse("CreateCustomGame", (string client_id, EdenData d) =>
             {
                 EdenNetClient client = new EdenNetClient(Program.config.matchingServerAddress, Program.config.matchingServerPort);
                 if (client.Connect() == ConnectionState.OK)
@@ -91,26 +116,25 @@ namespace CSRServer
                     EdenData data = client.Request("CreateLobby", 10);
                     if(data.type == EdenData.Type.ERROR)
                     {
-                        return new EdenData(0, "Cannot Create Game : cannot create lobby");
+                        return new EdenData(false, "Cannot Create Game : cannot create lobby");
                     }
                     int roomNumber = data.Get<int>();
+
+                    scenes.Enqueue(new LobbyScene(this, server));
+
                     Scene scene = scenes.Peek();
                     scene.passingData.Add("hostplayer", new LobbyPlayer(client_id, d.Get<string>(), 0, true));
                     scene.passingData.Add("roomNumber", roomNumber);
+                    //
+                    scene.Load();
                     overlayScene = new ChatScene(this, server);
                     overlayScene.Load();
-                    return new EdenData(1, "OK");
+
+                    return new EdenData(true, "OK");
                 }
-                return new EdenData(0, "Cannot Create Game : cannot connect Matching Server");
+                return new EdenData(false, "Cannot Create Game : cannot connect Matching Server");
             });
 
-            server.AddReceiveEvent("CreateLobby", (string client_id, EdenData data) =>
-            {
-                Scene scene = scenes.Peek();
-                scene.Load();
-            });
-
-            scenes.Enqueue(new LobbyScene(this, server));
         }
 
         public void Close()

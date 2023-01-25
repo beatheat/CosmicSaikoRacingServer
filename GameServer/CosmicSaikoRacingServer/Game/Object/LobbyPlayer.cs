@@ -6,12 +6,11 @@ namespace CSRServer
     {
         [JsonIgnore]
         public string clientId;
-        [JsonIgnore]
-        public bool host;
 
         public int id;
         public string nickname;
         public bool isReady;
+        public bool host;
 
         public LobbyPlayer(string clientId, string nickname, int index, bool host = false)
         {

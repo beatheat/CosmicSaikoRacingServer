@@ -36,9 +36,6 @@ namespace CSRServer
             LobbyPlayer host = (LobbyPlayer)passingData["hostplayer"];
             cid2idx.Add(host.clientId, playerList.Count);
             playerList.Add(host);
-            server.Send("scLobbyPlayerId", host.clientId, host.id);
-            server.Broadcast("scLobbyPlayerUpdate", playerList);
-
             roomNumber = (int)passingData["roomNumber"];
         }
 
@@ -76,11 +73,16 @@ namespace CSRServer
         #region Network Methods
         private void Login(string clientId, EdenData data)
         {
+            ////if(clientId == )여기수정
+            //            server.Send("scLobbyPlayerId", host.clientId, host.id);
+            //server.Broadcast("scLobbyPlayerUpdate", playerList);
+            //server.Send("scLobbyNumber", host.clientId, roomNumber);
             string nickname = data.Get<string>();
             LobbyPlayer player = new LobbyPlayer(clientId, nickname, playerList.Count);
             cid2idx.Add(clientId, playerList.Count);
             playerList.Add(player);
             server.Send("scLobbyPlayerId", clientId, player.id);
+            server.Send("scLobbyNumber", clientId, roomNumber);
             server.Broadcast("scLobbyPlayerUpdate", playerList);
         }
 

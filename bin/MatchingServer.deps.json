@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "MatchingServer/1.0.0": {
+        "dependencies": {
+          "EdenNetwork": "1.1.5"
+        },
+        "runtime": {
+          "MatchingServer.dll": {}
+        }
+      },
+      "EdenNetwork/1.1.5": {
+        "runtime": {
+          "lib/net6.0/EdenNetwork.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MatchingServer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EdenNetwork/1.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tD60D+NUMiYCdTLa/tp53Uv6BuV8whBt1xWxu+JaiOvuugScX7OaguL7kugK4eoBRs8mksg+TB5/qnM7B4IWnQ==",
+      "path": "edennetwork/1.1.5",
+      "hashPath": "edennetwork.1.1.5.nupkg.sha512"
+    }
+  }
+}

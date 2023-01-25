@@ -33,6 +33,7 @@ namespace CSRServer
 
         static void Main(string[] args)
         {
+            Console.Title = "CosmicSaikoRacing - GameServer";
             try { LoadConfig(); }
             catch (Exception e) { Console.WriteLine("Fail in Config Loading :: " + e.Message); return; }
 

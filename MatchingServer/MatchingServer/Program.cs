@@ -7,6 +7,7 @@ namespace MatchingServer
     {
         static void Main(string[] args)
         {
+            Console.Title = "CosmicSaikoRacing - MatchingServer";
             EdenNetServer server = new EdenNetServer(16969, "test.txt");
             MatchingServer matchingServer = new MatchingServer(server);
             matchingServer.Run();

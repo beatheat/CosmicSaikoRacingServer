@@ -13,6 +13,7 @@ namespace CSRServer
         protected EdenNetServer server;
 
         public Dictionary<string, object> passingData = new Dictionary<string, object>();
+        public Dictionary<string, object>? passedData = null;
 
         public Scene(GameManager gameManager, EdenNetServer server)
         {

@@ -15,13 +15,16 @@ namespace CSRServer
     public class LobbyScene : Scene
     {
         private List<LobbyPlayer> playerList;
-        private Dictionary<string, int> cid2idx;
+        private Dictionary<string, LobbyPlayer> playerMap;
         private int roomNumber;
+        private string hostId;
 
         public LobbyScene(GameManager gameManager, EdenNetServer server) : base(gameManager, server)
         {
             playerList = new List<LobbyPlayer>();
-            cid2idx = new Dictionary<string, int>();
+            playerMap = new Dictionary<string, LobbyPlayer>();
+            roomNumber = 0;
+            hostId = "";
         }
 
         public override void Load()
@@ -33,10 +36,8 @@ namespace CSRServer
             server.SetClientDisconnectEvent(RemovePlayer);
 
             //Create LobbyPlayer instance of host player
-            LobbyPlayer host = (LobbyPlayer)passingData["hostplayer"];
-            cid2idx.Add(host.clientId, playerList.Count);
-            playerList.Add(host);
-            roomNumber = (int)passingData["roomNumber"];
+            roomNumber = (int)passedData["roomNumber"];
+            hostId = (string)passedData["hostId"];
         }
 
         public override void Destroy()
@@ -51,21 +52,16 @@ namespace CSRServer
         private void ChangeScene()
         {
             passingData.Add("playerList", playerList);
-            passingData.Add("cid2idx", cid2idx);
+            passingData.Add("playerMap", playerMap);
             gameManager.ChangeToNextScene();
         }
 
         private void RemovePlayer(string clientId)
         {
-            if (cid2idx.ContainsKey(clientId))
+            if (playerMap.ContainsKey(clientId))
             {
-                int deleteIdx = cid2idx[clientId];
-
-                playerList.RemoveAt(deleteIdx);
-                for (int i = deleteIdx; i < playerList.Count; i++)
-                {
-                    cid2idx[playerList[i].clientId] = i;
-                }
+                playerList.Remove(playerMap[clientId]);
+                playerMap.Remove(clientId);
                 gameManager.RemoveGameClient(clientId);
             }
         }
@@ -73,14 +69,17 @@ namespace CSRServer
         #region Network Methods
         private void Login(string clientId, EdenData data)
         {
-            ////if(clientId == )여기수정
-            //            server.Send("scLobbyPlayerId", host.clientId, host.id);
-            //server.Broadcast("scLobbyPlayerUpdate", playerList);
-            //server.Send("scLobbyNumber", host.clientId, roomNumber);
+
             string nickname = data.Get<string>();
             LobbyPlayer player = new LobbyPlayer(clientId, nickname, playerList.Count);
-            cid2idx.Add(clientId, playerList.Count);
-            playerList.Add(player);
+            playerMap.Add(clientId, player);
+            if (clientId == hostId)
+            {
+                player.host = true;
+                playerList.Insert(0, player);
+            }
+            else
+                playerList.Add(player);
             server.Send("scLobbyPlayerId", clientId, player.id);
             server.Send("scLobbyNumber", clientId, roomNumber);
             server.Broadcast("scLobbyPlayerUpdate", playerList);
@@ -95,8 +94,7 @@ namespace CSRServer
         private void Ready(string clientId, EdenData data)
         {
             bool isReady = data.Get<bool>();
-            int cidx = cid2idx[clientId];
-            playerList[cidx].isReady = isReady;
+            playerMap[clientId].isReady = isReady;
             server.Broadcast("scLobbyPlayerUpdate", playerList);
         }
 

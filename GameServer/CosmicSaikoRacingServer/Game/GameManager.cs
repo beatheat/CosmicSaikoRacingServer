@@ -123,9 +123,10 @@ namespace CSRServer
                     scenes.Enqueue(new LobbyScene(this, server));
 
                     Scene scene = scenes.Peek();
-                    scene.passingData.Add("hostplayer", new LobbyPlayer(client_id, d.Get<string>(), 0, true));
-                    scene.passingData.Add("roomNumber", roomNumber);
-                    //
+                    scene.passedData = new Dictionary<string, object>();
+                    scene.passedData.Add("hostId", client_id);
+                    scene.passedData.Add("roomNumber", roomNumber);
+                    
                     scene.Load();
                     overlayScene = new ChatScene(this, server);
                     overlayScene.Load();
@@ -164,7 +165,7 @@ namespace CSRServer
                 Console.WriteLine("GameManger::ChangeToNextScene called in last scene - " + pastScene.GetType().Name);
                 return;
             }
-            nextScene.passingData = pastScene.passingData;
+            nextScene.passedData = pastScene.passingData;
             pastScene.Destroy();
             nextScene.Load();
         }

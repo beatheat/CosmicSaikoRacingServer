@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="1.1.4" />
+    <PackageReference Include="EdenNetwork" Version="1.1.5" />
   </ItemGroup>
 
   <ItemGroup>

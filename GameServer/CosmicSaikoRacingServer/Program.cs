@@ -31,6 +31,7 @@ namespace CSRServer
             catch { throw new Exception("Config.json is not formatted"); }
         }
 
+
         static void Main(string[] args)
         {
             Console.Title = "CosmicSaikoRacing - GameServer";

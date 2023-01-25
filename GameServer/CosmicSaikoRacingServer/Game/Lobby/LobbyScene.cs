@@ -52,7 +52,6 @@ namespace CSRServer
         private void ChangeScene()
         {
             passingData.Add("playerList", playerList);
-            passingData.Add("playerMap", playerMap);
             gameManager.ChangeToNextScene();
         }
 

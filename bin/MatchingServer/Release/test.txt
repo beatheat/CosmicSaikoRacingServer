@@ -1,0 +1,100 @@
+[2023-01-29 22:45:42.40|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-29 22:50:00.28|EdenNetServer]Remote client connected 127.0.0.1:60775
+[2023-01-29 22:50:00.32|EdenNetServer]127.0.0.1:60775  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 22:50:00.39|EdenNetServer]127.0.0.1:60775 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":12345}}
+[2023-01-29 22:53:09.49|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-29 22:53:29.13|EdenNetServer]Remote client connected 127.0.0.1:60871
+[2023-01-29 22:53:58.00|EdenNetServer]127.0.0.1:60871  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 22:54:09.66|EdenNetServer]Remote client connected 127.0.0.1:60886
+[2023-01-29 22:54:09.66|EdenNetServer]127.0.0.1:60886  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:11:06.94|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-29 23:11:58.96|EdenNetServer]Remote client connected 127.0.0.1:56765
+[2023-01-29 23:11:58.99|EdenNetServer]127.0.0.1:56765  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:18:10.50|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-29 23:18:15.51|EdenNetServer]Remote client connected 127.0.0.1:54819
+[2023-01-29 23:18:15.53|EdenNetServer]127.0.0.1:54819  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:18:15.59|EdenNetServer]127.0.0.1:54819 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":94620}}
+[2023-01-29 23:26:14.75|EdenNetServer]Remote client connected 127.0.0.1:55194
+[2023-01-29 23:26:14.75|EdenNetServer]127.0.0.1:55194  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:26:14.76|EdenNetServer]127.0.0.1:55194 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":12266}}
+[2023-01-29 23:28:26.60|EdenNetServer]Remote client connected 127.0.0.1:55213
+[2023-01-29 23:28:26.60|EdenNetServer]127.0.0.1:55213  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:28:26.60|EdenNetServer]127.0.0.1:55213 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":85795}}
+[2023-01-29 23:29:31.88|EdenNetServer]Remote client connected 127.0.0.1:55221
+[2023-01-29 23:29:31.88|EdenNetServer]127.0.0.1:55221  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:29:31.88|EdenNetServer]127.0.0.1:55221 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":58532}}
+[2023-01-29 23:31:04.40|EdenNetServer]Remote client connected 127.0.0.1:55250
+[2023-01-29 23:31:04.40|EdenNetServer]127.0.0.1:55250  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:31:04.40|EdenNetServer]127.0.0.1:55250 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":28535}}
+[2023-01-29 23:31:19.84|EdenNetServer]Remote client connected 127.0.0.1:55254
+[2023-01-29 23:31:19.84|EdenNetServer]127.0.0.1:55254  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:31:19.85|EdenNetServer]127.0.0.1:55254 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":20740}}
+[2023-01-29 23:32:36.06|EdenNetServer]Remote client connected 127.0.0.1:63751
+[2023-01-29 23:32:36.06|EdenNetServer]127.0.0.1:63751  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:32:36.06|EdenNetServer]127.0.0.1:63751 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":43056}}
+[2023-01-29 23:34:05.25|EdenNetServer]Remote client connected 127.0.0.1:63775
+[2023-01-29 23:34:05.25|EdenNetServer]127.0.0.1:63775  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:34:05.25|EdenNetServer]127.0.0.1:63775 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":82573}}
+[2023-01-29 23:34:22.68|EdenNetServer]Remote client connected 127.0.0.1:63780
+[2023-01-29 23:34:22.68|EdenNetServer]127.0.0.1:63780  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:34:22.68|EdenNetServer]127.0.0.1:63780 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":64942}}
+[2023-01-29 23:34:28.71|EdenNetServer]Remote client connected 127.0.0.1:63781
+[2023-01-29 23:34:28.71|EdenNetServer]127.0.0.1:63781  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:34:28.71|EdenNetServer]127.0.0.1:63781 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":45366}}
+[2023-01-29 23:39:30.55|EdenNetServer]Remote client connected 127.0.0.1:63838
+[2023-01-29 23:39:30.55|EdenNetServer]127.0.0.1:63838  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:39:30.56|EdenNetServer]127.0.0.1:63838 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":96267}}
+[2023-01-29 23:42:43.66|EdenNetServer]Remote client connected 127.0.0.1:63885
+[2023-01-29 23:42:43.66|EdenNetServer]127.0.0.1:63885  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:42:43.67|EdenNetServer]127.0.0.1:63885 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":97053}}
+[2023-01-29 23:42:55.34|EdenNetServer]Remote client connected 127.0.0.1:63887
+[2023-01-29 23:42:55.34|EdenNetServer]127.0.0.1:63887  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:42:55.34|EdenNetServer]127.0.0.1:63887 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":85324}}
+[2023-01-29 23:46:19.77|EdenNetServer]Remote client connected 127.0.0.1:64024
+[2023-01-29 23:46:19.78|EdenNetServer]127.0.0.1:64024  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:46:19.78|EdenNetServer]127.0.0.1:64024 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":54201}}
+[2023-01-29 23:46:48.00|EdenNetServer]Remote client connected 127.0.0.1:64042
+[2023-01-29 23:46:48.01|EdenNetServer]127.0.0.1:64042  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:46:48.01|EdenNetServer]127.0.0.1:64042 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":32194}}
+[2023-01-29 23:47:10.35|EdenNetServer]Remote client connected 127.0.0.1:64046
+[2023-01-29 23:47:10.35|EdenNetServer]127.0.0.1:64046  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:47:10.36|EdenNetServer]127.0.0.1:64046 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":36589}}
+[2023-01-29 23:52:05.24|EdenNetServer]Remote client connected 127.0.0.1:63629
+[2023-01-29 23:52:05.24|EdenNetServer]127.0.0.1:63629  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:52:05.25|EdenNetServer]127.0.0.1:63629 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":19857}}
+[2023-01-29 23:52:26.14|EdenNetServer]Remote client connected 127.0.0.1:63635
+[2023-01-29 23:52:26.14|EdenNetServer]127.0.0.1:63635  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:52:26.15|EdenNetServer]127.0.0.1:63635 <==  Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":5595}}
+[2023-01-29 23:53:03.90|EdenNetServer]Remote client connected 127.0.0.1:56088
+[2023-01-29 23:53:03.90|EdenNetServer]127.0.0.1:56088  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:53:03.90|EdenNetServer]127.0.0.1:56088 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":72069}}
+[2023-01-29 23:53:12.70|EdenNetServer]Remote client connected 127.0.0.1:56089
+[2023-01-29 23:53:12.70|EdenNetServer]127.0.0.1:56089  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:53:12.71|EdenNetServer]127.0.0.1:56089 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":23350}}
+[2023-01-29 23:54:27.36|EdenNetServer]Remote client connected 127.0.0.1:56109
+[2023-01-29 23:54:27.36|EdenNetServer]127.0.0.1:56109  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:54:27.36|EdenNetServer]127.0.0.1:56109 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":35547}}
+[2023-01-29 23:55:00.74|EdenNetServer]Remote client connected 127.0.0.1:56114
+[2023-01-29 23:55:00.74|EdenNetServer]127.0.0.1:56114  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:55:00.75|EdenNetServer]127.0.0.1:56114 <==  Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":4229}}
+[2023-01-29 23:56:00.30|EdenNetServer]Remote client connected 127.0.0.1:56121
+[2023-01-29 23:56:00.31|EdenNetServer]127.0.0.1:56121  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:56:00.31|EdenNetServer]127.0.0.1:56121 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":21296}}
+[2023-01-29 23:56:38.71|EdenNetServer]Remote client connected 127.0.0.1:56132
+[2023-01-29 23:56:38.71|EdenNetServer]127.0.0.1:56132  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:56:38.72|EdenNetServer]127.0.0.1:56132 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":14335}}
+[2023-01-29 23:57:37.52|EdenNetServer]Remote client connected 127.0.0.1:56140
+[2023-01-29 23:57:37.52|EdenNetServer]127.0.0.1:56140  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:57:37.53|EdenNetServer]127.0.0.1:56140 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":10858}}
+[2023-01-29 23:58:53.06|EdenNetServer]Remote client connected 127.0.0.1:56151
+[2023-01-29 23:58:53.06|EdenNetServer]127.0.0.1:56151  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-29 23:58:53.06|EdenNetServer]127.0.0.1:56151 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":67397}}
+[2023-01-30 00:00:40.33|EdenNetServer]Remote client connected 127.0.0.1:56163
+[2023-01-30 00:00:40.33|EdenNetServer]127.0.0.1:56163  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-30 00:00:40.34|EdenNetServer]127.0.0.1:56163 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":96355}}
+[2023-01-30 00:01:14.00|EdenNetServer]Remote client connected 127.0.0.1:56172
+[2023-01-30 00:01:14.00|EdenNetServer]127.0.0.1:56172  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-30 00:01:14.00|EdenNetServer]127.0.0.1:56172 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":28729}}
+[2023-01-30 00:10:35.04|EdenNetServer]Remote client connected 127.0.0.1:60038
+[2023-01-30 00:10:35.04|EdenNetServer]127.0.0.1:60038  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-30 00:10:35.05|EdenNetServer]127.0.0.1:60038 <==  Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":2723}}

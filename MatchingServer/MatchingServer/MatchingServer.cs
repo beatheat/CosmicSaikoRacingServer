@@ -93,15 +93,15 @@ namespace MatchingServer
                 return new EdenData(-1);
             }
 
-            //int roomNum;
-            //do
-            //{
-            //    roomNum = (int)(DateTime.Now.Ticks % 100000L);
-            //} while (!room.ContainsKey(roomNum));
+            int roomNum;
+            do
+            {
+                roomNum = (int)(DateTime.Now.Ticks % 100000L);
+            } while (room.ContainsKey(roomNum));
 
-            room.Add(12345, client_id);
+            room.Add(roomNum, client_id);
 
-            return new EdenData(12345);
+            return new EdenData(roomNum);
         }
 
         public EdenData DestroyLobby(string client_id, EdenData data)

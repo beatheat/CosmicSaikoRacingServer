@@ -1,0 +1,629 @@
+[2023-01-26 02:42:11.08|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-26 02:42:12.83|EdenNetServer]Remote client connected 127.0.0.1:52352
+[2023-01-26 02:42:18.34|EdenNetServer]Client disconnected.127.0.0.1:52352
+[2023-01-26 02:44:45.84|EdenNetServer]Remote client connected 127.0.0.1:55316
+[2023-01-26 02:44:49.82|EdenNetServer]Client disconnected.127.0.0.1:55316
+[2023-01-26 02:45:37.67|EdenNetServer]Remote client connected 127.0.0.1:55319
+[2023-01-26 02:45:44.14|EdenNetServer]Client disconnected.127.0.0.1:55319
+[2023-01-26 02:45:59.09|EdenNetServer]Remote client connected 127.0.0.1:55320
+[2023-01-26 02:46:00.62|EdenNetServer]Client disconnected.127.0.0.1:55320
+[2023-01-26 03:00:40.43|EdenNetServer]Remote client connected 127.0.0.1:55417
+[2023-01-26 03:00:41.02|EdenNetServer]Client disconnected.127.0.0.1:55417
+[2023-01-26 03:00:41.03|EdenNetServer]Remote client connected 127.0.0.1:55418
+[2023-01-26 03:00:42.16|EdenNetServer]Client disconnected.127.0.0.1:55418
+[2023-01-26 03:00:42.16|EdenNetServer]Remote client connected 127.0.0.1:55419
+[2023-01-26 03:00:43.27|EdenNetServer]Client disconnected.127.0.0.1:55419
+[2023-01-26 23:52:32.05|EdenNetServer]Remote client connected 127.0.0.1:57072
+[2023-01-26 23:53:04.43|EdenNetServer]Remote client connected 127.0.0.1:57073
+[2023-01-26 23:53:04.43|EdenNetServer]Remote client connected 127.0.0.1:57074
+[2023-01-26 23:53:04.53|EdenNetServer]Forced disconnection to client. 127.0.0.1:57073
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-01-26 23:53:04.53|EdenNetServer]Forced disconnection to client. 127.0.0.1:57074
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-01-26 23:53:04.53|EdenNetServer]Forced disconnection to client. 127.0.0.1:57072
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-01-26 23:53:09.22|EdenNetServer]Remote client connected 127.0.0.1:57077
+[2023-01-26 23:53:37.69|EdenNetServer]Remote client connected 127.0.0.1:57078
+[2023-01-26 23:53:37.69|EdenNetServer]Forced disconnection to client. 127.0.0.1:57077
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-01-26 23:53:37.69|EdenNetServer]Remote client connected 127.0.0.1:57080
+[2023-01-26 23:53:37.69|EdenNetServer]Forced disconnection to client. 127.0.0.1:57078
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-01-26 23:53:44.21|EdenNetServer]127.0.0.1:57080  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-26 23:53:44.27|EdenNetServer]127.0.0.1:57080 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-26 23:53:44.27|EdenNetServer]127.0.0.1:57080  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-26 23:53:44.27|EdenNetServer]127.0.0.1:57080 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-26 23:53:44.27|EdenNetServer]127.0.0.1:57080  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-26 23:53:44.28|EdenNetServer]127.0.0.1:57080 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-26 23:53:44.28|EdenNetServer]127.0.0.1:57080  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-26 23:53:44.28|EdenNetServer]127.0.0.1:57080 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-26 23:53:44.28|EdenNetServer]127.0.0.1:57080  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-26 23:53:44.28|EdenNetServer]127.0.0.1:57080 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-26 23:54:28.14|EdenNetServer]Client disconnected.127.0.0.1:57080
+[2023-01-27 00:00:24.75|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-27 00:00:27.56|EdenNetServer]Remote client connected 127.0.0.1:57163
+[2023-01-27 00:00:29.46|EdenNetServer]127.0.0.1:57163  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:00:29.49|EdenNetServer]127.0.0.1:57163 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:00:29.49|EdenNetServer]127.0.0.1:57163  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:00:29.49|EdenNetServer]127.0.0.1:57163 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:00:29.49|EdenNetServer]127.0.0.1:57163  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:00:29.49|EdenNetServer]127.0.0.1:57163 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:00:29.49|EdenNetServer]127.0.0.1:57163  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:00:29.50|EdenNetServer]127.0.0.1:57163 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:00:29.50|EdenNetServer]127.0.0.1:57163  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:00:29.50|EdenNetServer]127.0.0.1:57163 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:00:29.50|EdenNetServer]127.0.0.1:57163  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:00:29.50|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:57163
+[2023-01-27 00:01:23.61|EdenNetServer]Forced disconnection to client. 127.0.0.1:57163
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-27 00:24:10.20|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-27 00:24:13.94|EdenNetServer]Remote client connected 127.0.0.1:57787
+[2023-01-27 00:24:15.36|EdenNetServer]127.0.0.1:57787  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:24:15.40|EdenNetServer]127.0.0.1:57787 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:24:15.40|EdenNetServer]127.0.0.1:57787  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:24:15.40|EdenNetServer]127.0.0.1:57787 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:24:15.40|EdenNetServer]127.0.0.1:57787  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:24:15.41|EdenNetServer]127.0.0.1:57787 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:24:15.41|EdenNetServer]127.0.0.1:57787  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:24:15.41|EdenNetServer]127.0.0.1:57787 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:24:15.41|EdenNetServer]127.0.0.1:57787  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:24:15.41|EdenNetServer]127.0.0.1:57787 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:24:15.41|EdenNetServer]127.0.0.1:57787  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:24:15.42|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:57787
+[2023-01-27 00:25:10.57|EdenNetServer]Client disconnected.127.0.0.1:57787
+[2023-01-27 00:29:12.86|EdenNetServer]Remote client connected 127.0.0.1:58130
+[2023-01-27 00:29:14.21|EdenNetServer]127.0.0.1:58130  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:29:14.22|EdenNetServer]127.0.0.1:58130  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:29:14.23|EdenNetServer]127.0.0.1:58130 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:29:14.23|EdenNetServer]127.0.0.1:58130  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:29:14.23|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58130
+[2023-01-27 00:29:49.82|EdenNetServer]Client disconnected.127.0.0.1:58130
+[2023-01-27 00:31:52.71|EdenNetServer]Remote client connected 127.0.0.1:58192
+[2023-01-27 00:31:53.62|EdenNetServer]127.0.0.1:58192  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:31:53.62|EdenNetServer]127.0.0.1:58192 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:31:53.62|EdenNetServer]127.0.0.1:58192  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:31:53.62|EdenNetServer]127.0.0.1:58192 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:31:53.62|EdenNetServer]127.0.0.1:58192  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:31:53.63|EdenNetServer]127.0.0.1:58192 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:31:53.63|EdenNetServer]127.0.0.1:58192  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:31:53.63|EdenNetServer]127.0.0.1:58192 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:31:53.63|EdenNetServer]127.0.0.1:58192  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:31:53.63|EdenNetServer]127.0.0.1:58192 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:31:53.63|EdenNetServer]127.0.0.1:58192  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:31:53.64|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58192
+[2023-01-27 00:31:56.31|EdenNetServer]Client disconnected.127.0.0.1:58192
+[2023-01-27 00:32:05.73|EdenNetServer]Remote client connected 127.0.0.1:58193
+[2023-01-27 00:32:06.30|EdenNetServer]127.0.0.1:58193  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:32:06.31|EdenNetServer]127.0.0.1:58193 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:32:06.32|EdenNetServer]127.0.0.1:58193  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:32:06.32|EdenNetServer]127.0.0.1:58193 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:32:06.32|EdenNetServer]127.0.0.1:58193  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:32:06.32|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58193
+[2023-01-27 00:32:20.38|EdenNetServer]Client disconnected.127.0.0.1:58193
+[2023-01-27 00:33:21.95|EdenNetServer]Remote client connected 127.0.0.1:58201
+[2023-01-27 00:33:22.97|EdenNetServer]127.0.0.1:58201  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:33:22.97|EdenNetServer]127.0.0.1:58201 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:33:22.97|EdenNetServer]127.0.0.1:58201  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:33:22.97|EdenNetServer]127.0.0.1:58201 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:33:22.98|EdenNetServer]127.0.0.1:58201  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:33:22.98|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58201
+[2023-01-27 00:33:36.32|EdenNetServer]Client disconnected.127.0.0.1:58201
+[2023-01-27 00:34:35.96|EdenNetServer]Remote client connected 127.0.0.1:58205
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:34:36.73|EdenNetServer]127.0.0.1:58205  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:34:36.74|EdenNetServer]127.0.0.1:58205 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:34:36.74|EdenNetServer]127.0.0.1:58205  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:34:36.74|EdenNetServer]127.0.0.1:58205 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:34:36.74|EdenNetServer]127.0.0.1:58205  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:34:36.74|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58205
+[2023-01-27 00:34:39.90|EdenNetServer]Client disconnected.127.0.0.1:58205
+[2023-01-27 00:35:35.42|EdenNetServer]Remote client connected 127.0.0.1:58208
+[2023-01-27 00:35:36.11|EdenNetServer]127.0.0.1:58208  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:35:36.11|EdenNetServer]127.0.0.1:58208 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:35:36.11|EdenNetServer]127.0.0.1:58208  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:35:36.11|EdenNetServer]127.0.0.1:58208 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:35:36.11|EdenNetServer]127.0.0.1:58208  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:35:36.12|EdenNetServer]127.0.0.1:58208 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:35:36.12|EdenNetServer]127.0.0.1:58208  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:35:36.12|EdenNetServer]127.0.0.1:58208 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:35:36.12|EdenNetServer]127.0.0.1:58208  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:35:36.12|EdenNetServer]127.0.0.1:58208 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:35:36.12|EdenNetServer]127.0.0.1:58208  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:35:36.12|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58208
+[2023-01-27 00:35:40.78|EdenNetServer]Client disconnected.127.0.0.1:58208
+[2023-01-27 00:36:11.50|EdenNetServer]Remote client connected 127.0.0.1:58229
+[2023-01-27 00:36:12.35|EdenNetServer]127.0.0.1:58229  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:12.36|EdenNetServer]127.0.0.1:58229  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:36:12.37|EdenNetServer]127.0.0.1:58229 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:36:12.37|EdenNetServer]127.0.0.1:58229  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:36:12.37|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58229
+[2023-01-27 00:36:14.83|EdenNetServer]Client disconnected.127.0.0.1:58229
+[2023-01-27 00:36:48.04|EdenNetServer]Remote client connected 127.0.0.1:58238
+[2023-01-27 00:36:48.67|EdenNetServer]127.0.0.1:58238  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:36:48.68|EdenNetServer]127.0.0.1:58238  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:36:48.69|EdenNetServer]127.0.0.1:58238 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:36:48.69|EdenNetServer]127.0.0.1:58238  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:36:48.69|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58238
+[2023-01-27 00:36:50.50|EdenNetServer]Client disconnected.127.0.0.1:58238
+[2023-01-27 00:37:10.52|EdenNetServer]Remote client connected 127.0.0.1:58243
+[2023-01-27 00:37:11.47|EdenNetServer]127.0.0.1:58243  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:11.47|EdenNetServer]127.0.0.1:58243 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:11.48|EdenNetServer]127.0.0.1:58243  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:11.48|EdenNetServer]127.0.0.1:58243 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:11.48|EdenNetServer]127.0.0.1:58243  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:11.48|EdenNetServer]127.0.0.1:58243 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:11.48|EdenNetServer]127.0.0.1:58243  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:11.49|EdenNetServer]127.0.0.1:58243 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:11.49|EdenNetServer]127.0.0.1:58243  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:37:11.49|EdenNetServer]127.0.0.1:58243 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:37:11.49|EdenNetServer]127.0.0.1:58243  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:37:11.49|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58243
+[2023-01-27 00:37:16.97|EdenNetServer]Client disconnected.127.0.0.1:58243
+[2023-01-27 00:37:31.62|EdenNetServer]Remote client connected 127.0.0.1:58244
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:37:32.26|EdenNetServer]127.0.0.1:58244  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:32.27|EdenNetServer]127.0.0.1:58244 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:32.27|EdenNetServer]127.0.0.1:58244  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:32.27|EdenNetServer]127.0.0.1:58244 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:32.27|EdenNetServer]127.0.0.1:58244  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:37:32.27|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58244
+[2023-01-27 00:37:39.42|EdenNetServer]Client disconnected.127.0.0.1:58244
+[2023-01-27 00:37:54.77|EdenNetServer]Remote client connected 127.0.0.1:58245
+[2023-01-27 00:37:55.58|EdenNetServer]127.0.0.1:58245  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:55.58|EdenNetServer]127.0.0.1:58245 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:55.58|EdenNetServer]127.0.0.1:58245  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:37:55.59|EdenNetServer]127.0.0.1:58245  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:37:55.60|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58245
+[2023-01-27 00:38:01.60|EdenNetServer]Client disconnected.127.0.0.1:58245
+[2023-01-27 00:38:22.60|EdenNetServer]Remote client connected 127.0.0.1:58265
+[2023-01-27 00:38:23.46|EdenNetServer]127.0.0.1:58265  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:23.46|EdenNetServer]127.0.0.1:58265 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:23.46|EdenNetServer]127.0.0.1:58265  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:23.47|EdenNetServer]127.0.0.1:58265 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:23.47|EdenNetServer]127.0.0.1:58265  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:23.47|EdenNetServer]127.0.0.1:58265 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:23.47|EdenNetServer]127.0.0.1:58265  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:23.47|EdenNetServer]127.0.0.1:58265 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:23.47|EdenNetServer]127.0.0.1:58265  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:38:23.48|EdenNetServer]127.0.0.1:58265 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:38:23.48|EdenNetServer]127.0.0.1:58265  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:38:23.48|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58265
+[2023-01-27 00:38:28.82|EdenNetServer]Client disconnected.127.0.0.1:58265
+[2023-01-27 00:38:45.89|EdenNetServer]Remote client connected 127.0.0.1:58273
+[2023-01-27 00:38:46.83|EdenNetServer]127.0.0.1:58273  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:38:46.83|EdenNetServer]127.0.0.1:58273 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:38:46.83|EdenNetServer]127.0.0.1:58273  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:46.83|EdenNetServer]127.0.0.1:58273 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:38:46.84|EdenNetServer]127.0.0.1:58273  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:38:46.84|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58273
+[2023-01-27 00:38:59.36|EdenNetServer]Client disconnected.127.0.0.1:58273
+[2023-01-27 00:39:37.22|EdenNetServer]Remote client connected 127.0.0.1:58280
+[2023-01-27 00:39:37.91|EdenNetServer]127.0.0.1:58280  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:39:37.92|EdenNetServer]127.0.0.1:58280  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:39:37.93|EdenNetServer]127.0.0.1:58280 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:39:37.93|EdenNetServer]127.0.0.1:58280  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:39:37.93|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58280
+[2023-01-27 00:39:45.36|EdenNetServer]Client disconnected.127.0.0.1:58280
+[2023-01-27 00:40:17.23|EdenNetServer]Remote client connected 127.0.0.1:58293
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:17.94|EdenNetServer]127.0.0.1:58293  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:40:17.95|EdenNetServer]127.0.0.1:58293 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:40:17.95|EdenNetServer]127.0.0.1:58293  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:40:17.95|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58293
+[2023-01-27 00:40:25.27|EdenNetServer]Client disconnected.127.0.0.1:58293
+[2023-01-27 00:40:34.85|EdenNetServer]Remote client connected 127.0.0.1:58294
+[2023-01-27 00:40:35.75|EdenNetServer]127.0.0.1:58294  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:35.75|EdenNetServer]127.0.0.1:58294 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:35.75|EdenNetServer]127.0.0.1:58294  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:35.75|EdenNetServer]127.0.0.1:58294 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:35.75|EdenNetServer]127.0.0.1:58294  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:35.76|EdenNetServer]127.0.0.1:58294 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:35.76|EdenNetServer]127.0.0.1:58294  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:40:35.76|EdenNetServer]127.0.0.1:58294 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:40:35.76|EdenNetServer]127.0.0.1:58294  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:40:35.76|EdenNetServer]127.0.0.1:58294 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:40:35.76|EdenNetServer]127.0.0.1:58294  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:40:35.76|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58294
+[2023-01-27 00:40:43.44|EdenNetServer]Client disconnected.127.0.0.1:58294
+[2023-01-27 00:42:01.35|EdenNetServer]Remote client connected 127.0.0.1:58381
+[2023-01-27 00:42:02.13|EdenNetServer]127.0.0.1:58381  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:42:02.14|EdenNetServer]127.0.0.1:58381  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:42:02.15|EdenNetServer]127.0.0.1:58381 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:42:02.15|EdenNetServer]127.0.0.1:58381  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:42:02.15|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58381
+[2023-01-27 00:42:08.26|EdenNetServer]Client disconnected.127.0.0.1:58381
+[2023-01-27 00:43:21.55|EdenNetServer]Remote client connected 127.0.0.1:58384
+[2023-01-27 00:43:22.18|EdenNetServer]127.0.0.1:58384  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384  ==> Packet Len : 48 | Json Obj : {"tag":"csString","data":{"type":0,"data":"hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384 <==  Packet Len : 57 | Json Obj : {"tag":"scString","data":{"type":0,"data":"server : hi"}}
+[2023-01-27 00:43:22.19|EdenNetServer]127.0.0.1:58384  ==> Packet Len : 61 | Json Obj : {"tag":"csDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:43:22.20|EdenNetServer]127.0.0.1:58384 <==  Packet Len : 61 | Json Obj : {"tag":"scDict","data":{"type":2,"data":{"a":1,"b":2,"c":3}}}
+[2023-01-27 00:43:22.20|EdenNetServer]127.0.0.1:58384  ==> Packet Len : 47 | Json Obj : {"tag":"*r*test","data":{"type":0,"data":null}}
+[2023-01-27 00:43:22.20|EdenNetServer]EdenNet-Error::There is no packet tag <*r*test> from 127.0.0.1:58384
+[2023-01-27 00:43:26.08|EdenNetServer]Client disconnected.127.0.0.1:58384
+[2023-01-27 20:07:51.26|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-27 20:08:50.00|EdenNetServer]Remote client connected 127.0.0.1:63504
+[2023-01-27 20:08:55.69|EdenNetServer]Remote client connected 127.0.0.1:63510
+[2023-01-27 20:08:55.70|EdenNetServer]Client disconnected.127.0.0.1:63504
+[2023-01-27 20:08:55.71|EdenNetServer]Client disconnected.127.0.0.1:63510
+[2023-01-27 20:09:00.12|EdenNetServer]Remote client connected 127.0.0.1:63513
+[2023-01-27 20:09:01.49|EdenNetServer]Client disconnected.127.0.0.1:63513
+[2023-01-27 20:09:01.49|EdenNetServer]Remote client connected 127.0.0.1:63514
+[2023-01-27 20:09:02.56|EdenNetServer]Client disconnected.127.0.0.1:63514
+[2023-01-27 20:09:02.56|EdenNetServer]Remote client connected 127.0.0.1:63515
+[2023-01-27 20:09:03.63|EdenNetServer]Client disconnected.127.0.0.1:63515
+[2023-01-29 22:45:42.39|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-29 22:49:50.34|EdenNetServer]Remote client connected 127.0.0.1:60773
+[2023-01-29 22:50:00.24|EdenNetServer]127.0.0.1:60773  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 22:50:00.42|EdenNetServer]127.0.0.1:60773 <==  Packet Len : 66 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[true,"OK"]}}
+[2023-01-29 22:50:02.10|EdenNetServer]Client disconnected.127.0.0.1:60773
+[2023-01-29 22:53:09.44|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-29 22:53:20.28|EdenNetServer]Remote client connected 127.0.0.1:60869
+[2023-01-29 22:53:29.09|EdenNetServer]127.0.0.1:60869  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 22:54:08.25|EdenNetServer]Remote client connected 127.0.0.1:60885
+[2023-01-29 22:54:08.67|EdenNetServer]Client disconnected.127.0.0.1:60869
+[2023-01-29 22:54:09.66|EdenNetServer]127.0.0.1:60885  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 22:54:20.36|EdenNetServer]127.0.0.1:60885 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 22:58:59.62|EdenNetServer]Client disconnected.127.0.0.1:60885
+[2023-01-29 22:59:00.94|EdenNetServer]Remote client connected 127.0.0.1:60937
+[2023-01-29 22:59:04.28|EdenNetServer]127.0.0.1:60937  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 22:59:41.11|EdenNetServer]127.0.0.1:60937 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 23:00:00.17|EdenNetServer]Client disconnected.127.0.0.1:60937
+[2023-01-29 23:00:01.16|EdenNetServer]Remote client connected 127.0.0.1:60952
+[2023-01-29 23:00:02.33|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:00:13.04|EdenNetServer]127.0.0.1:60952 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 23:02:10.68|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:02:21.38|EdenNetServer]127.0.0.1:60952 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 23:02:58.28|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:03:09.01|EdenNetServer]127.0.0.1:60952 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 23:04:06.32|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:04:17.04|EdenNetServer]127.0.0.1:60952 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 23:04:30.32|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:04:41.02|EdenNetServer]127.0.0.1:60952 <==  Packet Len : 105 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[false,"Cannot Create Game : cannot create lobby"]}}
+[2023-01-29 23:05:36.62|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:05:36.74|EdenNetServer]127.0.0.1:60952 <==  Packet Len : 66 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[true,"OK"]}}
+[2023-01-29 23:06:29.62|EdenNetServer]127.0.0.1:60952  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:07:44.59|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:07:44.59|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:07:44.59|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:07:44.59|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:07:44.59|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:07:44.59|EdenNetServer]Client disconnected.127.0.0.1:60952
+[2023-01-29 23:08:01.53|EdenNetServer]Remote client connected 127.0.0.1:56698
+[2023-01-29 23:08:02.95|EdenNetServer]127.0.0.1:56698  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:08:03.06|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:08:03.06|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:08:03.06|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:08:03.06|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:08:03.07|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:08:03.07|EdenNetServer]127.0.0.1:56698 <==  Packet Len : 66 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":1,"data":[true,"OK"]}}
+[2023-01-29 23:11:07.01|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-01-29 23:11:57.62|EdenNetServer]Remote client connected 127.0.0.1:56764
+[2023-01-29 23:11:58.93|EdenNetServer]127.0.0.1:56764  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:12:09.67|EdenNetServer]127.0.0.1:56764 <==  Packet Len : 123 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":false,"message":"Cannot Create Game : cannot create lobby"}}}
+[2023-01-29 23:17:20.70|EdenNetServer]127.0.0.1:56764  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:17:38.23|EdenNetServer]127.0.0.1:56764 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:18:15.51|EdenNetServer]127.0.0.1:56764  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:18:15.62|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:18:15.62|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:18:15.62|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:18:15.62|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:18:15.62|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:18:15.62|EdenNetServer]127.0.0.1:56764 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:26:14.75|EdenNetServer]127.0.0.1:56764  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:26:14.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:26:14.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:26:14.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:26:14.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:26:14.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:26:14.86|EdenNetServer]127.0.0.1:56764 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:27:09.81|EdenNetServer]Client disconnected.127.0.0.1:56764
+[2023-01-29 23:28:25.41|EdenNetServer]Remote client connected 127.0.0.1:55212
+[2023-01-29 23:28:26.60|EdenNetServer]127.0.0.1:55212  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:28:26.71|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:28:26.71|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:28:26.71|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:28:26.71|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:28:26.71|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:28:26.71|EdenNetServer]127.0.0.1:55212 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:29:31.88|EdenNetServer]127.0.0.1:55212  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:29:31.99|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:29:31.99|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:29:32.00|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:29:32.00|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:29:32.00|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:29:32.00|EdenNetServer]127.0.0.1:55212 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:30:44.17|EdenNetServer]Client disconnected.127.0.0.1:55212
+[2023-01-29 23:31:02.33|EdenNetServer]Remote client connected 127.0.0.1:55249
+[2023-01-29 23:31:04.39|EdenNetServer]127.0.0.1:55249  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:31:04.51|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:04.51|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:04.52|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:04.52|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:04.52|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:04.54|EdenNetServer]127.0.0.1:55249 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:31:19.84|EdenNetServer]127.0.0.1:55249  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:31:19.95|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:19.95|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:19.95|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:19.95|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:19.95|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:31:19.95|EdenNetServer]127.0.0.1:55249 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:32:36.05|EdenNetServer]127.0.0.1:55249  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:32:36.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:32:36.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:32:36.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:32:36.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:32:36.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:32:36.17|EdenNetServer]127.0.0.1:55249 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:33:55.21|EdenNetServer]Client disconnected.127.0.0.1:55249
+[2023-01-29 23:34:04.10|EdenNetServer]Remote client connected 127.0.0.1:63774
+[2023-01-29 23:34:05.25|EdenNetServer]127.0.0.1:63774  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:34:05.36|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:05.36|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:05.36|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:05.36|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:05.36|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:05.37|EdenNetServer]127.0.0.1:63774 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:34:22.68|EdenNetServer]127.0.0.1:63774  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:34:22.78|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:22.78|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:22.78|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:22.79|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:22.79|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:22.79|EdenNetServer]127.0.0.1:63774 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:34:28.70|EdenNetServer]127.0.0.1:63774  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:34:28.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:28.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:28.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:28.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:28.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:34:28.82|EdenNetServer]127.0.0.1:63774 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:39:10.73|EdenNetServer]Client disconnected.127.0.0.1:63774
+[2023-01-29 23:39:22.19|EdenNetServer]Remote client connected 127.0.0.1:63837
+[2023-01-29 23:39:30.55|EdenNetServer]127.0.0.1:63837  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:39:30.67|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:39:30.67|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:39:30.67|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:39:30.67|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:39:30.67|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:39:30.67|EdenNetServer]127.0.0.1:63837 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:41:13.64|EdenNetServer]Client disconnected.127.0.0.1:63837
+[2023-01-29 23:42:41.96|EdenNetServer]Remote client connected 127.0.0.1:63884
+[2023-01-29 23:42:43.66|EdenNetServer]127.0.0.1:63884  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:42:43.77|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:43.77|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:43.77|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:43.78|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:43.78|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:43.78|EdenNetServer]127.0.0.1:63884 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:42:55.34|EdenNetServer]127.0.0.1:63884  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:42:55.45|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:55.45|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:55.46|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:55.46|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:55.46|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:42:55.46|EdenNetServer]127.0.0.1:63884 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:45:24.72|EdenNetServer]Client disconnected.127.0.0.1:63884
+[2023-01-29 23:46:16.31|EdenNetServer]Remote client connected 127.0.0.1:64023
+[2023-01-29 23:46:19.77|EdenNetServer]127.0.0.1:64023  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:46:19.88|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:19.88|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:19.88|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:19.89|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:19.89|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:19.90|EdenNetServer]127.0.0.1:64023 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:46:37.16|EdenNetServer]Client disconnected.127.0.0.1:64023
+[2023-01-29 23:46:46.40|EdenNetServer]Remote client connected 127.0.0.1:64041
+[2023-01-29 23:46:48.00|EdenNetServer]127.0.0.1:64041  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:46:48.11|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:48.12|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:48.12|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:48.12|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:48.12|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:46:48.12|EdenNetServer]127.0.0.1:64041 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:46:58.53|EdenNetServer]Client disconnected.127.0.0.1:64041
+[2023-01-29 23:47:09.03|EdenNetServer]Remote client connected 127.0.0.1:64045
+[2023-01-29 23:47:10.35|EdenNetServer]127.0.0.1:64045  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:47:10.46|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:47:10.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:47:10.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:47:10.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:47:10.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:47:10.49|EdenNetServer]127.0.0.1:64045 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:52:00.16|EdenNetServer]Client disconnected.127.0.0.1:64045
+[2023-01-29 23:52:02.38|EdenNetServer]Remote client connected 127.0.0.1:63627
+[2023-01-29 23:52:05.24|EdenNetServer]127.0.0.1:63627  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:52:05.34|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:05.34|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:05.35|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:05.35|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:05.35|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:05.35|EdenNetServer]127.0.0.1:63627 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:52:22.87|EdenNetServer]Client disconnected.127.0.0.1:63627
+[2023-01-29 23:52:25.01|EdenNetServer]Remote client connected 127.0.0.1:63634
+[2023-01-29 23:52:26.14|EdenNetServer]127.0.0.1:63634  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:52:26.24|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:26.25|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:26.25|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:26.26|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:26.27|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:52:26.29|EdenNetServer]127.0.0.1:63634 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:53:03.90|EdenNetServer]127.0.0.1:63634  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:53:04.00|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:04.00|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:04.00|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:04.01|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:04.01|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:04.01|EdenNetServer]127.0.0.1:63634 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:53:12.70|EdenNetServer]127.0.0.1:63634  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:53:12.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:12.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:12.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:12.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:12.81|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:53:12.82|EdenNetServer]127.0.0.1:63634 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:54:06.82|EdenNetServer]Client disconnected.127.0.0.1:63634
+[2023-01-29 23:54:25.85|EdenNetServer]Remote client connected 127.0.0.1:56108
+[2023-01-29 23:54:27.35|EdenNetServer]127.0.0.1:56108  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:54:27.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:54:27.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:54:27.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:54:27.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:54:27.47|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:54:27.47|EdenNetServer]127.0.0.1:56108 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:54:47.94|EdenNetServer]Client disconnected.127.0.0.1:56108
+[2023-01-29 23:54:59.17|EdenNetServer]Remote client connected 127.0.0.1:56113
+[2023-01-29 23:55:00.74|EdenNetServer]127.0.0.1:56113  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:55:00.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:55:00.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:55:00.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:55:00.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:55:00.86|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:55:00.86|EdenNetServer]127.0.0.1:56113 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:55:44.40|EdenNetServer]Client disconnected.127.0.0.1:56113
+[2023-01-29 23:55:59.12|EdenNetServer]Remote client connected 127.0.0.1:56120
+[2023-01-29 23:56:00.30|EdenNetServer]127.0.0.1:56120  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:56:00.42|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:00.42|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:00.42|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:00.42|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:00.42|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:00.42|EdenNetServer]127.0.0.1:56120 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:56:35.57|EdenNetServer]Client disconnected.127.0.0.1:56120
+[2023-01-29 23:56:37.54|EdenNetServer]Remote client connected 127.0.0.1:56131
+[2023-01-29 23:56:38.71|EdenNetServer]127.0.0.1:56131  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:56:38.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:38.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:38.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:38.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:38.82|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:56:38.83|EdenNetServer]127.0.0.1:56131 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:57:06.14|EdenNetServer]Client disconnected.127.0.0.1:56131
+[2023-01-29 23:57:35.93|EdenNetServer]Remote client connected 127.0.0.1:56139
+[2023-01-29 23:57:37.52|EdenNetServer]127.0.0.1:56139  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:57:37.63|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:57:37.63|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:57:37.63|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:57:37.63|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:57:37.63|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:57:37.63|EdenNetServer]127.0.0.1:56139 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-29 23:58:42.80|EdenNetServer]Client disconnected.127.0.0.1:56139
+[2023-01-29 23:58:51.51|EdenNetServer]Remote client connected 127.0.0.1:56150
+[2023-01-29 23:58:53.06|EdenNetServer]127.0.0.1:56150  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-29 23:58:53.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:58:53.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:58:53.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:58:53.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:58:53.17|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-29 23:58:53.18|EdenNetServer]127.0.0.1:56150 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-30 00:00:37.10|EdenNetServer]Client disconnected.127.0.0.1:56150
+[2023-01-30 00:00:38.92|EdenNetServer]Remote client connected 127.0.0.1:56162
+[2023-01-30 00:00:40.33|EdenNetServer]127.0.0.1:56162  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-30 00:00:40.43|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:00:40.43|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:00:40.44|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:00:40.44|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:00:40.44|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:00:40.44|EdenNetServer]127.0.0.1:56162 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-30 00:01:03.72|EdenNetServer]Client disconnected.127.0.0.1:56162
+[2023-01-30 00:01:12.51|EdenNetServer]Remote client connected 127.0.0.1:56171
+[2023-01-30 00:01:13.99|EdenNetServer]127.0.0.1:56171  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-30 00:01:14.10|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:01:14.10|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:01:14.10|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:01:14.11|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:01:14.11|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:01:14.11|EdenNetServer]127.0.0.1:56171 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-30 00:04:36.77|EdenNetServer]Client disconnected.127.0.0.1:56171
+[2023-01-30 00:10:33.39|EdenNetServer]Remote client connected 127.0.0.1:60037
+[2023-01-30 00:10:35.04|EdenNetServer]127.0.0.1:60037  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-01-30 00:10:35.15|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:10:35.15|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:10:35.15|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:10:35.16|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:10:35.16|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-01-30 00:10:35.16|EdenNetServer]127.0.0.1:60037 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-01-30 00:10:54.11|EdenNetServer]Client disconnected.127.0.0.1:60037

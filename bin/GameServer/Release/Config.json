@@ -3,6 +3,8 @@
   "gamelogPath": "EdenGameServerLog.txt",
   "networklogPath": "EdenNetworkLog.txt",
 
+  "moduleChipPath" :  "Data/ModuleChip",
+
   "matchingServerAddress": "127.0.0.1",
   "matchingServerPort" :  16969
 }

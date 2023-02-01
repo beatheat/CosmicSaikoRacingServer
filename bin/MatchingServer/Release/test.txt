@@ -98,3 +98,298 @@
 [2023-01-30 00:10:35.04|EdenNetServer]Remote client connected 127.0.0.1:60038
 [2023-01-30 00:10:35.04|EdenNetServer]127.0.0.1:60038  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
 [2023-01-30 00:10:35.05|EdenNetServer]127.0.0.1:60038 <==  Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":2723}}
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:55194
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:55254
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:55221
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:55250
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.88|EdenNetServer]Forced disconnection to client. 127.0.0.1:63885
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:63838
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:63780
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:56109
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:54819
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:63781
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:63775
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:55213
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:56151
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.83|EdenNetServer]Forced disconnection to client. 127.0.0.1:63751
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.87|EdenNetServer]Forced disconnection to client. 127.0.0.1:63887
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.88|EdenNetServer]Forced disconnection to client. 127.0.0.1:64024
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.88|EdenNetServer]Forced disconnection to client. 127.0.0.1:64042
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.89|EdenNetServer]Forced disconnection to client. 127.0.0.1:56114
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.90|EdenNetServer]Forced disconnection to client. 127.0.0.1:64046
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-30 01:38:40.90|EdenNetServer]Forced disconnection to client. 127.0.0.1:63629
+Unable to read data [2023-01-31 01:15:44.70|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-31 01:15:49.75|EdenNetServer]Remote client connected 127.0.0.1:55507
+[2023-01-31 01:15:49.78|EdenNetServer]127.0.0.1:55507  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 01:15:49.84|EdenNetServer]127.0.0.1:55507 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":41285}}
+[2023-01-31 01:16:16.86|EdenNetServer]Forced disconnection to client. 127.0.0.1:55507
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 01:28:38.48|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-31 01:28:48.19|EdenNetServer]Remote client connected 127.0.0.1:50588
+[2023-01-31 01:28:48.21|EdenNetServer]127.0.0.1:50588  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 01:28:48.28|EdenNetServer]127.0.0.1:50588 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":89471}}
+[2023-01-31 01:29:46.75|EdenNetServer]Remote client connected 127.0.0.1:49605
+[2023-01-31 01:29:46.76|EdenNetServer]127.0.0.1:49605  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 01:29:46.76|EdenNetServer]127.0.0.1:49605 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":12232}}
+[2023-01-31 01:32:14.22|EdenNetServer]Remote client connected 127.0.0.1:49649
+[2023-01-31 01:32:23.30|EdenNetServer]127.0.0.1:49649  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 01:32:23.31|EdenNetServer]127.0.0.1:49649 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":96091}}
+[2023-01-31 01:33:13.21|EdenNetServer]Forced disconnection to client. 127.0.0.1:49649
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 01:33:13.21|EdenNetServer]Forced disconnection to client. 127.0.0.1:49605
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 01:33:13.21|EdenNetServer]Forced disconnection to client. 127.0.0.1:50588
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 01:33:18.74|EdenNetServer]Remote client connected 127.0.0.1:49662
+[2023-01-31 01:33:18.76|EdenNetServer]127.0.0.1:49662  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 01:33:18.76|EdenNetServer]127.0.0.1:49662 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":76458}}
+[2023-01-31 01:33:24.81|EdenNetServer]Forced disconnection to client. 127.0.0.1:49662
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 01:42:09.89|EdenNetServer]Remote client connected 127.0.0.1:49821
+[2023-01-31 01:42:09.90|EdenNetServer]127.0.0.1:49821  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 01:42:09.91|EdenNetServer]127.0.0.1:49821 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":14962}}
+[2023-01-31 16:44:23.03|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-01-31 16:48:23.23|EdenNetServer]Remote client connected 127.0.0.1:63485
+[2023-01-31 16:48:23.26|EdenNetServer]127.0.0.1:63485  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 16:48:23.33|EdenNetServer]127.0.0.1:63485 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":75801}}
+[2023-01-31 17:29:58.25|EdenNetServer]Forced disconnection to client. 127.0.0.1:63485
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:30:13.88|EdenNetServer]Remote client connected 127.0.0.1:54177
+[2023-01-31 17:30:13.90|EdenNetServer]127.0.0.1:54177  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:30:13.90|EdenNetServer]127.0.0.1:54177 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":13489}}
+[2023-01-31 17:31:42.89|EdenNetServer]Remote client connected 127.0.0.1:54209
+[2023-01-31 17:31:42.89|EdenNetServer]127.0.0.1:54209  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:31:42.89|EdenNetServer]127.0.0.1:54209 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":36453}}
+[2023-01-31 17:37:40.09|EdenNetServer]Remote client connected 127.0.0.1:54319
+[2023-01-31 17:37:40.09|EdenNetServer]127.0.0.1:54319  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:37:40.09|EdenNetServer]127.0.0.1:54319 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":26193}}
+[2023-01-31 17:37:54.08|EdenNetServer]Remote client connected 127.0.0.1:54323
+[2023-01-31 17:37:54.08|EdenNetServer]127.0.0.1:54323  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:37:54.08|EdenNetServer]127.0.0.1:54323 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":62098}}
+[2023-01-31 17:39:02.26|EdenNetServer]Remote client connected 127.0.0.1:54335
+[2023-01-31 17:39:02.26|EdenNetServer]127.0.0.1:54335  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:39:02.26|EdenNetServer]127.0.0.1:54335 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":82858}}
+[2023-01-31 17:39:37.14|EdenNetServer]Remote client connected 127.0.0.1:54343
+[2023-01-31 17:39:37.15|EdenNetServer]127.0.0.1:54343  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:39:37.15|EdenNetServer]127.0.0.1:54343 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":27893}}
+[2023-01-31 17:41:19.55|EdenNetServer]Remote client connected 127.0.0.1:54360
+[2023-01-31 17:41:19.55|EdenNetServer]127.0.0.1:54360  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:41:19.55|EdenNetServer]127.0.0.1:54360 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":56635}}
+[2023-01-31 17:41:46.91|EdenNetServer]Remote client connected 127.0.0.1:54389
+[2023-01-31 17:41:46.91|EdenNetServer]127.0.0.1:54389  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:41:46.92|EdenNetServer]127.0.0.1:54389 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":93697}}
+[2023-01-31 17:42:08.66|EdenNetServer]Remote client connected 127.0.0.1:54394
+[2023-01-31 17:42:08.66|EdenNetServer]127.0.0.1:54394  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:42:08.66|EdenNetServer]127.0.0.1:54394 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":88897}}
+[2023-01-31 17:42:41.99|EdenNetServer]Remote client connected 127.0.0.1:54401
+[2023-01-31 17:42:41.99|EdenNetServer]127.0.0.1:54401  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:42:41.99|EdenNetServer]127.0.0.1:54401 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":78144}}
+[2023-01-31 17:46:14.41|EdenNetServer]Remote client connected 127.0.0.1:54529
+[2023-01-31 17:46:14.41|EdenNetServer]127.0.0.1:54529  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:46:14.42|EdenNetServer]127.0.0.1:54529 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":59269}}
+[2023-01-31 17:48:06.54|EdenNetServer]Remote client connected 127.0.0.1:54545
+[2023-01-31 17:48:06.54|EdenNetServer]127.0.0.1:54545  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:48:06.54|EdenNetServer]127.0.0.1:54545 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":47949}}
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54177
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54323
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54209
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54319
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54394
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54335
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54343
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54389
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54401
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.04|EdenNetServer]Forced disconnection to client. 127.0.0.1:54360
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.05|EdenNetServer]Forced disconnection to client. 127.0.0.1:54529
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:21.05|EdenNetServer]Forced disconnection to client. 127.0.0.1:54545
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-01-31 17:48:36.84|EdenNetServer]Remote client connected 127.0.0.1:54553
+[2023-01-31 17:48:48.50|EdenNetServer]127.0.0.1:54553  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:48:48.50|EdenNetServer]127.0.0.1:54553 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":71274}}
+[2023-01-31 17:49:31.68|EdenNetServer]Remote client connected 127.0.0.1:54568
+[2023-01-31 17:49:31.68|EdenNetServer]127.0.0.1:54568  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-01-31 17:49:31.69|EdenNetServer]127.0.0.1:54568 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":13308}}
+[2023-02-01 20:31:50.77|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-02-01 20:34:01.05|EdenNetServer]Remote client connected 127.0.0.1:49639
+[2023-02-01 20:34:01.08|EdenNetServer]127.0.0.1:49639  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-02-01 20:34:01.13|EdenNetServer]127.0.0.1:49639 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":33992}}
+[2023-02-01 20:37:07.19|EdenNetServer]Remote client connected 127.0.0.1:49685
+[2023-02-01 20:37:07.20|EdenNetServer]127.0.0.1:49685  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":33992}}
+[2023-02-01 20:37:07.21|EdenNetServer]127.0.0.1:49685 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":49639}}}
+[2023-02-01 20:37:42.62|EdenNetServer]Client disconnected.127.0.0.1:49685
+[2023-02-01 20:54:23.47|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-02-01 20:54:38.55|EdenNetServer]Remote client connected 127.0.0.1:55732
+[2023-02-01 20:54:38.57|EdenNetServer]127.0.0.1:55732  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-02-01 20:54:38.63|EdenNetServer]127.0.0.1:55732 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":38958}}
+[2023-02-01 20:54:57.45|EdenNetServer]Remote client connected 127.0.0.1:55738
+[2023-02-01 20:54:57.45|EdenNetServer]127.0.0.1:55738  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":38958}}
+[2023-02-01 20:54:57.46|EdenNetServer]127.0.0.1:55738 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":55732}}}
+[2023-02-01 20:55:05.07|EdenNetServer]Client disconnected.127.0.0.1:55738
+[2023-02-01 21:01:14.53|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-02-01 21:01:45.57|EdenNetServer]Remote client connected 127.0.0.1:55876
+[2023-02-01 21:01:45.60|EdenNetServer]127.0.0.1:55876  ==> Packet Len : 54 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":null}}
+[2023-02-01 21:01:45.65|EdenNetServer]127.0.0.1:55876 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":34008}}
+[2023-02-01 21:07:45.24|EdenNetServer]Eden Server is listening on  0.0.0.0:16969
+[2023-02-01 21:08:21.63|EdenNetServer]Remote client connected 127.0.0.1:57096
+[2023-02-01 21:08:21.66|EdenNetServer]127.0.0.1:57096  ==> Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":17979}}
+[2023-02-01 21:08:21.72|EdenNetServer]127.0.0.1:57096 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":22475}}
+[2023-02-01 21:09:06.18|EdenNetServer]Remote client connected 127.0.0.1:57111
+[2023-02-01 21:09:06.19|EdenNetServer]127.0.0.1:57111  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:09:06.19|EdenNetServer]127.0.0.1:57111 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:15:05.45|EdenNetServer]Client disconnected.127.0.0.1:57111
+[2023-02-01 21:15:29.38|EdenNetServer]Remote client connected 127.0.0.1:57183
+[2023-02-01 21:15:29.40|EdenNetServer]Client disconnected.127.0.0.1:57183
+[2023-02-01 21:15:38.81|EdenNetServer]Remote client connected 127.0.0.1:57184
+[2023-02-01 21:15:38.81|EdenNetServer]127.0.0.1:57184  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:15:38.81|EdenNetServer]127.0.0.1:57184 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:15:52.16|EdenNetServer]Client disconnected.127.0.0.1:57184
+[2023-02-01 21:18:11.73|EdenNetServer]Remote client connected 127.0.0.1:57213
+[2023-02-01 21:18:11.73|EdenNetServer]Client disconnected.127.0.0.1:57213
+[2023-02-01 21:18:23.26|EdenNetServer]Remote client connected 127.0.0.1:57214
+[2023-02-01 21:18:23.34|EdenNetServer]127.0.0.1:57214  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:18:23.34|EdenNetServer]127.0.0.1:57214 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:18:51.61|EdenNetServer]Client disconnected.127.0.0.1:57214
+[2023-02-01 21:19:10.10|EdenNetServer]Remote client connected 127.0.0.1:57227
+[2023-02-01 21:19:10.10|EdenNetServer]127.0.0.1:57227  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:19:10.10|EdenNetServer]127.0.0.1:57227 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:19:45.13|EdenNetServer]Client disconnected.127.0.0.1:57227
+[2023-02-01 21:19:45.13|EdenNetServer]Remote client connected 127.0.0.1:62976
+[2023-02-01 21:19:45.14|EdenNetServer]127.0.0.1:62976  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:19:45.14|EdenNetServer]127.0.0.1:62976 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:19:55.42|EdenNetServer]Client disconnected.127.0.0.1:62976
+[2023-02-01 21:21:55.45|EdenNetServer]Remote client connected 127.0.0.1:63028
+[2023-02-01 21:21:55.45|EdenNetServer]Client disconnected.127.0.0.1:63028
+[2023-02-01 21:22:11.67|EdenNetServer]Remote client connected 127.0.0.1:63029
+[2023-02-01 21:22:11.78|EdenNetServer]127.0.0.1:63029  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:22:11.78|EdenNetServer]127.0.0.1:63029 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:22:23.04|EdenNetServer]Client disconnected.127.0.0.1:63029
+[2023-02-01 21:25:32.68|EdenNetServer]Remote client connected 127.0.0.1:63063
+[2023-02-01 21:25:32.68|EdenNetServer]Client disconnected.127.0.0.1:63063
+[2023-02-01 21:31:59.42|EdenNetServer]Remote client connected 127.0.0.1:63209
+[2023-02-01 21:31:59.54|EdenNetServer]127.0.0.1:63209  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:31:59.54|EdenNetServer]127.0.0.1:63209 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:33:48.16|EdenNetServer]Client disconnected.127.0.0.1:63209
+[2023-02-01 21:34:00.16|EdenNetServer]Remote client connected 127.0.0.1:63247
+[2023-02-01 21:34:00.27|EdenNetServer]127.0.0.1:63247  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:34:00.27|EdenNetServer]127.0.0.1:63247 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:34:35.24|EdenNetServer]Client disconnected.127.0.0.1:63247
+[2023-02-01 21:34:45.89|EdenNetServer]Remote client connected 127.0.0.1:63258
+[2023-02-01 21:34:46.00|EdenNetServer]127.0.0.1:63258  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:34:46.00|EdenNetServer]127.0.0.1:63258 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:36:27.29|EdenNetServer]Client disconnected.127.0.0.1:63258
+[2023-02-01 21:36:38.53|EdenNetServer]Remote client connected 127.0.0.1:63299
+[2023-02-01 21:36:38.64|EdenNetServer]127.0.0.1:63299  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:36:38.64|EdenNetServer]127.0.0.1:63299 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:36:59.11|EdenNetServer]Client disconnected.127.0.0.1:63299
+[2023-02-01 21:37:09.73|EdenNetServer]Remote client connected 127.0.0.1:63317
+[2023-02-01 21:37:09.83|EdenNetServer]127.0.0.1:63317  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:37:09.83|EdenNetServer]127.0.0.1:63317 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:38:48.52|EdenNetServer]Client disconnected.127.0.0.1:63317
+[2023-02-01 21:39:03.17|EdenNetServer]Remote client connected 127.0.0.1:62024
+[2023-02-01 21:39:03.29|EdenNetServer]127.0.0.1:62024  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:39:03.29|EdenNetServer]127.0.0.1:62024 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:39:32.49|EdenNetServer]Client disconnected.127.0.0.1:62024
+[2023-02-01 21:39:42.16|EdenNetServer]Remote client connected 127.0.0.1:62042
+[2023-02-01 21:39:42.27|EdenNetServer]127.0.0.1:62042  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:39:42.27|EdenNetServer]127.0.0.1:62042 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 21:41:11.88|EdenNetServer]Client disconnected.127.0.0.1:62042
+[2023-02-01 21:41:26.83|EdenNetServer]Remote client connected 127.0.0.1:62070
+[2023-02-01 21:41:26.94|EdenNetServer]127.0.0.1:62070  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 21:41:26.94|EdenNetServer]127.0.0.1:62070 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:50:16.98|EdenNetServer]Client disconnected.127.0.0.1:62070
+[2023-02-01 22:50:29.33|EdenNetServer]Remote client connected 127.0.0.1:49619
+[2023-02-01 22:50:29.46|EdenNetServer]127.0.0.1:49619  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:50:29.46|EdenNetServer]127.0.0.1:49619 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:52:02.53|EdenNetServer]Client disconnected.127.0.0.1:49619
+[2023-02-01 22:52:23.26|EdenNetServer]Remote client connected 127.0.0.1:49652
+[2023-02-01 22:52:23.39|EdenNetServer]127.0.0.1:49652  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:52:23.39|EdenNetServer]127.0.0.1:49652 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:52:39.81|EdenNetServer]Client disconnected.127.0.0.1:49652
+[2023-02-01 22:52:39.81|EdenNetServer]Remote client connected 127.0.0.1:49653
+[2023-02-01 22:52:39.82|EdenNetServer]127.0.0.1:49653  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:52:39.82|EdenNetServer]127.0.0.1:49653 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:54:22.18|EdenNetServer]Client disconnected.127.0.0.1:49653
+[2023-02-01 22:54:32.77|EdenNetServer]Remote client connected 127.0.0.1:49783
+[2023-02-01 22:54:32.89|EdenNetServer]127.0.0.1:49783  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:54:32.89|EdenNetServer]127.0.0.1:49783 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:54:57.36|EdenNetServer]Client disconnected.127.0.0.1:49783
+[2023-02-01 22:55:07.63|EdenNetServer]Remote client connected 127.0.0.1:57168
+[2023-02-01 22:55:07.74|EdenNetServer]127.0.0.1:57168  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:55:07.74|EdenNetServer]127.0.0.1:57168 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:56:00.55|EdenNetServer]Client disconnected.127.0.0.1:57168
+[2023-02-01 22:56:13.18|EdenNetServer]Remote client connected 127.0.0.1:57215
+[2023-02-01 22:56:13.29|EdenNetServer]127.0.0.1:57215  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:56:13.29|EdenNetServer]127.0.0.1:57215 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:57:00.63|EdenNetServer]Client disconnected.127.0.0.1:57215
+[2023-02-01 22:57:28.45|EdenNetServer]Remote client connected 127.0.0.1:57255
+[2023-02-01 22:57:28.57|EdenNetServer]127.0.0.1:57255  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:57:28.57|EdenNetServer]127.0.0.1:57255 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:58:15.03|EdenNetServer]Client disconnected.127.0.0.1:57255
+[2023-02-01 22:58:25.00|EdenNetServer]Remote client connected 127.0.0.1:57283
+[2023-02-01 22:58:25.14|EdenNetServer]127.0.0.1:57283  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:58:25.14|EdenNetServer]127.0.0.1:57283 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:59:05.66|EdenNetServer]Client disconnected.127.0.0.1:57283
+[2023-02-01 22:59:15.67|EdenNetServer]Remote client connected 127.0.0.1:57297
+[2023-02-01 22:59:15.78|EdenNetServer]127.0.0.1:57297  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:59:15.78|EdenNetServer]127.0.0.1:57297 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 22:59:30.03|EdenNetServer]Client disconnected.127.0.0.1:57297
+[2023-02-01 22:59:40.70|EdenNetServer]Remote client connected 127.0.0.1:57305
+[2023-02-01 22:59:40.81|EdenNetServer]127.0.0.1:57305  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 22:59:40.81|EdenNetServer]127.0.0.1:57305 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 23:03:01.09|EdenNetServer]Client disconnected.127.0.0.1:57305
+[2023-02-01 23:03:17.15|EdenNetServer]Remote client connected 127.0.0.1:53964
+[2023-02-01 23:03:17.28|EdenNetServer]127.0.0.1:53964  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 23:03:17.28|EdenNetServer]127.0.0.1:53964 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 23:03:49.86|EdenNetServer]Client disconnected.127.0.0.1:53964
+[2023-02-01 23:04:01.59|EdenNetServer]Remote client connected 127.0.0.1:53979
+[2023-02-01 23:04:01.71|EdenNetServer]127.0.0.1:53979  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 23:04:01.72|EdenNetServer]127.0.0.1:53979 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 23:07:52.49|EdenNetServer]Client disconnected.127.0.0.1:53979
+[2023-02-01 23:13:04.72|EdenNetServer]Remote client connected 127.0.0.1:62844
+[2023-02-01 23:13:04.84|EdenNetServer]127.0.0.1:62844  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 23:13:04.84|EdenNetServer]127.0.0.1:62844 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 23:13:18.84|EdenNetServer]Client disconnected.127.0.0.1:62844
+[2023-02-01 23:14:42.14|EdenNetServer]Remote client connected 127.0.0.1:62879
+[2023-02-01 23:14:42.26|EdenNetServer]127.0.0.1:62879  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":22475}}
+[2023-02-01 23:14:42.26|EdenNetServer]127.0.0.1:62879 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-01 23:15:05.38|EdenNetServer]Client disconnected.127.0.0.1:62879
+[2023-02-02 03:39:58.41|EdenNetServer]Remote client connected 127.0.0.1:53818
+[2023-02-02 03:39:58.42|EdenNetServer]127.0.0.1:53818  ==> Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":17979}}
+[2023-02-02 03:39:58.42|EdenNetServer]127.0.0.1:53818 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":41974}}
+[2023-02-02 03:40:27.22|EdenNetServer]Remote client connected 127.0.0.1:53825
+[2023-02-02 03:40:27.22|EdenNetServer]127.0.0.1:53825  ==> Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":17979}}
+[2023-02-02 03:40:27.23|EdenNetServer]127.0.0.1:53825 <==  Packet Len : 55 | Json Obj : {"tag":"*r*CreateLobby","data":{"type":0,"data":93255}}
+[2023-02-02 03:40:59.66|EdenNetServer]Remote client connected 127.0.0.1:53829
+[2023-02-02 03:40:59.79|EdenNetServer]127.0.0.1:53829  ==> Packet Len : 58 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":0,"data":93255}}
+[2023-02-02 03:40:59.79|EdenNetServer]127.0.0.1:53829 <==  Packet Len : 89 | Json Obj : {"tag":"*r*GetRoomAddress","data":{"type":2,"data":{"address":"127.0.0.1","port":17979}}}
+[2023-02-02 03:40:59.90|EdenNetServer]Client disconnected.127.0.0.1:53829

@@ -1,0 +1,127 @@
+[2023-02-01 20:31:50.78|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-02-01 20:33:58.94|EdenNetServer]Remote client connected 127.0.0.1:49636
+[2023-02-01 20:34:01.01|EdenNetServer]127.0.0.1:49636  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-02-01 20:34:01.19|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-02-01 20:34:01.33|EdenNetServer]127.0.0.1:49636  ==> Packet Len : 70 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":0,"data":"정신나간 닌자"}}
+[2023-02-01 20:34:01.38|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 204 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":2,"data":{"playerId":-952879055,"lobbyNumber":33992,"playerList":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}}
+[2023-02-01 20:34:03.56|EdenNetServer]Remote client connected 127.0.0.1:49642
+[2023-02-01 20:34:03.56|EdenNetServer]Remote client connected 127.0.0.1:49643
+[2023-02-01 20:34:20.38|EdenNetServer]Client disconnected.127.0.0.1:49642
+[2023-02-01 20:34:20.39|EdenNetServer]127.0.0.1:49643 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 20:34:20.39|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 20:34:20.50|EdenNetServer]Forced disconnection to client. 127.0.0.1:49643
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-02-01 20:34:20.50|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 20:34:48.32|EdenNetServer]Remote client connected 127.0.0.1:49652
+[2023-02-01 20:34:57.88|EdenNetServer]Client disconnected.127.0.0.1:49652
+[2023-02-01 20:34:57.89|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 20:36:35.64|EdenNetServer]Remote client connected 127.0.0.1:49680
+[2023-02-01 20:36:39.32|EdenNetServer]Client disconnected.127.0.0.1:49680
+[2023-02-01 20:36:39.32|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 20:37:01.18|EdenNetServer]Remote client connected 127.0.0.1:49684
+[2023-02-01 20:37:07.19|EdenNetServer]Client disconnected.127.0.0.1:49684
+[2023-02-01 20:37:07.19|EdenNetServer]127.0.0.1:49636 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-952879055,"nickname":"\uC815\uC2E0\uB098\uAC04 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 20:54:23.52|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-02-01 20:54:36.95|EdenNetServer]Remote client connected 127.0.0.1:55729
+[2023-02-01 20:54:38.52|EdenNetServer]127.0.0.1:55729  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-02-01 20:54:38.68|EdenNetServer]127.0.0.1:55729 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-02-01 20:54:38.74|EdenNetServer]127.0.0.1:55729  ==> Packet Len : 70 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":0,"data":"정신나간 바지"}}
+[2023-02-01 20:54:38.77|EdenNetServer]127.0.0.1:55729 <==  Packet Len : 206 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":2,"data":{"playerId":-2011429419,"lobbyNumber":38958,"playerList":[{"id":-2011429419,"nickname":"\uC815\uC2E0\uB098\uAC04 \uBC14\uC9C0","isReady":false,"host":true}]}}}
+[2023-02-01 20:54:50.00|EdenNetServer]Remote client connected 127.0.0.1:55733
+[2023-02-01 20:54:57.45|EdenNetServer]Client disconnected.127.0.0.1:55733
+[2023-02-01 20:54:57.45|EdenNetServer]127.0.0.1:55729 <==  Packet Len : 152 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":-2011429419,"nickname":"\uC815\uC2E0\uB098\uAC04 \uBC14\uC9C0","isReady":false,"host":true}]}}
+[2023-02-01 21:01:14.50|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-02-01 21:01:44.10|EdenNetServer]Remote client connected 127.0.0.1:55873
+[2023-02-01 21:01:45.55|EdenNetServer]127.0.0.1:55873  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-02-01 21:01:45.70|EdenNetServer]127.0.0.1:55873 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-02-01 21:01:45.76|EdenNetServer]127.0.0.1:55873  ==> Packet Len : 70 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":0,"data":"막강한 개구리"}}
+[2023-02-01 21:01:45.79|EdenNetServer]127.0.0.1:55873 <==  Packet Len : 204 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":2,"data":{"playerId":1992322026,"lobbyNumber":34008,"playerList":[{"id":1992322026,"nickname":"\uB9C9\uAC15\uD55C \uAC1C\uAD6C\uB9AC","isReady":false,"host":true}]}}}
+[2023-02-01 21:07:45.20|EdenNetServer]Eden Server is listening on  0.0.0.0:17979
+[2023-02-01 21:08:20.32|EdenNetServer]Remote client connected 127.0.0.1:57093
+[2023-02-01 21:08:21.60|EdenNetServer]127.0.0.1:57093  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-02-01 21:08:21.77|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-02-01 21:08:21.92|EdenNetServer]127.0.0.1:57093  ==> Packet Len : 70 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":0,"data":"아름다운 닌자"}}
+[2023-02-01 21:08:21.95|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 204 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":2,"data":{"playerId":1824212553,"lobbyNumber":22475,"playerList":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}}
+[2023-02-01 21:08:42.39|EdenNetServer]Remote client connected 127.0.0.1:57097
+[2023-02-01 21:08:54.12|EdenNetServer]Remote client connected 127.0.0.1:57101
+[2023-02-01 21:08:54.17|EdenNetServer]Forced disconnection to client. 127.0.0.1:57097
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-02-01 21:08:54.17|EdenNetServer]Forced disconnection to client. 127.0.0.1:57101
+Unable to read data from the transport connection: 현재 연결은 사용자의 호스트 시스템의 소프트웨어의 의해 중단되었습니다..
+[2023-02-01 21:08:54.19|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:08:54.19|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:08:58.17|EdenNetServer]Remote client connected 127.0.0.1:57109
+[2023-02-01 21:09:06.18|EdenNetServer]Client disconnected.127.0.0.1:57109
+[2023-02-01 21:09:06.18|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:15:21.03|EdenNetServer]Remote client connected 127.0.0.1:57182
+[2023-02-01 21:15:29.38|EdenNetServer]Client disconnected.127.0.0.1:57182
+[2023-02-01 21:15:29.38|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:18:03.69|EdenNetServer]Remote client connected 127.0.0.1:57211
+[2023-02-01 21:18:11.73|EdenNetServer]Client disconnected.127.0.0.1:57211
+[2023-02-01 21:18:11.73|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:19:05.13|EdenNetServer]Remote client connected 127.0.0.1:57226
+[2023-02-01 21:19:10.10|EdenNetServer]Client disconnected.127.0.0.1:57226
+[2023-02-01 21:19:10.10|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:21:44.06|EdenNetServer]Remote client connected 127.0.0.1:63025
+[2023-02-01 21:21:55.45|EdenNetServer]Client disconnected.127.0.0.1:63025
+[2023-02-01 21:21:55.45|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-01 21:25:23.82|EdenNetServer]Remote client connected 127.0.0.1:63062
+[2023-02-01 21:25:32.68|EdenNetServer]Client disconnected.127.0.0.1:63062
+[2023-02-01 21:25:32.69|EdenNetServer]127.0.0.1:57093 <==  Packet Len : 151 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1824212553,"nickname":"\uC544\uB984\uB2E4\uC6B4 \uB2CC\uC790","isReady":false,"host":true}]}}
+[2023-02-02 00:27:29.44|EdenNetServer]Client disconnected.127.0.0.1:57093
+[2023-02-02 03:39:56.25|EdenNetServer]Remote client connected 127.0.0.1:53815
+[2023-02-02 03:39:56.25|EdenNetServer]Remote client connected 127.0.0.1:53814
+[2023-02-02 03:39:58.41|EdenNetServer]127.0.0.1:53815  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-02-02 03:39:58.52|EdenNetServer]EdenNetServer::AddResponse - receive event tag already exists
+[2023-02-02 03:39:58.52|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:39:58.52|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:39:58.53|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:39:58.53|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:39:58.53|EdenNetServer]127.0.0.1:53815 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-02-02 03:39:58.53|EdenNetServer]Client disconnected.127.0.0.1:53815
+[2023-02-02 03:39:58.53|EdenNetServer]127.0.0.1:53814 <==  Packet Len : 55 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[]}}
+[2023-02-02 03:40:14.47|EdenNetServer]Forced disconnection to client. 127.0.0.1:53814
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-02-02 03:40:26.07|EdenNetServer]Remote client connected 127.0.0.1:53822
+[2023-02-02 03:40:27.22|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 59 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":0,"data":null}}
+[2023-02-02 03:40:27.32|EdenNetServer]EdenNetServer::AddResponse - receive event tag already exists
+[2023-02-02 03:40:27.32|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:40:27.33|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:40:27.33|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:40:27.33|EdenNetServer]EdenNetServer::AddReceiveEvent - receive event tag already exists
+[2023-02-02 03:40:27.33|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 84 | Json Obj : {"tag":"*r*CreateCustomGame","data":{"type":2,"data":{"state":true,"message":"OK"}}}
+[2023-02-02 03:40:27.45|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 67 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":0,"data":"막강한 의자"}}
+[2023-02-02 03:40:27.45|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 198 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":2,"data":{"playerId":1047716442,"lobbyNumber":93255,"playerList":[{"id":1047716442,"nickname":"\uB9C9\uAC15\uD55C \uC758\uC790","isReady":false,"host":true}]}}}
+[2023-02-02 03:40:59.90|EdenNetServer]Remote client connected 127.0.0.1:53830
+[2023-02-02 03:40:59.91|EdenNetServer]127.0.0.1:53830  ==> Packet Len : 67 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":0,"data":"마법의 닌자"}}
+[2023-02-02 03:40:59.91|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 290 | Json Obj : {"tag":"*r*LobbyLogin","data":{"type":2,"data":{"playerId":1188896313,"lobbyNumber":93255,"playerList":[{"id":1047716442,"nickname":"\uB9C9\uAC15\uD55C \uC758\uC790","isReady":false,"host":true},{"id":1188896313,"nickname":"\uB9C8\uBC95\uC758 \uB2CC\uC790","isReady":false,"host":false}]}}}
+[2023-02-02 03:40:59.91|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 237 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1047716442,"nickname":"\uB9C9\uAC15\uD55C \uC758\uC790","isReady":false,"host":true},{"id":1188896313,"nickname":"\uB9C8\uBC95\uC758 \uB2CC\uC790","isReady":false,"host":false}]}}
+[2023-02-02 03:41:08.31|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 50 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":true}}
+[2023-02-02 03:41:08.32|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":true}}}
+[2023-02-02 03:41:08.32|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":true}}}
+[2023-02-02 03:41:10.93|EdenNetServer]127.0.0.1:53830  ==> Packet Len : 50 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":true}}
+[2023-02-02 03:41:10.93|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":true}}}
+[2023-02-02 03:41:10.93|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":true}}}
+[2023-02-02 03:41:11.99|EdenNetServer]127.0.0.1:53830  ==> Packet Len : 51 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":false}}
+[2023-02-02 03:41:12.00|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":false}}}
+[2023-02-02 03:41:12.00|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":false}}}
+[2023-02-02 03:41:12.56|EdenNetServer]127.0.0.1:53830  ==> Packet Len : 50 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":true}}
+[2023-02-02 03:41:12.56|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":true}}}
+[2023-02-02 03:41:12.56|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":true}}}
+[2023-02-02 03:41:13.03|EdenNetServer]127.0.0.1:53830  ==> Packet Len : 51 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":false}}
+[2023-02-02 03:41:13.03|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":false}}}
+[2023-02-02 03:41:13.03|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1188896313,"readyState":false}}}
+[2023-02-02 03:41:14.35|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 51 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":false}}
+[2023-02-02 03:41:14.35|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":false}}}
+[2023-02-02 03:41:14.35|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":false}}}
+[2023-02-02 03:41:14.78|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 50 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":true}}
+[2023-02-02 03:41:14.79|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":true}}}
+[2023-02-02 03:41:14.80|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":true}}}
+[2023-02-02 03:41:15.17|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 51 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":false}}
+[2023-02-02 03:41:15.17|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":false}}}
+[2023-02-02 03:41:15.17|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 94 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":false}}}
+[2023-02-02 03:41:15.55|EdenNetServer]127.0.0.1:53822  ==> Packet Len : 50 | Json Obj : {"tag":"LobbyReady","data":{"type":0,"data":true}}
+[2023-02-02 03:41:15.55|EdenNetServer]127.0.0.1:53830 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":true}}}
+[2023-02-02 03:41:15.55|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 93 | Json Obj : {"tag":"LobbyPlayerReady","data":{"type":2,"data":{"playerId":1047716442,"readyState":true}}}
+[2023-02-02 03:41:17.37|EdenNetServer]Client disconnected.127.0.0.1:53830
+[2023-02-02 03:41:17.37|EdenNetServer]127.0.0.1:53822 <==  Packet Len : 144 | Json Obj : {"tag":"LobbyPlayerUpdate","data":{"type":0,"data":[{"id":1047716442,"nickname":"\uB9C9\uAC15\uD55C \uC758\uC790","isReady":true,"host":true}]}}

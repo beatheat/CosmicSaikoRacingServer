@@ -11,18 +11,30 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="1.1.5" />
+    <PackageReference Include="EdenNetwork" Version="1.2.0" />
+    <PackageReference Include="NLua" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="Config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\ModuleChip\ModuleChip.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Util\" />
+    <Folder Include="Game\ModuleChipManager\" />
   </ItemGroup>
 
 </Project>

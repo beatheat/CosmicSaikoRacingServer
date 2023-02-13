@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace CSRServer
 {
-    internal class Resource
+    public enum ResourceType
     {
-        public enum Type
-        {
-            FOSSIL, ELECTRIC, BIO, NUCLEAR, COSMIC
-        }
-
-        Type type;
+        Fossil, Electric, Bio, Nuclear, Cosmic,  All
     }
 }

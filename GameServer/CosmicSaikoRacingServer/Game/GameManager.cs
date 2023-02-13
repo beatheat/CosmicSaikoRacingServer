@@ -26,6 +26,8 @@ namespace CSRServer
             this.clients = new Dictionary<string, GameClient>();
             this.scenes = new Queue<Scene>();
             this.overlayScene = null;
+            logThread = null!;
+            logStream = null!;
         }
 
         public void RemoveGameClient(string client_id)
@@ -33,6 +35,9 @@ namespace CSRServer
             clients.Remove(client_id);
         }
 
+        /// <summary>
+        /// 게임서버 최초 로딩, 로그 준비
+        /// </summary>
         public void Load()
         {
             try
@@ -60,6 +65,10 @@ namespace CSRServer
                 throw new Exception("EdenGameManager::Load - Cannot create log-file stream \n" + e.Message);
             }
         }
+
+        /// <summary>
+        /// 게임서버를 실행함
+        /// </summary>
         public void Run()
         {
             server.Listen(MAX_PLAYER, (string client_id) =>
@@ -77,21 +86,12 @@ namespace CSRServer
                 }
             });
 
-            //test
-            server.AddReceiveEvent("csString", (string client_id, EdenData d) =>
-            {
-                server.Send("scString", client_id, "server : " + d.Get<string>());
-            });
-            server.AddReceiveEvent("csDict", (string client_id, EdenData d) =>
-            {
-                server.Send("scDict", client_id, d);
-            });
-            //
             server.AddResponse("IsGameReady", (string client_id, EdenData d) => 
             {
                 return new EdenData(scenes.Count > 0);
             });
 
+            // 랜덤 매칭 게임 생성
             server.AddResponse("CreateGame", (string client_id, EdenData d) =>
             {
 
@@ -108,15 +108,20 @@ namespace CSRServer
                 return new EdenData();
             });
 
+            // 커스텀 게임 생성
             server.AddResponse("CreateCustomGame", (string client_id, EdenData d) =>
             {
                 EdenNetClient client = new EdenNetClient(Program.config.matchingServerAddress, Program.config.matchingServerPort);
                 if (client.Connect() == ConnectionState.OK)
                 {
-                    EdenData data = client.Request("CreateLobby", 10);
+                    EdenData data = client.Request("CreateLobby", 10, Program.config.port);
                     if(data.type == EdenData.Type.ERROR)
                     {
-                        return new EdenData(false, "Cannot Create Game : cannot create lobby");
+                        return new EdenData(new Dictionary<string, object>
+                        {
+                            ["state"] = false,
+                            ["message"] = "Cannot Create Game : cannot create lobby"
+                        });
                     }
                     int roomNumber = data.Get<int>();
 
@@ -131,13 +136,23 @@ namespace CSRServer
                     overlayScene = new ChatScene(this, server);
                     overlayScene.Load();
 
-                    return new EdenData(true, "OK");
+                    return new EdenData(new Dictionary<string, object>
+                    {
+                        ["state"] = true,
+                        ["message"] = "OK"
+                    });
                 }
-                return new EdenData(false, "Cannot Create Game : cannot connect Matching Server");
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["state"] = false,
+                    ["message"] = "Cannot Create Game : cannot connect Matching Server"
+                });
             });
 
         }
-
+        /// <summary>
+        /// 게임서버 종료
+        /// </summary>
         public void Close()
         {
             while (scenes.Count > 0)
@@ -152,6 +167,9 @@ namespace CSRServer
             server.Close();
         }
 
+        /// <summary>
+        /// 다음 씬으로 변경함
+        /// </summary>
         public void ChangeToNextScene()
         {
             Scene pastScene, nextScene;
@@ -174,6 +192,9 @@ namespace CSRServer
         {
             scenes.Dequeue().Destroy();
         }
+        /// <summary>
+        /// 게임서버 로그를 출력함
+        /// </summary>
         public void Log(string log)
         {
             log = "[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ff") + "|EdenGameManager]" + log;

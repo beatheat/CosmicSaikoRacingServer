@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSRServer
 {
+    /// <summary>
+    /// 서버에 접속한 클라이언트를 관리하는 클래스
+    /// </summary>
     public class GameClient
     {
         string id;

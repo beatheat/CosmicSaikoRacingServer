@@ -7,6 +7,9 @@ using EdenNetwork;
 
 namespace CSRServer
 {
+    /// <summary>
+    /// 게임 화면의 최소단위인 씬을 구성하는 클래스
+    /// </summary>
     public abstract class Scene
     {
         protected GameManager gameManager;

@@ -2,6 +2,9 @@
 
 namespace CSRServer
 {
+    /// <summary>
+    /// 로비씬에서 하나의 클라이언트를 표현하는 클래스
+    /// </summary>
     public class LobbyPlayer
     {
         [JsonIgnore]

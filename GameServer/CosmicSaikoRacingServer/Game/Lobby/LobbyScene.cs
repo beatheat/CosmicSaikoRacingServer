@@ -11,14 +11,24 @@ using System.Numerics;
 
 namespace CSRServer
 {
-
+    /// <summary>
+    /// CSR의 첫번째 씬인 로비씬
+    /// </summary>
     public class LobbyScene : Scene
     {
+        #region Properties
+        // 로비에 접속한 플레이어를 리스트와 맵 두가지로 관리함
+        // clientId를 id값으로 playerMap에서 LobbyPlayer를 검색하고 클라이언트에게는 playerList만 보내줌
         private List<LobbyPlayer> playerList;
         private Dictionary<string, LobbyPlayer> playerMap;
+        //로비의 방번호
         private int roomNumber;
+        //로비 호스트의 clientId
         private string hostId;
-
+        #endregion
+        
+        
+        #region Load Methods
         public LobbyScene(GameManager gameManager, EdenNetServer server) : base(gameManager, server)
         {
             playerList = new List<LobbyPlayer>();
@@ -29,32 +39,39 @@ namespace CSRServer
 
         public override void Load()
         {
-            server.AddReceiveEvent("csLobbyLogin", Login);
-            server.AddReceiveEvent("csLobbyLogout", Logout);
-            server.AddReceiveEvent("csLobbyReady", Ready);
-            server.AddReceiveEvent("csLobbyGameStart", GameStart);
+            server.AddResponse("LobbyLogin", Login);
+            server.AddReceiveEvent("LobbyLogout", Logout);
+            server.AddReceiveEvent("LobbyReady", Ready);
+            server.AddReceiveEvent("LobbyGameStart", GameStart);
             server.SetClientDisconnectEvent(RemovePlayer);
 
-            //Create LobbyPlayer instance of host player
+            //로비 호스트의 clientId값과 방번호를 
+            if (passedData == null)
+            {
+                throw new Exception("LobbyScene - passedData is null");
+            }
             roomNumber = (int)passedData["roomNumber"];
             hostId = (string)passedData["hostId"];
         }
 
         public override void Destroy()
         {
-            server.RemoveReceiveEvent("csLobbyLogin");
-            server.RemoveReceiveEvent("csLobbyLogout");
-            server.RemoveReceiveEvent("csLobbyReady");
-            server.RemoveReceiveEvent("csLobbyGameStart");
+            server.RemoveResponse("LobbyLogin");
+            server.RemoveReceiveEvent("LobbyLogout");
+            server.RemoveReceiveEvent("LobbyReady");
+            server.RemoveReceiveEvent("LobbyGameStart");
             server.ResetClientDisconnectEvent();
         }
 
+        #endregion
+        #region Lobby Logic Methods
         private void ChangeScene()
         {
             passingData.Add("playerList", playerList);
             gameManager.ChangeToNextScene();
         }
 
+        //로비에서 클라이언트 접속이 끊어질 시 해당 클라이언트 리스트에서 제거
         private void RemovePlayer(string clientId)
         {
             if (playerMap.ContainsKey(clientId))
@@ -63,10 +80,12 @@ namespace CSRServer
                 playerMap.Remove(clientId);
                 gameManager.RemoveGameClient(clientId);
             }
+            server.BroadcastAsync("LobbyPlayerUpdate", playerList);
         }
-
-        #region Network Methods
-        private void Login(string clientId, EdenData data)
+        #endregion
+        #region Receive/Response Methods
+        // 클라이언트가 최초에 로비에 접속한 뒤 필요한 로비정보를 응답해줌
+        private EdenData Login(string clientId, EdenData data)
         {
 
             string nickname = data.Get<string>();
@@ -79,24 +98,37 @@ namespace CSRServer
             }
             else
                 playerList.Add(player);
-            server.Send("scLobbyPlayerId", clientId, player.id);
-            server.Send("scLobbyNumber", clientId, roomNumber);
-            server.Broadcast("scLobbyPlayerUpdate", playerList);
+
+            server.BroadcastExceptAsync("LobbyPlayerUpdate", clientId, playerList);
+
+            var response = new Dictionary<string, object>
+            {
+                ["playerId"] = player.id,
+                ["lobbyNumber"] = roomNumber,
+                ["playerList"] = playerList
+            };
+            return new EdenData(response);
         }
 
+        // 클라이언트가 로비를 나감을 알림
         private void Logout(string clientId, EdenData data)
         {
             RemovePlayer(clientId);
-            server.Broadcast("scLobbyPlayerUpdate", playerList);
         }
 
+        // 클라이언트가 게임준비를 했음을 알림
         private void Ready(string clientId, EdenData data)
         {
             bool isReady = data.Get<bool>();
-            playerMap[clientId].isReady = isReady;
-            server.Broadcast("scLobbyPlayerUpdate", playerList);
+            LobbyPlayer player = playerMap[clientId];
+            player.isReady = isReady;
+            server.BroadcastAsync("LobbyPlayerReady", new Dictionary<string, object> {
+                ["playerId"] = player.id,
+                ["readyState"] = isReady
+            });
         }
 
+        // 모든 클라이언트가 준비완료하고 호스트가 게임을 시작했을 때 게임을 시작함
         private void GameStart(string clientId, EdenData data)
         {
             foreach (var player in playerList)
@@ -104,7 +136,7 @@ namespace CSRServer
                 if (!player.isReady)
                     return;
             }
-            server.Broadcast("scLobbyGameStart");
+            server.BroadcastAsync("LobbyGameStart");
             ChangeScene();
         }
 

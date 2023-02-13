@@ -90,16 +90,24 @@ namespace MatchingServer
         {
             if (room.Count >= 100000)
             {
-                return new EdenData(-1);
+                return new EdenData("There is no room remain");
             }
-
+            int port = data.Get<int>();
+            if (port < 0 || port > 65535)
+            {
+                return new EdenData(new EdenError("Wrong port number"));
+            }
+            
+            string address = (string) (StringToAddress(client_id))["address"];
+            address += ":" + port.ToString();
+            
             int roomNum;
             do
             {
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
             } while (room.ContainsKey(roomNum));
 
-            room.Add(roomNum, client_id);
+            room.Add(roomNum, address);
 
             return new EdenData(roomNum);
         }
@@ -127,7 +135,7 @@ namespace MatchingServer
                 return new EdenData(new EdenError("ERR:Unauthorized Access"));
             int roomNum = data.Get<int>();
             if (room.ContainsKey(roomNum))
-                return StringToAddress(room[roomNum]);
+                return new EdenData(StringToAddress(room[roomNum]));
             else
                 return new EdenData(new EdenError("ERR:Wrong Lobby Number"));
         }
@@ -147,7 +155,7 @@ namespace MatchingServer
             }
         }
 
-        public static EdenData StringToAddress(string address)
+        public static Dictionary<string,object> StringToAddress(string address)
         {
             var splitAddress = address.Split(':');
             var sendData = new Dictionary<string, object>
@@ -155,7 +163,7 @@ namespace MatchingServer
                 ["address"] = splitAddress[0],
                 ["port"] = Int32.Parse(splitAddress[1])
             };
-            return new EdenData(sendData);
+            return sendData;
         }
 
     }

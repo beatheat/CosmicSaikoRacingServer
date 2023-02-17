@@ -1,0 +1,20 @@
+[
+  {
+    "id": "0",
+    "name": "카드1",
+    "rank": 1,
+    "type": "fossil",
+    "condition": "f1",
+    "effect-string": "이동거리 +5",
+    "effect": "Add(5)"
+  },
+  {
+    "id": "1",
+    "name": null,
+    "rank": 1,
+    "type": "electric",
+    "condition": "#two-pair",
+    "effect-string": "이동거리 +6",
+    "effect": "Add({Add({Add(1)})}), Nothing(), Nothing()"
+  }
+]

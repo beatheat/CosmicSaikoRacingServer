@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="1.2.0" />
+    <PackageReference Include="EdenNetwork" Version="1.3.0" />
     <PackageReference Include="NLua" Version="1.6.0" />
   </ItemGroup>
 

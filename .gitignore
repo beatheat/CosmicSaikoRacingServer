@@ -5,3 +5,4 @@ bin/GameServer/Debug
 bin/MatchingServer/Debug
 GameServer/.idea
 MatchingServer/.idea
+bin/GameServer/Release/EdenNetworkLog.txt

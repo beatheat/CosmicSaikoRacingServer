@@ -44,7 +44,7 @@ namespace CSRServer.Lobby
 			return new EdenData();
 		}
 
-		private EdenData CreateCustomGame(string client_id, EdenData data)
+		private EdenData CreateCustomGame(string clientId, EdenData data)
 		{
 			EdenNetClient client = new EdenNetClient(Program.config.matchingServerAddress, Program.config.matchingServerPort);
 			if (client.Connect() == ConnectionState.OK)
@@ -59,7 +59,7 @@ namespace CSRServer.Lobby
 				gameManager.AddScene(new LobbyScene(gameManager, server));
 				gameManager.AddScene(new GameScene(gameManager, server));
 				
-				this.passingData.Add("hostId", client_id);
+				this.passingData.Add("hostId", clientId);
 				this.passingData.Add("roomNumber", roomNumber);
 				
 				gameManager.ChangeToNextScene();

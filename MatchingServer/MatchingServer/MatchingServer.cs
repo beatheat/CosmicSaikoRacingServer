@@ -90,12 +90,13 @@ namespace MatchingServer
         {
             if (room.Count >= 100000)
             {
-                return new EdenData("There is no room remain");
+                return EdenData.Error("There is no room remain");
             }
-            int port = data.Get<int>();
+            if (!data.TryGet<int>(out var port))
+                return EdenData.Error("Wrong formatted port number");
             if (port < 0 || port > 65535)
             {
-                return new EdenData(new EdenError("Wrong port number"));
+                return EdenData.Error("Wrong port number");
             }
             
             string address = (string) (StringToAddress(client_id))["address"];
@@ -114,8 +115,8 @@ namespace MatchingServer
 
         public EdenData DestroyLobby(string client_id, EdenData data)
         {
-            int roomNum = data.Get<int>();
-
+            if (!data.TryGet<int>(out var roomNum))
+                return EdenData.Error("Wrong formatted room number");
             if (room.ContainsKey(roomNum))
             {
                 if (client_id == room[roomNum])
@@ -133,7 +134,8 @@ namespace MatchingServer
         {
             if (data.type != EdenData.Type.SINGLE)
                 return new EdenData(new EdenError("ERR:Unauthorized Access"));
-            int roomNum = data.Get<int>();
+            if(!data.TryGet<int>(out var roomNum))
+                return new EdenData(new EdenError("ERR:Unauthorized Access"));
             if (room.ContainsKey(roomNum))
                 return new EdenData(StringToAddress(room[roomNum]));
             else

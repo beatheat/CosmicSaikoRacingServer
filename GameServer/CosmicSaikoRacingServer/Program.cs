@@ -5,6 +5,8 @@ using System.Threading;
 using EdenNetwork;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using CSRServer.Game;
+using CSRServer.Lobby;
 
 
 namespace CSRServer
@@ -47,10 +49,18 @@ namespace CSRServer
             EdenNetServer server = new EdenNetServer(config.port, config.networklogPath);
             GameManager gameManager = new GameManager(server);
             
-            try { gameManager.Load(); }
-            catch (Exception e) { Console.WriteLine("Fail in Server Loading \n" + e.Message); return; }
-            
-            gameManager.Run();
+            try
+            {
+                Logger.Load(config.gamelogPath);
+                // CardManager.Load("Data/cards.json");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+
+            gameManager.Run(new BootScene(gameManager, server));
             
             //콘솔창 관리
             Console.WriteLine("Type quit to close server");
@@ -64,7 +74,7 @@ namespace CSRServer
             }
             
             gameManager.Close();
-
+            Logger.Close();
         }
     }
 }

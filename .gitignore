@@ -7,3 +7,4 @@ GameServer/.idea
 MatchingServer/.idea
 bin/GameServer/Release/EdenNetworkLog.txt
 bin/GameServer/Release/EdenGameServerLog.txt
+bin/MatchingServer/Release/test.txt

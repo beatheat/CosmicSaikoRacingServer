@@ -11,7 +11,7 @@ namespace CSRServer
         /// <summary>
         /// big리스트에 있는 값을 size개 만큼 small리스트에 랜덤으로 옮긴다
         /// </summary>
-        static public bool DistributeOnList<T>(List<T> small, List<T> big, int size)
+        public static bool DistributeOnList<T>(List<T> small, List<T> big, int size)
         {
             if (size > big.Count)
             {
@@ -30,7 +30,7 @@ namespace CSRServer
             return true;
         }
 
-        static public bool DistributeAndMoveOnList<T>(List<T> small, List<T> big, int size)
+        public static bool DistributeAndMoveOnList<T>(List<T> small, List<T> big, int size)
         {
             if (size > big.Count)
             {
@@ -48,21 +48,25 @@ namespace CSRServer
             return true;
         }
 
-        static public void Swap<T>(ref T a, ref T b)
+        public static void Swap<T>(ref T a, ref T b)
         {
-            T temp = a;
-            a = b;
-            b = temp;
+            (a, b) = (b, a);
         }
 
-        static public bool Swap<T>(this List<T> list, int from, int to)
+        public static bool Swap<T>(this List<T> list, int from, int to)
         {
             if (from >= list.Count || from < 0 || to >= list.Count || to < 0)
                 return false;
-            T temp = list[from];
-            list[from] = list[to];
-            list[to] = temp;
+            (list[from], list[to]) = (list[to], list[from]);
             return true;
+        }
+        
+        public static T GetRandomEnumValue<T>()
+        {
+            Array values = Enum.GetValues(typeof(T));
+            Random random = new Random();
+            T randomEnumValue = (T)values.GetValue(random.Next(values.Length))!;
+            return randomEnumValue;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace CSRServer.Game
         [JsonIgnore] public const int INITIAL_MAX_DISTANCE = 100;
         [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 2;
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
+        [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 5;
+        [JsonIgnore] public const int INITIAL_COIN_COUNT = 10;
         
         [JsonIgnore]
         public string clientId;
@@ -21,6 +23,8 @@ namespace CSRServer.Game
 
         public int remainDistance;
         public int currentDistance;
+
+        public int turnDistance;
 
         public int drawCount;
 
@@ -66,15 +70,17 @@ namespace CSRServer.Game
             resource = new List<ResourceType>();
             availableRerollCount = INITIAL_RESOURCE_REROLL_COUNT;
             resourceRerollCount = availableRerollCount;
-            resourceCount = 5;
+            resourceCount = INITIAL_RESOURCE_COUNT;
                 
             artifact = new List<Artifact>();
 
             remainDistance = INITIAL_MAX_DISTANCE;
             currentDistance = 0;
+            turnDistance = 0;
+            
             drawCount = INITIAL_DRAW_COUNT;
 
-            coin = 10;
+            coin = INITIAL_COIN_COUNT;
             exp = 0;
             level = 1;
 
@@ -122,23 +128,17 @@ namespace CSRServer.Game
             return true;
         }
         
-        public List<ResourceType> RollResource(List<int>? resourceFixed)
+        public List<ResourceType> RollResource(List<int>? resourceFixed = null)
         {
             if (resourceRerollCount > 0)
             {
-                Random random = new Random();
-
                 for (int i = 0; i < resourceCount; i++)
                 {
                     ResourceType resourceElement = Util.GetRandomEnumValue<ResourceType>();
                     if (i >= resource.Count)
-                    {
                         resource.Add(resourceElement);
-                    }
                     else if (resourceFixed != null && !resourceFixed.Contains(i))
-                    {
                         resource[i] = resourceElement;
-                    }
                 }
                 resourceRerollCount--;
                 return resource;

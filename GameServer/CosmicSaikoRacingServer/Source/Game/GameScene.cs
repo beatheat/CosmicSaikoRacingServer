@@ -178,10 +178,9 @@ namespace CSRServer
                 GamePlayer player = playerMap[clientId];
                 if(!player.IsCardEnable(useCardIndex))
                     return new EdenData(new EdenError("UseCard - Card does not satisfy resource condition"));
-                if(!player.UseCard(useCardIndex,out var result, out var effectType))
+                if(!player.UseCard(useCardIndex,out var result))
                     return new EdenData(new EdenError("UseCard - Card index is wrong"));
-                var response = new Dictionary<string, object> {["effectType"] = effectType, ["results"] = result};
-                return new EdenData(response);
+                return new EdenData(result);
             }
             return new EdenData(new EdenError("UseCard - Phase is not Preheat-Phase"));
         }

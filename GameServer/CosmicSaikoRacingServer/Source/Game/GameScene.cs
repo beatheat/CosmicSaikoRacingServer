@@ -54,7 +54,7 @@ namespace CSRServer
             maintainStore = new MaintainStore(playerList.Count);
             
             server.AddResponse("UseCard", UseCard);
-            server.AddResponse("RollResource", RollResource);
+            server.AddResponse("RerollResource", RerollResource);
 
             server.AddResponse("RerollStore", RerollStore);
             server.AddResponse("BuyExp", BuyExp);
@@ -91,7 +91,7 @@ namespace CSRServer
             phase = Phase.Preheat;
             foreach (var player in playerList)
             {
-                player.RollResource(null);
+                player.RollResource();
                 player.DrawCard(player.drawCount);
                 player.turnReady = false;
                 player.resourceRerollCount = player.availableRerollCount;
@@ -115,15 +115,30 @@ namespace CSRServer
         {
             phase = Phase.Depart;
             time = 99;
+            List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
             foreach (var player in playerList)
+            {
+                results.Add(player.PreheatEnd());
                 player.turnReady = false;
-            server.BroadcastAsync("DepartStart", GetMonitorPlayerList());
+            }
+
+            server.BroadcastAsync("DepartStart", new Dictionary<string, object>
+            {
+                ["playerList"] = GetMonitorPlayerList(),
+                ["infos"] = results
+            });
         }
 
         private void MaintainStart()
         {
             phase = Phase.Maintain;
             time = 99;
+
+            //플레이어 rank 정해주기
+            var orderedPlayerList = playerList.OrderBy(p => p.currentDistance).ToList();
+            for (int i = 1; i <= orderedPlayerList.Count; i++)
+                orderedPlayerList[i].rank = i;
+            
             foreach (var player in playerList)
             {
                 player.turnReady = false;
@@ -185,7 +200,7 @@ namespace CSRServer
             return new EdenData(new EdenError("UseCard - Phase is not Preheat-Phase"));
         }
 
-        private EdenData RollResource(string clientId, EdenData data)
+        private EdenData RerollResource(string clientId, EdenData data)
         {
             if (phase == Phase.Preheat)
             {
@@ -193,7 +208,7 @@ namespace CSRServer
                     return new EdenData(new EdenError("RollResource - resourceFixed data is missing"));
                 GamePlayer player = playerMap[clientId];
                 var result = player.RollResource(resourceFixed);
-                if (result.Count == 0)
+                if (result == null)
                     return new EdenData(new EdenError("RollResource - Reroll Count is 0"));
                 return new EdenData(result);
             }

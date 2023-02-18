@@ -15,7 +15,7 @@ namespace CSRServer.Game
         public string clientId;
 
         [JsonIgnore]
-        private List<GamePlayer> parent;
+        public List<GamePlayer> parent;
 
         public int index;
 
@@ -26,12 +26,16 @@ namespace CSRServer.Game
 
         public int turnDistance;
 
+        public int rank;
+        
         public int drawCount;
 
         [JsonIgnore]
         public bool turnReady;
         [JsonIgnore]
         public List<Card> turnUsedCard;
+        [JsonIgnore]
+        private readonly Queue<EffectModule> _preheatTurnEndEvents;
 
         public List<Card> hand;
         public List<Card> deck;
@@ -46,6 +50,7 @@ namespace CSRServer.Game
         public int resourceCount;
 
         public List<Artifact> artifact;
+
         
         //정비턴 자료
         public int coin;
@@ -59,6 +64,8 @@ namespace CSRServer.Game
             this.nickname = nickname;
 
             this.parent = parent;
+
+            rank = 1;
             
             deck = new List<Card>();
             hand = new List<Card>();
@@ -85,6 +92,8 @@ namespace CSRServer.Game
             level = 1;
 
             turnReady = false;
+
+            _preheatTurnEndEvents = new Queue<EffectModule>();
         }
 
         public GamePlayer CloneForMonitor()
@@ -101,34 +110,28 @@ namespace CSRServer.Game
             if (index >= hand.Count || index < 0)
                 return false;
             Card card = hand[index];
-            return card.condition.Check(resource);
+            return card.CheckCondition(resource);
         }
         
-        public bool UseCard(int index, out object[] result, out CardEffect.Type[] effectType)
+        public bool UseCard(int index, out List<CardEffect.Result> result)
         {
             if (index >= hand.Count || index < 0)
             {
                 result = null!;
-                effectType = null!;
                 return false;
             }
             Card card = hand[index];
+            result = null!;
             //효과발동
             result = card.UseEffect(this);
             //효과 타입
-            effectType = card.effect.GetTypes();
-            //패에서 삭제
-            hand.RemoveAt(index);
-            //묘지로
-            if (card.death)
-                deck.Remove(card);
-            else
-                usedCard.Add(card);
-            //타입 설정
+            ThrowCard(index);
+            turnUsedCard.Add(card);
             return true;
         }
         
-        public List<ResourceType> RollResource(List<int>? resourceFixed = null)
+        
+        public List<ResourceType>? RollResource(List<int>? resourceFixed = null)
         {
             if (resourceRerollCount > 0)
             {
@@ -143,39 +146,117 @@ namespace CSRServer.Game
                 resourceRerollCount--;
                 return resource;
             }
-            return new List<ResourceType>();
+            return null;
         }
         
-        public List<Card> DrawCard(int count)
+        public List<Card>? DrawCard(int count)
         {
             if (count < 0)
-                return new List<Card>();
-            //덱 회전에 관한 로직 짜기
-            if (count >= unusedCard.Count)
+                return null;
+            int remainCount = 0;
+            
+            List<Card> cards = new List<Card>();
+            
+            if (count > unusedCard.Count)
+            {
+                remainCount = count - unusedCard.Count;
                 count = unusedCard.Count;
-            List<Card> cards = new List<Card>(count);
+            }
+            
             for (int i = 0; i < count; i++)
             {
                 Random rand = new Random();
                 int drawIndex = rand.Next(unusedCard.Count);
                 hand.Add(unusedCard[drawIndex]);
-                cards[i] = unusedCard[drawIndex];
+                cards.Add(unusedCard[drawIndex]);
                 unusedCard.RemoveAt(drawIndex);
             }
+
+            if (remainCount > 0)
+            {
+                (usedCard, unusedCard) = (unusedCard, usedCard);
+                if (remainCount > unusedCard.Count)
+                    remainCount = unusedCard.Count;
+
+                for (int i = 0; i < remainCount; i++)
+                {
+                    Random rand = new Random();
+                    int drawIndex = rand.Next(unusedCard.Count);
+                    hand.Add(unusedCard[drawIndex]);
+                    cards.Add(unusedCard[drawIndex]);
+                    unusedCard.RemoveAt(drawIndex);
+                }
+            }
+            
             return cards;
         }
 
         public void AddCardToDeck(Card card)
         {
             deck.Add(card);
+            usedCard.Add(card);
         }
 
         public bool RemoveCardFromDeck(int index)
         {
             if (index < 0 || index >= deck.Count)
                 return false;
+            Card card = deck[index];
             deck.RemoveAt(index);
+            unusedCard.Remove(card);
+            usedCard.Remove(card);
             return true;
+        }
+
+        public void ThrowCard(int index)
+        {
+            if (index >= hand.Count || index < 0)
+            {
+                return;
+            }
+            Card card = hand[index];
+            //패에서 삭제
+            hand.RemoveAt(index);
+            //묘지로
+            if (card.death)
+            {
+                deck.Remove(card);
+                unusedCard.Remove(card);
+                usedCard.Remove(card);
+            }
+            else
+                usedCard.Add(card);
+        }
+        
+        public CardEffect.Result[] PreheatEnd()
+        {
+            //손패 전부 버리기
+            while (hand.Count > 0)
+            {
+                ThrowCard(0);
+            }
+
+            //턴 종료시 미뤄둔 이벤트 전부 실행
+            CardEffect.Result[] results = new CardEffect.Result[_preheatTurnEndEvents.Count];
+            for (int idx = 0; _preheatTurnEndEvents.Count > 0; idx++)
+            {
+                var turnEndEvent = _preheatTurnEndEvents.Dequeue();
+                results[idx] = turnEndEvent(null!, this, null!);
+            }
+
+            //이번턴에 실행한 카드 배열 초기화
+            turnUsedCard.Clear();
+            
+            //턴 종료시 전진
+            currentDistance += turnDistance;
+            turnDistance = 0;
+            
+            return results;
+        }
+
+        public void AddPreheatEndEvent(EffectModule turnEndEvent)
+        {
+            _preheatTurnEndEvents.Enqueue(turnEndEvent);
         }
     }
 }

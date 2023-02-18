@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="1.3.0" />
+    <PackageReference Include="EdenNetwork" Version="1.3.1" />
     <PackageReference Include="NLua" Version="1.6.0" />
   </ItemGroup>
 
@@ -31,10 +31,13 @@
     <None Update="Data\ModuleChip\ModuleChip.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\cards.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Game\ModuleChipManager\" />
+    <Folder Include="Data" />
   </ItemGroup>
 
 </Project>

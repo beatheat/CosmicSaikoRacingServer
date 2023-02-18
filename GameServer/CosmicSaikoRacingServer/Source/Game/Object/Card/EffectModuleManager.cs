@@ -3,7 +3,7 @@
 	using ParameterList = List<CardEffect.Parameter>;
 	internal delegate CardEffect.Result EffectModule(Card card , GamePlayer player, List<CardEffect.Parameter> parameters);
 	
-	internal class CardEffectManager
+	internal class EffectModuleManager
 	{
 		private static readonly Dictionary<string, EffectModule> effectModules = new Dictionary<string, EffectModule>();
 		private static readonly Dictionary<string, CardEffect.Type> effectTypes = new Dictionary<string, CardEffect.Type>();
@@ -130,7 +130,7 @@
 			}
 			
 			
-			CardEffect.Result _CreateToOther(Card card, GamePlayer player, ParameterList parameters)
+			CardEffect.Result _CreateToOther(Card _card, GamePlayer _player, ParameterList _parameters)
 			{
 				if (type == 0)
 				{
@@ -148,35 +148,53 @@
 				{
 
 				}
-	
-				return createdCards;
+
+				var result = new Dictionary<string, object>
+				{
+					["source"] = _player.index,
+					// ["destination"] = ,
+					["cards"] = createdCards
+				};
+				return new CardEffect.Result{result = createdCards, type = CardEffect.Type.CreateToOther};
 			}
-
-			CardEffect cardEffect = new CardEffect(new List<CardEffect.Element>())
-
+			
 			player.AddPreheatEndEvent(_CreateToOther);
-			return new CardEffect.Result{result = null, type = CardEffect.Type.CreateToMe};
+			return new CardEffect.Result{result = null, type = CardEffect.Type.CreateToOther};
 		}	
 		
 		private static CardEffect.Result BuffToMe(Card card, GamePlayer player, ParameterList parameters)
 		{
 			// int id = parameters[0].Get<int>(player);
 			// int amount = parameters[1].Get<int>(player);
-			return null;
+			return new CardEffect.Result{result = null, type = CardEffect.Type.BuffToMe};
 		}	
 		
 		private static CardEffect.Result BuffToOther(Card card, GamePlayer player, ParameterList parameters)
 		{
 			// int id = parameters[0].Get<int>(player);
 			// int amount = parameters[1].Get<int>(player);
-			return null;
+			return new CardEffect.Result{result = null, type = CardEffect.Type.BuffToOther};
 		}	
 		
 		private static CardEffect.Result EraseBuff(Card card, GamePlayer player, ParameterList parameters)
 		{
 			// int id = parameters[0].Get<int>(player);
 			// int amount = parameters[1].Get<int>(player);
-			return null;
+			return new CardEffect.Result{result = null, type = CardEffect.Type.EraseBuff};
+		}	
+		
+		private static CardEffect.Result Mount(Card card, GamePlayer player, ParameterList parameters)
+		{
+			// int id = parameters[0].Get<int>(player);
+			// int amount = parameters[1].Get<int>(player);
+			return new CardEffect.Result{result = null, type = CardEffect.Type.Mount};
+		}	
+		
+		private static CardEffect.Result EnforceSelf(Card card, GamePlayer player, ParameterList parameters)
+		{
+			// int id = parameters[0].Get<int>(player);
+			// int amount = parameters[1].Get<int>(player);
+			return new CardEffect.Result{result = null, type = CardEffect.Type.EnforceSelf};
 		}	
 		
 		private static CardEffect.Result Overload(Card card, GamePlayer player, ParameterList parameters)
@@ -185,17 +203,9 @@
 			int amount = parameters[1].Get<int>(player);
 			CardEffect effect = parameters[2].Get<CardEffect>(player);
 
-			effect.Use(card, player);
+			var result = effect.Use(card, player);
 			
-			return null;
-		}	
-
-		
-		private static CardEffect.Result Mount(Card card, GamePlayer player, ParameterList parameters)
-		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return null;
+			return new CardEffect.Result{result = result, type = CardEffect.Type.Overload};
 		}	
 		
 		private static CardEffect.Result Combo(Card card, GamePlayer player, ParameterList parameters)
@@ -210,33 +220,39 @@
 				isComboReady = isComboReady && (find != null);
 			}
 
+			CardEffect.Result[]? result = null;
 			if (isComboReady)
 			{
-				effect.Use(card, player);
-				effect.GetTypes();
+				result = effect.Use(card, player);
 			}
-			return null;
-		}	
-		
-		private static CardEffect.Result EnforceSelf(Card card, GamePlayer player, ParameterList parameters)
-		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return null;
-		}	
-		
+			return new CardEffect.Result{result = result, type = CardEffect.Type.Combo};
+		}
+
 		private static CardEffect.Result Discard(Card card, GamePlayer player, ParameterList parameters)
 		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return null;
+			int amount = parameters[0].Get<int>(player);
+			CardEffect effect = parameters[1].Get<CardEffect>(player);
+			Random random = new Random();
+			
+			if (amount > player.hand.Count)
+				amount = player.hand.Count();
+			
+			for (int i = 0; i < amount; i++)
+			{
+				player.ThrowCard(random.Next(player.hand.Count));
+			}
+			var result = effect.Use(card, player);
+
+			return new CardEffect.Result{result = result, type = CardEffect.Type.Discard};
 		}	
 		
 		private static CardEffect.Result Choice(Card card, GamePlayer player, ParameterList parameters)
 		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return null;
+			CardEffect effect = parameters[1].Get<CardEffect>(player);
+			Random random = new Random();
+			var result = effect.Use(random.Next(effect.ElementCount), card, player);
+
+			return new CardEffect.Result{result = result, type = CardEffect.Type.Choice};
 		}	
 	}
 }

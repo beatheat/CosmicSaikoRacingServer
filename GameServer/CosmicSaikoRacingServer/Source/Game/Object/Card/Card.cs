@@ -46,12 +46,12 @@ namespace CSRServer.Game
             return (Card)this.MemberwiseClone();
         }
         
-        public object[] UseEffect(GamePlayer gamePlayer)
+        public List<CardEffect.Result> UseEffect(GamePlayer gamePlayer)
         {
-            object[] results = new object[useCountAtOnes];
+            List<CardEffect.Result> results = new List<CardEffect.Result>();
             for (int i = 0; i < useCountAtOnes; i++)
             {
-                results[i] = effect.Use(this, gamePlayer);
+                results.AddRange(effect.Use(this, gamePlayer));
                 usedCount++;
             }
             useCountAtOnes = 1;

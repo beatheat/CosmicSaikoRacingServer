@@ -37,7 +37,7 @@ namespace CSRServer.Game
 		{
 			if (_isLoaded) return;
 			Logger.Log("Card effect module is loading...");
-			CardEffectModule.Load();
+			EffectModuleManager.Load();
 			Logger.LogWithClear("Card effect module is loaded");
 			cards.Clear();
 
@@ -93,11 +93,23 @@ namespace CSRServer.Game
 			_isLoaded = true;
 		}
 
-		public static Card CloneCard(int index)
+		public static Card CloneCard(int id)
 		{
-			if(index >= 0 && index < cards.Count)
-				return cards[index].Clone();
+			if(id >= 0 && id < cards.Count)
+				return cards[id].Clone();
 			return null!;
+		}
+		public static Card CloneRandomCardWithCondition(int rankMin, int rankMax)
+		{
+			Random random = new Random();
+			var findCards = cards.FindAll(x => x.rank >= rankMin && x.rank <= rankMax);
+			return findCards[random.Next(findCards.Count)];
+		}
+		public static Card CloneRandomCardWithCondition(Card.Type type, int rankMin, int rankMax)
+		{
+			Random random = new Random();
+			var findCards = cards.FindAll(x => x.type == type && x.rank >= rankMin && x.rank <= rankMax);
+			return findCards[random.Next(findCards.Count)];
 		}
 		
 		private static CardCondition ParseCondition(string rawConditionString)
@@ -148,7 +160,7 @@ namespace CSRServer.Game
 				int delimeterIndex = effectModuleString.IndexOf('(');
 				string moduleName = effectModuleString.Substring(0, delimeterIndex);
 
-				if (!CardEffectModule.TryGet(moduleName, out var module, out var type))
+				if (!EffectModuleManager.TryGet(moduleName, out var module, out var type))
 					throw new Exception($"CardManager::ParseEffect - {effectString} is not parsable on module");
 				
 				// 이펙 모듈 파라미터 파싱

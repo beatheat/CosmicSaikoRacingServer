@@ -6,13 +6,13 @@ namespace CSRServer.Game
 	{
 		private readonly List<ResourceType> conditionList;
 		private readonly List<int> countList;
-		private readonly bool freeSameCondtion;
+		private readonly bool freeSameCondition;
 		private readonly int freeSameCount;
 
 		public CardCondition(List<ResourceType> conditionList, List<int> countList)
 		{
 			this.conditionList = conditionList;
-			this.freeSameCondtion = false;
+			this.freeSameCondition = false;
 			this.countList = countList;
 		}
 		
@@ -20,13 +20,13 @@ namespace CSRServer.Game
 		{
 			this.conditionList = null!;
 			this.countList = null!;
-			this.freeSameCondtion = true;
+			this.freeSameCondition = true;
 			this.freeSameCount = sameCount;
 		}
 		
 		public bool Check(List<ResourceType> resource)
 		{
-			if (freeSameCondtion == false)
+			if (freeSameCondition == false)
 			{
 				for (int i = 0; i < conditionList.Count; i++)
 				{

@@ -138,7 +138,6 @@ namespace CSRServer
                 if (!player.isReady)
                     return;
             }
-            server.BroadcastAsync("LobbyGameStart");
             ChangeScene();
         }
 

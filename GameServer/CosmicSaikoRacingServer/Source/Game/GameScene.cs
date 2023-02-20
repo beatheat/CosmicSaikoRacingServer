@@ -53,6 +53,8 @@ namespace CSRServer
 
             maintainStore = new MaintainStore(playerList.Count);
             
+            server.AddReceiveEvent("PlayerReady", PlayerReady);
+
             server.AddResponse("UseCard", UseCard);
             server.AddResponse("RerollResource", RerollResource);
 
@@ -63,14 +65,14 @@ namespace CSRServer
             
             server.AddReceiveEvent("PreheatEnd", PreheatEnd);
             server.AddReceiveEvent("DepartEnd", DepartEnd);
-
-            turn = 1;
-            PreheatStart();
-            Timer timer = new Timer(GameTimer, null, 0, 1000);
+            
+            server.BroadcastAsync("LobbyGameStart");
         }
 
         public override void Destroy()
         {
+            server.RemoveReceiveEvent("PlayerReady");
+
             server.RemoveResponse("UseCard");
             server.RemoveResponse("RollResource");
             
@@ -84,17 +86,14 @@ namespace CSRServer
         }
         #endregion
         #region Game Methods
-        
+
         private void PreheatStart()
         {
             time = 99;
             phase = Phase.Preheat;
             foreach (var player in playerList)
             {
-                player.RollResource();
-                player.DrawCard(player.drawCount);
-                player.turnReady = false;
-                player.resourceRerollCount = player.availableRerollCount;
+                player.PreheatStart();
             }
 
             //TurnStart로 대체하자 -> playerList, playerIndex, turn
@@ -125,7 +124,7 @@ namespace CSRServer
             server.BroadcastAsync("DepartStart", new Dictionary<string, object>
             {
                 ["playerList"] = GetMonitorPlayerList(),
-                ["infos"] = results
+                ["results"] = results
             });
         }
 
@@ -183,6 +182,24 @@ namespace CSRServer
         #endregion
         #region Receive/Response Methods
         
+        
+        private void PlayerReady(string clientId, EdenData data)
+        {
+            playerMap[clientId].turnReady = true;
+            bool gameStart = true;
+            foreach (var player in playerList)
+            {
+                gameStart = gameStart && player.turnReady;
+            }
+
+            if (gameStart)
+            {
+                turn = 1;
+                PreheatStart();
+                Timer timer = new Timer(GameTimer, null, 0, 1000);
+            }
+        }
+        
         //예열턴
         private EdenData UseCard(string clientId, EdenData data)
         {
@@ -195,7 +212,11 @@ namespace CSRServer
                     return new EdenData(new EdenError("UseCard - Card does not satisfy resource condition"));
                 if(!player.UseCard(useCardIndex,out var result))
                     return new EdenData(new EdenError("UseCard - Card index is wrong"));
-                return new EdenData(result);
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["player"] = player,
+                    ["results"] = result
+                });
             }
             return new EdenData(new EdenError("UseCard - Phase is not Preheat-Phase"));
         }

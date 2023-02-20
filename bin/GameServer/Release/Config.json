@@ -6,5 +6,7 @@
   "moduleChipPath" :  "Data/ModuleChip",
 
   "matchingServerAddress": "127.0.0.1",
-  "matchingServerPort" :  16969
+  "matchingServerPort" :  16969,
+  
+  "cardDataPath" : "Data/cards.json"
 }

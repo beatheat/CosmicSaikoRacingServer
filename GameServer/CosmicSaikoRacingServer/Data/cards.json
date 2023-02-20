@@ -1,0 +1,92 @@
+[
+  {
+    "id": "0",
+    "name": "카드1",
+    "rank": 1,
+    "type": "fossil",
+    "condition": "f1",
+    "effect-string": "이동거리 +5",
+    "effect": "Add(5)"
+  },
+  {
+    "id": "1",
+    "name": null,
+    "rank": 1,
+    "type": "electric",
+    "condition": "e1",
+    "effect-string": "이동거리 +6",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "2",
+    "name": null,
+    "rank": 1,
+    "type": "bio",
+    "condition": "b1",
+    "effect-string": "이동거리 +7",
+    "effect": "Add(7)"
+  },
+  {
+    "id": "3",
+    "name": null,
+    "rank": 1,
+    "type": "nuclear",
+    "condition": "n1",
+    "effect-string": "이동거리 x2",
+    "effect": "Multiply(2)"
+  },
+  {
+    "id": "4",
+    "name": null,
+    "rank": 1,
+    "type": "cosmic",
+    "condition": "c1",
+    "effect-string": "이동거리 x3",
+    "effect": "Multiply(3)"
+  },
+  {
+    "id": "5",
+    "name": null,
+    "rank": 2,
+    "type": "normal",
+    "condition": "#pair",
+    "effect-string": "이동거리 +8",
+    "effect": "Add(8)"
+  },
+  {
+    "id": "6",
+    "name": null,
+    "rank": 2,
+    "type": "normal",
+    "condition": "#two-pair",
+    "effect-string": "이동거리 +9",
+    "effect": "Add(9)"
+  },
+  {
+    "id": "7",
+    "name": null,
+    "rank": 2,
+    "type": "normal",
+    "condition": "#triple",
+    "effect-string": "이동거리 +10",
+    "effect": "Add(10)"
+  },
+  {
+    "id": "8",
+    "name": null,
+    "rank": 2,
+    "type": "normal",
+    "condition": "#four-card",
+    "effect-string": "이동거리 x4",
+    "effect": "Multiply(4)"
+  },
+  {
+    "id": "9",
+    "name": null,
+    "rank": 2,
+    "type": "normal",
+    "condition": "#yatch",
+    "effect-string": "이동거리 x5",
+    "effect": "Multiply(5)"
+  }
+]

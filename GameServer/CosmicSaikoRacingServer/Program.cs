@@ -26,6 +26,8 @@ namespace CSRServer
 
             public string matchingServerAddress;
             public int matchingServerPort;
+
+            public string cardDataPath;
         }
 
         public static Config config;
@@ -52,7 +54,7 @@ namespace CSRServer
             try
             {
                 Logger.Load(config.gamelogPath);
-                // CardManager.Load("Data/cards.json");
+                CardManager.Load(config.cardDataPath);
             }
             catch (Exception e)
             {

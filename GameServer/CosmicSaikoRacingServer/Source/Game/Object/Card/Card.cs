@@ -11,6 +11,8 @@ namespace CSRServer.Game
         
         //카드 기본정보
         public int id;
+        public Dictionary<string, int> variable;
+
         [JsonIgnore]
         public Type type;
         [JsonIgnore] 
@@ -21,6 +23,7 @@ namespace CSRServer.Game
         public CardCondition condition;
         
         //카드 자체생성정보
+
         [JsonIgnore]
         public bool enable = true;
         [JsonIgnore] 
@@ -60,7 +63,7 @@ namespace CSRServer.Game
 
         public bool CheckCondition(List<ResourceType> resource)
         {
-            return (enable = condition.Check(resource));
+            return condition.Check(resource);
         }
         
     }

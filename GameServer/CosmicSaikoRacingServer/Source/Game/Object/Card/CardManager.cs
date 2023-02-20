@@ -93,19 +93,19 @@ namespace CSRServer.Game
 			_isLoaded = true;
 		}
 
-		public static Card CloneCard(int id)
+		public static Card GetCard(int id)
 		{
 			if(id >= 0 && id < cards.Count)
 				return cards[id].Clone();
-			return null!;
+			return cards[0].Clone();
 		}
-		public static Card CloneRandomCardWithCondition(int rankMin, int rankMax)
+		public static Card GetRandomCardWithCondition(int rankMin, int rankMax)
 		{
 			Random random = new Random();
 			var findCards = cards.FindAll(x => x.rank >= rankMin && x.rank <= rankMax);
 			return findCards[random.Next(findCards.Count)];
 		}
-		public static Card CloneRandomCardWithCondition(Card.Type type, int rankMin, int rankMax)
+		public static Card GetRandomCardWithCondition(Card.Type type, int rankMin, int rankMax)
 		{
 			Random random = new Random();
 			var findCards = cards.FindAll(x => x.type == type && x.rank >= rankMin && x.rank <= rankMax);
@@ -174,12 +174,17 @@ namespace CSRServer.Game
 				foreach (var parameterString in parameterStringSplit)
 				{
 					char identifier = parameterString[0];
-					if (Char.IsDigit(identifier))
+					if (Char.IsDigit(identifier) || identifier == '-')
 					{
 						if(double.TryParse(parameterString,out var parameter))
 							parameters.Add(new CardEffect.Parameter(parameter));
 						else
 							throw new Exception($"CardManager::ParseEffect - {effectString} is not parsable on number : {parameterString}");
+					}
+					else if (identifier is '\'' or '\"')
+					{
+						var parameter = parameterString.Substring(1, parameterString.Length - 2);
+						parameters.Add(new CardEffect.Parameter(parameter));
 					}
 					else if (identifier == '[')
 					{

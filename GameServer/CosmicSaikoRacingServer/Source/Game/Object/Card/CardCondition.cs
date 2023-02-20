@@ -44,7 +44,7 @@ namespace CSRServer.Game
 			}
 			else
 			{
-				//투페어 , 혹시 쓰리페어?
+				//투페어
 				if (freeSameCount == 22)
 				{
 					int pairCount = 0;

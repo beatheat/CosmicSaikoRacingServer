@@ -3,7 +3,7 @@
 	using ParameterList = List<CardEffect.Parameter>;
 	internal delegate CardEffect.Result EffectModule(Card card , GamePlayer player, List<CardEffect.Parameter> parameters);
 	
-	internal class EffectModuleManager
+	internal static class EffectModuleManager
 	{
 		private static readonly Dictionary<string, EffectModule> effectModules = new Dictionary<string, EffectModule>();
 		private static readonly Dictionary<string, CardEffect.Type> effectTypes = new Dictionary<string, CardEffect.Type>();
@@ -55,7 +55,7 @@
 		private static CardEffect.Result Multiply(Card card, GamePlayer player, ParameterList parameters)
 		{
 			double amount = parameters[0].Get<double>(player);
-			player.currentDistance = (int)(player.currentDistance * amount);
+			player.turnDistance = (int)(player.turnDistance * amount);
 			return new CardEffect.Result{result = amount, type = CardEffect.Type.Multiply};;
 		}
 
@@ -69,7 +69,7 @@
 		{
 			int amount = parameters[0].Get<int>(player);
 			player.resourceRerollCount += amount;
-			return new CardEffect.Result{result = player.resourceRerollCount, type = CardEffect.Type.RerollCountUp};
+			return new CardEffect.Result{result = amount, type = CardEffect.Type.RerollCountUp};
 		}
 		
 		private static CardEffect.Result Death(Card card, GamePlayer player, ParameterList parameters)
@@ -94,9 +94,9 @@
 		{
 			for (int i = 0; i < player.resourceCount; i++)
 			{
-				player.resource[i] = Util.GetRandomEnumValue<ResourceType>();
+				player.resourceReel[i] = Util.GetRandomEnumValue<ResourceType>();
 			}
-			return new CardEffect.Result{result = player.resource, type = CardEffect.Type.ForceReroll};
+			return new CardEffect.Result{result = player.resourceReel, type = CardEffect.Type.ForceReroll};
 		}
 
 		private static CardEffect.Result CreateToMe(Card card, GamePlayer player, ParameterList parameters)
@@ -107,7 +107,7 @@
 			Card[] createdCards = new Card[amount];
 			for (int i = 0; i < amount; i++)
 			{
-				createdCards[i] = CardManager.CloneCard(id);
+				createdCards[i] = CardManager.GetCard(id);
 				createdCards[i].death = true;
 				player.hand.Add(createdCards[i]);
 			}
@@ -119,68 +119,178 @@
 		{
 			int id = parameters[0].Get<int>(player);
 			int amount = parameters[1].Get<int>(player);
-			int type = parameters[2].Get<int>(player);
-			int placeOrRange = parameters[3].Get<int>(player);
+			int target = parameters[2].Get<int>(player);
 
 			Card[] createdCards = new Card[amount];
 			for (int i = 0; i < amount; i++)
 			{
-				createdCards[i] = CardManager.CloneCard(id);
+				createdCards[i] = CardManager.GetCard(id);
 				createdCards[i].death = true;
 			}
 			
-			
-			CardEffect.Result _CreateToOther(Card _card, GamePlayer _player, ParameterList _parameters)
+			List<int> targetPlayerIndex = new List<int>();
+			//자신을 제외한 모든 플레이어
+			if (target == 0)
 			{
-				if (type == 0)
+				foreach (var p in player.parent)
 				{
-					int place = placeOrRange;
-					var targetPlayer = player.parent.Find(x => x.rank == place);
-					foreach (var c in createdCards)
-						targetPlayer?.AddCardToDeck(c);
+					if(p != player)
+						targetPlayerIndex.Add(p.index);
 				}
-				else if (type == 1)
+			}
+			// 해당 등수
+			else if (target is >= 1 and <= 4)
+			{
+				var p = player.parent.Find(x => x.rank == target);
+				if (p != player)
+					targetPlayerIndex.Add(p!.index);
+			}
+			//자신 바로 앞 플레이어
+			else if (target == 5)
+			{
+				if (player.rank > 1)
 				{
-					int range = placeOrRange;
-					// player.parent.FindAll(x => x.rank >= player.rank-1)
+					var p = player.parent.Find(x => x.rank == player.rank - 1);
+					targetPlayerIndex.Add(p!.index);
 				}
-				else
+			}
+			//자신 바로 뒤 플레이어
+			else if (target == 6)
+			{
+				if (player.rank < 4)
 				{
+					var p = player.parent.Find(x => x.rank == player.rank + 1);
+					targetPlayerIndex.Add(p!.index);
+				}
+			}
+			// target->distance 범위 안의 플레이어
+			else if (target >= 7)
+			{
+				int distance = target;
+				foreach (var p in player.parent)
+				{
+					if (Math.Abs(p.currentDistance - player.currentDistance) <= distance)
+						targetPlayerIndex.Add(p.index);
+				}
+			}
+			
+			var result = new Dictionary<string, object>
+			{
+				["source"] = player.index,
+				["destination"] = targetPlayerIndex,
+				["cards"] = createdCards
+			};
 
-				}
-
-				var result = new Dictionary<string, object>
-				{
-					["source"] = _player.index,
-					// ["destination"] = ,
-					["cards"] = createdCards
-				};
-				return new CardEffect.Result{result = createdCards, type = CardEffect.Type.CreateToOther};
+			CardEffect.Result _CreateToOther()
+			{
+				foreach (int idx in targetPlayerIndex)
+                {
+                	player.parent[idx].AddCardToDeck(createdCards);
+                }
+				return new CardEffect.Result{result = result, type = CardEffect.Type.CreateToOther};
 			}
 			
 			player.AddPreheatEndEvent(_CreateToOther);
-			return new CardEffect.Result{result = null, type = CardEffect.Type.CreateToOther};
+			return new CardEffect.Result{result = result, type = CardEffect.Type.CreateToOther};
 		}	
 		
 		private static CardEffect.Result BuffToMe(Card card, GamePlayer player, ParameterList parameters)
 		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return new CardEffect.Result{result = null, type = CardEffect.Type.BuffToMe};
+			int id = parameters[0].Get<int>(player);
+			int amount = parameters[1].Get<int>(player);
+
+			player.AddBuff((Buff.Type) id, amount);
+			return new CardEffect.Result{result = id, type = CardEffect.Type.BuffToMe};
 		}	
 		
 		private static CardEffect.Result BuffToOther(Card card, GamePlayer player, ParameterList parameters)
 		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return new CardEffect.Result{result = null, type = CardEffect.Type.BuffToOther};
+			int id = parameters[0].Get<int>(player);
+			int amount = parameters[1].Get<int>(player);
+			int target = parameters[2].Get<int>(player);
+			
+
+			List<int> targetPlayerIndex = new List<int>();
+            //자신을 제외한 모든 플레이어
+            if (target == 0)
+            {
+            	foreach (var p in player.parent)
+            	{
+            		if(p != player)
+            			targetPlayerIndex.Add(p.index);
+            	}
+            }
+            // 해당 등수
+            else if (target is >= 1 and <= 4)
+            {
+            	var p = player.parent.Find(x => x.rank == target);
+            	if (p != player)
+            		targetPlayerIndex.Add(p!.index);
+            }
+            //자신 바로 앞 플레이어
+            else if (target == 5)
+            {
+            	if (player.rank > 1)
+            	{
+            		var p = player.parent.Find(x => x.rank == player.rank - 1);
+            		targetPlayerIndex.Add(p!.index);
+            	}
+            }
+            //자신 바로 뒤 플레이어
+            else if (target == 6)
+            {
+            	if (player.rank < 4)
+            	{
+            		var p = player.parent.Find(x => x.rank == player.rank + 1);
+            		targetPlayerIndex.Add(p!.index);
+            	}
+            }
+            // target->distance 범위 안의 플레이어
+            else if (target >= 7)
+            {
+            	int distance = target;
+            	foreach (var p in player.parent)
+            	{
+            		if (Math.Abs(p.currentDistance - player.currentDistance) <= distance)
+            			targetPlayerIndex.Add(p.index);
+            	}
+            }
+            
+            var result = new Dictionary<string, object>
+            {
+            	["source"] = player.index,
+            	["destination"] = targetPlayerIndex,
+            	["buffs"] = id
+            };
+
+			CardEffect.Result _BuffToOther()
+			{
+				foreach (int idx in targetPlayerIndex)
+				{
+					player.parent[idx].AddBuff((Buff.Type)id, amount);
+				}
+				return new CardEffect.Result{result = result, type = CardEffect.Type.CreateToOther};
+			}
+			
+			player.AddPreheatEndEvent(_BuffToOther);
+			
+			return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
 		}	
 		
 		private static CardEffect.Result EraseBuff(Card card, GamePlayer player, ParameterList parameters)
 		{
-			// int id = parameters[0].Get<int>(player);
-			// int amount = parameters[1].Get<int>(player);
-			return new CardEffect.Result{result = null, type = CardEffect.Type.EraseBuff};
+			CardEffect effect = parameters[0].Get<CardEffect>(player);
+			int amount = 0;
+			foreach (var buff in player.buffs.Values)
+			{
+				amount += buff.count;
+				buff.count = 0;
+			}
+
+			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
+			for (int i = 0; i < amount; i++)
+				results.Add(effect.Use(card, player));
+			return new CardEffect.Result{result = results, type = CardEffect.Type.EraseBuff};
 		}	
 		
 		private static CardEffect.Result Mount(Card card, GamePlayer player, ParameterList parameters)
@@ -228,6 +338,7 @@
 			return new CardEffect.Result{result = result, type = CardEffect.Type.Combo};
 		}
 
+		//수정필요
 		private static CardEffect.Result Discard(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters[0].Get<int>(player);

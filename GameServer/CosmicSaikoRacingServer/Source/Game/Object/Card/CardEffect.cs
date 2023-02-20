@@ -71,8 +71,6 @@ namespace CSRServer.Game
 		public Result[] Use(Card card, GamePlayer player)
 		{
 			Result[] results = new Result[elementList.Count];
-			//리소스 체크할때 켜도 될듯하다
-			card.enable = true;
 			for (int i = 0; i < elementList.Count; i++)
 			{
 				if(card.enable)

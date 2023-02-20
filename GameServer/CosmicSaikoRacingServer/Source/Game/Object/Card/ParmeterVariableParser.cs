@@ -70,12 +70,12 @@ namespace CSRServer.Game
 			if (attribute == null)
 				return 0;
 			if (attribute[0] == "all")
-				return player.resource.Count;
+				return player.resourceReel.Count;
 			
 			if (symbolToResourceType.TryGetValue(attribute[0], out var resourceType))
 			{
 				int count = 0;
-				foreach (var resourceElement in player.resource)
+				foreach (var resourceElement in player.resourceReel)
 				{
 					if (resourceType == resourceElement)
 						count++;
@@ -114,11 +114,11 @@ namespace CSRServer.Game
 			{
 				if (attribute[0] == "all")
 				{
-					return CardManager.CloneRandomCardWithCondition(rankMin, rankMax).id;
+					return CardManager.GetRandomCardWithCondition(rankMin, rankMax).id;
 				}
 				else if (symbolToCardType.TryGetValue(attribute[0], out var cardType))
 				{
-					return CardManager.CloneRandomCardWithCondition(cardType, rankMin, rankMax).id;
+					return CardManager.GetRandomCardWithCondition(cardType, rankMin, rankMax).id;
 				}
 			}
 			return 0;

@@ -50,6 +50,7 @@ namespace CSRServer.Lobby
 			if (client.Connect() == ConnectionState.OK)
 			{
 				EdenData matchingServerData = client.Request("CreateLobby", 5, Program.config.port);
+				client.Close();
 				if (data.type == EdenData.Type.ERROR)
 					return new EdenData(new Dictionary<string, object> {["state"] = false, ["message"] = "Cannot Create Game : cannot create lobby"});
 

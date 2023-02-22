@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using CSRServer.Game.Mount;
 
 
 namespace CSRServer.Game
@@ -8,13 +9,15 @@ namespace CSRServer.Game
         [JsonIgnore] public const int INITIAL_MAX_DISTANCE = 100;
         [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 2;
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
-        [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 5;
+        [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 4;
         [JsonIgnore] public const int INITIAL_COIN_COUNT = 10;
         
         [JsonIgnore]
         public string clientId { private set; get; }
         [JsonIgnore]
         public List<GamePlayer> parent { private set; get; }
+        [JsonIgnore]
+        public List<Obstacle> obstacleList { private set; get; }
 
         public int index { private set; get; }
 
@@ -65,13 +68,14 @@ namespace CSRServer.Game
         public int exp { private set; get; }
         public int level { private set; get; }
         
-        public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent)
+        public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent, List<Obstacle> obstacleList)
         {
             this.clientId = clientId;
             this.index = index;
             this.nickname = nickname;
 
             this.parent = parent;
+            this.obstacleList = obstacleList;
 
             rank = 1;
             deck = new List<Card>();
@@ -101,8 +105,18 @@ namespace CSRServer.Game
             level = 1;
 
             turnReady = false;
-
+            
             preheatTurnEndEvents = new Queue<Func<CardEffect.Result>>();
+
+            //임시 초기화
+            for (int i = 0; i < 10; i++)
+            {
+                Card card = CardManager.GetCard(0);
+                deck.Add(card);
+                hand.Add(card);
+                unusedCard.Add(card);
+                usedCard.Add(card);
+            }
         }
 
         public GamePlayer CloneForMonitor()
@@ -211,6 +225,15 @@ namespace CSRServer.Game
             
             return cards;
         }
+        
+        public void AddCardToHand(params Card[] card)
+        {
+            foreach (var c in card)
+            {
+                deck.Add(c);
+                hand.Add(c);
+            }
+        }
 
         public void AddCardToDeck(params Card[] card)
         {
@@ -272,22 +295,16 @@ namespace CSRServer.Game
             }
         }
         
-        public CardEffect.Result[] PreheatEnd()
+        public void PreheatEnd(out CardEffect.Result[] attackResult, out object[] obstacleResult)
         {
             //손패 전부 버리기
             while (hand.Count > 0)
             {
                 ThrowCard(0);
             }
-            
+
             //이번턴에 실행한 카드 배열 초기화
             turnUsedCard.Clear();
-
-            //턴 종료시 전진 + 고효율&저효율 버프 적용
-            turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HIGH_EFFICIENCY].count - buffs[Buff.Type.LOW_EFFICIENCY].count)));
-            currentDistance += turnDistance;
-            remainDistance -= turnDistance;
-            turnDistance = 0;
             
             //버프 릴리즈
             foreach (var buff in buffs.Values)
@@ -296,15 +313,34 @@ namespace CSRServer.Game
             }
 
             //턴 종료시 미뤄둔 이벤트 전부 실행
-            CardEffect.Result[] results = new CardEffect.Result[preheatTurnEndEvents.Count];
+            CardEffect.Result[] _attakResult = new CardEffect.Result[preheatTurnEndEvents.Count];
             for (int idx = 0; preheatTurnEndEvents.Count > 0; idx++)
             {
                 var turnEndEvent = preheatTurnEndEvents.Dequeue();
-                results[idx] = turnEndEvent();
+                _attakResult[idx] = turnEndEvent();
             }
 
+            attackResult = _attakResult;
+
+            //턴 종료시 전진 + 고효율&저효율 버프 적용
+            turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HIGH_EFFICIENCY].count - buffs[Buff.Type.LOW_EFFICIENCY].count)));
+
+            //방해물 밟기
+            List<object> _obstacleResult = new List<object>();
+            foreach (var obstacle in obstacleList)
+            {
+                //방해물 밟음
+                if (obstacle.location > currentDistance && obstacle.location < currentDistance + turnDistance)
+                {
+                    _obstacleResult.Add(obstacle.Activate(this));
+                }
+            }
+            obstacleResult = _obstacleResult.ToArray();
             
-            return results;
+            currentDistance += turnDistance;
+            remainDistance -= turnDistance;
+            turnDistance = 0;
+            
         }
 
         public void AddPreheatEndEvent(Func<CardEffect.Result> turnEndEvent)

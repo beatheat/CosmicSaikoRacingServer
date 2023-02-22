@@ -1,6 +1,7 @@
 ﻿using EdenNetwork;
 using CSRServer.Lobby;
 using CSRServer.Game;
+using CSRServer.Game.Mount;
 
 
 namespace CSRServer
@@ -13,6 +14,8 @@ namespace CSRServer
         private readonly List<GamePlayer> playerList;
         private readonly Dictionary<string, GamePlayer> playerMap;
 
+        private readonly List<Obstacle> obstacleList;
+        
         private MaintainStore maintainStore;
 
         // 전체 턴 수
@@ -32,6 +35,7 @@ namespace CSRServer
         {
             playerList = new List<GamePlayer>();
             playerMap = new Dictionary<string, GamePlayer>();
+            obstacleList = new List<Obstacle>();
             maintainStore = null!;
         }
 
@@ -46,7 +50,7 @@ namespace CSRServer
 
             foreach(LobbyPlayer lbPlayer in lbPlayerList)
             {
-                GamePlayer gamePlayer = new GamePlayer(lbPlayer.clientId, playerList.Count, lbPlayer.nickname, playerList);
+                GamePlayer gamePlayer = new GamePlayer(lbPlayer.clientId, playerList.Count, lbPlayer.nickname, playerList, obstacleList);
                 playerList.Add(gamePlayer);
                 playerMap.Add(gamePlayer.clientId, gamePlayer);
             }
@@ -114,17 +118,28 @@ namespace CSRServer
         {
             phase = Phase.Depart;
             time = 99;
-            List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
+            List<CardEffect.Result[]> attackResults = new List<CardEffect.Result[]>();
+            List<object[]> obstacleResults = new List<object[]>();
+            
             foreach (var player in playerList)
             {
-                results.Add(player.PreheatEnd());
+                player.PreheatEnd(out var attackResult,out var obstacleResult);
+                attackResults.Add(attackResult);
+                obstacleResults.Add(obstacleResult);
                 player.turnReady = false;
+            }
+
+            for (int i = obstacleList.Count - 1; i >= 0; i--)
+            {
+                if(obstacleList[i].isActivated)
+                    obstacleList.RemoveAt(i);
             }
 
             server.BroadcastAsync("DepartStart", new Dictionary<string, object>
             {
                 ["playerList"] = GetMonitorPlayerList(),
-                ["results"] = results
+                ["attackResults"] = attackResults,
+                ["obstacleResults"] = obstacleResults
             });
         }
 

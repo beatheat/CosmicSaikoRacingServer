@@ -41,13 +41,13 @@ namespace CSRServer
             catch { throw new Exception("Config.json is not formatted"); }
         }
 
-        private static EdenNetServer server;
-        private static GameManager gameManager;
+        private static EdenNetServer? _server;
+        private static GameManager? _gameManager;
 
         static void Close()
         {
-            gameManager.Close();
-            server.Close();
+            _gameManager?.Close();
+            _server?.Close();
             Logger.Close();
         }
         
@@ -58,8 +58,8 @@ namespace CSRServer
             catch (Exception e) { Console.WriteLine("Fail in Config Loading :: " + e.Message); return; }
             
             //게임서버 초기화 및 실행
-            server = new EdenNetServer(config.port, config.networklogPath);
-            gameManager = new GameManager(server);
+            _server = new EdenNetServer(config.port, config.networklogPath);
+            _gameManager = new GameManager(_server);
 
             //데이터 로딩
             try
@@ -74,7 +74,7 @@ namespace CSRServer
                 return;
             }
 
-            gameManager.Run(new BootScene(gameManager, server));
+            _gameManager.Run(new BootScene(_gameManager, _server));
             
             //콘솔창 관리
             Console.WriteLine("Type quit to close server");
@@ -85,9 +85,9 @@ namespace CSRServer
                     break;
                 if (isQuit == "r")
                 {
-                    gameManager.Close();
-                    gameManager = new GameManager(server);
-                    gameManager.Run(new BootScene(gameManager, server));
+                    _gameManager.Close();
+                    _gameManager = new GameManager(_server);
+                    _gameManager.Run(new BootScene(_gameManager, _server));
                     Console.WriteLine("Server restarted");
                 }
                 else if (isQuit == "help")

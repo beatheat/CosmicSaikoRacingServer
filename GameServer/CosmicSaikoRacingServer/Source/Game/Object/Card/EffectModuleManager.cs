@@ -1,5 +1,4 @@
-﻿using CSRServer.Game.Mount;
-
+﻿
 namespace CSRServer.Game
 {
 	using ParameterList = List<CardEffect.Parameter>;
@@ -243,7 +242,7 @@ namespace CSRServer.Game
 			int amount = parameters[1].Get<int>(card, player);
 
 			player.AddBuff((Buff.Type) id, amount);
-			var result = new Dictionary<string, object> {["buffId"] = (Buff.Type) id, ["count"] = amount};
+			var result = new Dictionary<string, object> {["buffType"] = (Buff.Type) id, ["count"] = amount};
 			return new CardEffect.Result {result = result, type = CardEffect.Type.BuffToMe};
 		}	
 		
@@ -345,6 +344,13 @@ namespace CSRServer.Game
 			Obstacle obstacle = new Obstacle(Obstacle.Type.CARD, player.currentDistance , id, amount, isDeath == 0);
 			player.obstacleList.Add(obstacle);
 			
+			CardEffect.Result _MountCard()
+			{
+				return new CardEffect.Result{result = null, type = CardEffect.Type.MountCard};
+			}
+			
+			player.AddPreheatEndEvent(_MountCard);
+			
 			return new CardEffect.Result{result = null, type = CardEffect.Type.MountCard};
 		}	
 		
@@ -356,6 +362,13 @@ namespace CSRServer.Game
 
 			Obstacle obstacle = new Obstacle(Obstacle.Type.BUFF, player.currentDistance , id, amount);
 			player.obstacleList.Add(obstacle);
+			
+			CardEffect.Result _MountBuff()
+            {
+            	return new CardEffect.Result{result = null, type = CardEffect.Type.MountBuff};
+            }
+            
+            player.AddPreheatEndEvent(_MountBuff);
 			
 			return new CardEffect.Result{result = null, type = CardEffect.Type.MountBuff};
 		}	
@@ -371,7 +384,7 @@ namespace CSRServer.Game
 		{
 			string percent = parameters[0].Get<string>(card, player);
 			CardEffect effect = parameters[1].Get<CardEffect>(card, player);
-			CardEffect.Result[]? result = null;
+			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 
 			if (card.variable.ContainsKey(percent))
 			{
@@ -408,7 +421,7 @@ namespace CSRServer.Game
 			string percent = parameters[0].Get<string>(card, player);
 			int amount = parameters[1].Get<int>(card, player);
 			CardEffect effect = parameters[2].Get<CardEffect>(card, player);
-			CardEffect.Result[]? result = null;
+			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 			if (card.variable.ContainsKey(percent))
 			{
 				var _percent = card.variable[percent];
@@ -423,7 +436,7 @@ namespace CSRServer.Game
 				if (_percent.value > _percent.upperBound)
 					_percent.value = _percent.upperBound;
 			}
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Overload};
+			return new CardEffect.Result{result = result, type = CardEffect.Type.DoPercent};
 		}	
 
 		
@@ -439,7 +452,7 @@ namespace CSRServer.Game
 				isComboReady = isComboReady && (find != null);
 			}
 
-			CardEffect.Result[]? result = null;
+			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 			if (isComboReady)
 			{
 				result = effect.Use(card, player);
@@ -456,12 +469,13 @@ namespace CSRServer.Game
 			
 			if (amount > player.hand.Count)
 				amount = player.hand.Count();
-			
+
+			List<CardEffect.Result[]> result = new List<CardEffect.Result[]>();
 			for (int i = 0; i < amount; i++)
 			{
 				player.ThrowCard(random.Next(player.hand.Count));
+				result.Add(effect.Use(card, player));
 			}
-			var result = effect.Use(card, player);
 
 			return new CardEffect.Result{result = result, type = CardEffect.Type.Discard};
 		}	

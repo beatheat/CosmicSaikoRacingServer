@@ -7,8 +7,8 @@ namespace CSRServer.Game
 	{
 		public enum Type
 		{
-			CARD,
-			BUFF
+			Card,
+			Buff
 		}
 
 		public class Result
@@ -19,14 +19,14 @@ namespace CSRServer.Game
 			public object? result;
 		}
 
-		private readonly Type type;
-		private readonly int id;
-		private readonly int amount;
-		public int location;
+		public readonly Type type;
+		public readonly int id;
+		public readonly int amount;
+		public readonly int location;
 
 		[JsonIgnore]
 		private readonly bool isDeath;
-
+		[JsonIgnore]
 		private readonly List<GamePlayer> activatePlayerList;
 
 
@@ -52,7 +52,7 @@ namespace CSRServer.Game
 				return false;
 
 			Card[] createdCards = Array.Empty<Card>();
-			if (type == Type.CARD)
+			if (type == Type.Card)
 			{
 				createdCards = new Card[amount];
 				for (int i = 0; i < amount; i++)
@@ -64,18 +64,18 @@ namespace CSRServer.Game
 
 				result.result = createdCards;
 				result.amount = amount;
-				result.type = Type.CARD;
+				result.type = Type.Card;
 			}
 			else
 			{
 				result.result = (Buff.Type) id;
 				result.amount = amount;
-				result.type = Type.BUFF;
+				result.type = Type.Buff;
 			}
 
 			foreach (var player in activatePlayerList)
 			{
-				if (type == Type.CARD)
+				if (type == Type.Card)
 					player.AddCardToDeck(createdCards);
 				else
 					player.AddBuff((Buff.Type) id, amount);

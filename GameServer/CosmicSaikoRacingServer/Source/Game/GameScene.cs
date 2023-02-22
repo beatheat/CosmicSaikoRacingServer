@@ -17,6 +17,7 @@ namespace CSRServer
         
         private MaintainStore maintainStore;
 
+        private Timer? gameTimer;
         // 전체 턴 수
         private int turn = 0;
         // 예열 섹션에서 시간제한을 알리는 변수
@@ -36,6 +37,7 @@ namespace CSRServer
             playerMap = new Dictionary<string, GamePlayer>();
             obstacleList = new List<Obstacle>();
             maintainStore = null!;
+            gameTimer = null;
         }
 
         //로비 씬으로 부터 플레이어 정보를 받아옴
@@ -74,6 +76,7 @@ namespace CSRServer
 
         public override void Destroy()
         {
+            gameTimer?.Dispose();
             server.RemoveReceiveEvent("PlayerReady");
 
             server.RemoveResponse("UseCard");
@@ -214,7 +217,7 @@ namespace CSRServer
             {
                 turn = 1;
                 PreheatStart();
-                Timer timer = new Timer(GameTimer, null, 0, 1000);
+                gameTimer = new Timer(GameTimer, null, 0, 1000);
             }
         }
         

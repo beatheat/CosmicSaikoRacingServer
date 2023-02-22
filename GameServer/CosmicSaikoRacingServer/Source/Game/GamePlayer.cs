@@ -110,11 +110,8 @@ namespace CSRServer.Game
             //임시 초기화
             for (int i = 0; i < 10; i++)
             {
-                Card card = CardManager.GetCard(0);
-                deck.Add(card);
-                hand.Add(card);
-                unusedCard.Add(card);
-                usedCard.Add(card);
+                Card card = CardManager.GetCard(i);
+                AddCardToDeck(card);
             }
         }
 

@@ -6,12 +6,12 @@
 		public static Dictionary<Buff.Type, Buff> CreateBuffDictionary()
 		{
 			Dictionary<Buff.Type, Buff> buffs = new Dictionary<Buff.Type, Buff>();
-			Add(buffs, Buff.Type.ELECTRIC_LEAK, ElectricLeak);
-			Add(buffs, Buff.Type.PROLIFERATION, Proliferation);
-			Add(buffs, Buff.Type.EXPOSURE, Exposure);
-			Add(buffs, Buff.Type.BREAK_DOWN, BreakDown);
-			Add(buffs, Buff.Type.HIGH_EFFICIENCY, HighEfficiency);
-			Add(buffs, Buff.Type.LOW_EFFICIENCY, LowEfficiency);
+			Add(buffs, Buff.Type.ElectricLeak, ElectricLeak);
+			Add(buffs, Buff.Type.Proliferation, Proliferation);
+			Add(buffs, Buff.Type.Exposure, Exposure);
+			Add(buffs, Buff.Type.BreakDown, BreakDown);
+			Add(buffs, Buff.Type.HighEfficiency, HighEfficiency);
+			Add(buffs, Buff.Type.LowEfficiency, LowEfficiency);
 			return buffs;
 		}
 

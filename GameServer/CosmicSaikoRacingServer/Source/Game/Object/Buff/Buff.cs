@@ -6,7 +6,7 @@ namespace CSRServer.Game
 	{
 		public enum Type
 		{
-			ELECTRIC_LEAK, PROLIFERATION, EXPOSURE, BREAK_DOWN, HIGH_EFFICIENCY, LOW_EFFICIENCY
+			ElectricLeak, Proliferation, Exposure, BreakDown, HighEfficiency, LowEfficiency
 		}
 		public Type type { protected set; get; }
 		public int count;

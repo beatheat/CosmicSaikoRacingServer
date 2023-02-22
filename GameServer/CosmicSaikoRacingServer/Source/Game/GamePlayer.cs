@@ -12,7 +12,7 @@ namespace CSRServer.Game
         [JsonIgnore] public const int INITIAL_COIN_COUNT = 10;
         
         [JsonIgnore]
-        public string clientId { private set; get; }
+        public string clientId  { private set; get; }
         [JsonIgnore]
         public List<GamePlayer> parent { private set; get; }
         [JsonIgnore]
@@ -145,12 +145,12 @@ namespace CSRServer.Game
             Card card = hand[index];
             result = null!;
             //고장(BREAK_DOWN)버프
-            if (buffs[Buff.Type.BREAK_DOWN].count > 0)
+            if (buffs[Buff.Type.BreakDown].count > 0)
             {
                 Random random = new Random();
                 if (random.Next(2) != 0)
                     card.enable = false;
-                buffs[Buff.Type.BREAK_DOWN].count--;
+                buffs[Buff.Type.BreakDown].count--;
             }
             //효과발동
             result = card.UseEffect(this);
@@ -167,7 +167,7 @@ namespace CSRServer.Game
             if (resourceRerollCount > 0)
             {
                 //누전(ELECTRIC_LEAK)버프가 있으면 적용한다
-                resourceFixed?.AddRange(buffs[Buff.Type.ELECTRIC_LEAK].GetVariable<List<int>>("resourceLockIndexList")!);
+                resourceFixed?.AddRange(buffs[Buff.Type.ElectricLeak].GetVariable<List<int>>("resourceLockIndexList")!);
                 
                 for (int i = 0; i < resourceCount; i++)
                 {
@@ -322,7 +322,7 @@ namespace CSRServer.Game
             attackResult = _attakResult;
 
             //턴 종료시 전진 + 고효율&저효율 버프 적용
-            turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HIGH_EFFICIENCY].count - buffs[Buff.Type.LOW_EFFICIENCY].count)));
+            turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HighEfficiency].count - buffs[Buff.Type.LowEfficiency].count)));
 
             //방해물 밟기
             foreach (var obstacle in obstacleList)

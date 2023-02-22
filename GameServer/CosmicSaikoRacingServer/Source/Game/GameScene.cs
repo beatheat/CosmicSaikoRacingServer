@@ -107,6 +107,7 @@ namespace CSRServer
                 {
                     ["player"] = player,
                     ["playerList"] = monitorPlayerList,
+                    ["obstacleList"] = obstacleList,
                     ["turn"] = turn,
                     ["timer"] = time
                 });

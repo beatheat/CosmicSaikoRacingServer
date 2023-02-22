@@ -341,7 +341,7 @@ namespace CSRServer.Game
 			int id = parameters[0].Get<int>(card, player);
 			int amount = parameters[1].Get<int>(card, player);
 			int isDeath = parameters[2].Get<int>(card, player);
-			Obstacle obstacle = new Obstacle(Obstacle.Type.CARD, player.currentDistance , id, amount, isDeath == 0);
+			Obstacle obstacle = new Obstacle(Obstacle.Type.Card, player.currentDistance , id, amount, isDeath == 0);
 			player.obstacleList.Add(obstacle);
 			
 			CardEffect.Result _MountCard()
@@ -360,7 +360,7 @@ namespace CSRServer.Game
 			int id = parameters[0].Get<int>(card, player);
 			int amount = parameters[1].Get<int>(card, player);
 
-			Obstacle obstacle = new Obstacle(Obstacle.Type.BUFF, player.currentDistance , id, amount);
+			Obstacle obstacle = new Obstacle(Obstacle.Type.Buff, player.currentDistance , id, amount);
 			player.obstacleList.Add(obstacle);
 			
 			CardEffect.Result _MountBuff()

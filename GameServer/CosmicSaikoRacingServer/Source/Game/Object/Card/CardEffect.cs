@@ -8,9 +8,9 @@ namespace CSRServer.Game
 	{
 		public enum Type
 		{
-			Nothing, Add, Multiply, Draw, RerollCountUp, Death, Fail, 
-			Initialize, ForceReroll, CreateToMe, CreateToOther, BuffToMe, BuffToOther, EraseBuff, Overload, Mount,
-			Combo, EnforceSelf, Discard, Choice
+			Nothing, Add, Multiply, Draw, RerollCountUp, Death, Fail, Initialize, ForceReroll, CreateCardToHand, 
+			CreateCardToDeck, CreateCardToOther, BuffToMe, BuffToOther, EraseBuff, Overload, MountCard, MountBuff,
+			Combo, EnforceSelf, Discard, Choice, DoPercent, SetVariable, 
 		}
 
 		public struct Result
@@ -21,28 +21,40 @@ namespace CSRServer.Game
 		
 		public class Parameter
 		{
+			public enum Type
+			{
+				Data, Expression
+			}
 			private readonly object data;
-			private readonly bool isVariable;
+			private readonly Type type;
 
-			public Parameter(object data, bool isVariable = false)
+			public Parameter(object data, Type type = Type.Data)
 			{
 				this.data = data;
-				this.isVariable = isVariable;
+				this.type = type;
 			}
 
-			public T Get<T>(GamePlayer player)
+			public T Get<T>(Card card, GamePlayer player)
 			{
-				if (isVariable == false)
+				if (type == Type.Data)
 				{
+					if (typeof(T) == typeof(int) || typeof(T) == typeof(double))
+					{
+						if (!double.TryParse(data.ToString(), out var d))
+							return default(T)!;
+					}
 					if (typeof(T) == typeof(int))
 					{
 						return (T) (object) (int) (double) data;
 					}
 					return (T) data;
 				}
+				else if(type == Type.Expression)
+					return (T) ParameterExpressionParser.Parse(card, player, data.ToString()!);
 				else
-					return (T) ParameterVariableParser.Parse(player, data.ToString()!);
+					return default(T)!;
 			}
+			
 
 		}
 		
@@ -95,6 +107,7 @@ namespace CSRServer.Game
 			}
 			return typeList;
 		}
+		
 	}
 	
 }

@@ -8,11 +8,18 @@ namespace CSRServer.Game
         {
             Fossil, Electric, Bio, Nuclear, Cosmic, Normal
         }
+
+        public class Variable
+        {
+            public int value;
+            public int lowerBound;
+            public int upperBound;
+        }
         
         //카드 기본정보
         public int id;
-        public Dictionary<string, int> variable;
-
+        public Dictionary<string, Variable> variable;
+        
         [JsonIgnore]
         public Type type;
         [JsonIgnore] 
@@ -35,13 +42,14 @@ namespace CSRServer.Game
         [JsonIgnore] 
         public int useCountAtOnes = 1;
 
-        public Card(int id, Type type, int rank, CardCondition condition, CardEffect effect)
+        public Card(int id, Type type, int rank, CardCondition condition, CardEffect effect, Dictionary<string,Variable> variable)
         {
             this.id = id;
             this.type = type;
             this.rank = rank;
             this.condition = condition;
             this.effect = effect;
+            this.variable = variable;
         }
         
         public Card Clone()

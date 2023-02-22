@@ -30,7 +30,7 @@ namespace CSRServer.Game
 			["two-pair"] = 22,
 			["triple"] = 3,
 			["four-card"] = 4,
-			["yatch"] = 5
+			["yacht"] = 5
 		};
 		
 		public static void Load(string path)
@@ -59,6 +59,7 @@ namespace CSRServer.Game
 				var jsonId = jsonCard["id"];
 				var jsonRank = jsonCard["rank"];
 				var jsonType = jsonCard["type"];
+				var jsonVariable = jsonCard["variable"];
 				var jsonCondition = jsonCard["condition"];
 				var jsonEffect = jsonCard["effect"];
 
@@ -67,27 +68,35 @@ namespace CSRServer.Game
 				Card.Type type;
 				CardCondition condition;
 				CardEffect effect;
-				
-				if (jsonId == null || !int.TryParse(jsonId.ToString(), out id))
-					throw new Exception($"CardManager::Load - index({i}) : id attribute is missing");
+				Dictionary<string, Card.Variable> variable = new Dictionary<string, Card.Variable>();
 
-				if(jsonRank == null || !int.TryParse(jsonRank.ToString(), out  rank))
-					throw new Exception($"CardManager::Load - index({i}) : rank attribute is missing");
-				
-				if(jsonType == null || !symbolToCardType.TryGetValue(jsonType.ToString(), out type)) 
-					throw new Exception($"CardManager::Load - index({i}) : type attribute is missing");
-				
-				if (jsonCondition != null)
-					condition = ParseCondition(jsonCondition.ToString());
-				else 
-					throw new Exception($"CardManager::Load - index({i}) : condition attribute is missing");
-				
-				if(jsonEffect != null)
-					effect = ParseEffect(jsonEffect.ToString());
-				else
-					throw new Exception($"CardManager::Load - index({i}) : effect attribute is missing");
+				try
+				{
+					if (jsonId == null || !int.TryParse(jsonId.ToString(), out id))
+						throw new Exception($"CardManager::Load - index({i}) : id attribute is missing");
 
-				cards.Add(new Card(id, type, rank, condition, effect));
+					if (jsonRank == null || !int.TryParse(jsonRank.ToString(), out rank))
+						throw new Exception($"CardManager::Load - index({i}) : rank attribute is missing");
+
+					if (jsonType == null || !symbolToCardType.TryGetValue(jsonType.ToString().ToLower(), out type))
+						throw new Exception($"CardManager::Load - index({i}) : type attribute is missing");
+
+					if (jsonVariable != null)
+						variable = ParseCardVariable(jsonVariable.ToString());
+
+					if (jsonCondition != null)
+						condition = ParseCondition(jsonCondition.ToString());
+					else
+						throw new Exception($"CardManager::Load - index({i}) : condition attribute is missing");
+
+					effect = ParseEffect(jsonEffect != null ? jsonEffect.ToString() : "Nothing()");
+				}
+				catch (Exception e)
+				{
+					throw new Exception($"CardManager::Load - index({i}) : \n" + e.Message);
+				}
+
+				cards.Add(new Card(id, type, rank, condition, effect, variable));
 			}
 			Logger.LogWithClear("Card data parsing ends");
 			_isLoaded = true;
@@ -152,7 +161,6 @@ namespace CSRServer.Game
 		{
 
 			string[] effectModuleStringList = SplitEffectModule(effectString);
-			
 			var cardEffectElements = new List<CardEffect.Element>();
 			foreach (var effectModuleString in effectModuleStringList)
 			{
@@ -161,7 +169,7 @@ namespace CSRServer.Game
 				string moduleName = effectModuleString.Substring(0, delimeterIndex);
 
 				if (!EffectModuleManager.TryGet(moduleName, out var module, out var type))
-					throw new Exception($"CardManager::ParseEffect - {effectString} is not parsable on module");
+					throw new Exception($"CardManager::ParseEffect - {moduleName} is not parsable on module");
 				
 				// 이펙 모듈 파라미터 파싱
 				string parameterListString = effectModuleString.Substring(delimeterIndex);
@@ -174,17 +182,21 @@ namespace CSRServer.Game
 				foreach (var parameterString in parameterStringSplit)
 				{
 					char identifier = parameterString[0];
-					if (Char.IsDigit(identifier) || identifier == '-')
+					if (parameterString.Contains('$') || parameterString.Contains('%'))
+					{
+						parameters.Add(new CardEffect.Parameter(parameterString, CardEffect.Parameter.Type.Expression));
+					}
+					else if (Char.IsDigit(identifier) || identifier == '-')
 					{
 						if(double.TryParse(parameterString,out var parameter))
 							parameters.Add(new CardEffect.Parameter(parameter));
 						else
 							throw new Exception($"CardManager::ParseEffect - {effectString} is not parsable on number : {parameterString}");
 					}
-					else if (identifier is '\'' or '\"')
+					else if (identifier is '\"' or '\'')
 					{
 						var parameter = parameterString.Substring(1, parameterString.Length - 2);
-						parameters.Add(new CardEffect.Parameter(parameter));
+						parameters.Add(new CardEffect.Parameter(parameter, CardEffect.Parameter.Type.Data));
 					}
 					else if (identifier == '[')
 					{
@@ -200,16 +212,16 @@ namespace CSRServer.Game
 						}
 						parameters.Add(new CardEffect.Parameter(numberList));
 					}
+					else if (Char.IsLetter(identifier))
+					{
+						var effectInEffect = ParseEffect(parameterString);
+						parameters.Add(new CardEffect.Parameter(effectInEffect));
+					}
 					else if (identifier == '{')
 					{
 						var effectListString = parameterString.Substring(1, parameterString.Length - 2);
 						var effectInEffect = ParseEffect(effectListString);
 						parameters.Add(new CardEffect.Parameter(effectInEffect));
-					}
-					else if (identifier == '%')
-					{
-						var varParameterString = parameterString.Substring(1);
-						parameters.Add(new CardEffect.Parameter(varParameterString, true));
 					}
 				}
 
@@ -218,7 +230,53 @@ namespace CSRServer.Game
 			return new CardEffect(cardEffectElements);
 		}
 
-		
+		private static Dictionary<string, Card.Variable> ParseCardVariable(string varString)
+		{
+			Dictionary<string, Card.Variable> variableDict = new Dictionary<string, Card.Variable>();
+			var varStringSplit = varString.Split(',', StringSplitOptions.TrimEntries);
+			foreach (var param in varStringSplit)
+			{
+				var paramSplit = param.Split('=');
+				string variableRawName = paramSplit[0];
+
+				var variableNameAndRange = variableRawName.Split(new[] {'(', '~', ')'}, StringSplitOptions.TrimEntries).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+				string variableName;
+				int lowerBound = int.MinValue;
+				int upperBound = int.MaxValue;
+				
+				if (variableNameAndRange.Length == 1)
+				{
+					variableName = variableNameAndRange[0];
+				} 
+				else if (variableNameAndRange.Length == 3)
+				{
+					variableName = variableNameAndRange[0];
+					if ((int.TryParse(variableNameAndRange[1], out lowerBound) && int.TryParse(variableNameAndRange[2], out upperBound)) == false)
+					{
+						throw new Exception($"CardManager::ParseCardVariable - Range of {variableName} is not formatted");
+					}
+				}
+				else
+				{
+					throw new Exception($"CardManager::ParseCardVariable - {variableRawName} is not formatted");
+				}
+				
+				switch (paramSplit.Length)
+				{
+					case 1:
+						variableDict.Add(variableName, new Card.Variable {value = 0, lowerBound = lowerBound, upperBound = upperBound});
+						break;
+					case 2 when int.TryParse(paramSplit[1], out int initialValue):
+						variableDict.Add(variableName, new Card.Variable {value = initialValue, lowerBound = lowerBound, upperBound = upperBound});
+						break;
+					default:
+						throw new Exception($"CardManager::ParseCardVariable - {variableNameAndRange} is not formatted");
+				}				
+			}
+
+			return variableDict;
+		}
+
 		private static string[] SplitEffectModule(string moduleString)
 		{
 			string stringSplitByAt = "";
@@ -244,7 +302,7 @@ namespace CSRServer.Game
 		{
 			string stringSplitByAt = "";
 			bool isInNumList = false;
-			int cntEffectDelimeter = 0;
+			int cntEffectDelimiter = 0;
 			//() 때기			
 			parameterString = parameterString.Substring(1, parameterString.Length - 2);
 			//가장 바깥쪽 , 전부 @로 변환
@@ -254,10 +312,13 @@ namespace CSRServer.Game
 				if (c == '[') isInNumList = true;
 				if (c == ']') isInNumList = false;
 
-				if (c == '{') cntEffectDelimeter++;
-				if (c == '}') cntEffectDelimeter--;
+				if (c == '(') cntEffectDelimiter++;
+				if (c == ')') cntEffectDelimiter--;
 				
-				if (c == ',' && !isInNumList && cntEffectDelimeter == 0)
+				if (c == '{') cntEffectDelimiter++;
+				if (c == '}') cntEffectDelimiter--;
+				
+				if (c == ',' && !isInNumList && cntEffectDelimiter == 0)
 					stringSplitByAt += "@";
 				else
 					stringSplitByAt += c;

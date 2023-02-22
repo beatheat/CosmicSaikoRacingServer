@@ -14,10 +14,17 @@ namespace CSRServer
 				_stream = new StreamWriter(path, append: true);
 				_flushThread = new Thread(() =>
 				{
-					while (_stream != null)
+					try
 					{
-						Thread.Sleep(3 * 60 * 1000);
-						_stream?.Flush();
+						while (_stream != null)
+						{
+							Thread.Sleep(3 * 60 * 1000);
+							_stream?.Flush();
+						}
+					}
+					catch
+					{
+						return;
 					}
 				});
 				_flushThread.Start();

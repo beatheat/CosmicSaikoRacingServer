@@ -56,7 +56,6 @@ namespace CSRServer
                 Scene scene = scenes.Dequeue();
                 scene.Destroy();
             }
-            server.Close();
         }
         
         /// <summary>

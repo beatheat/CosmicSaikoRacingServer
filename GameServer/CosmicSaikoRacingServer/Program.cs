@@ -40,6 +40,16 @@ namespace CSRServer
             try { config = JsonSerializer.Deserialize<Config>(configStr, new JsonSerializerOptions { IncludeFields = true }); }
             catch { throw new Exception("Config.json is not formatted"); }
         }
+
+        private static EdenNetServer server;
+        private static GameManager gameManager;
+
+        static void Close()
+        {
+            gameManager.Close();
+            server.Close();
+            Logger.Close();
+        }
         
         static void Main(string[] args)
         {
@@ -48,9 +58,10 @@ namespace CSRServer
             catch (Exception e) { Console.WriteLine("Fail in Config Loading :: " + e.Message); return; }
             
             //게임서버 초기화 및 실행
-            EdenNetServer server = new EdenNetServer(config.port, config.networklogPath);
-            GameManager gameManager = new GameManager(server);
-            
+            server = new EdenNetServer(config.port, config.networklogPath);
+            gameManager = new GameManager(server);
+
+            //데이터 로딩
             try
             {
                 Logger.Load(config.gamelogPath);
@@ -59,6 +70,7 @@ namespace CSRServer
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Close();
                 return;
             }
 
@@ -71,12 +83,18 @@ namespace CSRServer
                 string? isQuit = Console.ReadLine();
                 if (isQuit == "quit")
                     break;
+                if (isQuit == "r")
+                {
+                    gameManager.Close();
+                    gameManager = new GameManager(server);
+                    gameManager.Run(new BootScene(gameManager, server));
+                    Console.WriteLine("Server restarted");
+                }
                 else if (isQuit == "help")
                     Console.WriteLine("Type quit to close server");
             }
-            
-            gameManager.Close();
-            Logger.Close();
+
+            Close();
         }
     }
 }

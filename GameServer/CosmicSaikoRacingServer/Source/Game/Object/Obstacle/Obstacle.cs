@@ -1,56 +1,88 @@
 ﻿using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
 
-namespace CSRServer.Game.Mount;
-
-internal class Obstacle
+namespace CSRServer.Game
 {
-	public enum Type
+	internal class Obstacle
 	{
-		CARD, BUFF
-	}
-
-	private readonly Type type;
-	private readonly int id;
-	private readonly int amount;
-	[JsonIgnore]
-	private readonly bool isDeath;
-	
-	public bool isActivated;
-	
-	public int location;
-
-	public Obstacle(Type type, int location, int id, int amount, bool isDeath = false)
-	{
-		this.location = location;
-		this.type = type;
-		this.id = id;
-		this.amount = amount;
-		this.isDeath = isDeath;
-		this.isActivated = false;
-	}
-
-	public object Activate(GamePlayer player)
-	{
-		isActivated = true;
-		if (type == Type.CARD)
+		public enum Type
 		{
-			Card[] createdCards = new Card[amount];
-			for (int i = 0; i < amount; i++)
+			CARD,
+			BUFF
+		}
+
+		public class Result
+		{
+			public List<int> activatePlayers = new List<int>();
+			public Type type;
+			public int amount;
+			public object? result;
+		}
+
+		private readonly Type type;
+		private readonly int id;
+		private readonly int amount;
+		public int location;
+
+		[JsonIgnore]
+		private readonly bool isDeath;
+
+		private readonly List<GamePlayer> activatePlayerList;
+
+
+		public Obstacle(Type type, int location, int id, int amount, bool isDeath = false)
+		{
+			this.location = location;
+			this.type = type;
+			this.id = id;
+			this.amount = amount;
+			this.isDeath = isDeath;
+			this.activatePlayerList = new List<GamePlayer>();
+		}
+
+		public void SetActivatePlayer(GamePlayer player)
+		{
+			activatePlayerList.Add(player);
+		}
+
+		public bool Activate(out Result result)
+		{
+			result = new Result();
+			if (activatePlayerList.Count == 0)
+				return false;
+
+			Card[] createdCards = Array.Empty<Card>();
+			if (type == Type.CARD)
 			{
-				createdCards[i] = CardManager.GetCard(id);
-				if(isDeath)
-					createdCards[i].death = true;
-				player.AddCardToDeck(createdCards[i]);
-				
-			}
-			return createdCards;
-		}
-		else
-		{
-			player.AddBuff((Buff.Type) id, amount);
-			return (Buff.Type) id;
-		}
+				createdCards = new Card[amount];
+				for (int i = 0; i < amount; i++)
+				{
+					createdCards[i] = CardManager.GetCard(id);
+					if (isDeath)
+						createdCards[i].death = true;
+				}
 
+				result.result = createdCards;
+				result.amount = amount;
+				result.type = Type.CARD;
+			}
+			else
+			{
+				result.result = (Buff.Type) id;
+				result.amount = amount;
+				result.type = Type.BUFF;
+			}
+
+			foreach (var player in activatePlayerList)
+			{
+				if (type == Type.CARD)
+					player.AddCardToDeck(createdCards);
+				else
+					player.AddBuff((Buff.Type) id, amount);
+				result.activatePlayers.Add(player.index);
+			}
+
+			return true;
+		}
 	}
 }

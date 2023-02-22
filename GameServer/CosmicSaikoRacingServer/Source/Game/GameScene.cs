@@ -1,7 +1,6 @@
 ﻿using EdenNetwork;
 using CSRServer.Lobby;
 using CSRServer.Game;
-using CSRServer.Game.Mount;
 
 
 namespace CSRServer
@@ -118,21 +117,24 @@ namespace CSRServer
         {
             phase = Phase.Depart;
             time = 99;
-            List<CardEffect.Result[]> attackResults = new List<CardEffect.Result[]>();
-            List<object[]> obstacleResults = new List<object[]>();
+            List<CardEffect.Result> attackResults = new List<CardEffect.Result>();
+            List<Obstacle.Result> obstacleResults = new List<Obstacle.Result>();
             
             foreach (var player in playerList)
             {
-                player.PreheatEnd(out var attackResult,out var obstacleResult);
-                attackResults.Add(attackResult);
-                obstacleResults.Add(obstacleResult);
+                player.PreheatEnd(out var attackResult);
+                attackResults.AddRange(attackResult);
+                // obstacleResults.AddRange(obstacleResult);
                 player.turnReady = false;
             }
-
+            
             for (int i = obstacleList.Count - 1; i >= 0; i--)
             {
-                if(obstacleList[i].isActivated)
+                if (obstacleList[i].Activate(out var obstacleResult))
+                {
+                    obstacleResults.Add(obstacleResult);
                     obstacleList.RemoveAt(i);
+                }
             }
 
             server.BroadcastAsync("DepartStart", new Dictionary<string, object>

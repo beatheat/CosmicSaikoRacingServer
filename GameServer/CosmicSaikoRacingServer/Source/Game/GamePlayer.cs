@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using CSRServer.Game.Mount;
 
 
 namespace CSRServer.Game
@@ -295,7 +294,7 @@ namespace CSRServer.Game
             }
         }
         
-        public void PreheatEnd(out CardEffect.Result[] attackResult, out object[] obstacleResult)
+        public void PreheatEnd(out CardEffect.Result[] attackResult)
         {
             //손패 전부 버리기
             while (hand.Count > 0)
@@ -326,16 +325,14 @@ namespace CSRServer.Game
             turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HIGH_EFFICIENCY].count - buffs[Buff.Type.LOW_EFFICIENCY].count)));
 
             //방해물 밟기
-            List<object> _obstacleResult = new List<object>();
             foreach (var obstacle in obstacleList)
             {
                 //방해물 밟음
                 if (obstacle.location > currentDistance && obstacle.location < currentDistance + turnDistance)
                 {
-                    _obstacleResult.Add(obstacle.Activate(this));
+                    obstacle.SetActivatePlayer(this);
                 }
             }
-            obstacleResult = _obstacleResult.ToArray();
             
             currentDistance += turnDistance;
             remainDistance -= turnDistance;

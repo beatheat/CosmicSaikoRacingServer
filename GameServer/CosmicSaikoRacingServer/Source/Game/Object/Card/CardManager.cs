@@ -242,6 +242,9 @@ namespace CSRServer.Game
 
 				cardEffectElements.Add(new CardEffect.Element(module, parameters, type));
 			}
+
+			if (cardEffectElements.Count == 0)
+				return CardEffect.Nothing();
 			return new CardEffect(cardEffectElements);
 		}
 

@@ -2,7 +2,7 @@
 
 namespace CSRServer.Game
 {
-	using ParameterList = List<CardEffect.Parameter>;
+	// using ParameterList = List<CardEffect.Parameter>;
 
 	internal class CardEffect
 	{
@@ -34,7 +34,7 @@ namespace CSRServer.Game
 				this.type = type;
 			}
 
-			public T Get<T>(Card card, GamePlayer player)
+			public T? Get<T>(Card card, GamePlayer player)
 			{
 				if (type == Type.Data)
 				{
@@ -43,10 +43,6 @@ namespace CSRServer.Game
 						if (!double.TryParse(data.ToString(), out var d))
 							return default(T)!;
 					}
-					if (typeof(T) == typeof(int))
-					{
-						return (T) (object) (int) (double) data;
-					}
 					return (T) data;
 				}
 				else if(type == Type.Expression)
@@ -54,8 +50,25 @@ namespace CSRServer.Game
 				else
 					return default(T)!;
 			}
-			
+		}
 
+		public class ParameterList
+		{
+			private readonly List<Parameter> parameterList;
+
+			public ParameterList(List<Parameter> parameterList)
+			{
+				this.parameterList = parameterList;
+			}
+
+			public T? Get<T>(int idx, Card card, GamePlayer player)
+			{
+				if (idx >= parameterList.Count || idx < 0)
+				{
+					return default(T);
+				}
+				else return parameterList[idx].Get<T>(card, player);
+			}
 		}
 		
 		public struct Element
@@ -64,11 +77,11 @@ namespace CSRServer.Game
 			public ParameterList parameter;
 			public Type type;
 
-			public Element(EffectModule effectModule, ParameterList parameter, Type type)
+			public Element(EffectModule effectModule, List<Parameter> parameter, Type type)
 			{
 				this.effectModule = effectModule;
-				this.parameter = parameter;
 				this.type = type;
+				this.parameter = new ParameterList(parameter);
 			}
 		}
 
@@ -78,6 +91,12 @@ namespace CSRServer.Game
 		public CardEffect(List<Element> cardEffectElements)
 		{
 			this.elementList = cardEffectElements;
+		}
+
+		public static CardEffect Nothing()
+		{
+			EffectModuleManager.TryGet("Nothing", out var nothingEffect, out var type);
+			return new CardEffect(new List<Element>{new Element(nothingEffect, null!, type)});
 		}
 
 		public Result[] Use(Card card, GamePlayer player)

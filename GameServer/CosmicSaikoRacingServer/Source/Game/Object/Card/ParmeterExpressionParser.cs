@@ -45,7 +45,7 @@ namespace CSRServer.Game
 		{
 			string variable = varString;
 			
-			int attrIndex = variable.IndexOf('(');
+			int attrIndex = variable.IndexOf('[');
 			string[]? attribute = null;
 			
 			
@@ -92,7 +92,7 @@ namespace CSRServer.Game
 				{
 					readVariable = true;
 				}
-				if (readVariable && exprString[idx] is '+' or '-' or '*' or '/')
+				if (readVariable && exprString[idx] is '+' or '-' or '*' or '/' or '=' or '>' or '<' or '&' or '|' or ')')
 				{
 					variableList.Add(varString.TrimEnd());
 					varString = "";

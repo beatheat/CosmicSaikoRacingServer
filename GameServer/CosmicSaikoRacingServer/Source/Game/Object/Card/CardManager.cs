@@ -233,14 +233,20 @@ namespace CSRServer.Game
 		private static Dictionary<string, Card.Variable> ParseCardVariable(string varString)
 		{
 			Dictionary<string, Card.Variable> variableDict = new Dictionary<string, Card.Variable>();
-			var varStringSplit = varString.Split(',', StringSplitOptions.TrimEntries);
+			var varStringSplit = varString.Split(',', StringSplitOptions.RemoveEmptyEntries);
 			foreach (var param in varStringSplit)
 			{
-				var paramSplit = param.Split('=');
-				string variableRawName = paramSplit[0];
+				var paramSplit = param.Split('=', StringSplitOptions.RemoveEmptyEntries);
+				string variableRawName = paramSplit[0].Trim();
 
-				var variableNameAndRange = variableRawName.Split(new[] {'(', '~', ')'}, StringSplitOptions.TrimEntries).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
-				string variableName;
+				//공백하나 추가
+                variableRawName = variableRawName.Replace("(", "( ");
+                variableRawName = variableRawName.Replace(")", " )");
+                //공백 하나로 만들기
+                variableRawName = Regex.Replace(variableRawName, @"\s+", " ");
+                
+                var variableNameAndRange = variableRawName.Split(new[] {'(', '~', ')'}, StringSplitOptions.RemoveEmptyEntries);
+                string variableName;
 				int lowerBound = int.MinValue;
 				int upperBound = int.MaxValue;
 				

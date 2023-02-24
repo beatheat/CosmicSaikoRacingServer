@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 
 namespace CSRServer.Game
 {
@@ -134,13 +135,13 @@ namespace CSRServer.Game
 				
 				foreach (var conditionString in conditionStringSplit)
 				{
-					char type = conditionString[0];
+					char type = conditionString.Trim()[0];
 					if (symbolToResourceType.TryGetValue(type, out var condition))
 						conditionList.Add(condition);
 					else
 						throw new Exception($"CardManager::ParseCondition - symbol of {rawConditionString} is not parsable");
 
-					if (int.TryParse(conditionString.Substring(1), out int count))
+					if (int.TryParse(conditionString[1..], out int count))
 						countList.Add(count);
 					else
 						throw new Exception($"CardManager::ParseCondition - symbol of {rawConditionString} is not parsable");
@@ -149,7 +150,7 @@ namespace CSRServer.Game
 			}
 			else
 			{
-				var conditionString = rawConditionString.Substring(1).ToLower();
+				var conditionString = rawConditionString.Trim().Substring(1).ToLower();
 				if (symbolToNumber.TryGetValue(conditionString, out var condition))
 					return new CardCondition(condition);
 				else
@@ -165,14 +166,17 @@ namespace CSRServer.Game
 			foreach (var effectModuleString in effectModuleStringList)
 			{
 				// 이펙트 모듈 이름 파싱
-				int delimeterIndex = effectModuleString.IndexOf('(');
-				string moduleName = effectModuleString.Substring(0, delimeterIndex);
+				int delimiterIndex = effectModuleString.IndexOf('(');
+				//모듈이 아닐경우 무시하고 지나감
+				if (delimiterIndex < 0)
+					continue;
+				string moduleName = effectModuleString.Substring(0, delimiterIndex);
 
 				if (!EffectModuleManager.TryGet(moduleName, out var module, out var type))
 					throw new Exception($"CardManager::ParseEffect - {moduleName} is not parsable on module");
 				
 				// 이펙 모듈 파라미터 파싱
-				string parameterListString = effectModuleString.Substring(delimeterIndex);
+				string parameterListString = effectModuleString.Substring(delimiterIndex);
 				var parameterStringSplit = SplitEffectParameter(parameterListString);
 
 				// List<object> parameters = new List<object>();
@@ -182,10 +186,17 @@ namespace CSRServer.Game
 				foreach (var parameterString in parameterStringSplit)
 				{
 					char identifier = parameterString[0];
+					//Expression일때
 					if (parameterString.Contains('$') || parameterString.Contains('%'))
 					{
 						parameters.Add(new CardEffect.Parameter(parameterString, CardEffect.Parameter.Type.Expression));
 					}
+					//Boolean 일때
+					else if (parameterString is "true" or "false")
+					{
+						parameters.Add(new CardEffect.Parameter(bool.Parse(parameterString)));
+					}
+					//Number일때
 					else if (Char.IsDigit(identifier) || identifier == '-')
 					{
 						if(double.TryParse(parameterString,out var parameter))
@@ -193,11 +204,13 @@ namespace CSRServer.Game
 						else
 							throw new Exception($"CardManager::ParseEffect - {effectString} is not parsable on number : {parameterString}");
 					}
+					//String일때
 					else if (identifier is '\"' or '\'')
 					{
 						var parameter = parameterString.Substring(1, parameterString.Length - 2);
 						parameters.Add(new CardEffect.Parameter(parameter, CardEffect.Parameter.Type.Data));
 					}
+					//Number List일때
 					else if (identifier == '[')
 					{
 						var numberListString = parameterString.Substring(1, parameterString.Length - 2);
@@ -212,11 +225,13 @@ namespace CSRServer.Game
 						}
 						parameters.Add(new CardEffect.Parameter(numberList));
 					}
+					//Module일때
 					else if (Char.IsLetter(identifier))
 					{
 						var effectInEffect = ParseEffect(parameterString);
 						parameters.Add(new CardEffect.Parameter(effectInEffect));
 					}
+					//ModuleList일 때
 					else if (identifier == '{')
 					{
 						var effectListString = parameterString.Substring(1, parameterString.Length - 2);
@@ -307,7 +322,6 @@ namespace CSRServer.Game
 		private static string[] SplitEffectParameter(string parameterString)
 		{
 			string stringSplitByAt = "";
-			bool isInNumList = false;
 			int cntEffectDelimiter = 0;
 			//() 때기			
 			parameterString = parameterString.Substring(1, parameterString.Length - 2);
@@ -315,16 +329,10 @@ namespace CSRServer.Game
 			for (int i = 0; i < parameterString.Length; i++)
 			{
 				char c = parameterString[i];
-				if (c == '[') isInNumList = true;
-				if (c == ']') isInNumList = false;
+				if (c is '[' or '(' or '{') cntEffectDelimiter++;
+				if (c is ']' or ')' or '}') cntEffectDelimiter--;
 
-				if (c == '(') cntEffectDelimiter++;
-				if (c == ')') cntEffectDelimiter--;
-				
-				if (c == '{') cntEffectDelimiter++;
-				if (c == '}') cntEffectDelimiter--;
-				
-				if (c == ',' && !isInNumList && cntEffectDelimiter == 0)
+				if (c == ',' && cntEffectDelimiter == 0)
 					stringSplitByAt += "@";
 				else
 					stringSplitByAt += c;

@@ -54,7 +54,7 @@
     "type": "Normal",
     "condition": "#four-card",
     "effect-string": "이동 거리를 5 더합니다. 카드를 1장 뽑습니다. 리롤 횟수를 1회 추가합니다. 랜덤한 카드 1장을 생성해 이번 턴에만 사용합니다.",
-    "effect": "Add(5), Draw(1), RerollCountUp(1), CreateCardToHand(%randomCardId(All, 1, 3), 1, 1)"
+    "effect": "Add(5), Draw(1), RerollCountUp(1), CreateCardToHand(%randomCardId[All, 1, 3], 1, true)"
   },
   {
     "id": "7",
@@ -78,7 +78,7 @@
     "type": "Normal",
     "condition": "#pair",
     "effect-string": "이동 거리를 3 더합니다. 랜덤한 카드 1장을 생성해 이번 턴에만 사용합니다.",
-    "effect": "Add(3), CreateCardToHand(%randomCardId(All, 1, 3), 1, 1)"
+    "effect": "Add(3), CreateCardToHand(%randomCardId[All, 1, 3], 1, true)"
   },
   {
     "id": "10",
@@ -133,7 +133,8 @@
     "rank": 3,
     "type": "Normal",
     "condition": "#triple",
-    "effect-string": "현재 자신에게 적용된 버프/디버프의 수 만큼 자신에게 면역을 부여합니다."
+    "effect-string": "현재 자신에게 적용된 버프/디버프의 수 만큼 자신에게 면역을 부여합니다.",
+    "effect": "BuffToMe(6, %currentMyBuffNum)"
   },
   {
     "id": "17",
@@ -182,7 +183,7 @@
     "type": "fossil",
     "condition": "f1",
     "effect-string": "이동 거리를 5 더합니다. 덱에 폐기물을 1장 넣습니다.",
-    "effect": "Add(5), CreateCardToDeck(20, 1, 1)"
+    "effect": "Add(5), CreateCardToDeck(20, 1, true)"
   },
   {
     "id": "23",
@@ -199,7 +200,7 @@
     "type": "fossil",
     "condition": "#pair",
     "effect-string": "발진 턴 시작시 시작 위치에 지뢰를 설치합니다. 밟은 플레이어는 덱에 폐기물을 1장 넣습니다.",
-    "effect": "MountCard(20, 1, 1)"
+    "effect": "MountCard(20, 1, true)"
   },
   {
     "id": "25",
@@ -207,7 +208,7 @@
     "type": "fossil",
     "condition": "#pair",
     "effect-string": "카드를 2장 뽑습니다. 덱에 폐기물을 1장 넣습니다.",
-    "effect": "Draw(2), CreateCardToDeck(20, 1, 1)"
+    "effect": "Draw(2), CreateCardToDeck(20, 1, true)"
   },
   {
     "id": "26",
@@ -222,7 +223,8 @@
     "rank": 1,
     "type": "fossil",
     "condition": "f2",
-    "effect-string": "화석 리소스의 개수 하나당 면역을 1씩 획득합니다."
+    "effect-string": "화석 리소스의 개수 하나당 면역을 1씩 획득합니다.",
+    "effect": "BuffToMe(6, %currentResourceNum[Fossil])"
   },
   {
     "id": "28",
@@ -230,7 +232,7 @@
     "type": "fossil",
     "condition": "#two-pair",
     "effect-string": "모든 플레이어의 덱에 폐기물을 1장 넣습니다.",
-    "effect": "CreateCardToOther(20, 1, 1, 0)"
+    "effect": "CreateCardToOther(20, 1, 0, true)"
   },
   {
     "id": "29",
@@ -238,7 +240,7 @@
     "type": "fossil",
     "condition": "#two-pair",
     "effect-string": "발진 턴 시작시 시작 위치에 지뢰를 설치합니다. 밟은 플레이어는 덱에 폐기물을 3장 넣습니다. 또는 자신의 덱에 폐기물을 3장 넣습니다.",
-    "effect": "Choice(MountCard(20, 3, 1), CreateCardToDeck(20, 3, 1))"
+    "effect": "Choice(MountCard(20, 3, true), CreateCardToDeck(20, 3, true))"
   },
   {
     "id": "30",
@@ -255,7 +257,7 @@
     "type": "fossil",
     "condition": "#triple",
     "effect-string": "자신에게 걸린 버프/디버프를 모두 지우고 지운 버프/디버프 만큼 덱에 폐기물을 넣습니다.",
-    "effect": "EraseBuff(CreateCardToDeck(20, 1, 1))"
+    "effect": "EraseBuff(CreateCardToDeck(20, 1, true))"
   },
   {
     "id": "32",
@@ -263,7 +265,7 @@
     "type": "fossil",
     "condition": "f3",
     "effect-string": "화석 리소스의 개수 하나당 카드를 1장씩 뽑습니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Draw(%currentResourceNum(Fossil)), ForceReroll()"
+    "effect": "Draw(%currentResourceNum[Fossil]), ForceReroll()"
   },
   {
     "id": "33",
@@ -271,7 +273,7 @@
     "type": "fossil",
     "condition": "f4",
     "effect-string": "핸드가 10장이 될 때 까지 카드를 뽑고 카드를 뽑은 만큼 덱에 폐기물을 넣습니다.",
-    "effect": "CreateCardToDeck(20, 10-%currentHandNum, 1), Draw(10-%currentHandNum)"
+    "effect": "CreateCardToDeck(20, 10-%currentHandNum, true), Draw(10-%currentHandNum)"
   },
   {
     "id": "34",
@@ -279,7 +281,7 @@
     "type": "fossil",
     "condition": "f1",
     "effect-string": "화석 리소스의 개수 하나당 이동 거리에 3씩 더합니다. 화석 리소스의 개수만큼 덱에 폐기물을 넣습니다.",
-    "effect": "Add(%currentResourceNum(Fossil)*5), CreateCardToDeck(20, %currentResourceNum(Fossil), 1)"
+    "effect": "Add(%currentResourceNum[Fossil]*5), CreateCardToDeck(20, %currentResourceNum[Fossil], true)"
   },
   {
     "id": "35",
@@ -287,7 +289,7 @@
     "type": "fossil",
     "condition": "#pair",
     "effect-string": "이동 거리를 10 뺍니다. 발진 턴 시작시 시작 위치에 지뢰를 설치합니다. 밟은 플레이어는 덱에 폐기물을 5장 넣습니다.",
-    "effect": "Add(-10), MountCard(20, 5, 1)"
+    "effect": "Add(-10), MountCard(20, 5, true)"
   },
   {
     "id": "36",
@@ -304,8 +306,8 @@
     "type": "fossil",
     "condition": "f2",
     "variable": "percent(0~100) = 0",
-    "effect-string": "이동 거리를 10 추가합니다. {percent}% 확률로 1등급 화석 카드를 생성해 덱에 넣고 소멸합니다. 사용할 때 마다 확률이 7% 증가합니다.",
-    "effect": "Add(10), Overload(\"percent\", 7, CreateCardToDeck(%randomCardId(Fossil, 1, 1), 1, 0), Death())"
+    "effect-string": "이동 거리를 10 더합니다. {percent}% 확률로 1등급 화석 카드를 생성해 덱에 넣고 소멸합니다. 사용할 때 마다 확률이 7% 증가합니다.",
+    "effect": "Add(10), Overload(\"percent\", 7, CreateCardToDeck(%randomCardId[Fossil, 1, 1], 1, 0), Death())"
   },
   {
     "id": "38",
@@ -338,7 +340,7 @@
     "type": "fossil",
     "condition": "f3",
     "effect-string": "이동 거리에 8을 더합니다. 발진 턴 시작시 시작 위치에 지뢰를 설치합니다. 밟은 플레이어는 덱에 폐기물을 3장 넣습니다.",
-    "effect": "Add(7), MountCard(20, 3, 1)"
+    "effect": "Add(7), MountCard(20, 3, true)"
   },
   {
     "id": "42",
@@ -354,8 +356,8 @@
     "type": "fossil",
     "condition": "f2",
     "variable": "percent(0~100) = 20",
-    "effect-string": "이동 거리를 10 추가합니다. {percent}% 확률로 2등급 화석 카드를 생성해 덱에 넣고 소멸합니다. 사용할 때 마다 확률이 10% 증가합니다.",
-    "effect": "Add(10), Overload($percent, 10, CreateCardToDeck(%randomCardId(Fossil, 2, 2), 1, 0), Death())"
+    "effect-string": "이동 거리를 10 더합니다. {percent}% 확률로 2등급 화석 카드를 생성해 덱에 넣고 소멸합니다. 사용할 때 마다 확률이 10% 증가합니다.",
+    "effect": "Add(10), Overload(\"percent\", 10, CreateCardToDeck(%randomCardId[Fossil, 2, 2], 1, 0), Death())"
   },
   {
     "id": "44",
@@ -370,8 +372,8 @@
     "rank": 3,
     "type": "fossil",
     "condition": "#two-pair",
-    "effect-string": "이동 거리를 5 추가합니다. 자신 주변 30거리 이내의 모든 플레이어의 덱에 폐기물을 3장 넣습니다.",
-    "effect": "Add(5), CreateCardToOther(20, 3, 1, 30)"
+    "effect-string": "이동 거리를 5 더합니다. 자신 주변 30거리 이내의 모든 플레이어의 덱에 폐기물을 3장 넣습니다.",
+    "effect": "Add(5), CreateCardToOther(20, 3, 30, true)"
   },
   {
     "id": "46",
@@ -388,7 +390,7 @@
     "condition": "f3",
     "variable": "percent(0~100) = 15",
     "effect-string": "이동 거리에 1.5를 곱합니다. {percent}% 확률로 실패합니다. 사용할 때 마다 확률이 5% 증가합니다.",
-    "effect": "Overload($percent, 5, Fail()), Multiply(1.5)"
+    "effect": "Overload(\"percent\", 5, Fail()), Multiply(1.5)"
   },
   {
     "id": "48",
@@ -396,7 +398,7 @@
     "type": "fossil",
     "condition": "f4",
     "effect-string": "모든 플레이어의 덱에 폐기물을 5장 넣습니다.",
-    "effect": "CreateCardToOther(20, 5, 1, 0)"
+    "effect": "CreateCardToOther(20, 5, 0, true)"
   },
   {
     "id": "49",
@@ -405,195 +407,6 @@
     "condition": "f5",
     "variable": "percent(0~100) = 25",
     "effect-string": "이동 거리를 3 곱합니다. {percent}% 확률로 이동 거리를 초기화 합니다. 사용할 때 마다 확률이 10% 증가합니다.",
-    "effect": "Multiply(3), Overload($percent, 10, Initialize())"
-  },
-  {
-    "id": "50",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e1",
-    "effect-string": "이동 거리를 3 더합니다.",
-    "effect": "Add(3)"
-  },
-  {
-    "id": "51",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e1"
-  },
-  {
-    "id": "52",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e1"
-  },
-  {
-    "id": "53",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#pair"
-  },
-  {
-    "id": "54",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#pair"
-  },
-  {
-    "id": "55",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2"
-  },
-  {
-    "id": "56",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2"
-  },
-  {
-    "id": "57",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2"
-  },
-  {
-    "id": "58",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#two-pair"
-  },
-  {
-    "id": "59",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#two-pair"
-  },
-  {
-    "id": "60",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#triple"
-  },
-  {
-    "id": "61",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e3"
-  },
-  {
-    "id": "62",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e1"
-  },
-  {
-    "id": "63",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#pair"
-  },
-  {
-    "id": "64",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e2"
-  },
-  {
-    "id": "65",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e2"
-  },
-  {
-    "id": "66",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#two-pair"
-  },
-  {
-    "id": "67",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#triple"
-  },
-  {
-    "id": "68",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e3"
-  },
-  {
-    "id": "69",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e3"
-  },
-  {
-    "id": "70",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e4"
-  },
-  {
-    "id": "71",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2"
-  },
-  {
-    "id": "72",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#two-pair"
-  },
-  {
-    "id": "73",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#triple"
-  },
-  {
-    "id": "74",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e3"
-  },
-  {
-    "id": "75",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e3"
-  },
-  {
-    "id": "76",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#four-card"
-  },
-  {
-    "id": "77",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e4"
-  },
-  {
-    "id": "78",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#yacht"
-  },
-  {
-    "id": "79",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e5"
-  },
-  {
-    "id": "80",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b1",
-    "effect": "Add(3)"
+    "effect": "Multiply(3), Overload(\"percent\", 10, Initialize())"
   }
 ]

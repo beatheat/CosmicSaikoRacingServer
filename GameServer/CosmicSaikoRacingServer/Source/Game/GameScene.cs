@@ -80,7 +80,7 @@ namespace CSRServer
             server.RemoveReceiveEvent("PlayerReady");
 
             server.RemoveResponse("UseCard");
-            server.RemoveResponse("RollResource");
+            server.RemoveResponse("RerollResource");
             
             server.RemoveResponse("RerollStore");
             server.RemoveResponse("BuyExp");
@@ -156,8 +156,8 @@ namespace CSRServer
 
             //플레이어 rank 정해주기
             var orderedPlayerList = playerList.OrderBy(p => p.currentDistance).ToList();
-            for (int i = 1; i <= orderedPlayerList.Count; i++)
-                orderedPlayerList[i].rank = i;
+            for (int i = 0; i < orderedPlayerList.Count; i++)
+                orderedPlayerList[i].rank = i + 1;
             
             foreach (var player in playerList)
             {
@@ -170,23 +170,23 @@ namespace CSRServer
         // 1초에 한번씩 실행함
         private void GameTimer(object? sender)
         {
-            if (time >= 0)
-            {
-                time--;
-                if(phase == Phase.Preheat)
-                    server.BroadcastAsync("PreheatTime", time);
-                else if(phase == Phase.Maintain)
-                    server.BroadcastAsync("MaintainTime", time);
-            }
-            else
-            {
-                if (phase == Phase.Preheat)
-                    DepartStart();
-                else if (phase == Phase.Depart)
-                    MaintainStart();                    
-                else if(phase == Phase.Maintain)
-                    PreheatStart();
-            }
+            // if (time >= 0)
+            // {
+            //     time--;
+            //     if(phase == Phase.Preheat)
+            //         server.BroadcastAsync("PreheatTime", time);
+            //     else if(phase == Phase.Maintain)
+            //         server.BroadcastAsync("MaintainTime", time);
+            // }
+            // else
+            // {
+            //     if (phase == Phase.Preheat)
+            //         DepartStart();
+            //     else if (phase == Phase.Depart)
+            //         MaintainStart();                    
+            //     else if(phase == Phase.Maintain)
+            //         PreheatStart();
+            // }
 
         }
         

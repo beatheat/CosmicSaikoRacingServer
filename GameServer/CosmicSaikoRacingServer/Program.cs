@@ -86,6 +86,8 @@ namespace CSRServer
                 if (isQuit == "r")
                 {
                     _gameManager.Close();
+                    _server.Close();
+                    _server = new EdenNetServer(config.port, config.networklogPath);
                     _gameManager = new GameManager(_server);
                     _gameManager.Run(new BootScene(_gameManager, _server));
                     Console.WriteLine("Server restarted");

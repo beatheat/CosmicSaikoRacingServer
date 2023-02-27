@@ -6,7 +6,7 @@ namespace CSRServer.Game
     internal class GamePlayer
     {
         [JsonIgnore] public const int INITIAL_MAX_DISTANCE = 100;
-        [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 2;
+        [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 100;
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
         [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 4;
         [JsonIgnore] public const int INITIAL_COIN_COUNT = 10;

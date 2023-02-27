@@ -10,7 +10,7 @@ namespace CSRServer.Game
 		{
 			Nothing, Add, Multiply, Draw, RerollCountUp, Death, Fail, Initialize, ForceReroll, CreateCardToHand, 
 			CreateCardToDeck, CreateCardToOther, BuffToMe, BuffToOther, EraseBuff, Overload, MountCard, MountBuff,
-			Combo, EnforceSelf, Discard, Choice, DoPercent, SetVariable, 
+			Combo, EnforceSelf, Discard, Choice, DoPercent, SetVariable, Check
 		}
 
 		public struct Result
@@ -38,10 +38,11 @@ namespace CSRServer.Game
 			{
 				if (type == Type.Data)
 				{
-					if (typeof(T) == typeof(int) || typeof(T) == typeof(double))
+					if (typeof(T) == typeof(int))
 					{
-						if (!double.TryParse(data.ToString(), out var d))
+						if (!double.TryParse(data.ToString(), out var dataParsed))
 							return default(T)!;
+						return (T) (object) (int) dataParsed;
 					}
 					return (T) data;
 				}

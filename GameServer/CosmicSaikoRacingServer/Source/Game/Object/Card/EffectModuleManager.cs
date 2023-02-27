@@ -39,7 +39,8 @@ namespace CSRServer.Game
 			AddModule("EnforceSelf", EnforceSelf, CardEffect.Type.EnforceSelf);
 			AddModule("Discard", Discard, CardEffect.Type.Discard);
 			AddModule("Choice", Choice, CardEffect.Type.Choice);
-			
+			AddModule("Check", Check, CardEffect.Type.Check);
+
 			_isLoaded = true;
 		}
 
@@ -303,16 +304,16 @@ namespace CSRServer.Game
             
             var result = new Dictionary<string, object>
             {
-            	["source"] = player.index,
-            	["destination"] = targetPlayerIndex,
-            	["buffs"] = id
+            	["srcIndex"] = player.index,
+            	["dstIndexList"] = targetPlayerIndex,
+            	["buffType"] = (Buff.Type)id
             };
 
 			CardEffect.Result _BuffToOther()
 			{
 				foreach (int idx in targetPlayerIndex)
 				{
-					player.parent[idx].AddBuff((Buff.Type)id, amount);
+					player.parent[idx].AddBuff((Buff.Type)idx, amount);
 				}
 				return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
 			}
@@ -362,6 +363,7 @@ namespace CSRServer.Game
 			int amount = parameters.Get<int>(1, card, player);
 
 			Obstacle obstacle = new Obstacle(Obstacle.Type.Buff, player.currentDistance , id, amount);
+			
 			player.obstacleList.Add(obstacle);
 			
 			CardEffect.Result _MountBuff()
@@ -501,7 +503,7 @@ namespace CSRServer.Game
 			if(condition == true)
 				result = effect.Use(card, player);
 
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Choice};
+			return new CardEffect.Result{result = result, type = CardEffect.Type.Check};
 		}	
 	}
 }

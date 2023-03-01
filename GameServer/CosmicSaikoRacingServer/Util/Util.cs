@@ -11,13 +11,13 @@ namespace CSRServer
         /// <summary>
         /// big리스트에 있는 값을 size개 만큼 small리스트에 랜덤으로 옮긴다
         /// </summary>
-        public static bool DistributeOnList<T>(List<T> small, List<T> big, int size)
+        public static bool DistributeOnList<T>(List<T> big, int size, out List<T> small)
         {
+            small = new List<T>();
             if (size > big.Count)
             {
                 return false;
             }
-            small.Clear();
             List<T> bigClone = new List<T>(big);
             Random random = new Random();
             for (int i = 0; i < size; i++)
@@ -30,13 +30,13 @@ namespace CSRServer
             return true;
         }
 
-        public static bool DistributeAndMoveOnList<T>(List<T> small, List<T> big, int size)
+        public static bool DistributeAndMoveOnList<T>(List<T> big, int size, out List<T> small)
         {
+            small = new List<T>();
             if (size > big.Count)
             {
                 return false;
             }
-            small.Clear();
             Random random = new Random();
             for (int i = 0; i < size; i++)
             {
@@ -48,6 +48,31 @@ namespace CSRServer
             return true;
         }
 
+        
+        public static List<int> GetRandomNumbers(int count, int min, int max)
+        {
+            if (count > max - min)
+                return new List<int>();
+            Random random = new Random();
+            List<int> randomNumbers = new List<int>(count);
+            int[] arr = new int[3];
+            for (int i = 0; i < count; i++)
+            {
+                int randomNumber;
+                do
+                {
+                    randomNumber = random.Next(min, max);
+                } while (randomNumbers.FindIndex(x => x == randomNumber) < 0);
+                randomNumbers[i] = randomNumber;
+            }
+            return randomNumbers;
+        }
+        
+        public static List<int> GetRandomNumbers(int count, int max)
+        {
+            return GetRandomNumbers(count, 0, max);
+        }
+        
         public static void Swap<T>(ref T a, ref T b)
         {
             (a, b) = (b, a);

@@ -22,7 +22,7 @@
 
 		private static void ElectricLeak(Buff buff, GamePlayer player)
 		{
-			if (buff.variables.ContainsKey("resourceLockIndexList"))
+			if (!buff.variables.ContainsKey("resourceLockIndexList"))
 				buff.variables.Add("resourceLockIndexList", new List<int>());
 			Random random = new Random();
 			int lockCount = buff.count > player.resourceCount ?  player.resourceCount : buff.count;
@@ -42,7 +42,7 @@
 		
 		private static void Proliferation(Buff buff, GamePlayer player)
 		{
-			if (buff.variables.ContainsKey("resourceCondition"))
+			if (!buff.variables.ContainsKey("resourceCondition"))
 				buff.variables.Add("resourceCondition", new List<int>());
 
 			foreach (var resource in player.resourceReel)
@@ -53,7 +53,7 @@
 		}	
 		private static void Exposure(Buff buff, GamePlayer player)
 		{
-			if (buff.variables.ContainsKey("cardExposureIndexList"))
+			if (!buff.variables.ContainsKey("cardExposureIndexList"))
 				buff.variables.Add("cardExposureIndexList", new List<int>());
 			
 		}	

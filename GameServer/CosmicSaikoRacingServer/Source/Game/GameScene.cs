@@ -70,6 +70,8 @@ namespace CSRServer
             
             server.AddReceiveEvent("PreheatEnd", PreheatEnd);
             server.AddReceiveEvent("DepartEnd", DepartEnd);
+            server.AddReceiveEvent("MaintainEnd", MaintainEnd);
+
             
             server.BroadcastAsync("LobbyGameStart");
         }
@@ -162,8 +164,13 @@ namespace CSRServer
             foreach (var player in playerList)
             {
                 player.turnReady = false;
-                var storeCards = maintainStore.ShowRandomCards(player.index, player.level);
-                server.SendAsync("MaintainStart", player.clientId, storeCards);
+                maintainStore.ShowRandomCards(player, out var storeCards);
+                maintainStore.ShowRandomRemoveCards(player, out var removeCards);
+                server.SendAsync("MaintainStart", player.clientId, new Dictionary<string, object>
+                {
+                    ["storeCards"] = storeCards,
+                    ["removeCards"] = removeCards
+                });
             }
         }
         
@@ -227,10 +234,10 @@ namespace CSRServer
             if (phase == Phase.Preheat)
             {
                 if (!data.TryGet<int>(out var useCardIndex))
-                    return new EdenData(new EdenError("UseCard - Card index is missing"));
+                    return EdenData.Error("UseCard - Card index is missing");
                 GamePlayer player = playerMap[clientId];
                 if(!player.IsCardEnable(useCardIndex))
-                    return new EdenData(new EdenError("UseCard - Card does not satisfy resource condition"));
+                    return EdenData.Error("UseCard - Card does not satisfy resource condition");
                 if(!player.UseCard(useCardIndex,out var result))
                     return new EdenData(new EdenError("UseCard - Card index is wrong"));
                 return new EdenData(new Dictionary<string, object>
@@ -239,7 +246,7 @@ namespace CSRServer
                     ["results"] = result
                 });
             }
-            return new EdenData(new EdenError("UseCard - Phase is not Preheat-Phase"));
+            return EdenData.Error("UseCard - Phase is not Preheat-Phase");
         }
 
         private EdenData RerollResource(string clientId, EdenData data)
@@ -247,14 +254,14 @@ namespace CSRServer
             if (phase == Phase.Preheat)
             {
                 if (!data.TryGet<List<int>>(out var resourceFixed))
-                    return new EdenData(new EdenError("RollResource - resourceFixed data is missing"));
+                    return EdenData.Error("RollResource - resourceFixed data is missing");
                 GamePlayer player = playerMap[clientId];
                 var result = player.RollResource(resourceFixed);
                 if (result == null)
-                    return new EdenData(new EdenError("RollResource - Reroll Count is 0"));
+                    return EdenData.Error("RollResource - Reroll Count is 0");
                 return new EdenData(result);
             }
-            return new EdenData(new EdenError("RollResource - Phase is not Preheat-Phase"));
+            return EdenData.Error("RollResource - Phase is not Preheat-Phase");
         }
         
         //정비턴
@@ -263,19 +270,31 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
-                var storeCards = maintainStore.ShowRandomCards(player.index, player.level);
-                return new EdenData(storeCards);
+                if (maintainStore.RerollStore(player, out var storeCards) == false)
+                {
+                    return EdenData.Error("RerollStore - Coin is not enough");
+                }
+                return new EdenData(storeCards!);
             }
-            return new EdenData(new EdenError("RerollStore - Phase is not Maintain-Phase"));
+            return EdenData.Error("RerollStore - Phase is not Maintain-Phase");
         }
 
         private EdenData BuyExp(string clientId, EdenData data)
         {
             if (phase == Phase.Maintain)
             {
-                //구현필요
+                GamePlayer player = playerMap[clientId];
+                if (maintainStore.BuyExp(player) == false)
+                {
+                    return EdenData.Error("BuyExp - Coin is not enough");
+                }
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["level"] = player.level,
+                    ["exp"] = player.exp
+                });
             }
-            return new EdenData(new EdenError("BuyExp - Phase is not Maintain-Phase"));
+            return EdenData.Error("BuyExp - Phase is not Maintain-Phase");
         }
         
         private EdenData BuyCard(string clientId, EdenData data)
@@ -284,16 +303,23 @@ namespace CSRServer
             {
                 GamePlayer player = playerMap[clientId];
                 if (!data.TryGet<int>(out var buyIndex))
-                    return new EdenData(new EdenError("BuyCard - Cannot find store card index"));
-                Card? buyCard = maintainStore.BuyCard(player.index, buyIndex);
+                    return EdenData.Error("BuyCard - Cannot find store card index");
+                if (maintainStore.BuyCard(player, buyIndex, out var storeCards, out var buyCard) == false)
+                {
+                    return EdenData.Error("BuyCard - Cannot find store card index");
+                }
                 if (buyCard == null)
                 {
-                    return new EdenData(new EdenError("BuyCard - Store card index is wrong"));
+                    return EdenData.Error("BuyCard - Unauthorized access");
                 }
                 player.AddCardToDeck(buyCard);
-                return new EdenData(buyCard);
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["storeCards"] = storeCards,
+                    ["buyCard"] = buyCard
+                });
             }
-            return new EdenData(new EdenError("BuyCard - Phase is not Maintain-Phase"));
+            return EdenData.Error("BuyCard - Phase is not Maintain-Phase");
         }
 
         private EdenData RemoveCard(string clientId, EdenData data)
@@ -302,13 +328,19 @@ namespace CSRServer
             {
                 GamePlayer player = playerMap[clientId];
                 if (!data.TryGet<int>(out var removeIndex))
-                    return new EdenData(new EdenError("RemoveCard - remove index is missing"));
-                bool success = player.RemoveCardFromDeck(removeIndex);
-                if (success == false)
-                    return new EdenData(new EdenError("RemoveCard - Remove index is wrong"));
-                return new EdenData(player.deck);
+                    return EdenData.Error("RemoveCard - remove index is missing");
+                if (maintainStore.RemoveCard(player, removeIndex, out var removeCards) == false)
+                {
+                    return EdenData.Error("BuyCard - Cannot find remove card index");
+                }
+
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["removeCards"] = removeCards,
+                    ["deck"] = player.deck
+                });            
             }
-            return new EdenData(new EdenError("RemoveCard - Phase is not Maintain-Phase"));
+            return EdenData.Error("RemoveCard - Phase is not Maintain-Phase");
         }
 
         //==============
@@ -344,6 +376,23 @@ namespace CSRServer
                     MaintainStart();
             }
         }
+        
+        private void MaintainEnd(string clientId, EdenData data)
+        {
+            if (phase == Phase.Maintain)
+            {
+                GamePlayer player = playerMap[clientId];
+                player.turnReady = true;
+
+                //모든 플레이어가 예열턴을 마쳤는지 체크
+                bool checkAllReady = true;
+                foreach (var p in playerList)
+                    checkAllReady = checkAllReady && p.turnReady;
+                if (checkAllReady)
+                    PreheatStart();
+            }
+        }
+
 
 
         #endregion

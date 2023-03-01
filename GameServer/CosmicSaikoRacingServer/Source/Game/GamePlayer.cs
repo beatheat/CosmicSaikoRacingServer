@@ -9,7 +9,8 @@ namespace CSRServer.Game
         [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 100;
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
         [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 4;
-        [JsonIgnore] public const int INITIAL_COIN_COUNT = 10;
+        [JsonIgnore] public const int INITIAL_COIN_COUNT = 4;
+        [JsonIgnore] public const int MAX_COIN_COUNT = 10;
         
         [JsonIgnore]
         public string clientId  { private set; get; }
@@ -63,9 +64,11 @@ namespace CSRServer.Game
         public int rank { set; get; }
 
         //정비턴 자료
-        public int coin { private set; get; }
-        public int exp { private set; get; }
-        public int level { private set; get; }
+        public int coin { set; get; }
+        public int exp { set; get; }
+        public int level { set; get; }
+
+        private int turnCoinCount;
         
         public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent, List<Obstacle> obstacleList)
         {
@@ -102,6 +105,8 @@ namespace CSRServer.Game
             coin = INITIAL_COIN_COUNT;
             exp = 0;
             level = 1;
+
+            turnCoinCount = INITIAL_COIN_COUNT;
 
             turnReady = false;
             
@@ -159,23 +164,29 @@ namespace CSRServer.Game
         }
         
         
+        public List<ResourceType>? RollResourceInit(List<int>? resourceFixed = null)
+        {
+            //누전(ELECTRIC_LEAK)버프가 있으면 적용한다
+            resourceFixed?.AddRange(buffs[Buff.Type.ElectricLeak].GetVariable<List<int>>("resourceLockIndexList")!);
+            
+            for (int i = 0; i < resourceCount; i++)
+            {
+                ResourceType resource = Util.GetRandomEnumValue<ResourceType>();
+                if (i >= resourceReel.Count)
+                    resourceReel.Add(resource);
+                else if (resourceFixed != null && !resourceFixed.Contains(i))
+                    resourceReel[i] = resource;
+            }
+            return resourceReel;
+        }
+
+        
         public List<ResourceType>? RollResource(List<int>? resourceFixed = null)
         {
             if (resourceRerollCount > 0)
             {
-                //누전(ELECTRIC_LEAK)버프가 있으면 적용한다
-                resourceFixed?.AddRange(buffs[Buff.Type.ElectricLeak].GetVariable<List<int>>("resourceLockIndexList")!);
-                
-                for (int i = 0; i < resourceCount; i++)
-                {
-                    ResourceType resource = Util.GetRandomEnumValue<ResourceType>();
-                    if (i >= resourceReel.Count)
-                        resourceReel.Add(resource);
-                    else if (resourceFixed != null && !resourceFixed.Contains(i))
-                        resourceReel[i] = resource;
-                }
                 resourceRerollCount--;
-                return resourceReel;
+                return RollResourceInit(resourceFixed);
             }
             return null;
         }
@@ -281,8 +292,14 @@ namespace CSRServer.Game
         {
             turnReady = false;
             resourceRerollCount = availableRerollCount;
+
+            //코인 수 조절
+            turnCoinCount++;
+            if (turnCoinCount >= MAX_COIN_COUNT)
+                turnCoinCount = MAX_COIN_COUNT;
             
-            RollResource();
+            
+            RollResourceInit();
             DrawCard(drawCount);
             
             foreach (var buff in buffs.Values)

@@ -115,7 +115,7 @@ namespace CSRServer.Game
 		
 		private static CardEffect.Result ForceReroll(Card card, GamePlayer player, ParameterList parameters)
 		{
-			for (int i = 0; i < player.resourceCount; i++)
+			for (int i = 0; i < player.resourceReelCount; i++)
 			{
 				player.resourceReel[i] = Util.GetRandomEnumValue<ResourceType>();
 			}

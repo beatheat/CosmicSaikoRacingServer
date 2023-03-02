@@ -64,6 +64,7 @@ namespace CSRServer
             server.AddResponse("RerollResource", RerollResource);
 
             server.AddResponse("RerollStore", RerollStore);
+            server.AddResponse("RerollRemoveCard", RerollRemoveCard);
             server.AddResponse("BuyExp", BuyExp);
             server.AddResponse("BuyCard", BuyCard);
             server.AddResponse("RemoveCard", RemoveCard);
@@ -85,6 +86,7 @@ namespace CSRServer
             server.RemoveResponse("RerollResource");
             
             server.RemoveResponse("RerollStore");
+            server.RemoveResponse("RerollRemoveCard");
             server.RemoveResponse("BuyExp");
             server.RemoveResponse("BuyCard");
             server.RemoveResponse("RemoveCard");
@@ -259,7 +261,11 @@ namespace CSRServer
                 var result = player.RollResource(resourceFixed);
                 if (result == null)
                     return EdenData.Error("RollResource - Reroll Count is 0");
-                return new EdenData(result);
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["resourceReel"] = result,
+                    ["resourceRerollCount"] = player.resourceRerollCount
+                });
             }
             return EdenData.Error("RollResource - Phase is not Preheat-Phase");
         }
@@ -271,12 +277,31 @@ namespace CSRServer
             {
                 GamePlayer player = playerMap[clientId];
                 if (maintainStore.RerollStore(player, out var storeCards) == false)
-                {
                     return EdenData.Error("RerollStore - Coin is not enough");
-                }
-                return new EdenData(storeCards!);
+
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["storeCards"] = storeCards!,
+                    ["coin"] = player.coin
+                });
             }
             return EdenData.Error("RerollStore - Phase is not Maintain-Phase");
+        }
+        private EdenData RerollRemoveCard(string clientId, EdenData data)
+        {
+            if (phase == Phase.Maintain)
+            {
+                GamePlayer player = playerMap[clientId];
+                if (maintainStore.RerollRemoveCard(player, out var removeCards) == false)
+                    return EdenData.Error("RerollRemoveCard - Coin is not enough");
+                
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["removeCards"] = removeCards!,
+                    ["coin"] = player.coin
+                });
+            }
+            return EdenData.Error("RerollRemoveCard - Phase is not Maintain-Phase");
         }
 
         private EdenData BuyExp(string clientId, EdenData data)
@@ -284,14 +309,17 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.level == MaintainStore.MAX_LEVEL)
+                    return EdenData.Error("BuyExp - Player level is max");
                 if (maintainStore.BuyExp(player) == false)
-                {
                     return EdenData.Error("BuyExp - Coin is not enough");
-                }
+                
                 return new EdenData(new Dictionary<string, object>
                 {
                     ["level"] = player.level,
-                    ["exp"] = player.exp
+                    ["exp"] = player.exp,
+                    ["expLimit"] = player.expLimit,
+                    ["coin"] = player.coin
                 });
             }
             return EdenData.Error("BuyExp - Phase is not Maintain-Phase");
@@ -302,21 +330,20 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.coin < MaintainStore.COIN_BUY_CARD)
+                    return EdenData.Error("BuyCard - Coin is not enough");
                 if (!data.TryGet<int>(out var buyIndex))
-                    return EdenData.Error("BuyCard - Cannot find store card index");
+                    return EdenData.Error("BuyCard - Buy index is missing");
                 if (maintainStore.BuyCard(player, buyIndex, out var storeCards, out var buyCard) == false)
-                {
-                    return EdenData.Error("BuyCard - Cannot find store card index");
-                }
-                if (buyCard == null)
-                {
-                    return EdenData.Error("BuyCard - Unauthorized access");
-                }
+                    return EdenData.Error($"BuyCard - Wrong store card index : {buyIndex}");
+
                 player.AddCardToDeck(buyCard);
                 return new EdenData(new Dictionary<string, object>
                 {
                     ["storeCards"] = storeCards,
-                    ["buyCard"] = buyCard
+                    ["buyCard"] = buyCard,
+                    ["deck"] = player.deck,
+                    ["coin"] = player.coin
                 });
             }
             return EdenData.Error("BuyCard - Phase is not Maintain-Phase");
@@ -327,17 +354,18 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.coin < MaintainStore.COIN_REMOVE_CARD)
+                    return EdenData.Error("BuyCard - Coin is not enough");
                 if (!data.TryGet<int>(out var removeIndex))
                     return EdenData.Error("RemoveCard - remove index is missing");
                 if (maintainStore.RemoveCard(player, removeIndex, out var removeCards) == false)
-                {
-                    return EdenData.Error("BuyCard - Cannot find remove card index");
-                }
+                    return EdenData.Error($"RemoveCard - Cannot find remove card index {removeIndex}");
 
                 return new EdenData(new Dictionary<string, object>
                 {
                     ["removeCards"] = removeCards,
-                    ["deck"] = player.deck
+                    ["deck"] = player.deck,
+                    ["coin"] = player.coin
                 });            
             }
             return EdenData.Error("RemoveCard - Phase is not Maintain-Phase");

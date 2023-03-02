@@ -9,7 +9,7 @@ namespace CSRServer.Game
         [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 100;
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
         [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 4;
-        [JsonIgnore] public const int INITIAL_COIN_COUNT = 4;
+        [JsonIgnore] public const int INITIAL_COIN_COUNT = 3; //PreheatStart호출 떄문에 1적게 시작한다
         [JsonIgnore] public const int MAX_COIN_COUNT = 10;
         
         [JsonIgnore]
@@ -53,9 +53,9 @@ namespace CSRServer.Game
         public List<ResourceType> resourceReel { private set; get; }
         public int resourceRerollCount{ set; get; }
         [JsonIgnore]
-        public int availableRerollCount { private set; get; }
+        public int availableRerollCount { set; get; }
         [JsonIgnore]
-        public int resourceCount { private set; get; }
+        public int resourceReelCount { set; get; }
         
 
         //GameScene사용자료
@@ -66,6 +66,7 @@ namespace CSRServer.Game
         //정비턴 자료
         public int coin { set; get; }
         public int exp { set; get; }
+        public int expLimit { set; get; }
         public int level { set; get; }
 
         private int turnCoinCount;
@@ -90,7 +91,7 @@ namespace CSRServer.Game
             resourceReel = new List<ResourceType>();
             availableRerollCount = INITIAL_RESOURCE_REROLL_COUNT;
             resourceRerollCount = availableRerollCount;
-            resourceCount = INITIAL_RESOURCE_COUNT;
+            resourceReelCount = INITIAL_RESOURCE_COUNT;
             
             
             artifactList = new List<Artifact>();
@@ -105,6 +106,7 @@ namespace CSRServer.Game
             coin = INITIAL_COIN_COUNT;
             exp = 0;
             level = 1;
+            expLimit = MaintainStore.expLimit[level];
 
             turnCoinCount = INITIAL_COIN_COUNT;
 
@@ -169,7 +171,7 @@ namespace CSRServer.Game
             //누전(ELECTRIC_LEAK)버프가 있으면 적용한다
             resourceFixed?.AddRange(buffs[Buff.Type.ElectricLeak].GetVariable<List<int>>("resourceLockIndexList")!);
             
-            for (int i = 0; i < resourceCount; i++)
+            for (int i = 0; i < resourceReelCount; i++)
             {
                 ResourceType resource = Util.GetRandomEnumValue<ResourceType>();
                 if (i >= resourceReel.Count)
@@ -297,7 +299,7 @@ namespace CSRServer.Game
             turnCoinCount++;
             if (turnCoinCount >= MAX_COIN_COUNT)
                 turnCoinCount = MAX_COIN_COUNT;
-            
+            coin = turnCoinCount;
             
             RollResourceInit();
             DrawCard(drawCount);

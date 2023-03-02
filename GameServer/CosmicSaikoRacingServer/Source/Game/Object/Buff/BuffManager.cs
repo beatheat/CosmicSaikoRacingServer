@@ -25,14 +25,14 @@
 			if (!buff.variables.ContainsKey("resourceLockIndexList"))
 				buff.variables.Add("resourceLockIndexList", new List<int>());
 			Random random = new Random();
-			int lockCount = buff.count > player.resourceCount ?  player.resourceCount : buff.count;
+			int lockCount = buff.count > player.resourceReelCount ?  player.resourceReelCount : buff.count;
 			List<int> lockIndex = new List<int>(lockCount);
 			for (int i = 0; i < lockCount; i++)
 			{
 				int randomIndex;
 				do
 				{
-					randomIndex = random.Next(player.resourceCount);
+					randomIndex = random.Next(player.resourceReelCount);
 					lockIndex.Add(randomIndex);
 				} while (lockIndex.FindIndex(x => x == randomIndex) > 0);
 			}

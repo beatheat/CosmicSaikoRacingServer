@@ -80,7 +80,7 @@ namespace CSRServer
             Console.WriteLine("Type quit to close server");
             while (true)
             {
-                string? isQuit = Console.ReadLine();
+                string? isQuit = Console.ReadLine()?.ToLower();
                 if (isQuit == "quit")
                     break;
                 if (isQuit == "r")

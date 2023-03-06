@@ -19,7 +19,7 @@ namespace CSRServer.Game
 		{
 			this.type = type;
 			this.initEffect = initEffect;
-			this.count = 1;
+			this.count = 0;
 			this.variables = new Dictionary<string, object>();
 		}
 

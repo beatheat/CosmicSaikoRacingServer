@@ -8,23 +8,19 @@ namespace MatchingServer
         static void Main(string[] args)
         {
             Console.Title = "CosmicSaikoRacing - MatchingServer";
-            EdenNetServer server = new EdenNetServer(16969, "test.txt");
+            EdenNetServer server = new EdenNetServer(16969, "MatchingServerLog.txt");
             MatchingServer matchingServer = new MatchingServer(server);
             matchingServer.Run();
 
-            Console.WriteLine("Type quit to close server");
+            Console.WriteLine("Ctrl+c to close server");
+            Console.CancelKeyPress += (object? sender, ConsoleCancelEventArgs eventArgs) =>
+            {
+                matchingServer.Close();
+            };
             while (true)
             {
-                string isQuit = Console.ReadLine();
-                if (isQuit == "quit")
-                    break;
-                else if (isQuit == "help")
-                    Console.WriteLine("Type quit to close server");
+                Thread.Sleep(100);
             }
-
-            matchingServer.Close();
-
-
         }
     }
 }

@@ -63,9 +63,11 @@ namespace CSRServer.Game
 				"currentUsedCardNum" => player.usedCard.Count,
 				"currentHandNum" => player.hand.Count,
 				"currentDeckNum" => player.deck.Count,
+				"currentResourceReelNum" => player.resourceReelCount,
 				"currentResourceNum" => GetCurrentResourceNum(player, attribute),
 				"thisTurnUsedCardNum" => GetThisTurnUsedCardNum(player, attribute),
 				"randomCardId" => GetRandomCardId(player, attribute),
+				"currentMyBuffNum" => GetCurrentMyBuffNum(player, attribute),
 				_ => 0
 			};
 
@@ -112,7 +114,6 @@ namespace CSRServer.Game
 			return new DataTable().Compute(varString, null);
 		}
 
-		
 		private static int GetCurrentResourceNum(GamePlayer player, string[]? attribute)
 		{
 			if (attribute == null)
@@ -156,7 +157,7 @@ namespace CSRServer.Game
 
 		private static int GetRandomCardId(GamePlayer player, string[]? attribute)
 		{
-			if (attribute == null || attribute.Length < 3)
+			if (attribute is not {Length: < 3})
 				return 0;
 			if (int.TryParse(attribute[1], out int rankMin) && int.TryParse(attribute[2], out int rankMax))
 			{
@@ -167,6 +168,24 @@ namespace CSRServer.Game
 				else if (symbolToCardType.TryGetValue(attribute[0], out var cardType))
 				{
 					return CardManager.GetRandomCardWithCondition(cardType, rankMin, rankMax).id;
+				}
+			}
+			return 0;
+		}
+		
+		private static int GetCurrentMyBuffNum(GamePlayer player, string[]? attribute)
+		{
+			if (attribute == null)
+			{
+				return player.buffs.Values.Sum(buff => buff.count);
+			}
+			if (attribute.Length >= 2)
+				return 0;
+			if (int.TryParse(attribute[0], out int buffId))
+			{
+				if (player.buffs.TryGetValue((Buff.Type) buffId, out var buff))
+				{
+					return buff.count;
 				}
 			}
 			return 0;

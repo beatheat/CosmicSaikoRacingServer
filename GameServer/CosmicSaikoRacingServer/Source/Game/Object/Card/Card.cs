@@ -36,11 +36,7 @@ namespace CSRServer.Game
         [JsonIgnore] 
         public bool death = false;
         [JsonIgnore] 
-        public int percentage = 0;
-        [JsonIgnore] 
         public int usedCount = 0;
-        [JsonIgnore] 
-        public int useCountAtOnes = 1;
 
         public Card(int id, Type type, int rank, CardCondition condition, CardEffect effect, Dictionary<string,Variable> variable)
         {
@@ -57,15 +53,10 @@ namespace CSRServer.Game
             return (Card)this.MemberwiseClone();
         }
         
-        public List<CardEffect.Result> UseEffect(GamePlayer gamePlayer)
+        public CardEffect.Result[] UseEffect(GamePlayer gamePlayer, bool isDiscard = false)
         {
-            List<CardEffect.Result> results = new List<CardEffect.Result>();
-            for (int i = 0; i < useCountAtOnes; i++)
-            {
-                results.AddRange(effect.Use(this, gamePlayer));
-                usedCount++;
-            }
-            useCountAtOnes = 1;
+            usedCount++;
+            var results = isDiscard ? effect.UseLeak(this, gamePlayer) : effect.Use(this, gamePlayer);
             return results;
         }
 

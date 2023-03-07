@@ -139,7 +139,7 @@ namespace CSRServer.Game
             return card.CheckCondition(resourceReel);
         }
         
-        public bool UseCard(int index, out List<CardEffect.Result> result)
+        public bool UseCard(int index, out CardEffect.Result[] result)
         {
             if (index >= hand.Count || index < 0)
             {
@@ -160,7 +160,7 @@ namespace CSRServer.Game
             result = card.UseEffect(this);
             card.enable = true;
             //효과 타입
-            ThrowCard(index);
+            DiscardCard(index);
             turnUsedCard.Add(card);
             return true;
         }
@@ -264,7 +264,7 @@ namespace CSRServer.Game
             return true;
         }
 
-        public void ThrowCard(int index)
+        public void DiscardCard(int index)
         {
             if (index >= hand.Count || index < 0)
             {
@@ -282,6 +282,17 @@ namespace CSRServer.Game
             }
             else
                 usedCard.Add(card);
+        }
+
+        public CardEffect.Result[] ThrowCard(int index)
+        {
+            if (index >= hand.Count || index < 0)
+            {
+                return Array.Empty<CardEffect.Result>();
+            }
+            Card card = hand[index];
+            DiscardCard(index);
+            return card.UseEffect(this, isDiscard: true);
         }
 
         public void AddBuff(Buff.Type type, int count)
@@ -315,7 +326,7 @@ namespace CSRServer.Game
             //손패 전부 버리기
             while (hand.Count > 0)
             {
-                ThrowCard(0);
+                DiscardCard(0);
             }
 
             //이번턴에 실행한 카드 배열 초기화
@@ -328,14 +339,14 @@ namespace CSRServer.Game
             }
 
             //턴 종료시 미뤄둔 이벤트 전부 실행
-            CardEffect.Result[] _attakResult = new CardEffect.Result[preheatTurnEndEvents.Count];
+            CardEffect.Result[] _attackResult = new CardEffect.Result[preheatTurnEndEvents.Count];
             for (int idx = 0; preheatTurnEndEvents.Count > 0; idx++)
             {
                 var turnEndEvent = preheatTurnEndEvents.Dequeue();
-                _attakResult[idx] = turnEndEvent();
+                _attackResult[idx] = turnEndEvent();
             }
 
-            attackResult = _attakResult;
+            attackResult = _attackResult;
 
             //턴 종료시 전진 + 고효율&저효율 버프 적용
             turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HighEfficiency].count - buffs[Buff.Type.LowEfficiency].count)));

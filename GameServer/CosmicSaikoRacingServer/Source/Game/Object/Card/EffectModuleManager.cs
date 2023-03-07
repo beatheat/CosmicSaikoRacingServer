@@ -40,6 +40,10 @@ namespace CSRServer.Game
 			AddModule("Discard", Discard, CardEffect.Type.Discard);
 			AddModule("Choice", Choice, CardEffect.Type.Choice);
 			AddModule("Check", Check, CardEffect.Type.Check);
+			AddModule("Leak", Leak, CardEffect.Type.Leak);
+			AddModule("Repeat", Repeat, CardEffect.Type.Repeat);
+			AddModule("TurnEnd", TurnEnd, CardEffect.Type.TurnEnd);
+
 
 			_isLoaded = true;
 		}
@@ -325,16 +329,30 @@ namespace CSRServer.Game
 		
 		private static CardEffect.Result EraseBuff(Card card, GamePlayer player, ParameterList parameters)
 		{
-			CardEffect effect = parameters.Get<CardEffect>(0, card, player) ?? CardEffect.Nothing();
+			int id = parameters.Get<int>(0, card, player);
+			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
 			int amount = 0;
-			foreach (var buff in player.buffs.Values)
-			{
-				amount += buff.count;
-				buff.count = 0;
-			}
 			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
-			for (int i = 0; i < amount; i++)
-				results.Add(effect.Use(card, player));
+			if (id == 99)
+			{
+				foreach (var buff in player.buffs.Values)
+				{
+					amount += buff.count;
+					buff.count = 0;
+				}
+				for (int i = 0; i < amount; i++)
+					results.Add(effect.Use(card, player));
+			}
+			else
+			{
+				if (player.buffs.TryGetValue((Buff.Type) id, out var buff))
+				{
+					int count = buff.count;
+					buff.count = 0;
+					for (int i = 0; i < count; i++)
+						results.Add(effect.Use(card, player));
+				}
+			}
 			return new CardEffect.Result{result = results, type = CardEffect.Type.EraseBuff};
 		}	
 		
@@ -476,10 +494,17 @@ namespace CSRServer.Game
 				amount = player.hand.Count();
 
 			List<CardEffect.Result[]> result = new List<CardEffect.Result[]>();
+			//amount장의 카드를 버린다.
 			for (int i = 0; i < amount; i++)
 			{
-				player.ThrowCard(random.Next(player.hand.Count));
-				result.Add(effect.Use(card, player));
+				CardEffect.Result[] throwResult = player.ThrowCard(random.Next(player.hand.Count));
+				result.Add(throwResult);
+			}
+			//amount번의 특수효과를 발동한다.
+			for (int i = 0; i < amount; i++)
+			{
+				CardEffect.Result[] discardResult = effect.Use(card, player);
+				result.Add(discardResult);
 			}
 
 			return new CardEffect.Result{result = result, type = CardEffect.Type.Discard};
@@ -504,6 +529,30 @@ namespace CSRServer.Game
 				result = effect.Use(card, player);
 
 			return new CardEffect.Result{result = result, type = CardEffect.Type.Check};
+		}	
+		
+		private static CardEffect.Result Leak(Card card, GamePlayer player, ParameterList parameters)
+		{
+			CardEffect effect = parameters.Get<CardEffect>(0, card, player) ?? CardEffect.Nothing();
+			var result = effect.Use(card, player);
+			return new CardEffect.Result{result = result, type = CardEffect.Type.Leak};
+		}	
+		
+		private static CardEffect.Result Repeat(Card card, GamePlayer player, ParameterList parameters)
+		{
+			int amount = parameters.Get<int>(0, card, player);
+			CardEffect effect = parameters.Get<CardEffect>(0, card, player) ?? CardEffect.Nothing();
+			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
+			for (int i = 0; i < amount; i++)
+				results.Add(effect.Use(card, player));
+			return new CardEffect.Result{result = results, type = CardEffect.Type.Repeat};		
+		}	
+		
+		private static CardEffect.Result TurnEnd(Card card, GamePlayer player, ParameterList parameters)
+		{
+			card.enable = false;
+			player.turnReady = true;
+			return new CardEffect.Result{result = null, type = CardEffect.Type.TurnEnd};
 		}	
 	}
 }

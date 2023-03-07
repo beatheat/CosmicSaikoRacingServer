@@ -235,9 +235,11 @@ namespace CSRServer
         {
             if (phase == Phase.Preheat)
             {
+                GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("UseCard - Player turn ends");
                 if (!data.TryGet<int>(out var useCardIndex))
                     return EdenData.Error("UseCard - Card index is missing");
-                GamePlayer player = playerMap[clientId];
                 if(!player.IsCardEnable(useCardIndex))
                     return EdenData.Error("UseCard - Card does not satisfy resource condition");
                 if(!player.UseCard(useCardIndex,out var result))
@@ -255,9 +257,11 @@ namespace CSRServer
         {
             if (phase == Phase.Preheat)
             {
+                GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("RollResource - Player turn ends");
                 if (!data.TryGet<List<int>>(out var resourceFixed))
                     return EdenData.Error("RollResource - resourceFixed data is missing");
-                GamePlayer player = playerMap[clientId];
                 var result = player.RollResource(resourceFixed);
                 if (result == null)
                     return EdenData.Error("RollResource - Reroll Count is 0");
@@ -276,6 +280,9 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("RerollStore - Player turn ends");
+                
                 if (maintainStore.RerollStore(player, out var storeCards) == false)
                     return EdenData.Error("RerollStore - Coin is not enough");
 
@@ -292,6 +299,8 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("RerollRemoveCard - Player turn ends");
                 if (maintainStore.RerollRemoveCard(player, out var removeCards) == false)
                     return EdenData.Error("RerollRemoveCard - Coin is not enough");
                 
@@ -309,6 +318,8 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("BuyExp - Player turn ends");
                 if (player.level == MaintainStore.MAX_LEVEL)
                     return EdenData.Error("BuyExp - Player level is max");
                 if (maintainStore.BuyExp(player) == false)
@@ -330,6 +341,8 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("BuyCard - Player turn ends");
                 if (player.coin < MaintainStore.COIN_BUY_CARD)
                     return EdenData.Error("BuyCard - Coin is not enough");
                 if (!data.TryGet<int>(out var buyIndex))
@@ -354,6 +367,8 @@ namespace CSRServer
             if (phase == Phase.Maintain)
             {
                 GamePlayer player = playerMap[clientId];
+                if (player.turnReady)
+                    return EdenData.Error("RemoveCard - Player turn ends");
                 if (player.coin < MaintainStore.COIN_REMOVE_CARD)
                     return EdenData.Error("BuyCard - Coin is not enough");
                 if (!data.TryGet<int>(out var removeIndex))

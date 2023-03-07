@@ -10,7 +10,7 @@ namespace CSRServer.Game
 		{
 			Nothing, Add, Multiply, Draw, RerollCountUp, Death, Fail, Initialize, ForceReroll, CreateCardToHand, 
 			CreateCardToDeck, CreateCardToOther, BuffToMe, BuffToOther, EraseBuff, Overload, MountCard, MountBuff,
-			Combo, EnforceSelf, Discard, Choice, DoPercent, SetVariable, Check
+			Combo, EnforceSelf, Discard, Choice, DoPercent, SetVariable, Check, Leak, Repeat, TurnEnd
 		}
 
 		public struct Result
@@ -105,6 +105,25 @@ namespace CSRServer.Game
 			Result[] results = new Result[elementList.Count];
 			for (int i = 0; i < elementList.Count; i++)
 			{
+				// 버리기 효과는 무시
+				if (elementList[i].type == Type.Leak)
+					continue;
+				
+				if(card.enable)
+					results[i] = elementList[i].effectModule(card, player, elementList[i].parameter);
+			}
+			return results;
+		}
+
+		public Result[] UseLeak(Card card, GamePlayer player)
+		{
+			Result[] results = new Result[elementList.Count];
+			for (int i = 0; i < elementList.Count; i++)
+			{
+				// 버리기 효과가 아닐시 무시
+				if (elementList[i].type != Type.Leak)
+					continue;
+				
 				if(card.enable)
 					results[i] = elementList[i].effectModule(card, player, elementList[i].parameter);
 			}

@@ -8,14 +8,14 @@
     ".NETCoreApp,Version=v6.0": {
       "CosmicSaikoRacingServer/1.0.0": {
         "dependencies": {
-          "EdenNetwork": "1.3.2",
+          "EdenNetwork": "1.3.3",
           "NLua": "1.6.0"
         },
         "runtime": {
           "CosmicSaikoRacingServer.dll": {}
         }
       },
-      "EdenNetwork/1.3.2": {
+      "EdenNetwork/1.3.3": {
         "runtime": {
           "lib/net6.0/EdenNetwork.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -132,12 +132,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EdenNetwork/1.3.2": {
+    "EdenNetwork/1.3.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+5JErIZNdqEbmfD7BHX66CzKuXUB7EeqlR0qA2NarU9vXnb/MJwoRFNaRFO/WW+LdcThHoyilfVR/+9rGvsi2g==",
-      "path": "edennetwork/1.3.2",
-      "hashPath": "edennetwork.1.3.2.nupkg.sha512"
+      "sha512": "sha512-t1rLnhOW95QFI60HBMclTvofWO/OnNhh6DNZYgmQ6V8jIr4WZPWTY1+4hFYRIT5aM+3EwELCLYjj+NLLktnTuA==",
+      "path": "edennetwork/1.3.3",
+      "hashPath": "edennetwork.1.3.3.nupkg.sha512"
     },
     "KeraLua/1.3.1": {
       "type": "package",

@@ -430,7 +430,7 @@
     "type": "Electric",
     "condition": "e1",
     "effect-string": "자신의 모든 릴을 누전시킵니다.",
-    "effect": "BuffToMe(0, %currentResourceNum)"
+    "effect": "BuffToMe(0, %currentResourceReelNum)"
   },
   {
     "id": "51",

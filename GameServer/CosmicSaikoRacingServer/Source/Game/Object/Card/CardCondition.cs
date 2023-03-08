@@ -4,74 +4,70 @@ namespace CSRServer.Game
 {
 	internal class CardCondition
 	{
-		private readonly List<ResourceType> conditionList;
-		private readonly List<int> countList;
-		private readonly bool freeSameCondition;
-		private readonly int freeSameCount;
-
-		public CardCondition(List<ResourceType> conditionList, List<int> countList)
+		public enum CommonType
+		{
+			None=0, OnePair=2, Triple, FourCard, Yacht, TwoPair
+		}
+		
+		public List<Resource.Type> conditionList;
+		public CommonType type;
+		public bool isCommon;
+		public int count;
+		
+		
+		public CardCondition(List<Resource.Type> conditionList)
 		{
 			this.conditionList = conditionList;
-			this.freeSameCondition = false;
-			this.countList = countList;
+			this.isCommon = false;
 		}
 		
-		public CardCondition(int sameCount)
+		public CardCondition(int sameCount = 0)
 		{
 			this.conditionList = null!;
-			this.countList = null!;
-			this.freeSameCondition = true;
-			this.freeSameCount = sameCount;
+			this.isCommon = true;
+			this.count = sameCount;
+			if (sameCount < 10)
+				this.type = (CommonType) sameCount;
+			else
+				this.type = CommonType.TwoPair;
 		}
 		
-		public bool Check(List<ResourceType> resource)
+		public bool Check(List<Resource.Type> resourceReel)
 		{
-			if (freeSameCondition == false)
+			if (isCommon == false)
 			{
-				for (int i = 0; i < conditionList.Count; i++)
-				{
-					var resourceType = conditionList[i];
-					int count = 0;
-					foreach (var resourceElement in resource)
-					{
-						if (resourceType == resourceElement)
-							count++;
-					}
-					if (count >= countList[i])
-						return true;
-				}
-				return false;
+				return resourceReel.Contains(conditionList);
 			}
 			else
 			{
 				//투페어
-				if (freeSameCount == 22)
+				if (count == 22)
 				{
 					int pairCount = 0;
-					foreach (var resourceType in Enum.GetValues<ResourceType>())
+					int[] resourceCount = Enumerable.Repeat(0, Resource.COUNT).ToArray();
+					foreach (var resource in resourceReel)
 					{
-						int count = 0;
-						foreach (var resourceElement in resource)
-						{
-							if (resourceType == resourceElement)
-								count++;
-						}
-						if (count >= 2)
+						resourceCount[(int) resource]++;
+					}
+
+					for (int i = 0; i < Resource.COUNT; i++)
+					{
+						if (resourceCount[i] >= 2)
 							pairCount++;
 					}
 					return pairCount >= 2;
 				}
 				else
 				{
-					foreach (var resourceType in Enum.GetValues<ResourceType>())
+					foreach (var resourceType in Enum.GetValues<Resource.Type>())
 					{
 						int count = 0;
-						foreach (var resourceElement in resource)
+						foreach (var resource in resourceReel)
 						{
-							if (resourceType == resourceElement)
+							if (resourceType == resource)
 								count++;
 						}
-						if (count >= freeSameCount)
+						if (count >= this.count)
 							return true;
 					}
 					return false;

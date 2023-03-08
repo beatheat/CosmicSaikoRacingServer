@@ -40,7 +40,6 @@ namespace CSRServer
             try { config = JsonSerializer.Deserialize<Config>(configStr, new JsonSerializerOptions { IncludeFields = true }); }
             catch { throw new Exception("Config.json is not formatted"); }
         }
-
         private static EdenNetServer? _server;
         private static GameManager? _gameManager;
 
@@ -60,7 +59,7 @@ namespace CSRServer
             //게임서버 초기화 및 실행
             _server = new EdenNetServer(config.port, config.networklogPath);
             _gameManager = new GameManager(_server);
-
+            
             //데이터 로딩
             try
             {

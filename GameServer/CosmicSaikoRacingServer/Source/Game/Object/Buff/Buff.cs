@@ -6,7 +6,7 @@ namespace CSRServer.Game
 	{
 		public enum Type
 		{
-			ElectricLeak, Proliferation, Exposure, BreakDown, HighEfficiency, LowEfficiency
+			ElectricLeak, Proliferation, Exposure, BreakDown, HighEfficiency, Immune, HighDensity, Mimesis
 		}
 		public Type type { protected set; get; }
 		public int count;
@@ -23,7 +23,7 @@ namespace CSRServer.Game
 			this.variables = new Dictionary<string, object>();
 		}
 
-		public void Init(GamePlayer player)
+		public void Apply(GamePlayer player)
 		{
 			initEffect(this, player);
 		}

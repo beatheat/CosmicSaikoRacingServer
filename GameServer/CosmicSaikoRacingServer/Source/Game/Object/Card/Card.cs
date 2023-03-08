@@ -18,16 +18,32 @@ namespace CSRServer.Game
         
         //카드 기본정보
         public int id;
-        public Dictionary<string, Variable> variable;
         
+        //실제사용객체
+        [JsonIgnore]
+        public Dictionary<string, Variable> _variable;
+        //데이터 최소화를 위한 전송 객체
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public Dictionary<string, Variable>? variable;
+
+        //실제 사용 객체
+        [JsonIgnore]
+        public CardCondition _condition;
+        //데이터 최소화를 위한 전송 객체
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public CardCondition? condition;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool isExposure = false;
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool isMimesis = false;
+
         [JsonIgnore]
         public Type type;
         [JsonIgnore] 
         public int rank;
         [JsonIgnore]
         public CardEffect effect;
-        [JsonIgnore]
-        public CardCondition condition;
+        
         
         //카드 자체생성정보
 
@@ -43,9 +59,13 @@ namespace CSRServer.Game
             this.id = id;
             this.type = type;
             this.rank = rank;
-            this.condition = condition;
+            this.condition = null;
+            this._condition = condition;
             this.effect = effect;
-            this.variable = variable;
+            this._variable = variable;
+            this.variable = null;
+            if (variable.Count > 0)
+                this.variable = variable;
         }
         
         public Card Clone()
@@ -60,9 +80,9 @@ namespace CSRServer.Game
             return results;
         }
 
-        public bool CheckCondition(List<ResourceType> resource)
+        public bool CheckCondition(List<Resource.Type> resource)
         {
-            return condition.Check(resource);
+            return _condition.Check(resource);
         }
         
     }

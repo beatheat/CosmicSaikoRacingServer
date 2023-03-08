@@ -5,13 +5,13 @@ namespace CSRServer.Game
 {
 	internal static class ParameterExpressionParser
 	{
-		private static readonly Dictionary<string, ResourceType> symbolToResourceType = new Dictionary<string, ResourceType>
+		private static readonly Dictionary<string, Resource.Type> symbolToResourceType = new Dictionary<string, Resource.Type>
 		{
-			["fossil"] = ResourceType.Fossil,
-			["electric"] = ResourceType.Electric,
-			["bio"] = ResourceType.Bio,
-			["nuclear"] = ResourceType.Nuclear,
-			["cosmic"] = ResourceType.Cosmic
+			["fossil"] = Resource.Type.Fossil,
+			["electric"] = Resource.Type.Electric,
+			["bio"] = Resource.Type.Bio,
+			["nuclear"] = Resource.Type.Nuclear,
+			["cosmic"] = Resource.Type.Cosmic
 		};
 
 		private static readonly Dictionary<string, Card.Type> symbolToCardType = new Dictionary<string, Card.Type>
@@ -76,7 +76,7 @@ namespace CSRServer.Game
 		
 		public static int GetCardVariable(Card card, string varString)
 		{
-			if (card.variable.TryGetValue(varString, out var result))
+			if (card._variable.TryGetValue(varString, out var result))
 			{
 				return result.value;
 			}

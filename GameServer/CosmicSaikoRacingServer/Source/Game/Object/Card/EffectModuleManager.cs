@@ -121,7 +121,7 @@ namespace CSRServer.Game
 		{
 			for (int i = 0; i < player.resourceReelCount; i++)
 			{
-				player.resourceReel[i] = Util.GetRandomEnumValue<ResourceType>();
+				player.resourceReel[i] = Util.GetRandomEnumValue<Resource.Type>();
 			}
 			return new CardEffect.Result{result = player.resourceReel, type = CardEffect.Type.ForceReroll};
 		}
@@ -408,9 +408,9 @@ namespace CSRServer.Game
 			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 			
 			
-			if (card.variable.ContainsKey(percent))
+			if (card._variable.ContainsKey(percent))
 			{
-				var _percent = card.variable[percent];
+				var _percent = card._variable[percent];
 				Random random = new Random();
 				if (random.Next(100) < _percent.value)
 				{
@@ -425,9 +425,9 @@ namespace CSRServer.Game
 			string varName = parameters.Get<string>(0, card, player) ?? "";
 			int number = parameters.Get<int>(1, card, player);
 
-			if (card.variable.ContainsKey(varName))
+			if (card._variable.ContainsKey(varName))
 			{
-				var variable = card.variable[varName];
+				var variable = card._variable[varName];
 				variable.value += number;
 				if (variable.value < variable.lowerBound)
 					variable.value = variable.lowerBound;
@@ -446,9 +446,9 @@ namespace CSRServer.Game
 			
 			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 			
-			if (card.variable.ContainsKey(percent))
+			if (card._variable.ContainsKey(percent))
 			{
-				var _percent = card.variable[percent];
+				var _percent = card._variable[percent];
 				Random random = new Random();
 				if (random.Next(100) < _percent.value)
 				{
@@ -493,20 +493,31 @@ namespace CSRServer.Game
 			if (amount > player.hand.Count)
 				amount = player.hand.Count();
 
-			List<CardEffect.Result[]> result = new List<CardEffect.Result[]>();
+			List<CardEffect.Result[]> leakResults = new List<CardEffect.Result[]>();
+			List<CardEffect.Result[]> discardResults = new List<CardEffect.Result[]>();
+			List<int> throwIndexList = new List<int>();
 			//amount장의 카드를 버린다.
 			for (int i = 0; i < amount; i++)
 			{
-				CardEffect.Result[] throwResult = player.ThrowCard(random.Next(player.hand.Count));
-				result.Add(throwResult);
+				int throwIndex = random.Next(player.hand.Count);
+				throwIndexList.Add(throwIndex);
+				CardEffect.Result[] throwResult = player.ThrowCard(throwIndex);
+				leakResults.Add(throwResult);
 			}
 			//amount번의 특수효과를 발동한다.
 			for (int i = 0; i < amount; i++)
 			{
 				CardEffect.Result[] discardResult = effect.Use(card, player);
-				result.Add(discardResult);
+				discardResults.Add(discardResult);
 			}
 
+			var result = new Dictionary<string, object>
+			{
+				["throwIndexList"] = throwIndexList,
+				["leakResults"] = leakResults,
+				["discardResults"] = discardResults
+			};
+			
 			return new CardEffect.Result{result = result, type = CardEffect.Type.Discard};
 		}	
 		

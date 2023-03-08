@@ -242,6 +242,8 @@ namespace CSRServer
                     return EdenData.Error("UseCard - Card index is missing");
                 if(!player.IsCardEnable(useCardIndex))
                     return EdenData.Error("UseCard - Card does not satisfy resource condition");
+                if (player.buffs[Buff.Type.Proliferation].count > 0)
+                    return EdenData.Error("UseCard - Cannot use card caused by proliferation debuff");
                 if(!player.UseCard(useCardIndex,out var result))
                     return new EdenData(new EdenError("UseCard - Card index is wrong"));
                 return new EdenData(new Dictionary<string, object>
@@ -350,11 +352,11 @@ namespace CSRServer
                 if (maintainStore.BuyCard(player, buyIndex, out var storeCards, out var buyCard) == false)
                     return EdenData.Error($"BuyCard - Wrong store card index : {buyIndex}");
 
-                player.AddCardToDeck(buyCard);
+                player.AddCardToDeck(buyCard!);
                 return new EdenData(new Dictionary<string, object>
                 {
                     ["storeCards"] = storeCards,
-                    ["buyCard"] = buyCard,
+                    ["buyCard"] = buyCard!,
                     ["deck"] = player.deck,
                     ["coin"] = player.coin
                 });

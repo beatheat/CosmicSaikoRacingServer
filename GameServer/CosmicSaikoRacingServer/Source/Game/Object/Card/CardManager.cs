@@ -8,13 +8,13 @@ namespace CSRServer.Game
 		private static readonly List<Card> cards = new List<Card>();
 		private static bool _isLoaded = false;
 
-		private static readonly Dictionary<char, ResourceType> symbolToResourceType = new Dictionary<char, ResourceType>
+		private static readonly Dictionary<char, Resource.Type> symbolToResourceType = new Dictionary<char, Resource.Type>
 		{
-			['f'] = ResourceType.Fossil,
-			['e'] = ResourceType.Electric,
-			['b'] = ResourceType.Bio,
-			['n'] = ResourceType.Nuclear,
-			['c'] = ResourceType.Cosmic
+			['f'] = Resource.Type.Fossil,
+			['e'] = Resource.Type.Electric,
+			['b'] = Resource.Type.Bio,
+			['n'] = Resource.Type.Nuclear,
+			['c'] = Resource.Type.Cosmic
 		};
 		private static readonly Dictionary<string, Card.Type> symbolToCardType = new Dictionary<string, Card.Type>
 		{
@@ -128,25 +128,22 @@ namespace CSRServer.Game
 
 			if (isFreeSame == false)
 			{
-				List<ResourceType> conditionList = new List<ResourceType>();
-				List<int> countList = new List<int>();
+				List<Resource.Type> conditionList = new List<Resource.Type>();
 				
 				var conditionStringSplit = rawConditionString.Split('/');
 				
 				foreach (var conditionString in conditionStringSplit)
 				{
 					char type = conditionString.Trim()[0];
-					if (symbolToResourceType.TryGetValue(type, out var condition))
-						conditionList.Add(condition);
-					else
-						throw new Exception($"CardManager::ParseCondition - symbol of {rawConditionString} is not parsable");
-
-					if (int.TryParse(conditionString[1..], out int count))
-						countList.Add(count);
+					if (symbolToResourceType.TryGetValue(type, out var condition) && int.TryParse(conditionString[1..], out int count))
+					{
+						for(int i=0;i<count;i++)
+							conditionList.Add(condition);
+					}
 					else
 						throw new Exception($"CardManager::ParseCondition - symbol of {rawConditionString} is not parsable");
 				}
-				return new CardCondition(conditionList, countList);
+				return new CardCondition(conditionList);
 			}
 			else
 			{

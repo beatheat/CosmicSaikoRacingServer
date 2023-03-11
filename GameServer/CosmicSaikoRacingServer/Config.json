@@ -5,7 +5,7 @@
 
   "moduleChipPath" :  "Data/ModuleChip",
 
-  "matchingServerAddress": "192.168.0.11",
+  "matchingServerAddress": "58.141.131.141",
   "matchingServerPort" :  16969,
   
   "cardDataPath" : "Data/cards.json"

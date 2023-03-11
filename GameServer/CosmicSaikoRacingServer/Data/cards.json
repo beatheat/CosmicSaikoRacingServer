@@ -5,8 +5,8 @@
     "rank": 1,
     "type": "Normal",
     "condition": "#pair",
-    "effect-string": "나를 피폭한다",
-    "effect": "BuffToMe(2, 1)"
+    "effect-string": "이동 거리를 4 더합니다.",
+    "effect": "Add(4)"
   },
   {
     "id": "1",

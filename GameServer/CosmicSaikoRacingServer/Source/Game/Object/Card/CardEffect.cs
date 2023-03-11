@@ -4,7 +4,7 @@ namespace CSRServer.Game
 {
 	// using ParameterList = List<CardEffect.Parameter>;
 
-	internal class CardEffect
+	public class CardEffect
 	{
 		public enum Type
 		{

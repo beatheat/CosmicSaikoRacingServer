@@ -76,7 +76,7 @@ namespace CSRServer.Game
 		
 		public static int GetCardVariable(Card card, string varString)
 		{
-			if (card._variable.TryGetValue(varString, out var result))
+			if (card.variable.TryGetValue(varString, out var result))
 			{
 				return result.value;
 			}
@@ -177,16 +177,13 @@ namespace CSRServer.Game
 		{
 			if (attribute == null)
 			{
-				return player.buffs.Values.Sum(buff => buff.count);
+				return player.buffManager.buffList.Sum(buff => buff.count);
 			}
 			if (attribute.Length >= 2)
 				return 0;
 			if (int.TryParse(attribute[0], out int buffId))
 			{
-				if (player.buffs.TryGetValue((Buff.Type) buffId, out var buff))
-				{
-					return buff.count;
-				}
+				return player.buffManager.GetBuffCount((Buff.Type) buffId);
 			}
 			return 0;
 		}

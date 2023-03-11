@@ -3,7 +3,7 @@ namespace CSRServer.Game
 {
 	using ParameterList =  CardEffect.ParameterList;
 
-	internal delegate CardEffect.Result EffectModule(Card card , GamePlayer player, ParameterList parameters);
+	public delegate CardEffect.Result EffectModule(Card card , GamePlayer player, ParameterList parameters);
 	
 	internal static class EffectModuleManager
 	{
@@ -239,7 +239,7 @@ namespace CSRServer.Game
 				return new CardEffect.Result{result = result, type = CardEffect.Type.CreateCardToOther};
 			}
 			
-			player.AddPreheatEndEvent(CreateToOther);
+			player.AddDepartEvent(CreateToOther);
 			return new CardEffect.Result{result = result, type = CardEffect.Type.CreateCardToOther};
 		}	
 		
@@ -322,7 +322,7 @@ namespace CSRServer.Game
 				return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
 			}
 			
-			player.AddPreheatEndEvent(_BuffToOther);
+			player.AddDepartEvent(_BuffToOther);
 			
 			return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
 		}	
@@ -331,27 +331,21 @@ namespace CSRServer.Game
 		{
 			int id = parameters.Get<int>(0, card, player);
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
-			int amount = 0;
 			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
+			//모든 버프 제거
 			if (id == 99)
 			{
-				foreach (var buff in player.buffs.Values)
-				{
-					amount += buff.count;
-					buff.count = 0;
-				}
+				int amount = player.buffManager.ReleaseAll();
 				for (int i = 0; i < amount; i++)
 					results.Add(effect.Use(card, player));
 			}
+			//특정버프제거
 			else
 			{
-				if (player.buffs.TryGetValue((Buff.Type) id, out var buff))
-				{
-					int count = buff.count;
-					buff.count = 0;
-					for (int i = 0; i < count; i++)
-						results.Add(effect.Use(card, player));
-				}
+				int amount = player.buffManager.Release((Buff.Type) id);
+				for (int i = 0; i < amount; i++)
+					results.Add(effect.Use(card, player));
+
 			}
 			return new CardEffect.Result{result = results, type = CardEffect.Type.EraseBuff};
 		}	
@@ -369,7 +363,7 @@ namespace CSRServer.Game
 				return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountCard};
 			}
 			
-			player.AddPreheatEndEvent(_MountCard);
+			player.AddDepartEvent(_MountCard);
 			
 			return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountCard};
 		}	
@@ -389,7 +383,7 @@ namespace CSRServer.Game
             	return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountBuff};
             }
             
-            player.AddPreheatEndEvent(_MountBuff);
+            player.AddDepartEvent(_MountBuff);
 			
 			return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountBuff};
 		}	
@@ -408,9 +402,9 @@ namespace CSRServer.Game
 			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 			
 			
-			if (card._variable.ContainsKey(percent))
+			if (card.variable.ContainsKey(percent))
 			{
-				var _percent = card._variable[percent];
+				var _percent = card.variable[percent];
 				Random random = new Random();
 				if (random.Next(100) < _percent.value)
 				{
@@ -425,9 +419,9 @@ namespace CSRServer.Game
 			string varName = parameters.Get<string>(0, card, player) ?? "";
 			int number = parameters.Get<int>(1, card, player);
 
-			if (card._variable.ContainsKey(varName))
+			if (card.variable.ContainsKey(varName))
 			{
-				var variable = card._variable[varName];
+				var variable = card.variable[varName];
 				variable.value += number;
 				if (variable.value < variable.lowerBound)
 					variable.value = variable.lowerBound;
@@ -446,9 +440,9 @@ namespace CSRServer.Game
 			
 			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
 			
-			if (card._variable.ContainsKey(percent))
+			if (card.variable.ContainsKey(percent))
 			{
-				var _percent = card._variable[percent];
+				var _percent = card.variable[percent];
 				Random random = new Random();
 				if (random.Next(100) < _percent.value)
 				{

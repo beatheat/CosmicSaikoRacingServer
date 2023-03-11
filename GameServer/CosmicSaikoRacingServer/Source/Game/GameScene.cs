@@ -212,7 +212,6 @@ namespace CSRServer
         #endregion
         #region Receive/Response Methods
         
-        
         private void PlayerReady(string clientId, EdenData data)
         {
             playerMap[clientId].turnReady = true;
@@ -242,10 +241,9 @@ namespace CSRServer
                     return EdenData.Error("UseCard - Card index is missing");
                 if(!player.IsCardEnable(useCardIndex))
                     return EdenData.Error("UseCard - Card does not satisfy resource condition");
-                if (player.buffs[Buff.Type.Proliferation].count > 0)
-                    return EdenData.Error("UseCard - Cannot use card caused by proliferation debuff");
+
                 if(!player.UseCard(useCardIndex,out var result))
-                    return new EdenData(new EdenError("UseCard - Card index is wrong"));
+                    return new EdenData(new EdenError("UseCard - Cannot use card"));
                 return new EdenData(new Dictionary<string, object>
                 {
                     ["player"] = player,

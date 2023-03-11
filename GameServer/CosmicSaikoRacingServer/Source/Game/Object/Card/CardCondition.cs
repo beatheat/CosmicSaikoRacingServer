@@ -2,7 +2,7 @@
 
 namespace CSRServer.Game
 {
-	internal class CardCondition
+	public struct CardCondition
 	{
 		public enum CommonType
 		{
@@ -13,12 +13,13 @@ namespace CSRServer.Game
 		public CommonType type;
 		public bool isCommon;
 		public int count;
-		
-		
+
 		public CardCondition(List<Resource.Type> conditionList)
 		{
 			this.conditionList = conditionList;
 			this.isCommon = false;
+			type = CommonType.None;
+			count = 0;
 		}
 		
 		public CardCondition(int sameCount = 0)
@@ -61,13 +62,13 @@ namespace CSRServer.Game
 				{
 					foreach (var resourceType in Enum.GetValues<Resource.Type>())
 					{
-						int count = 0;
+						int sameCount = 0;
 						foreach (var resource in resourceReel)
 						{
 							if (resourceType == resource)
-								count++;
+								sameCount++;
 						}
-						if (count >= this.count)
+						if (sameCount >= this.count)
 							return true;
 					}
 					return false;

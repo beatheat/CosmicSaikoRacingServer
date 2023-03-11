@@ -1,6 +1,6 @@
 ﻿namespace CSRServer.Game
 {
-    internal static class Resource
+    public static class Resource
     {
         public const int COUNT = 5;
         public enum Type

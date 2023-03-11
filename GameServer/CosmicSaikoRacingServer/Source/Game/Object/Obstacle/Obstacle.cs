@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CSRServer.Game
 {
-	internal class Obstacle
+	public class Obstacle
 	{
 		public enum Type
 		{

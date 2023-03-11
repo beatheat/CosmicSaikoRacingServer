@@ -1,49 +1,60 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CSRServer.Game
 {
-	internal class Buff
+	[JsonDerivedType(typeof(Buff))]
+	[JsonDerivedType(typeof(BuffBreakDown))]
+	[JsonDerivedType(typeof(BuffElectricLeak))]
+	[JsonDerivedType(typeof(BuffExposure))]
+	[JsonDerivedType(typeof(BuffHighDensity))]
+	[JsonDerivedType(typeof(BuffHighEfficiency))]
+	[JsonDerivedType(typeof(BuffMimesis))]
+	[JsonDerivedType(typeof(BuffProliferation))]
+	[JsonDerivedType(typeof(BuffRefine))]
+	public class Buff
 	{
 		public enum Type
 		{
-			ElectricLeak, Proliferation, Exposure, BreakDown, HighEfficiency, Immune, HighDensity, Mimesis
+			ElectricLeak, Proliferation, Exposure, BreakDown, HighEfficiency, Refine, HighDensity, Mimesis
 		}
+		
 		public Type type { protected set; get; }
-		public int count;
-		public Dictionary<string, object> variables { private set; get; }
-		
+		public int count { protected set; get; }
+
 		[JsonIgnore]
-		public BuffEffect initEffect;
+		protected GamePlayer player;
 		
-		public Buff(Type type, BuffEffect initEffect)
+		protected Buff(GamePlayer player)
 		{
-			this.type = type;
-			this.initEffect = initEffect;
 			this.count = 0;
-			this.variables = new Dictionary<string, object>();
+			this.player = player;
 		}
 
-		public void Apply(GamePlayer player)
+		public void Add(int count)
 		{
-			initEffect(this, player);
+			this.count += count;
 		}
+		
+		public virtual void OnTurnStart() { }
+		public virtual bool BeforeUseCard(ref Card card) { return true; }
+		public virtual void AfterUseCard(ref Card card, ref CardEffect.Result[] results) { }
 
-		public void Release()
+		public virtual void OnRollResource(ref List<int>? resourceFixed) { }
+		public virtual void OnDiscardCard(Card card) { }
+		public virtual void OnDrawCard(ref Card card) { }
+
+		public virtual int Release()
 		{
+			int releaseCount = count;
 			count = 0;
-		}
-		
-		public T? GetVariable<T>(string key)
-		{
-			if (variables.ContainsKey(key))
-				return (T) variables[key];
-			return default(T);
+			return releaseCount;
 		}
 
-		public Buff Clone()
+		public virtual void OnTurnEnd()
 		{
-			return (Buff)this.MemberwiseClone();
+			Release();
 		}
-		
 	}
 }

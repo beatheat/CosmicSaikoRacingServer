@@ -3,7 +3,7 @@
 
 namespace CSRServer.Game
 {
-    internal class GamePlayer
+    public class GamePlayer
     {
         [JsonIgnore] public const int INITIAL_MAX_DISTANCE = 100;
         [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 100;
@@ -38,15 +38,17 @@ namespace CSRServer.Game
 
         public List<Artifact> artifactList { private set; get; }
 
-        public Dictionary<Buff.Type, Buff> buffs { private set; get; }
-
+        [JsonIgnore]
+        public BuffManager buffManager { private set; get; }
+        public List<Buff> buffList { private set; get; }
+        
         //예열턴 관련 정보
         [JsonIgnore]
         public int drawCount { private set; get; }
         [JsonIgnore]
         public List<Card> turnUsedCard { private set; get; }
         [JsonIgnore]
-        private readonly Queue<Func<CardEffect.Result>> _preheatTurnEndEvents;
+        private readonly Queue<Func<CardEffect.Result>> _departEvents;
         
         
         //리소스 
@@ -95,7 +97,9 @@ namespace CSRServer.Game
             
             
             artifactList = new List<Artifact>();
-            buffs = BuffManager.CreateBuffDictionary();
+            
+            buffManager = new BuffManager(this);
+            buffList = buffManager.buffList;
 
             remainDistance = INITIAL_MAX_DISTANCE;
             currentDistance = 0;
@@ -112,12 +116,12 @@ namespace CSRServer.Game
 
             turnReady = false;
             
-            _preheatTurnEndEvents = new Queue<Func<CardEffect.Result>>();
+            _departEvents = new Queue<Func<CardEffect.Result>>();
             
             //임시 초기화
             for (int i = 0; i < 10; i++)
             {
-                Card card = CardManager.GetCard(i);
+                Card card = CardManager.GetCard(0);
                 AddCardToDeck(card);
             }
             AddCardToDeck(CardManager.GetCard(50));
@@ -149,26 +153,21 @@ namespace CSRServer.Game
             }
             Card card = hand[index];
             result = null!;
-            //증식 버프로 인해 카드 사용불가
-            if (buffs[Buff.Type.Proliferation].count > 0)
+
+            // 카드 사용전 버프
+            if (buffManager.BeforeUseCard(ref card) == false)
+            {
                 return false;
-            //고장(BREAK_DOWN)버프
-            if (buffs[Buff.Type.BreakDown].count > 0)
-            {
-                Random random = new Random();
-                if (random.Next(2) != 0)
-                    card.enable = false;
-                buffs[Buff.Type.BreakDown].count--;
             }
-            //효과발동
+
             result = card.UseEffect(this);
-            if (buffs[Buff.Type.HighDensity].count > 0)
-            {
-                result = result.Concat(card.UseEffect(this)).ToArray();
-                buffs[Buff.Type.HighDensity].count--;
-            }
+            //카드 사용가능 복구, 고장시 false로 바뀌어 복구한다.
             card.enable = true;
             //효과 타입
+
+            //카드 사용후 버프
+            buffManager.AfterUseCard(ref card, ref result);
+                
             DiscardCard(index);
             turnUsedCard.Add(card);
             return true;
@@ -177,10 +176,6 @@ namespace CSRServer.Game
         
         public List<Resource.Type>? RollResourceInit(List<int>? resourceFixed = null)
         {
-            //누전(ELECTRIC_LEAK)버프가 있으면 적용한다
-            if(buffs[Buff.Type.ElectricLeak].count > 0)
-                resourceFixed?.AddRange(buffs[Buff.Type.ElectricLeak].GetVariable<List<int>>("resourceLockIndexList")!);
-            
             for (int i = 0; i < resourceReelCount; i++)
             {
                 Resource.Type resource = Util.GetRandomEnumValue<Resource.Type>();
@@ -197,12 +192,8 @@ namespace CSRServer.Game
         {
             if (resourceRerollCount > 0)
             {
+                buffManager.OnRollResource(ref resourceFixed);
                 resourceRerollCount--;
-                //증식버프가 해제되었는지 체크
-                if (buffs[Buff.Type.Proliferation].count > 0 && resourceReel.Contains(buffs[Buff.Type.Proliferation].GetVariable<List<Resource.Type>>("resourceCondition")))
-                {
-                    buffs[Buff.Type.Proliferation].count = 0;
-                }
                 return RollResourceInit(resourceFixed);
             }
             return null;
@@ -226,13 +217,12 @@ namespace CSRServer.Game
             {
                 Random rand = new Random();
                 int drawIndex = rand.Next(unusedCard.Count);
+                Card card = unusedCard[drawIndex];
                 hand.Add(unusedCard[drawIndex]);
                 cards.Add(unusedCard[drawIndex]);
                 unusedCard.RemoveAt(drawIndex);
                 
-                //새로 뽑는 카드에 피폭적용
-                if(buffs[Buff.Type.Exposure].count > 0)
-                    buffs[Buff.Type.Exposure].Apply(this);
+                buffManager.OnDrawCard(ref card);
             }
 
             //드로우 수가 남은 덱의 수보다 많으면 묘지를 섞고 다시 드로우
@@ -246,14 +236,13 @@ namespace CSRServer.Game
                 {
                     Random rand = new Random();
                     int drawIndex = rand.Next(unusedCard.Count);
+                    Card card = unusedCard[drawIndex];
 
                     hand.Add(unusedCard[drawIndex]);
                     cards.Add(unusedCard[drawIndex]);
                     unusedCard.RemoveAt(drawIndex);
 
-                    //새로 뽑는 카드에 피폭적용
-                    if(buffs[Buff.Type.Exposure].count > 0)
-                        buffs[Buff.Type.Exposure].Apply(this);
+                    buffManager.OnDrawCard(ref card);
                 }
             }
             
@@ -297,8 +286,7 @@ namespace CSRServer.Game
             }
             Card card = hand[index];
             card.isExposure = false;
-            card.isMimesis = false;
-            card.condition = null;
+            card.isMimesis = false; 
             //패에서 삭제
             hand.RemoveAt(index);
             //묘지로
@@ -325,7 +313,7 @@ namespace CSRServer.Game
 
         public void AddBuff(Buff.Type type, int count)
         {
-            buffs[type].count += count;
+            buffManager.AddBuff(type, count);
         }
         
 
@@ -344,16 +332,7 @@ namespace CSRServer.Game
             RollResourceInit();
             DrawCard(drawCount);
             
-            foreach (var buff in buffs.Values)
-            {
-                buff.Apply(this);
-            }
-
-            // 증식 버프가 해제되었는지 체크
-            if (buffs[Buff.Type.Proliferation].count > 0 && resourceReel.Contains(buffs[Buff.Type.Proliferation].GetVariable<List<Resource.Type>>("resourceCondition")))
-            {
-                buffs[Buff.Type.Proliferation].count = 0;
-            }
+            buffManager.OnTurnStart();
         }
         
         public void PreheatEnd(out CardEffect.Result[] attackResult)
@@ -367,25 +346,19 @@ namespace CSRServer.Game
             //이번턴에 실행한 카드 배열 초기화
             turnUsedCard.Clear();
             
-            //버프 릴리즈
-            foreach (var buff in buffs.Values)
-            {
-                buff.Release();
-            }
+            //버프 적용
+            buffManager.OnTurnEnd();
 
             //턴 종료시 미뤄둔 이벤트 전부 실행
-            CardEffect.Result[] _attackResult = new CardEffect.Result[_preheatTurnEndEvents.Count];
-            for (int idx = 0; _preheatTurnEndEvents.Count > 0; idx++)
+            CardEffect.Result[] _attackResult = new CardEffect.Result[_departEvents.Count];
+            for (int idx = 0; _departEvents.Count > 0; idx++)
             {
-                var turnEndEvent = _preheatTurnEndEvents.Dequeue();
+                var turnEndEvent = _departEvents.Dequeue();
                 _attackResult[idx] = turnEndEvent();
             }
 
             attackResult = _attackResult;
-
-            //턴 종료시 전진 + 고효율 버프 적용
-            turnDistance = (int) (turnDistance * (1.0 + 0.1 * (buffs[Buff.Type.HighEfficiency].count)));
-
+            
             //방해물 밟기
             foreach (var obstacle in obstacleList)
             {
@@ -402,9 +375,9 @@ namespace CSRServer.Game
             
         }
 
-        public void AddPreheatEndEvent(Func<CardEffect.Result> turnEndEvent)
+        public void AddDepartEvent(Func<CardEffect.Result> departEvent)
         {
-            _preheatTurnEndEvents.Enqueue(turnEndEvent);
+            _departEvents.Enqueue(departEvent);
         }
     }
 }

@@ -84,14 +84,23 @@ namespace CSRServer.Game
 			}
 		}
 
-		public void OnRollResource(ref List<int>? resourceFixed)
+		public void BeforeRollResource(ref List<int>? resourceFixed)
 		{
 			foreach (var buff in buffList)
 			{
-				buff.OnRollResource(ref resourceFixed);
+				buff.BeforeRollResource(ref resourceFixed);
+			}
+		}
+
+		public void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
+		{
+			foreach (var buff in buffList)
+			{
+				buff.AfterRollResource(ref resourceFixed, ref resourceReel);
 			}
 		}
 		
+
 		public void OnDrawCard(ref Card card)
 		{
 			foreach (var buff in buffList)

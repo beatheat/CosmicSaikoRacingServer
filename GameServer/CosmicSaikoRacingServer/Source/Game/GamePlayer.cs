@@ -52,24 +52,24 @@ namespace CSRServer.Game
         
         
         //리소스 
-        public List<Resource.Type> resourceReel { private set; get; }
-        public int resourceRerollCount{ set; get; }
+        public List<Resource.Type> resourceReel;
+        public int resourceRerollCount;
         [JsonIgnore]
-        public int availableRerollCount { set; get; }
+        public int availableRerollCount;
         [JsonIgnore]
-        public int resourceReelCount { set; get; }
+        public int resourceReelCount;
         
 
         //GameScene사용자료
         [JsonIgnore]
-        public bool turnReady { set; get; }
-        public int rank { set; get; }
+        public bool turnReady;
+        public int rank;
 
         //정비턴 자료
-        public int coin { set; get; }
-        public int exp { set; get; }
-        public int expLimit { set; get; }
-        public int level { set; get; }
+        public int coin;
+        public int exp;
+        public int expLimit;
+        public int level;
 
         private int _turnCoinCount;
         
@@ -119,12 +119,17 @@ namespace CSRServer.Game
             _departEvents = new Queue<Func<CardEffect.Result>>();
             
             //임시 초기화
+            int[,] card = {
+                {0,0,1,1,3,3,4,4,6,6},
+                {23,23,52,52,80,80,110,110,141,141},
+                {21,21,25,25,26,26,30,30,32,32}
+            };
+            Random random = new Random();
+            int randomNumber = random.Next(3);
             for (int i = 0; i < 10; i++)
             {
-                Card card = CardManager.GetCard(0);
-                AddCardToDeck(card);
+                AddCardToDeck(CardManager.GetCard(card[randomNumber,i]));
             }
-            AddCardToDeck(CardManager.GetCard(50));
         }
 
         public GamePlayer CloneForMonitor()
@@ -176,6 +181,8 @@ namespace CSRServer.Game
         
         public List<Resource.Type>? RollResourceInit(List<int>? resourceFixed = null)
         {
+            buffManager.BeforeRollResource(ref resourceFixed);
+            
             for (int i = 0; i < resourceReelCount; i++)
             {
                 Resource.Type resource = Util.GetRandomEnumValue<Resource.Type>();
@@ -184,6 +191,9 @@ namespace CSRServer.Game
                 else if (resourceFixed != null && !resourceFixed.Contains(i))
                     resourceReel[i] = resource;
             }
+            
+            buffManager.AfterRollResource(ref resourceFixed, ref resourceReel);
+            
             return resourceReel;
         }
 
@@ -192,7 +202,6 @@ namespace CSRServer.Game
         {
             if (resourceRerollCount > 0)
             {
-                buffManager.OnRollResource(ref resourceFixed);
                 resourceRerollCount--;
                 return RollResourceInit(resourceFixed);
             }

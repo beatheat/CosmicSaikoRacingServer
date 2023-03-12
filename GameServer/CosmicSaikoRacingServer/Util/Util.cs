@@ -86,12 +86,35 @@ namespace CSRServer
             return true;
         }
         
-        public static T GetRandomEnumValue<T>()
+        public static T GetRandomEnumValue<T>() where T : struct, Enum
         {
             Array values = Enum.GetValues(typeof(T));
             Random random = new Random();
             T randomEnumValue = (T)values.GetValue(random.Next(values.Length))!;
             return randomEnumValue;
         }
+        
+        //{10,20,70} 일렇게 넣으면 차지하고 있는 구간만큼의 확률로 나옴
+        public static T GetRandomEnumValue<T>(double[] percentage) where T : struct, Enum
+        {
+            Array values = Enum.GetValues(typeof(T));
+            if (percentage.Length != values.Length)
+                return default(T);
+            
+            Random random = new Random();
+            int randomNumber = random.Next(100);
+            for (int i = 0; i < values.Length; i++)
+            {
+                if(i>0)
+                    percentage[i] += percentage[i - 1];
+  
+                if (randomNumber < percentage[i])
+                {
+                    return (T) values.GetValue(i)!;
+                }
+            }
+            return default(T);
+        }
+        
     }
 }

@@ -41,7 +41,8 @@ namespace CSRServer.Game
 		public virtual bool BeforeUseCard(ref Card card) { return true; }
 		public virtual void AfterUseCard(ref Card card, ref CardEffect.Result[] results) { }
 
-		public virtual void OnRollResource(ref List<int>? resourceFixed) { }
+		public virtual void BeforeRollResource(ref List<int>? resourceFixed) { }
+		public virtual void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel) { }
 		public virtual void OnDiscardCard(Card card) { }
 		public virtual void OnDrawCard(ref Card card) { }
 

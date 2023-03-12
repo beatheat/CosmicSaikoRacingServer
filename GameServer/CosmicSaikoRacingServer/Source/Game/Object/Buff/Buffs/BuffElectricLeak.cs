@@ -42,7 +42,7 @@ namespace CSRServer.Game
 			
 		}
 
-		public override void OnRollResource(ref List<int>? resourceFixed)
+		public override void BeforeRollResource(ref List<int>? resourceFixed)
 		{
 			if (count == 0) return;
 			resourceFixed?.AddRange(resourceLockIndexList);

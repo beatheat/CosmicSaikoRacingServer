@@ -15,7 +15,8 @@ namespace CSRServer.Game
 		public void LockResources(int count)
 		{
 			var remainResourceReel = Enumerable.Range(0, player.resourceReelCount).Except(resourceLockIndexList).ToList();
-			Util.DistributeOnList(remainResourceReel, count, out resourceLockIndexList);
+			Util.DistributeOnList(remainResourceReel, count, out var additionalLockIndexList);
+			resourceLockIndexList.AddRange(additionalLockIndexList);
 		}
 		
 		public override void OnTurnStart()

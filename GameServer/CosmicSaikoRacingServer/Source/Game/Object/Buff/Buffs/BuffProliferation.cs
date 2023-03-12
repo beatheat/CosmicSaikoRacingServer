@@ -20,9 +20,9 @@
 				>= 10 => 5,
 				_ => 0
 			};
-			List<Resource.Type> lockCondition = new List<Resource.Type>(conditionCount);
+			List<Resource.Type> lockCondition = new List<Resource.Type>();
 			for (int i = 0; i < conditionCount; i++)
-				lockCondition[i] = Util.GetRandomEnumValue<Resource.Type>();
+				lockCondition.Add(Util.GetRandomEnumValue<Resource.Type>());
 			resourceCondition = lockCondition;
 		}
 

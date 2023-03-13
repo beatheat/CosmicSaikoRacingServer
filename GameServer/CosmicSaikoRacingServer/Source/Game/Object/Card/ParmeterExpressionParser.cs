@@ -67,6 +67,7 @@ namespace CSRServer.Game
 				"currentResourceNum" => GetCurrentResourceNum(player, attribute),
 				"thisTurnUsedCardNum" => GetThisTurnUsedCardNum(player, attribute),
 				"randomCardId" => GetRandomCardId(player, attribute),
+				"randomNum" => GetRandomNum(player, attribute),
 				"currentMyBuffNum" => GetCurrentMyBuffNum(player, attribute),
 				_ => 0
 			};
@@ -157,7 +158,9 @@ namespace CSRServer.Game
 
 		private static int GetRandomCardId(GamePlayer player, string[]? attribute)
 		{
-			if (attribute is not {Length: < 3})
+			if (attribute == null) 
+				return 0;
+			if (attribute.Length < 3)
 				return 0;
 			if (int.TryParse(attribute[1], out int rankMin) && int.TryParse(attribute[2], out int rankMax))
 			{
@@ -172,7 +175,20 @@ namespace CSRServer.Game
 			}
 			return 0;
 		}
-		
+
+		private static int GetRandomNum(GamePlayer player, string[]? attribute)
+		{
+			if (attribute == null)
+				return 0;
+			if (attribute.Length < 2)
+				return 0;
+			if (int.TryParse(attribute[0], out int min) && int.TryParse(attribute[1], out int max))
+			{
+				return new Random().Next(min, max);
+			}
+			return 0;
+		}
+
 		private static int GetCurrentMyBuffNum(GamePlayer player, string[]? attribute)
 		{
 			if (attribute == null)

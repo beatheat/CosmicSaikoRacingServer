@@ -238,6 +238,9 @@ namespace CSRServer.Game
                 }
 				return new CardEffect.Result{result = result, type = CardEffect.Type.CreateCardToOther};
 			}
+
+			if (targetPlayerIndex.Count == 0)
+				return Nothing(card, player, parameters);
 			
 			player.AddDepartEvent(CreateToOther);
 			return new CardEffect.Result{result = result, type = CardEffect.Type.CreateCardToOther};
@@ -305,12 +308,13 @@ namespace CSRServer.Game
             			targetPlayerIndex.Add(p.index);
             	}
             }
-            
+ 
             var result = new Dictionary<string, object>
             {
             	["srcIndex"] = player.index,
             	["dstIndexList"] = targetPlayerIndex,
-            	["buffType"] = (Buff.Type)id
+            	["buffType"] = (Buff.Type)id,
+                ["amount"] = amount
             };
 
 			CardEffect.Result _BuffToOther()
@@ -321,9 +325,12 @@ namespace CSRServer.Game
 				}
 				return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
 			}
-			
+
+			if (targetPlayerIndex.Count == 0)
+			{
+				return Nothing(card, player, parameters);
+			}
 			player.AddDepartEvent(_BuffToOther);
-			
 			return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
 		}	
 		

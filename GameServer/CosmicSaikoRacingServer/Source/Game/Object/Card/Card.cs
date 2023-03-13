@@ -23,10 +23,10 @@ namespace CSRServer.Game
         public Dictionary<string, Variable> variable;
         public CardCondition condition;
         
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool isExposure = false;
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool isMimesis = false;
+        public bool death = false;
+        
 
         [JsonIgnore]
         public Type type;
@@ -40,8 +40,7 @@ namespace CSRServer.Game
 
         [JsonIgnore]
         public bool enable = true;
-        [JsonIgnore] 
-        public bool death = false;
+
         [JsonIgnore] 
         public int usedCount = 0;
 

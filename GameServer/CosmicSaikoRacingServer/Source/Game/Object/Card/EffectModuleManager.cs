@@ -553,7 +553,8 @@ namespace CSRServer.Game
 		private static CardEffect.Result Repeat(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
-			CardEffect effect = parameters.Get<CardEffect>(0, card, player) ?? CardEffect.Nothing();
+			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
+			
 			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
 			for (int i = 0; i < amount; i++)
 				results.Add(effect.Use(card, player));

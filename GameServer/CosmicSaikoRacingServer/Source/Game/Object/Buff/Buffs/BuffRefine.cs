@@ -10,6 +10,7 @@
 
 		public override void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
 		{
+			if(count == 0) return;
 			int cardTypeCount = Enum.GetValues(typeof(Card.Type)).Length;
 			int[] frequentList = Enumerable.Repeat<int>(0,cardTypeCount).ToArray();
 				
@@ -43,17 +44,10 @@
 				Resource.Type resource = Util.GetRandomEnumValue<Resource.Type>(resourcePercentage);
 				if (i >= resourceReel.Count)
 					resourceReel.Add(resource);
-				else if (resourceFixed != null && !resourceFixed.Contains(i))
+				else if (resourceFixed == null || !resourceFixed.Contains(i))
 					resourceReel[i] = resource;
 			}
-
-			
-			
 		}
 		
-		public override void OnTurnEnd()
-		{
-			
-		}
 	}
 }

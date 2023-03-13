@@ -116,19 +116,20 @@ namespace CSRServer.Game
 
             turnReady = false;
             
+            
             _departEvents = new Queue<Func<CardEffect.Result>>();
             
             //임시 초기화
-            int[,] card = {
-                {0,0,1,1,3,3,4,4,6,6},
-                {23,23,52,52,80,80,110,110,141,141},
-                {21,21,25,25,26,26,30,30,32,32}
-            };
-            Random random = new Random();
-            int randomNumber = random.Next(3);
+            // int[,] card = {
+            //     {0,0,1,1,3,3,4,4,6,6},
+            //     // {23,23,52,52,80,80,110,110,141,141},
+            //     // {21,21,25,25,26,26,30,30,32,32}
+            // };
+            // Random random = new Random();
+            // int randomNumber = random.Next(1);
             for (int i = 0; i < 10; i++)
             {
-                AddCardToDeck(CardManager.GetCard(card[randomNumber,i]));
+                AddCardToDeck(CardManager.GetCard(0));
             }
         }
 
@@ -188,7 +189,7 @@ namespace CSRServer.Game
                 Resource.Type resource = Util.GetRandomEnumValue<Resource.Type>();
                 if (i >= resourceReel.Count)
                     resourceReel.Add(resource);
-                else if (resourceFixed != null && !resourceFixed.Contains(i))
+                else if (resourceFixed == null || !resourceFixed.Contains(i))
                     resourceReel[i] = resource;
             }
             

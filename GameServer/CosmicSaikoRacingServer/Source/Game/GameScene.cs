@@ -8,6 +8,8 @@ namespace CSRServer
     internal class GameScene : Scene
     {
         #region Properties
+
+        private const int INITIAL_TIME = 99;
         // 게임에 접속한 플레이어를 리스트와 맵 두가지로 관리함
         // clientId를 id값으로 playerMap에서 GamePlayer 검색하고 클라이언트에게는 playerList만 보내줌
         private readonly List<GamePlayer> playerList;
@@ -99,7 +101,7 @@ namespace CSRServer
 
         private void PreheatStart()
         {
-            time = 99;
+            time = INITIAL_TIME;
             phase = Phase.Preheat;
             foreach (var player in playerList)
             {
@@ -124,7 +126,7 @@ namespace CSRServer
         private void DepartStart()
         {
             phase = Phase.Depart;
-            time = 99;
+            time = time = INITIAL_TIME;
             List<CardEffect.Result> attackResults = new List<CardEffect.Result>();
             List<Obstacle.Result> obstacleResults = new List<Obstacle.Result>();
             
@@ -156,7 +158,7 @@ namespace CSRServer
         private void MaintainStart()
         {
             phase = Phase.Maintain;
-            time = 99;
+            time = INITIAL_TIME;
 
             //플레이어 rank 정해주기
             var orderedPlayerList = playerList.OrderBy(p => p.currentDistance).ToList();
@@ -267,8 +269,7 @@ namespace CSRServer
                     return EdenData.Error("RollResource - Reroll Count is 0");
                 return new EdenData(new Dictionary<string, object>
                 {
-                    ["resourceReel"] = result,
-                    ["resourceRerollCount"] = player.resourceRerollCount
+                    ["player"] = player,
                 });
             }
             return EdenData.Error("RollResource - Phase is not Preheat-Phase");

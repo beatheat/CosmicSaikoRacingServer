@@ -55,14 +55,14 @@ namespace CSRServer
             Console.Title = "CosmicSaikoRacing - GameServer";
             try { LoadConfig(); }
             catch (Exception e) { Console.WriteLine("Fail in Config Loading :: " + e.Message); return; }
-            
-            //게임서버 초기화 및 실행
-            _server = new EdenNetServer(config.port, config.networklogPath);
-            _gameManager = new GameManager(_server);
+
             
             //데이터 로딩
             try
             {
+                //게임서버 초기화 및 실행
+                _server = new EdenNetServer(config.port, config.networklogPath);
+                _gameManager = new GameManager(_server);
                 Logger.Load(config.gamelogPath);
                 CardManager.Load(config.cardDataPath);
             }

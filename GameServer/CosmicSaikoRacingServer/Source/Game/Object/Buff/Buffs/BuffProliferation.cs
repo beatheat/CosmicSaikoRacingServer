@@ -12,17 +12,21 @@
 
 		private void MakeRandomCondition()
 		{
-			int conditionCount = count switch
+			List<Resource.Type> lockCondition;
+			do
 			{
-				>= 1 and <= 3 => 2,
-				>= 4 and <= 6 => 3,
-				>= 7 and <= 9 => 4,
-				>= 10 => 5,
-				_ => 0
-			};
-			List<Resource.Type> lockCondition = new List<Resource.Type>();
-			for (int i = 0; i < conditionCount; i++)
-				lockCondition.Add(Util.GetRandomEnumValue<Resource.Type>());
+				int conditionCount = count switch
+				{
+					>= 1 and <= 3 => 2,
+					>= 4 and <= 6 => 3,
+					>= 7 and <= 9 => 4,
+					>= 10 => 5,
+					_ => 0
+				};
+				lockCondition = new List<Resource.Type>();
+				for (int i = 0; i < conditionCount; i++)
+					lockCondition.Add(Util.GetRandomEnumValue<Resource.Type>());
+			} while (lockCondition.IsSame(player.resourceReel));
 			resourceCondition = lockCondition;
 		}
 
@@ -32,12 +36,16 @@
 			MakeRandomCondition();
 		}
 
-		public override void BeforeRollResource(ref List<int>? resourceFixed)
+
+		public override void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
 		{
-			if (count == 0) return;
 			if (player.resourceReel.Contains(resourceCondition))
+			{
+				resourceCondition.Clear();
 				count = 0;
+			}
 		}
+		
 
 		public override bool BeforeUseCard(ref Card card)
 		{

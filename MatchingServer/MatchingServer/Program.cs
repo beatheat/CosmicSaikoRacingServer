@@ -14,7 +14,6 @@ namespace MatchingServer
             MatchingServer matchingServer = new MatchingServer(server);
             matchingServer.Run();
 
-            TcpClient tcpClient = new TcpClient();
   
 
             Console.WriteLine("Ctrl+c to close server");

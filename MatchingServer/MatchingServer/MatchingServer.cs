@@ -106,7 +106,7 @@ namespace MatchingServer
             do
             {
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
-            } while (room.ContainsKey(roomNum));s
+            } while (room.ContainsKey(roomNum));
             if (address.Contains("192.168"))
                 room.Add(roomNum, "58.141.131.141:17979");
             else

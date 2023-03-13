@@ -19,11 +19,27 @@ public class CardJsonConverter : JsonConverter<Card>
 		writer.WriteNumber(nameof(card.id), card.id);
 		if (card.isExposure)
 		{
+			writer.WriteBoolean(nameof(card.isExposure), card.isExposure);
 			//"condition" : 
 			writer.WritePropertyName(nameof(card.condition));
 			// {CardCondition}
 			JsonSerializer.Serialize(writer, card.condition, options);
 		}
+
+		if (card.isMimesis)
+		{
+			writer.WriteBoolean(nameof(card.isMimesis), card.isMimesis);
+			//"condition" : 
+			writer.WritePropertyName(nameof(card.condition));
+			// {CardCondition}
+			JsonSerializer.Serialize(writer, card.condition, options);
+		}
+
+		if (card.death)
+		{
+			writer.WriteBoolean(nameof(card.death), card.death);
+		}
+
 		if (card.variable.Count > 0)
 		{
 			//"variable": 

@@ -1,4 +1,6 @@
 ﻿using EdenNetwork;
+using System.Net;
+using System.Net.Sockets;
 using System.Text.Json;
 
 namespace MatchingServer
@@ -11,6 +13,9 @@ namespace MatchingServer
             EdenNetServer server = new EdenNetServer(16969, "MatchingServerLog.txt");
             MatchingServer matchingServer = new MatchingServer(server);
             matchingServer.Run();
+
+            TcpClient tcpClient = new TcpClient();
+  
 
             Console.WriteLine("Ctrl+c to close server");
             Console.CancelKeyPress += (object? sender, ConsoleCancelEventArgs eventArgs) =>

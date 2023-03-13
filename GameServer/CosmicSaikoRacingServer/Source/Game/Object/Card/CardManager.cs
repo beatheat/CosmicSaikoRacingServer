@@ -71,6 +71,7 @@ namespace CSRServer.Game
 				CardEffect effect;
 				Dictionary<string, Card.Variable> variable = new Dictionary<string, Card.Variable>();
 
+
 				try
 				{
 					if (jsonId == null || !int.TryParse(jsonId.ToString(), out id))
@@ -157,7 +158,6 @@ namespace CSRServer.Game
 		
 		private static CardEffect ParseEffect(string effectString)
 		{
-
 			string[] effectModuleStringList = SplitEffectModule(effectString);
 			var cardEffectElements = new List<CardEffect.Element>();
 			foreach (var effectModuleString in effectModuleStringList)
@@ -183,29 +183,35 @@ namespace CSRServer.Game
 				foreach (var parameterString in parameterStringSplit)
 				{
 					char identifier = parameterString[0];
-					//Expression일때
-					if (parameterString.Contains('$') || parameterString.Contains('%'))
-					{
-						parameters.Add(new CardEffect.Parameter(parameterString, CardEffect.Parameter.Type.Expression));
-					}
+					
 					//Boolean 일때
-					else if (parameterString is "true" or "false")
+					if (parameterString is "true" or "false")
 					{
 						parameters.Add(new CardEffect.Parameter(bool.Parse(parameterString)));
-					}
-					//Number일때
-					else if (Char.IsDigit(identifier) || identifier == '-')
-					{
-						if(double.TryParse(parameterString,out var parameter))
-							parameters.Add(new CardEffect.Parameter(parameter));
-						else
-							throw new Exception($"CardManager::ParseEffect - {effectString} is not parsable on number : {parameterString}");
 					}
 					//String일때
 					else if (identifier is '\"' or '\'')
 					{
 						var parameter = parameterString.Substring(1, parameterString.Length - 2);
 						parameters.Add(new CardEffect.Parameter(parameter, CardEffect.Parameter.Type.Data));
+					}
+					//Number일때
+					else if (double.TryParse(parameterString, out var parameter))
+					{
+						parameters.Add(new CardEffect.Parameter(parameter));
+					}
+					//ModuleList일 때
+					else if (identifier == '{')
+					{
+						var effectListString = parameterString.Substring(1, parameterString.Length - 2);
+						var effectInEffect = ParseEffect(effectListString);
+						parameters.Add(new CardEffect.Parameter(effectInEffect));
+					}
+					//Module일때
+					else if (Regex.IsMatch(parameterString,"[a-zA-Z]*[(].*[)]"))
+					{
+						var effectInEffect = ParseEffect(parameterString);
+						parameters.Add(new CardEffect.Parameter(effectInEffect));
 					}
 					//Number List일때
 					else if (identifier == '[')
@@ -222,18 +228,10 @@ namespace CSRServer.Game
 						}
 						parameters.Add(new CardEffect.Parameter(numberList));
 					}
-					//Module일때
-					else if (Char.IsLetter(identifier))
+					//Expression일때
+					else if (parameterString.Contains('$') || parameterString.Contains('%'))
 					{
-						var effectInEffect = ParseEffect(parameterString);
-						parameters.Add(new CardEffect.Parameter(effectInEffect));
-					}
-					//ModuleList일 때
-					else if (identifier == '{')
-					{
-						var effectListString = parameterString.Substring(1, parameterString.Length - 2);
-						var effectInEffect = ParseEffect(effectListString);
-						parameters.Add(new CardEffect.Parameter(effectInEffect));
+						parameters.Add(new CardEffect.Parameter(parameterString, CardEffect.Parameter.Type.Expression));
 					}
 				}
 

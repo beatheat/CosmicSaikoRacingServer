@@ -37,7 +37,7 @@
                 partCount[(int) resource]++;
 
             bool check = true;
-            for (int i = 0; i < origin.Count; i++)
+            for (int i = 0; i < originCount.Length; i++)
             {
                 check = check && originCount[i] >= partCount[i];
             }

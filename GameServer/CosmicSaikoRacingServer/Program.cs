@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using CSRServer.Game;
 using CSRServer.Lobby;
+using Mono.Nat;
 
 
 namespace CSRServer
@@ -28,6 +29,7 @@ namespace CSRServer
             public int matchingServerPort;
 
             public string cardDataPath;
+
         }
 
         public static Config config;
@@ -55,16 +57,23 @@ namespace CSRServer
             Console.Title = "CosmicSaikoRacing - GameServer";
             try { LoadConfig(); }
             catch (Exception e) { Console.WriteLine("Fail in Config Loading :: " + e.Message); return; }
-
             
-            //데이터 로딩
+
             try
             {
                 //게임서버 초기화 및 실행
+                while (!EdenNetServer.IsPortAvailable(config.port))
+                    config.port++;
                 _server = new EdenNetServer(config.port, config.networklogPath);
                 _gameManager = new GameManager(_server);
                 Logger.Load(config.gamelogPath);
                 CardManager.Load(config.cardDataPath);
+                
+                //UPnP적용
+                NatUtility.DeviceFound += DeviceFound;
+                NatUtility.StartDiscovery ();
+                //Upnp 디바이스 찾기 10초 타임아웃
+                Task.Delay(TimeSpan.FromMilliseconds(10000)).ContinueWith(_ => NatUtility.StopDiscovery());
             }
             catch (Exception e)
             {
@@ -96,6 +105,17 @@ namespace CSRServer
             }
 
             Close();
+        }
+        
+        //UPnP적용
+        private static async void DeviceFound(object? sender, DeviceEventArgs args)
+        {
+            INatDevice device = args.Device;
+
+            var mapping = new Mapping(Protocol.Tcp, config.port, config.port);
+            mapping = await device.CreatePortMapAsync(mapping);
+            Logger.Log ($"Create Mapping: protocol={mapping.Protocol}, public={mapping.PublicPort}, private={mapping.PrivatePort}");
+            NatUtility.StopDiscovery();
         }
     }
 }

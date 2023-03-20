@@ -12,16 +12,16 @@ namespace CSRServer
     {
 
         public const int MAX_PLAYER = 8;
-        private readonly EdenNetServer server;
-        private readonly Dictionary<string, GameClient> clients;
-        private readonly Queue<Scene> scenes;
+        private readonly EdenNetServer _server;
+        private readonly Dictionary<string, GameClient> _clients;
+        private readonly Queue<Scene> _scenes;
         
 
         public GameManager(EdenNetServer server)
         {
-            this.server = server;
-            this.clients = new Dictionary<string, GameClient>();
-            this.scenes = new Queue<Scene>();
+            this._server = server;
+            this._clients = new Dictionary<string, GameClient>();
+            this._scenes = new Queue<Scene>();
         }
 
         /// <summary>
@@ -29,21 +29,21 @@ namespace CSRServer
         /// </summary>
         public void Run(Scene firstScene)
         {
-            server.Listen(MAX_PLAYER, (string client_id) =>
+            _server.Listen(MAX_PLAYER, (string client_id) =>
             {
-                if(scenes.Count == 0)
+                if(_scenes.Count == 0)
                 {
                     //준비안됨
                     //server.DisconnectClient(client_id);
                 }
-                if (!clients.ContainsKey(client_id))
-                    clients.Add(client_id, new GameClient(client_id));
+                if (!_clients.ContainsKey(client_id))
+                    _clients.Add(client_id, new GameClient(client_id));
                 else //클라 재접속
                 {
 
                 }
             });
-            scenes.Enqueue(firstScene);
+            _scenes.Enqueue(firstScene);
             firstScene.Load();
         }
         /// <summary>
@@ -51,9 +51,9 @@ namespace CSRServer
         /// </summary>
         public void Close()
         {
-            while (scenes.Count > 0)
+            while (_scenes.Count > 0)
             {
-                Scene scene = scenes.Dequeue();
+                Scene scene = _scenes.Dequeue();
                 scene.Destroy();
             }
         }
@@ -64,7 +64,7 @@ namespace CSRServer
         public void AddScene(params Scene[] scenes)
         {
             foreach(var scene in scenes)
-                this.scenes.Enqueue(scene);
+                this._scenes.Enqueue(scene);
         }
         
         /// <summary>
@@ -73,10 +73,10 @@ namespace CSRServer
         public void ChangeToNextScene()
         {
             Scene pastScene, nextScene;
-            pastScene = scenes.Dequeue();
+            pastScene = _scenes.Dequeue();
             try
             {
-                nextScene = scenes.Peek();
+                nextScene = _scenes.Peek();
             }
             catch
             {
@@ -98,12 +98,12 @@ namespace CSRServer
 
         public void RemoveGameClient(string client_id)
         {
-            clients.Remove(client_id);
+            _clients.Remove(client_id);
         }
         
         public void EndScene()
         {
-            scenes.Dequeue().Destroy();
+            _scenes.Dequeue().Destroy();
         }
 
     }

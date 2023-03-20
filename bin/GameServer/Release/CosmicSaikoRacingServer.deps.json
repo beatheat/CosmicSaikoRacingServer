@@ -8,14 +8,15 @@
     ".NETCoreApp,Version=v7.0": {
       "CosmicSaikoRacingServer/1.0.0": {
         "dependencies": {
-          "EdenNetwork": "1.3.8",
+          "EdenNetwork": "1.4.3",
+          "Mono.Nat": "3.0.4",
           "NLua": "1.6.0"
         },
         "runtime": {
           "CosmicSaikoRacingServer.dll": {}
         }
       },
-      "EdenNetwork/1.3.8": {
+      "EdenNetwork/1.4.3": {
         "runtime": {
           "lib/net6.0/EdenNetwork.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -113,6 +114,14 @@
           }
         }
       },
+      "Mono.Nat/3.0.4": {
+        "runtime": {
+          "lib/net6.0/Mono.Nat.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.4.0"
+          }
+        }
+      },
       "NLua/1.6.0": {
         "dependencies": {
           "KeraLua": "1.3.1"
@@ -132,12 +141,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EdenNetwork/1.3.8": {
+    "EdenNetwork/1.4.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-3jV84PQJI2TwndvIrW7Q+6x5Z1RDVCeEPwA4jdQxlwcUKAGO72pR9M1BHdzpJ4/jeA1ZmxrPTDYIc4Tk6Vy/UQ==",
-      "path": "edennetwork/1.3.8",
-      "hashPath": "edennetwork.1.3.8.nupkg.sha512"
+      "sha512": "sha512-YEauxw9dIcaZuWOASGL/FAwAxt2+10HuLEW5Y1Rc9T5K/JcvGKzWMVC3lpTWnYtJWvKT4InFJ5XnWVJkP0mWLQ==",
+      "path": "edennetwork/1.4.3",
+      "hashPath": "edennetwork.1.4.3.nupkg.sha512"
     },
     "KeraLua/1.3.1": {
       "type": "package",
@@ -145,6 +154,13 @@
       "sha512": "sha512-DSZkJx3+9YmJONylrJY2xvjmBBT6oPZO1Iv+MBZh4Ta8KsYewKmpp5n+yW2J5vkIxkJ1yxiQuHE+iKw25Kw6GA==",
       "path": "keralua/1.3.1",
       "hashPath": "keralua.1.3.1.nupkg.sha512"
+    },
+    "Mono.Nat/3.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oodXnwdcML4qUaZ+J44gaC/hn0n3uZHkvxScdt8NOcBbmbNmA7z1t5FEvUvn8cOnYSha8F4ZS57FJuXSKYhqdw==",
+      "path": "mono.nat/3.0.4",
+      "hashPath": "mono.nat.3.0.4.nupkg.sha512"
     },
     "NLua/1.6.0": {
       "type": "package",

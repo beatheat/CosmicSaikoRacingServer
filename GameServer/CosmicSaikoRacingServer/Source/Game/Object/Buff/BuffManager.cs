@@ -109,11 +109,11 @@ namespace CSRServer.Game
 			}
 		}
 
-		public void OnDiscardCard(Card card)
+		public void OnThrowCard(Card card)
 		{
 			foreach (var buff in buffList)
 			{
-				buff.OnDiscardCard(card);
+				buff.OnThrowCard(card);
 			}
 		}
 

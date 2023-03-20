@@ -71,14 +71,13 @@ namespace CSRServer.Game
 
         private int _turnCoinCount;
         
-        public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent, List<Obstacle> obstacleList)
+        public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent)
         {
             this.clientId = clientId;
             this.index = index;
             this.nickname = nickname;
 
             this.parent = parent;
-            this.obstacleList = obstacleList;
 
             rank = 1;
             deck = new List<Card>();
@@ -286,6 +285,7 @@ namespace CSRServer.Game
             return true;
         }
 
+        //패에서 카드를 제거
         public void DiscardCard(int index)
         {
             if (index >= hand.Count || index < 0)
@@ -307,7 +307,8 @@ namespace CSRServer.Game
             else
                 usedCard.Add(card);
         }
-
+        
+        //카드 버리기
         public CardEffect.Result[] ThrowCard(int index)
         {
             if (index >= hand.Count || index < 0)
@@ -316,6 +317,7 @@ namespace CSRServer.Game
             }
             Card card = hand[index];
             DiscardCard(index);
+            buffManager.OnThrowCard(card);
             return card.UseEffect(this, isDiscard: true);
         }
 
@@ -351,7 +353,7 @@ namespace CSRServer.Game
                 DiscardCard(0);
             }
 
-            //이번턴에 실행한 카드 배열 초기화
+            //이번턴에 사용한 카드 리스트 초기화
             turnUsedCard.Clear();
             
             //버프 적용

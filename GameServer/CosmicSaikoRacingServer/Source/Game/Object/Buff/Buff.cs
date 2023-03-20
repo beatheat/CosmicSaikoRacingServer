@@ -43,7 +43,7 @@ namespace CSRServer.Game
 
 		public virtual void BeforeRollResource(ref List<int>? resourceFixed) { }
 		public virtual void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel) { }
-		public virtual void OnDiscardCard(Card card) { }
+		public virtual void OnThrowCard(Card card) { }
 		public virtual void OnDrawCard(ref Card card) { }
 
 		public virtual int Release()

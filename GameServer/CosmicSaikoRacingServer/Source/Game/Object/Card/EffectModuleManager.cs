@@ -32,8 +32,6 @@ namespace CSRServer.Game
 			AddModule("DoPercent", DoPercent, CardEffect.Type.DoPercent);
 			AddModule("SetVariable", SetVariable, CardEffect.Type.SetVariable);
 			AddModule("Overload", Overload, CardEffect.Type.Overload);
-			AddModule("MountCard", MountCard, CardEffect.Type.MountCard);
-			AddModule("MountBuff", MountBuff, CardEffect.Type.MountBuff);
 			AddModule("EraseBuff", EraseBuff, CardEffect.Type.EraseBuff);
 			AddModule("Combo", Combo, CardEffect.Type.Combo);
 			AddModule("EnforceSelf", EnforceSelf, CardEffect.Type.EnforceSelf);
@@ -355,46 +353,8 @@ namespace CSRServer.Game
 
 			}
 			return new CardEffect.Result{result = results, type = CardEffect.Type.EraseBuff};
-		}	
-		
-		private static CardEffect.Result MountCard(Card card, GamePlayer player, ParameterList parameters)
-		{
-			int id = parameters.Get<int>(0, card, player);
-			int amount = parameters.Get<int>(1, card, player);
-			bool isDeath = parameters.Get<bool>(2, card, player);
-			Obstacle obstacle = new Obstacle(Obstacle.Type.Card, player.currentDistance , id, amount, isDeath);
-			player.obstacleList.Add(obstacle);
-			
-			CardEffect.Result _MountCard()
-			{
-				return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountCard};
-			}
-			
-			player.AddDepartEvent(_MountCard);
-			
-			return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountCard};
-		}	
-		
-				
-		private static CardEffect.Result MountBuff(Card card, GamePlayer player, ParameterList parameters)
-		{
-			int id = parameters.Get<int>(0, card, player);
-			int amount = parameters.Get<int>(1, card, player);
+		}
 
-			Obstacle obstacle = new Obstacle(Obstacle.Type.Buff, player.currentDistance , id, amount);
-			
-			player.obstacleList.Add(obstacle);
-			
-			CardEffect.Result _MountBuff()
-            {
-            	return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountBuff};
-            }
-            
-            player.AddDepartEvent(_MountBuff);
-			
-			return new CardEffect.Result{result = obstacle, type = CardEffect.Type.MountBuff};
-		}	
-		
 		private static CardEffect.Result EnforceSelf(Card card, GamePlayer player, ParameterList parameters)
 		{
 			// int id = parameters[0].Get<int>(player);

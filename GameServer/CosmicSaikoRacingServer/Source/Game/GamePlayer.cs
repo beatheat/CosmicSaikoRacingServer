@@ -16,9 +16,7 @@ namespace CSRServer.Game
         public string clientId  { private set; get; }
         [JsonIgnore]
         public List<GamePlayer> parent { private set; get; }
-        [JsonIgnore]
-        public List<Obstacle> obstacleList { private set; get; }
-        
+
         public int index { private set; get; }
 
         public string nickname { private set; get; }
@@ -368,17 +366,7 @@ namespace CSRServer.Game
             }
 
             attackResult = _attackResult;
-            
-            //방해물 밟기
-            foreach (var obstacle in obstacleList)
-            {
-                //방해물 밟음
-                if (obstacle.location > currentDistance && obstacle.location < currentDistance + turnDistance)
-                {
-                    obstacle.SetActivatePlayer(this);
-                }
-            }
-            
+
             currentDistance += turnDistance;
             remainDistance -= turnDistance;
             turnDistance = 0;

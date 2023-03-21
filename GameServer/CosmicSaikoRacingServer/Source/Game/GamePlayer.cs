@@ -5,27 +5,44 @@ namespace CSRServer.Game
 {
     public class GamePlayer
     {
-        [JsonIgnore] public const int INITIAL_MAX_DISTANCE = 100;
-        [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 100;
+        //목표 이동거리
+        [JsonIgnore] public const int INITIAL_TARGET_DISTANCE = 100;
+        //최초 리롤 카운트
+        [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 5;
+        //최초 카드 드로우 카운트
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
-        [JsonIgnore] public const int INITIAL_RESOURCE_COUNT = 4;
-        [JsonIgnore] public const int INITIAL_COIN_COUNT = 3; //PreheatStart호출 떄문에 1적게 시작한다
+        //최초 리소스릴 카운트
+        [JsonIgnore] public const int INITIAL_RESOURCE_REEL_COUNT = 4;
+        //최초 코인 카운트 , PreheatStart호출때 1을 더하기 떄문에 1적게 시작한다
+        [JsonIgnore] public const int INITIAL_COIN_COUNT = 3; 
+        //최대 코인 카운트
         [JsonIgnore] public const int MAX_COIN_COUNT = 10;
+        //최대 레벨
+        [JsonIgnore] public const int MAX_LEVEL = 5;
+
         
+        //플레이어의 고유식별자
         [JsonIgnore]
         public string clientId  { private set; get; }
+        //플레이어가 속한 리스트
         [JsonIgnore]
         public List<GamePlayer> parent { private set; get; }
 
+        //리스트에서의 인덱스
         public int index { private set; get; }
 
+        //플레이어의 닉네임
         public string nickname { private set; get; }
 
-        //게임 목표 
+        //남은 이동거리
         public int remainDistance { private set; get; }
+        //현재 이동거리
         public int currentDistance { private set; get; }
-        //EffectModule에서 사용
+        //이번턴에 이동할 거리
         public int turnDistance { set; get; }
+        
+        //현재 등수 (이동거리가 크면 1등)
+        public int rank { set; get; }
 
         //덱, 핸드, 묘지
         public List<Card> hand { private set; get; }
@@ -34,42 +51,56 @@ namespace CSRServer.Game
         public List<Card> unusedCard { private set; get; }
 
 
+        //아티팩트 리스트
         public List<Artifact> artifactList { private set; get; }
 
+        //버프 리스트
         [JsonIgnore]
         public BuffManager buffManager { private set; get; }
         public List<Buff> buffList { private set; get; }
+
         
-        //예열턴 관련 정보
+        //페이즈 관련 데이터=======================================
+        //한 페이즈에서의 레디여부
+        [JsonIgnore]
+        public bool phaseReady;
+        
+        //예열페이즈 관련 데이터-----------------------------------
+        //이번턴에 드로우할 카드 수
         [JsonIgnore]
         public int drawCount { private set; get; }
+        //이번턴에 사용한 카드 리스트
         [JsonIgnore]
         public List<Card> turnUsedCard { private set; get; }
-        [JsonIgnore]
-        private readonly Queue<Func<CardEffect.Result>> _departEvents;
-        
-        
-        //리소스 
+
+        //리소스릴
         public List<Resource.Type> resourceReel;
+        //리소스릴의 리롤 카운트
         public int resourceRerollCount;
+        //턴 시작 시 부여받는 리롤 카운트
         [JsonIgnore]
         public int availableRerollCount;
+        //리소스 릴 카운트
         [JsonIgnore]
         public int resourceReelCount;
         
-
-        //GameScene사용자료
+        //발진페이즈 관련 데이터----------------------------------
+        //발진페이즈에 실행할 이벤트 큐
         [JsonIgnore]
-        public bool turnReady;
-        public int rank;
+        private readonly Queue<Func<CardEffectModule.Result>> _departEvents;
 
-        //정비턴 자료
+        //정비페이즈 관련 데이터----------------------------------
+        //코인
         public int coin;
+        //경험치
         public int exp;
+        //레벨별 경험치 한계치
         public int expLimit;
+        //레벨
         public int level;
+        //턴 당 시작 코인 수
+        public int turnCoinCount;
 
-        private int _turnCoinCount;
         
         public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent)
         {
@@ -90,7 +121,7 @@ namespace CSRServer.Game
             resourceReel = new List<Resource.Type>();
             availableRerollCount = INITIAL_RESOURCE_REROLL_COUNT;
             resourceRerollCount = availableRerollCount;
-            resourceReelCount = INITIAL_RESOURCE_COUNT;
+            resourceReelCount = INITIAL_RESOURCE_REEL_COUNT;
             
             
             artifactList = new List<Artifact>();
@@ -98,7 +129,7 @@ namespace CSRServer.Game
             buffManager = new BuffManager(this);
             buffList = buffManager.buffList;
 
-            remainDistance = INITIAL_MAX_DISTANCE;
+            remainDistance = INITIAL_TARGET_DISTANCE;
             currentDistance = 0;
             turnDistance = 0;
             
@@ -109,27 +140,35 @@ namespace CSRServer.Game
             level = 1;
             expLimit = MaintainStore.expLimit[level];
 
-            _turnCoinCount = INITIAL_COIN_COUNT;
+            turnCoinCount = INITIAL_COIN_COUNT;
 
-            turnReady = false;
+            phaseReady = false;
             
             
-            _departEvents = new Queue<Func<CardEffect.Result>>();
+            _departEvents = new Queue<Func<CardEffectModule.Result>>();
             
             //임시 초기화
-            // int[,] card = {
-            //     {0,0,1,1,3,3,4,4,6,6},
-            //     // {23,23,52,52,80,80,110,110,141,141},
-            //     // {21,21,25,25,26,26,30,30,32,32}
-            // };
-            // Random random = new Random();
-            // int randomNumber = random.Next(1);
+            int[,] card = {
+                {0,0,1,1,3,3,4,4,6,6},
+                {23,23,52,52,80,80,110,110,141,141},
+                {21,21,25,25,26,26,30,30,32,32},
+                {51,51,52,52,53,53,54,54,55,55},
+                {52,52,53,53,54,54,56,56,57,57},
+                {80,80,84,84,85,85,87,87,92,92},
+                {110,110,110,115,115,115,115,121,121,121},
+                {140,140,144,144,146,146,157,157,151,151}
+            };
+            Random random = new Random();
+            int randomNumber = random.Next(8);
             for (int i = 0; i < 10; i++)
             {
-                AddCardToDeck(CardManager.GetCard(0));
+                AddCardToDeck(CardManager.GetCard(card[randomNumber,i]));
             }
         }
 
+        /// <summary>
+        /// 모니터링 플레이어 데이터는 덱정보 빼고 전달
+        /// </summary>
         public GamePlayer CloneForMonitor()
         {
             GamePlayer hidePlayer = (GamePlayer)this.MemberwiseClone();
@@ -138,7 +177,10 @@ namespace CSRServer.Game
             hidePlayer.unusedCard = null!;
             return hidePlayer;
         }
-
+        
+        /// <summary>
+        /// 카드가 리소스릴 조건에 맞는지 확인
+        /// </summary>
         public bool IsCardEnable(int index)
         {
             if (index >= hand.Count || index < 0)
@@ -147,7 +189,10 @@ namespace CSRServer.Game
             return card.CheckCondition(resourceReel);
         }
         
-        public bool UseCard(int index, out CardEffect.Result[] result)
+        /// <summary>
+        /// 패에 있는 카드 사용
+        /// </summary>
+        public bool UseCard(int index, out CardEffectModule.Result[] result)
         {
             if (index >= hand.Count || index < 0)
             {
@@ -157,55 +202,67 @@ namespace CSRServer.Game
             Card card = hand[index];
             result = null!;
 
-            // 카드 사용전 버프
+            // 카드 사용전 버프 적용
             if (buffManager.BeforeUseCard(ref card) == false)
             {
                 return false;
             }
-
+            //카드 사용
             result = card.UseEffect(this);
             //카드 사용가능 복구, 고장시 false로 바뀌어 복구한다.
             card.enable = true;
-            //효과 타입
-
-            //카드 사용후 버프
+            //카드 사용후 버프 적용
             buffManager.AfterUseCard(ref card, ref result);
-                
+            //패에서 카드 제거
             DiscardCard(index);
+            //이번턴에 사용한 카드 리스트에 추가
             turnUsedCard.Add(card);
             return true;
         }
         
-        
-        public List<Resource.Type>? RollResourceInit(List<int>? resourceFixed = null)
+        /// <summary>
+        /// 리소스릴에 있는 리소스를 랜덤으로 다시 뽑는다
+        /// </summary>
+        public List<Resource.Type>? RollResource(List<int>? resourceFixed = null)
         {
-            buffManager.BeforeRollResource(ref resourceFixed);
-            
             for (int i = 0; i < resourceReelCount; i++)
             {
                 Resource.Type resource = Util.GetRandomEnumValue<Resource.Type>();
+                //리소스릴 개수가 늘어났다면 리소스릴 새로 추가
                 if (i >= resourceReel.Count)
                     resourceReel.Add(resource);
+                //리소스릴 개수가 그대로라면 기존에 있던 릴에 덮어쓴다
                 else if (resourceFixed == null || !resourceFixed.Contains(i))
                     resourceReel[i] = resource;
             }
             
-            buffManager.AfterRollResource(ref resourceFixed, ref resourceReel);
-            
+
             return resourceReel;
         }
 
-        
-        public List<Resource.Type>? RollResource(List<int>? resourceFixed = null)
+        /// <summary>
+        /// 최초로 받은 리소스를 이후 다시 배정받는다
+        /// </summary>
+        public List<Resource.Type>? RerollResource(List<int>? resourceFixed = null)
         {
+            //리롤카운트가 0보다 클때만 사용할 수 있고 사용할때마다 1씩 줄어든다
             if (resourceRerollCount > 0)
             {
                 resourceRerollCount--;
-                return RollResourceInit(resourceFixed);
+                //롤 리소스전 버프 적용
+                buffManager.BeforeRerollResource(ref resourceFixed);
+
+                RollResource(resourceFixed);
+                //롤 리소스후 버프 적용
+                buffManager.AfterRerollResource(ref resourceFixed, ref resourceReel);
+                return resourceReel;
             }
             return null;
         }
         
+        /// <summary>
+        /// 덱에서 카드를 한장 뽑는다
+        /// </summary>
         public List<Card>? DrawCard(int count)
         {
             if (count < 0)
@@ -222,6 +279,7 @@ namespace CSRServer.Game
             
             for (int i = 0; i < count; i++)
             {
+                //덱에서 랜덤한 카드를 선택하여 패에 추가한다
                 Random rand = new Random();
                 int drawIndex = rand.Next(unusedCard.Count);
                 Card card = unusedCard[drawIndex];
@@ -229,12 +287,14 @@ namespace CSRServer.Game
                 cards.Add(unusedCard[drawIndex]);
                 unusedCard.RemoveAt(drawIndex);
                 
+                //카드를 뽑은후 버프 실행
                 buffManager.OnDrawCard(ref card);
             }
 
-            //드로우 수가 남은 덱의 수보다 많으면 묘지를 섞고 다시 드로우
+            //드로우할 카드 수가 남은 덱의 수보다 많으면 묘지를 섞고 다시 드로우한다
             if (remainCount > 0)
             {
+                //묘지와 덱을 스왑한다. 이때 덱은 항상 0장이다
                 (usedCard, unusedCard) = (unusedCard, usedCard);
                 if (remainCount > unusedCard.Count)
                     remainCount = unusedCard.Count;
@@ -248,7 +308,7 @@ namespace CSRServer.Game
                     hand.Add(unusedCard[drawIndex]);
                     cards.Add(unusedCard[drawIndex]);
                     unusedCard.RemoveAt(drawIndex);
-
+                    //카드를 뽑은후 버프 실행
                     buffManager.OnDrawCard(ref card);
                 }
             }
@@ -256,6 +316,9 @@ namespace CSRServer.Game
             return cards;
         }
         
+        /// <summary>
+        /// 카드를 패에 추가한다
+        /// </summary>
         public void AddCardToHand(params Card[] card)
         {
             foreach (var c in card)
@@ -265,6 +328,9 @@ namespace CSRServer.Game
             }
         }
 
+        /// <summary>
+        /// 카드를 덱에 추가한다
+        /// </summary>
         public void AddCardToDeck(params Card[] card)
         {
             foreach (var c in card)
@@ -274,6 +340,9 @@ namespace CSRServer.Game
             }
         }
 
+        /// <summary>
+        /// 덱에서 카드를 제거한다
+        /// </summary>
         public bool RemoveCardFromDeck(int index)
         {
             if (index < 0 || index >= deck.Count)
@@ -285,7 +354,9 @@ namespace CSRServer.Game
             return true;
         }
 
-        //패에서 카드를 제거
+        /// <summary>
+        /// 패에서 카드를 제거한다
+        /// </summary>
         public void DiscardCard(int index)
         {
             if (index >= hand.Count || index < 0)
@@ -293,11 +364,12 @@ namespace CSRServer.Game
                 return;
             }
             Card card = hand[index];
+            //카드가 묘지로 갈때 카드에 적용된 버프 제거
             card.isExposure = false;
             card.isMimesis = false; 
             //패에서 삭제
             hand.RemoveAt(index);
-            //묘지로
+            //제거한 카드를 묘지로 보낸다
             if (card.death)
             {
                 deck.Remove(card);
@@ -308,19 +380,25 @@ namespace CSRServer.Game
                 usedCard.Add(card);
         }
         
-        //카드 버리기
-        public CardEffect.Result[] ThrowCard(int index)
+        /// <summary>
+        /// 패에서 카드제거와는 다른 "버리기"를 수행한다 
+        /// </summary>
+        public CardEffectModule.Result[] ThrowCard(int index)
         {
             if (index >= hand.Count || index < 0)
             {
-                return Array.Empty<CardEffect.Result>();
+                return Array.Empty<CardEffectModule.Result>();
             }
             Card card = hand[index];
             DiscardCard(index);
+            //버리기 후 버프적용
             buffManager.OnThrowCard(card);
             return card.UseEffect(this, isDiscard: true);
         }
 
+        /// <summary>
+        /// 플레이어에게 버프를 추가한다
+        /// </summary>
         public void AddBuff(Buff.Type type, int count)
         {
             buffManager.AddBuff(type, count);
@@ -328,24 +406,30 @@ namespace CSRServer.Game
         
 
         //Turn Method==================
+        /// <summary>
+        /// 예열 페이즈가 실행할때 플레이어 정보를 설정한다
+        /// </summary>
         public void PreheatStart()
         {
-            turnReady = false;
+            phaseReady = false;
             resourceRerollCount = availableRerollCount;
 
             //코인 수 조절
-            _turnCoinCount++;
-            if (_turnCoinCount >= MAX_COIN_COUNT)
-                _turnCoinCount = MAX_COIN_COUNT;
-            coin = _turnCoinCount;
+            turnCoinCount++;
+            if (turnCoinCount >= MAX_COIN_COUNT)
+                turnCoinCount = MAX_COIN_COUNT;
+            coin = turnCoinCount;
             
-            RollResourceInit();
+            RollResource();
             DrawCard(drawCount);
             
             buffManager.OnTurnStart();
         }
         
-        public void PreheatEnd(out CardEffect.Result[] attackResult)
+        /// <summary>
+        /// 예열 페이즈가 끝날때 플레이어 정보를 설정한다
+        /// </summary>
+        public void PreheatEnd(out CardEffectModule.Result[] attackResult)
         {
             //손패 전부 버리기
             while (hand.Count > 0)
@@ -359,8 +443,8 @@ namespace CSRServer.Game
             //버프 적용
             buffManager.OnTurnEnd();
 
-            //턴 종료시 미뤄둔 이벤트 전부 실행
-            CardEffect.Result[] _attackResult = new CardEffect.Result[_departEvents.Count];
+            //발진 페이즈 시 발생할 공격정보를 보여준다
+            CardEffectModule.Result[] _attackResult = new CardEffectModule.Result[_departEvents.Count];
             for (int idx = 0; _departEvents.Count > 0; idx++)
             {
                 var turnEndEvent = _departEvents.Dequeue();
@@ -375,7 +459,10 @@ namespace CSRServer.Game
             
         }
 
-        public void AddDepartEvent(Func<CardEffect.Result> departEvent)
+        /// <summary>
+        /// 발진 페이즈 발생할 이벤트 추가
+        /// </summary>
+        public void AddDepartEvent(Func<CardEffectModule.Result> departEvent)
         {
             _departEvents.Enqueue(departEvent);
         }

@@ -6,6 +6,9 @@ using CSRServer.Game;
 namespace CSRServer
 {
 
+    /// <summary>
+    /// 게임 내 모든 페이즈가 공유하는 정보를 담은 클래스
+    /// </summary>
     public class TurnData
     {
         // 게임에 접속한 플레이어를 리스트와 맵 두가지로 관리함
@@ -23,20 +26,18 @@ namespace CSRServer
         private DepartPhase _departPhase = null!;
         private MaintainPhase _maintainPhase = null!;
         
-
         public GameScene(GameManager gameManager, EdenNetServer server) : base(gameManager, server)
         {
-
             _turnData = new TurnData();
         }
 
-        //로비 씬으로 부터 플레이어 정보를 받아옴
         public override void Load()
         {
             if (passedData == null || passedData.ContainsKey("playerList") == false)
             {
                 throw new Exception("GameScene - passedData is null or playerList does not exists");
             }
+            //로비 씬으로 부터 플레이어 정보를 받아온다
             List<LobbyPlayer> lbPlayerList = (List<LobbyPlayer>)passedData["playerList"];
 
             foreach(LobbyPlayer lbPlayer in lbPlayerList)
@@ -59,22 +60,7 @@ namespace CSRServer
         {
             server.RemoveReceiveEvent("PlayerReady");
         }
-
-        private void PlayerReady(string clientId, EdenData data)
-        {
-            _turnData.playerMap[clientId].turnReady = true;
-            bool gameStart = true;
-            foreach (var player in _turnData.playerList)
-            {
-                gameStart = gameStart && player.turnReady;
-            }
-
-            if (gameStart)
-            {
-                _turnData.turn = 1;
-                PreheatStart();
-            }
-        }
+        
 
         public void PreheatStart()
         {
@@ -91,6 +77,9 @@ namespace CSRServer
             _maintainPhase.MaintainStart();
         }
         
+        /// <summary>
+        /// 클라이언트 플레이어가 본인의 플레이어 정보 외 다른 플레이어 정보를 원할때 보내주는 플레이어 리스트를 반환한다
+        /// </summary>
         public List<GamePlayer> GetMonitorPlayerList()
         {
             List<GamePlayer> monitorPlayerList = new List<GamePlayer>();
@@ -100,5 +89,26 @@ namespace CSRServer
             }
             return monitorPlayerList;
         }
+
+        #region Receive/Response Methods
+        /// <summary>
+        /// 클라이언트가 게임시작 준비가 되었음을 받는 메소드
+        /// </summary>
+        private void PlayerReady(string clientId, EdenData data)
+        {
+            _turnData.playerMap[clientId].phaseReady = true;
+            bool gameStart = true;
+            foreach (var player in _turnData.playerList)
+            {
+                gameStart = gameStart && player.phaseReady;
+            }
+
+            if (gameStart)
+            {
+                _turnData.turn = 1;
+                PreheatStart();
+            }
+        }
+        #endregion
     }
 }

@@ -28,6 +28,9 @@ namespace CSRServer.Game
             _maintainStore = new MaintainStore(_turnData.playerList.Count);
         }
 
+        /// <summary>
+        /// 정비 페이즈 시작
+        /// </summary>
         public void MaintainStart()
         {
             _time = INITIAL_TIME;
@@ -37,9 +40,10 @@ namespace CSRServer.Game
             for (int i = 0; i < orderedPlayerList.Count; i++)
                 orderedPlayerList[i].rank = i + 1;
             
+            //정비 페이즈 구성요소 클라이언트와 동기화
             foreach (var player in _turnData.playerList)
             {
-                player.turnReady = false;
+                player.phaseReady = false;
                 _maintainStore.ShowRandomCards(player, out var storeCards);
                 _maintainStore.ShowRandomRemoveCards(player, out var removeCards);
                 _server.SendAsync("MaintainStart", player.clientId, new Dictionary<string, object>
@@ -59,6 +63,9 @@ namespace CSRServer.Game
             _server.AddResponse("RemoveCard", RemoveCard);
         }
 
+        /// <summary>
+        /// 정비 페이즈 종료
+        /// </summary>
         private void MaintainEnd()
         {
             _timer?.Dispose();
@@ -73,7 +80,7 @@ namespace CSRServer.Game
             _parent.PreheatStart();
         }
         
-        // 1초에 한번씩 실행함
+        // 정비 페이즈 타이머
         private void GameTimer(object? sender)
         {
             if (_time >= 0)
@@ -87,26 +94,32 @@ namespace CSRServer.Game
             }
         }
 
+        #region Receive/Response Methods
+        
+        /// <summary>
+        /// 정비 페이즈 준비완료 API
+        /// </summary>
         private void MaintainReady(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-            player.turnReady = true;
+            player.phaseReady = true;
 
             //모든 플레이어가 예열턴을 마쳤는지 체크
             bool checkAllReady = true;
             foreach (var p in _turnData.playerList)
-                checkAllReady = checkAllReady && p.turnReady;
+                checkAllReady = checkAllReady && p.phaseReady;
             if (checkAllReady)
                 MaintainEnd();
         }
 
 
-        //정비턴
+        /// <summary>
+        /// 구매카드 상점 리롤 API
+        /// </summary>
         private EdenData RerollStore(string clientId, EdenData data)
         {
-
             GamePlayer player = _turnData.playerMap[clientId];
-            if (player.turnReady)
+            if (player.phaseReady)
                 return EdenData.Error("RerollStore - Player turn ends");
             
             if (_maintainStore.RerollStore(player, out var storeCards) == false)
@@ -119,11 +132,15 @@ namespace CSRServer.Game
             });
 
         }
+        
+        /// <summary>
+        /// 제거카드 상점 리롤 API
+        /// </summary>
         private EdenData RerollRemoveCard(string clientId, EdenData data)
         {
 
                 GamePlayer player = _turnData.playerMap[clientId];
-                if (player.turnReady)
+                if (player.phaseReady)
                     return EdenData.Error("RerollRemoveCard - Player turn ends");
                 if (_maintainStore.RerollRemoveCard(player, out var removeCards) == false)
                     return EdenData.Error("RerollRemoveCard - Coin is not enough");
@@ -135,12 +152,15 @@ namespace CSRServer.Game
                 });
         }
 
+        /// <summary>
+        /// 경험치 구매 API
+        /// </summary>
         private EdenData BuyExp(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-            if (player.turnReady)
+            if (player.phaseReady)
                 return EdenData.Error("BuyExp - Player turn ends");
-            if (player.level == MaintainStore.MAX_LEVEL)
+            if (player.level == GamePlayer.MAX_LEVEL)
                 return EdenData.Error("BuyExp - Player level is max");
             if (_maintainStore.BuyExp(player) == false)
                 return EdenData.Error("BuyExp - Coin is not enough");
@@ -148,10 +168,13 @@ namespace CSRServer.Game
             return new EdenData(new Dictionary<string, object> {["level"] = player.level, ["exp"] = player.exp, ["expLimit"] = player.expLimit, ["coin"] = player.coin});
         }
 
+        /// <summary>
+        /// 구매카드 상점 구매 API
+        /// </summary>
         private EdenData BuyCard(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-                if (player.turnReady)
+                if (player.phaseReady)
                     return EdenData.Error("BuyCard - Player turn ends");
                 if (player.coin < MaintainStore.COIN_BUY_CARD)
                     return EdenData.Error("BuyCard - Coin is not enough");
@@ -170,10 +193,13 @@ namespace CSRServer.Game
                 });
         }
 
+        /// <summary>
+        /// 제커 카드 상점 제거 API
+        /// </summary>
         private EdenData RemoveCard(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-                if (player.turnReady)
+                if (player.phaseReady)
                     return EdenData.Error("RemoveCard - Player turn ends");
                 if (player.coin < MaintainStore.COIN_REMOVE_CARD)
                     return EdenData.Error("BuyCard - Coin is not enough");
@@ -189,9 +215,8 @@ namespace CSRServer.Game
                     ["coin"] = player.coin
                 });
         }
-
-
-
+        
+        #endregion
 
     }
 }

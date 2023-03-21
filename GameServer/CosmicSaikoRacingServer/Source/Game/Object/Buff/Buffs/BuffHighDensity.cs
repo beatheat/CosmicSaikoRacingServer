@@ -7,7 +7,10 @@
 			type = Buff.Type.HighDensity;
 		}
 
-		public override void AfterUseCard(ref Card card, ref CardEffect.Result[] results)
+		/// <summary>
+		/// 고밀도 버프가 있을 경우 카드가 두번 발동함
+		/// </summary>
+		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
 			if (count > 0)
 			{

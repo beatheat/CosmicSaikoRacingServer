@@ -29,7 +29,6 @@ namespace CSRServer
             public int matchingServerPort;
 
             public string cardDataPath;
-
         }
 
         public static Config config;
@@ -82,15 +81,17 @@ namespace CSRServer
                 return;
             }
 
+            //게임서버 시작
             _gameManager.Run(new BootScene(_gameManager, _server));
             
-            //콘솔창 관리
+            //콘솔창 관리    
             Console.WriteLine("Type quit to close server");
             while (true)
             {
                 string? isQuit = Console.ReadLine()?.ToLower();
                 if (isQuit == "quit")
                     break;
+                //서버 재시작
                 if (isQuit == "r")
                 {
                     _gameManager.Close();
@@ -107,7 +108,7 @@ namespace CSRServer
             Close();
         }
         
-        //UPnP적용
+        //UPnP로 (internal port-external port)=16969:16969적용
         private static async void DeviceFound(object? sender, DeviceEventArgs args)
         {
             INatDevice device = args.Device;

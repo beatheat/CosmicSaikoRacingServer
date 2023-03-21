@@ -25,7 +25,7 @@ namespace CSRServer.Game
 		}
 		
 		
-		// 1초에 한번씩 실행함
+		// 발진 페이즈 타이머
 		private void GameTimer(object? sender)
 		{
 			if (_time >= 0)
@@ -39,21 +39,25 @@ namespace CSRServer.Game
 			}
 		}
 		
+		/// <summary>
+		/// 발진 페이즈 시작
+		/// </summary>
 		public void DepartStart()
 		{
 			_server.AddReceiveEvent("DepartReady", DepartReady);
 			
 			_time = INITIAL_TIME;
-			List<CardEffect.Result> attackResults = new List<CardEffect.Result>();
+			List<CardEffectModule.Result> attackResults = new List<CardEffectModule.Result>();
             
 			foreach (var player in _turnData.playerList)
 			{
 				player.PreheatEnd(out var attackResult);
 				attackResults.AddRange(attackResult);
 				// obstacleResults.AddRange(obstacleResult);
-				player.turnReady = false;
+				player.phaseReady = false;
 			}
 			
+			//발진 페이즈 데이터 클라이언트와 동기화
 			_server.BroadcastAsync("DepartStart", new Dictionary<string, object>
 			{
 				["playerList"] = _parent.GetMonitorPlayerList(),
@@ -63,24 +67,33 @@ namespace CSRServer.Game
 			_timer = new Timer(GameTimer, null, 0, 1000);
 		}
 
+		/// <summary>
+		/// 발진 페이즈 종료
+		/// </summary>
 		private void DepartEnd()
 		{
 			_timer?.Dispose();
 			_server.RemoveReceiveEvent("DepartReady");
 			_parent.MaintainStart();
 		}
-		
+
+		#region Receive/Response Methods
+		/// <summary>
+		/// 발진 페이즈 준비완료 API
+		/// </summary>
 		private void DepartReady(string clientId, EdenData data)
 		{
 			GamePlayer player = _turnData.playerMap[clientId];
-			player.turnReady = true;
+			player.phaseReady = true;
 
 			//모든 플레이어가 예열턴을 마쳤는지 체크
 			bool checkAllReady = true;
 			foreach (var p in _turnData.playerList)
-				checkAllReady = checkAllReady && p.turnReady;
+				checkAllReady = checkAllReady && p.phaseReady;
 			if (checkAllReady)
 				DepartEnd();
 		}
+		#endregion
+
 	}
 }

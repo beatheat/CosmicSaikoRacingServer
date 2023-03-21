@@ -9,7 +9,7 @@ namespace CSRServer
     internal static class Util
     {
         /// <summary>
-        /// big리스트에 있는 값을 size개 만큼 small리스트에 랜덤으로 옮긴다
+        /// big리스트에 있는 값들을 size개 만큼 small리스트에 랜덤으로 옮긴다
         /// </summary>
         public static bool DistributeOnList<T>(List<T> big, int size, out List<T> small)
         {
@@ -30,6 +30,9 @@ namespace CSRServer
             return true;
         }
 
+        /// <summary>
+        /// big리스트에 있는 값들을 size개 만큼 small리스트에 랜덤으로 잘라내서 옮긴다
+        /// </summary>
         public static bool DistributeAndMoveOnList<T>(List<T> big, int size, out List<T> small)
         {
             small = new List<T>();
@@ -48,7 +51,9 @@ namespace CSRServer
             return true;
         }
 
-        
+        /// <summary>
+        /// min과 max 사이의 랜덤한 값을 가진 리스트를 반환한다. 중복되는 값은 없다
+        /// </summary>
         public static List<int> GetRandomNumbers(int count, int min, int max)
         {
             if (count > max - min)
@@ -68,6 +73,12 @@ namespace CSRServer
             return randomNumbers;
         }
         
+        /// <summary>
+        /// 0과 max 사이의 랜덤한 값을 가진 리스트를 반환한다. 중복되는 값은 없다
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         public static List<int> GetRandomNumbers(int count, int max)
         {
             return GetRandomNumbers(count, 0, max);
@@ -86,6 +97,9 @@ namespace CSRServer
             return true;
         }
         
+        /// <summary>
+        /// 특정 Enum타입의 값을 랜덤으로 반환
+        /// </summary>
         public static T GetRandomEnumValue<T>() where T : struct, Enum
         {
             Array values = Enum.GetValues(typeof(T));
@@ -95,6 +109,9 @@ namespace CSRServer
         }
         
         //{10,20,70} 일렇게 넣으면 차지하고 있는 구간만큼의 확률로 나옴
+        /// <summary>
+        /// 특정 Enum타입의 값을 percentage 배열의 확률만큼 반환
+        /// </summary>
         public static T GetRandomEnumValue<T>(double[] percentage) where T : struct, Enum
         {
             Array values = Enum.GetValues(typeof(T));

@@ -1,58 +1,69 @@
 ﻿
 namespace CSRServer.Game
 {
-	using ParameterList =  CardEffect.ParameterList;
+	using ParameterList =  CardEffectModule.ParameterList;
+	using Result = CardEffectModule.Result;
+	using Type = CardEffectModule.Type;
 
-	public delegate CardEffect.Result EffectModule(Card card , GamePlayer player, ParameterList parameters);
-	
+	public delegate CardEffectModule.Result EffectModule(Card card , GamePlayer player, ParameterList parameters);
+
+	/// <summary>
+	/// 카드 이펙트 모듈 로딩 클래스
+	/// </summary>
 	internal static class EffectModuleManager
 	{
 		private static readonly Dictionary<string, EffectModule> effectModules = new Dictionary<string, EffectModule>();
-		private static readonly Dictionary<string, CardEffect.Type> effectTypes = new Dictionary<string, CardEffect.Type>();
+		private static readonly Dictionary<string, Type> effectTypes = new Dictionary<string, Type>();
 		private static bool _isLoaded = false;
 
 		public static void Load()
 		{
 			if (_isLoaded) return;
 			
-			AddModule("Nothing", Nothing, CardEffect.Type.Nothing);
-			AddModule("Add", Add, CardEffect.Type.Add);
-			AddModule("Multiply", Multiply, CardEffect.Type.Multiply);
-			AddModule("Draw", Draw, CardEffect.Type.Draw);
-			AddModule("RerollCountUp", RerollCountUp, CardEffect.Type.RerollCountUp);
-			AddModule("Death", Death, CardEffect.Type.Death);
-			AddModule("Fail", Fail, CardEffect.Type.Fail);
-			AddModule("Initialize", Initialize, CardEffect.Type.Initialize);
-			AddModule("ForceReroll", ForceReroll, CardEffect.Type.ForceReroll);
-			AddModule("CreateCardToHand", CreateCardToHand, CardEffect.Type.CreateCardToHand);
-			AddModule("CreateCardToDeck", CreateCardToDeck, CardEffect.Type.CreateCardToDeck);
-			AddModule("CreateCardToOther", CreateCardToOther, CardEffect.Type.CreateCardToOther);
-			AddModule("BuffToMe", BuffToMe, CardEffect.Type.BuffToMe);
-			AddModule("BuffToOther", BuffToOther, CardEffect.Type.BuffToOther);
-			AddModule("DoPercent", DoPercent, CardEffect.Type.DoPercent);
-			AddModule("SetVariable", SetVariable, CardEffect.Type.SetVariable);
-			AddModule("Overload", Overload, CardEffect.Type.Overload);
-			AddModule("EraseBuff", EraseBuff, CardEffect.Type.EraseBuff);
-			AddModule("Combo", Combo, CardEffect.Type.Combo);
-			AddModule("EnforceSelf", EnforceSelf, CardEffect.Type.EnforceSelf);
-			AddModule("Discard", Discard, CardEffect.Type.Discard);
-			AddModule("Choice", Choice, CardEffect.Type.Choice);
-			AddModule("Check", Check, CardEffect.Type.Check);
-			AddModule("Leak", Leak, CardEffect.Type.Leak);
-			AddModule("Repeat", Repeat, CardEffect.Type.Repeat);
-			AddModule("TurnEnd", TurnEnd, CardEffect.Type.TurnEnd);
+			AddModule("Nothing", Nothing, Type.Nothing);
+			AddModule("Add", Add, Type.Add);
+			AddModule("Multiply", Multiply, Type.Multiply);
+			AddModule("Draw", Draw, Type.Draw);
+			AddModule("RerollCountUp", RerollCountUp, Type.RerollCountUp);
+			AddModule("Death", Death, Type.Death);
+			AddModule("Fail", Fail, Type.Fail);
+			AddModule("Initialize", Initialize, Type.Initialize);
+			AddModule("ForceReroll", ForceReroll, Type.ForceReroll);
+			AddModule("CreateCardToHand", CreateCardToHand, Type.CreateCardToHand);
+			AddModule("CreateCardToDeck", CreateCardToDeck, Type.CreateCardToDeck);
+			AddModule("CreateCardToOther", CreateCardToOther, Type.CreateCardToOther);
+			AddModule("BuffToMe", BuffToMe, Type.BuffToMe);
+			AddModule("BuffToOther", BuffToOther, Type.BuffToOther);
+			AddModule("DoPercent", DoPercent, Type.DoPercent);
+			AddModule("SetVariable", SetVariable, Type.SetVariable);
+			AddModule("Overload", Overload, Type.Overload);
+			AddModule("EraseBuff", EraseBuff, Type.EraseBuff);
+			AddModule("Combo", Combo, Type.Combo);
+			AddModule("EnforceSelf", EnforceSelf, Type.EnforceSelf);
+			AddModule("Discard", Discard, Type.Discard);
+			AddModule("Choice", Choice, Type.Choice);
+			AddModule("Check", Check, Type.Check);
+			AddModule("Leak", Leak, Type.Leak);
+			AddModule("Repeat", Repeat, Type.Repeat);
+			AddModule("TurnEnd", TurnEnd, Type.TurnEnd);
 
 
 			_isLoaded = true;
 		}
-
-		private static void AddModule(string moduleName, EffectModule effectModule, CardEffect.Type effectType)
+		
+		/// <summary>
+		/// 초기화시 모듈메소드를 모듈이름과 매핑
+		/// </summary>
+		private static void AddModule(string moduleName, EffectModule effectModule, Type effectType)
 		{
 			effectModules.Add(moduleName, effectModule);
 			effectTypes.Add(moduleName, effectType);
 		}
 
-		public static bool TryGet(string moduleName, out EffectModule module, out CardEffect.Type type)
+		/// <summary>
+		/// 모듈 이름을 통해 모듈을 가져온다
+		/// </summary>
+		public static bool TryGet(string moduleName, out EffectModule module, out Type type)
 		{
 			if (effectModules.TryGetValue(moduleName, out module!))
 			{
@@ -60,71 +71,73 @@ namespace CSRServer.Game
 				return true;
 			}
 
-			type = default(CardEffect.Type);
+			type = default(Type);
 			return false;
 		}
 
-		//Effect Modules
-		private static CardEffect.Result Nothing(Card card, GamePlayer player, ParameterList parameters)
+		#region Effect Modules
+
+
+		private static Result Nothing(Card card, GamePlayer player, ParameterList parameters)
 		{
-			return new CardEffect.Result{result = null, type = CardEffect.Type.Nothing};
+			return new Result{result = null, type = Type.Nothing};
 		}
 
-		private static CardEffect.Result Add(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Add(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
 			player.turnDistance += amount;
-			return new CardEffect.Result{result = amount, type = CardEffect.Type.Add};;
+			return new Result{result = amount, type = Type.Add};;
 		}
 		
-		private static CardEffect.Result Multiply(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Multiply(Card card, GamePlayer player, ParameterList parameters)
 		{
 			double amount = parameters.Get<double>(0, card, player);
 			player.turnDistance = (int)(player.turnDistance * amount);
-			return new CardEffect.Result{result = amount, type = CardEffect.Type.Multiply};;
+			return new Result{result = amount, type = Type.Multiply};;
 		}
 
-		private static CardEffect.Result Draw(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Draw(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
-			return new CardEffect.Result{result = player.DrawCard(amount), type = CardEffect.Type.Draw};
+			return new Result{result = player.DrawCard(amount), type = Type.Draw};
 		}
 		
-		private static CardEffect.Result RerollCountUp(Card card, GamePlayer player, ParameterList parameters)
+		private static Result RerollCountUp(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
 			player.resourceRerollCount += amount;
-			return new CardEffect.Result{result = amount, type = CardEffect.Type.RerollCountUp};
+			return new Result{result = amount, type = Type.RerollCountUp};
 		}
 		
-		private static CardEffect.Result Death(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Death(Card card, GamePlayer player, ParameterList parameters)
 		{
 			card.death = true;
-			return new CardEffect.Result{result = null, type = CardEffect.Type.Death};
+			return new Result{result = null, type = Type.Death};
 		}
 
-		private static CardEffect.Result Fail(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Fail(Card card, GamePlayer player, ParameterList parameters)
 		{
 			card.enable = false;
-			return new CardEffect.Result{result = null, type = CardEffect.Type.Fail};
+			return new Result{result = null, type = Type.Fail};
 		}
 		
-		private static CardEffect.Result Initialize(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Initialize(Card card, GamePlayer player, ParameterList parameters)
 		{
 			player.turnDistance = 0;
-			return new CardEffect.Result{result = null, type = CardEffect.Type.Initialize};
+			return new Result{result = null, type = Type.Initialize};
 		}
 		
-		private static CardEffect.Result ForceReroll(Card card, GamePlayer player, ParameterList parameters)
+		private static Result ForceReroll(Card card, GamePlayer player, ParameterList parameters)
 		{
 			for (int i = 0; i < player.resourceReelCount; i++)
 			{
 				player.resourceReel[i] = Util.GetRandomEnumValue<Resource.Type>();
 			}
-			return new CardEffect.Result{result = player.resourceReel, type = CardEffect.Type.ForceReroll};
+			return new Result{result = player.resourceReel, type = Type.ForceReroll};
 		}
 
-		private static CardEffect.Result CreateCardToHand(Card card, GamePlayer player, ParameterList parameters)
+		private static Result CreateCardToHand(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int id = parameters.Get<int>(0, card, player);
 			int amount = parameters.Get<int>(1, card, player);
@@ -139,10 +152,10 @@ namespace CSRServer.Game
 				player.AddCardToHand(createdCards[i]);
 
 			}
-			return new CardEffect.Result{result = createdCards, type = CardEffect.Type.CreateCardToHand};
+			return new Result{result = createdCards, type = Type.CreateCardToHand};
 		}
 		
-		private static CardEffect.Result CreateCardToDeck(Card card, GamePlayer player, ParameterList parameters)
+		private static Result CreateCardToDeck(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int id = parameters.Get<int>(0, card, player);
 			int amount = parameters.Get<int>(1, card, player);
@@ -156,10 +169,10 @@ namespace CSRServer.Game
 					createdCards[i].death = true;
 				player.AddCardToDeck(createdCards[i]);
 			}
-			return new CardEffect.Result{result = createdCards, type = CardEffect.Type.CreateCardToDeck};
+			return new Result{result = createdCards, type = Type.CreateCardToDeck};
 		}
 		
-		private static CardEffect.Result CreateCardToOther(Card card, GamePlayer player, ParameterList parameters)
+		private static Result CreateCardToOther(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int id = parameters.Get<int>(0, card, player);
 			int amount = parameters.Get<int>(1, card, player);
@@ -228,33 +241,33 @@ namespace CSRServer.Game
 				["createdCards"] = createdCards
 			};
 
-			CardEffect.Result CreateToOther()
+			Result CreateToOther()
 			{
 				foreach (int idx in targetPlayerIndex)
                 {
                 	player.parent[idx].AddCardToDeck(createdCards);
                 }
-				return new CardEffect.Result{result = result, type = CardEffect.Type.CreateCardToOther};
+				return new Result{result = result, type = Type.CreateCardToOther};
 			}
 
 			if (targetPlayerIndex.Count == 0)
 				return Nothing(card, player, parameters);
 			
 			player.AddDepartEvent(CreateToOther);
-			return new CardEffect.Result{result = result, type = CardEffect.Type.CreateCardToOther};
+			return new Result{result = result, type = Type.CreateCardToOther};
 		}	
 		
-		private static CardEffect.Result BuffToMe(Card card, GamePlayer player, ParameterList parameters)
+		private static Result BuffToMe(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int id = parameters.Get<int>(0, card, player);
 			int amount = parameters.Get<int>(1, card, player);
 
 			player.AddBuff((Buff.Type) id, amount);
 			var result = new Dictionary<string, object> {["buffType"] = (Buff.Type) id, ["count"] = amount};
-			return new CardEffect.Result {result = result, type = CardEffect.Type.BuffToMe};
+			return new Result {result = result, type = Type.BuffToMe};
 		}	
 		
-		private static CardEffect.Result BuffToOther(Card card, GamePlayer player, ParameterList parameters)
+		private static Result BuffToOther(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int id = parameters.Get<int>(0, card, player);
 			int amount = parameters.Get<int>(1,card, player);
@@ -315,13 +328,13 @@ namespace CSRServer.Game
                 ["amount"] = amount
             };
 
-			CardEffect.Result _BuffToOther()
+			Result _BuffToOther()
 			{
 				foreach (int idx in targetPlayerIndex)
 				{
 					player.parent[idx].AddBuff((Buff.Type)idx, amount);
 				}
-				return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
+				return new Result{result = result, type = Type.BuffToOther};
 			}
 
 			if (targetPlayerIndex.Count == 0)
@@ -329,14 +342,14 @@ namespace CSRServer.Game
 				return Nothing(card, player, parameters);
 			}
 			player.AddDepartEvent(_BuffToOther);
-			return new CardEffect.Result{result = result, type = CardEffect.Type.BuffToOther};
+			return new Result{result = result, type = Type.BuffToOther};
 		}	
 		
-		private static CardEffect.Result EraseBuff(Card card, GamePlayer player, ParameterList parameters)
+		private static Result EraseBuff(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int id = parameters.Get<int>(0, card, player);
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
-			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
+			List<Result[]> results = new List<Result[]>();
 			//모든 버프 제거
 			if (id == 99)
 			{
@@ -352,21 +365,21 @@ namespace CSRServer.Game
 					results.Add(effect.Use(card, player));
 
 			}
-			return new CardEffect.Result{result = results, type = CardEffect.Type.EraseBuff};
+			return new Result{result = results, type = Type.EraseBuff};
 		}
 
-		private static CardEffect.Result EnforceSelf(Card card, GamePlayer player, ParameterList parameters)
+		private static Result EnforceSelf(Card card, GamePlayer player, ParameterList parameters)
 		{
 			// int id = parameters[0].Get<int>(player);
 			// int amount = parameters[1].Get<int>(player);
-			return new CardEffect.Result{result = null, type = CardEffect.Type.EnforceSelf};
+			return new Result{result = null, type = Type.EnforceSelf};
 		}
 
-		private static CardEffect.Result DoPercent(Card card, GamePlayer player, ParameterList parameters)
+		private static Result DoPercent(Card card, GamePlayer player, ParameterList parameters)
 		{
 			string percent = parameters.Get<string>(0, card, player) ?? "";
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
-			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
+			Result[] result = Array.Empty<Result>();
 			
 			
 			if (card.variable.ContainsKey(percent))
@@ -378,10 +391,10 @@ namespace CSRServer.Game
 					result = effect.Use(card, player);
 				}
 			}
-			return new CardEffect.Result{result = result, type = CardEffect.Type.DoPercent};
+			return new Result{result = result, type = Type.DoPercent};
 		}	
 		
-		private static CardEffect.Result SetVariable(Card card, GamePlayer player, ParameterList parameters)
+		private static Result SetVariable(Card card, GamePlayer player, ParameterList parameters)
 		{
 			string varName = parameters.Get<string>(0, card, player) ?? "";
 			int number = parameters.Get<int>(1, card, player);
@@ -396,16 +409,16 @@ namespace CSRServer.Game
 					variable.value = variable.upperBound;
 			}
 
-			return new CardEffect.Result{result = null, type = CardEffect.Type.SetVariable};
+			return new Result{result = null, type = Type.SetVariable};
 		}	
 		
-		private static CardEffect.Result Overload(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Overload(Card card, GamePlayer player, ParameterList parameters)
 		{
 			string percent = parameters.Get<string>(0, card, player) ?? "";
 			int amount = parameters.Get<int>(1, card, player);
 			CardEffect effect = parameters.Get<CardEffect>(2, card, player) ?? CardEffect.Nothing();;
 			
-			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
+			Result[] result = Array.Empty<Result>();
 			
 			if (card.variable.ContainsKey(percent))
 			{
@@ -421,14 +434,14 @@ namespace CSRServer.Game
 				if (_percent.value > _percent.upperBound)
 					_percent.value = _percent.upperBound;
 			}
-			return new CardEffect.Result{result = result, type = CardEffect.Type.DoPercent};
+			return new Result{result = result, type = Type.DoPercent};
 		}	
 
 		
-		private static CardEffect.Result Combo(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Combo(Card card, GamePlayer player, ParameterList parameters)
 		{
 			List<int> idList = parameters.Get<List<int>>(0, card, player) ?? new List<int> {0};
-			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();;
+			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
 
 			bool isComboReady = true;
 			foreach (var id in idList)
@@ -437,15 +450,15 @@ namespace CSRServer.Game
 				isComboReady = isComboReady && (find != null);
 			}
 
-			CardEffect.Result[] result = Array.Empty<CardEffect.Result>();
+			Result[] result = Array.Empty<Result>();
 			if (isComboReady)
 			{
 				result = effect.Use(card, player);
 			}
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Combo};
+			return new Result{result = result, type = Type.Combo};
 		}
 
-		private static CardEffect.Result Discard(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Discard(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
@@ -454,21 +467,21 @@ namespace CSRServer.Game
 			if (amount > player.hand.Count)
 				amount = player.hand.Count();
 
-			List<CardEffect.Result[]> leakResults = new List<CardEffect.Result[]>();
-			List<CardEffect.Result[]> discardResults = new List<CardEffect.Result[]>();
+			List<Result[]> leakResults = new List<Result[]>();
+			List<Result[]> discardResults = new List<Result[]>();
 			List<int> throwIndexList = new List<int>();
 			//amount장의 카드를 버린다.
 			for (int i = 0; i < amount; i++)
 			{
 				int throwIndex = random.Next(player.hand.Count);
 				throwIndexList.Add(throwIndex);
-				CardEffect.Result[] throwResult = player.ThrowCard(throwIndex);
+				Result[] throwResult = player.ThrowCard(throwIndex);
 				leakResults.Add(throwResult);
 			}
 			//amount번의 특수효과를 발동한다.
 			for (int i = 0; i < amount; i++)
 			{
-				CardEffect.Result[] discardResult = effect.Use(card, player);
+				Result[] discardResult = effect.Use(card, player);
 				discardResults.Add(discardResult);
 			}
 
@@ -479,53 +492,54 @@ namespace CSRServer.Game
 				["discardResults"] = discardResults
 			};
 			
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Discard};
+			return new Result{result = result, type = Type.Discard};
 		}	
 		
-		private static CardEffect.Result Choice(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Choice(Card card, GamePlayer player, ParameterList parameters)
 		{
 			CardEffect effect = parameters.Get<CardEffect>(0, card, player) ?? CardEffect.Nothing();
 			Random random = new Random();
-			var result = effect.Use(random.Next(effect.ElementCount), card, player);
+			var result = effect.Use(random.Next(effect.count), card, player);
 
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Choice};
+			return new Result{result = result, type = Type.Choice};
 		}	
 		
-		private static CardEffect.Result Check(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Check(Card card, GamePlayer player, ParameterList parameters)
 		{
 			bool condition = parameters.Get<bool>(0, card, player);
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
 
-			CardEffect.Result[] result = {Nothing(card, player, parameters)};
+			Result[] result = {Nothing(card, player, parameters)};
 			if(condition == true)
 				result = effect.Use(card, player);
 
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Check};
+			return new Result{result = result, type = Type.Check};
 		}	
 		
-		private static CardEffect.Result Leak(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Leak(Card card, GamePlayer player, ParameterList parameters)
 		{
 			CardEffect effect = parameters.Get<CardEffect>(0, card, player) ?? CardEffect.Nothing();
 			var result = effect.Use(card, player);
-			return new CardEffect.Result{result = result, type = CardEffect.Type.Leak};
+			return new Result{result = result, type = Type.Leak};
 		}	
 		
-		private static CardEffect.Result Repeat(Card card, GamePlayer player, ParameterList parameters)
+		private static Result Repeat(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
 			
-			List<CardEffect.Result[]> results = new List<CardEffect.Result[]>();
+			List<Result[]> results = new List<Result[]>();
 			for (int i = 0; i < amount; i++)
 				results.Add(effect.Use(card, player));
-			return new CardEffect.Result{result = results, type = CardEffect.Type.Repeat};		
+			return new Result{result = results, type = Type.Repeat};		
 		}	
 		
-		private static CardEffect.Result TurnEnd(Card card, GamePlayer player, ParameterList parameters)
+		private static Result TurnEnd(Card card, GamePlayer player, ParameterList parameters)
 		{
 			card.enable = false;
-			player.turnReady = true;
-			return new CardEffect.Result{result = null, type = CardEffect.Type.TurnEnd};
-		}	
+			player.phaseReady = true;
+			return new Result{result = null, type = Type.TurnEnd};
+		}
+		#endregion
 	}
 }

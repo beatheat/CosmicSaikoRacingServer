@@ -10,13 +10,19 @@
 			mimesisCards = new List<Card>();
 		}
 
-		public void SetMimesis(Card card)
+		/// <summary>
+		/// 의태 버프를 적용한다
+		/// </summary>
+		private void SetMimesis(Card card)
 		{
 			card.isExposure = true;
 			card.condition = new CardCondition(0);
 			mimesisCards.Add(card);
 		}
 		
+		/// <summary>
+		/// 턴 시작 시 의태버프가 존재하면 적용한다
+		/// </summary>
 		public override void OnTurnStart()
 		{
 			if (count == 0) return;
@@ -34,7 +40,9 @@
 			}
 		}
 		
-		
+		/// <summary>
+		/// 카드 드로우 시 남은 의태버프가 있으면 적용한다
+		/// </summary>
 		public override void OnDrawCard(ref Card card)
 		{
 			if (count == 0) return;
@@ -44,6 +52,9 @@
 			}
 		}
 
+		/// <summary>
+		/// 카드 사용 시 의태한 카드면 의태버프스택 1 감소한다
+		/// </summary>
 		public override bool BeforeUseCard(ref Card card)
 		{
 			if (count > 0 && card.isExposure)
@@ -54,8 +65,12 @@
 			return true;
 		}
 		
-		public override void AfterUseCard(ref Card card, ref CardEffect.Result[] results)
+		/// <summary>
+		/// 카드 사용 후 의태 버프에 변동이 있으면 적용한다
+		/// </summary>
+		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
+			//의태한 카드 수가 의태버프스택보다 적고 손패의 개수보다 많을때만 발동 
 			if(!(mimesisCards.Count < count && mimesisCards.Count < player.hand.Count))
 				return;
 

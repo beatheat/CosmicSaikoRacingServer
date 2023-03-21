@@ -10,6 +10,9 @@
 			resourceCondition = new List<Resource.Type>();
 		}
 
+		/// <summary>
+		/// 랜덤한 리소스릴 조건을 생성한다
+		/// </summary>
 		private void MakeRandomCondition()
 		{
 			List<Resource.Type> lockCondition;
@@ -30,6 +33,9 @@
 			resourceCondition = lockCondition;
 		}
 
+		/// <summary>
+		/// 턴 시작시 증식버프가 있다면 적용한다
+		/// </summary>
 		public override void OnTurnStart()
 		{
 			if (count == 0) return;
@@ -37,7 +43,10 @@
 		}
 
 
-		public override void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
+		/// <summary>
+		/// 리소스 리롤 후 증식버프의 조건을 만족하면 증식버프스택을 0으로 만든다
+		/// </summary>
+		public override void AfterRerollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
 		{
 			if (player.resourceReel.Contains(resourceCondition))
 			{
@@ -47,12 +56,18 @@
 		}
 		
 
+		/// <summary>
+		/// 증식버프 조건을 만족하지 않았다면 카드 사용불가
+		/// </summary>
 		public override bool BeforeUseCard(ref Card card)
 		{
 			return count == 0;
 		}
 		
-		public override void AfterUseCard(ref Card card, ref CardEffect.Result[] results)
+		/// <summary>
+		/// 카드 사용후 증식버프스택에 변동이 있으면 적용
+		/// </summary>
+		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
 			if(resourceCondition.Count >= count)
 				return;

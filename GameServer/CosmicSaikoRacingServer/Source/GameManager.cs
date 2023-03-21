@@ -8,9 +8,11 @@ using EdenNetwork;
 
 namespace CSRServer
 {
+    /// <summary>
+    /// 게임서버의 모든 씬을 컨트롤하는 클래스
+    /// </summary>
     public class GameManager
     {
-
         public const int MAX_PLAYER = 8;
         private readonly EdenNetServer _server;
         private readonly Dictionary<string, GameClient> _clients;
@@ -25,19 +27,20 @@ namespace CSRServer
         }
 
         /// <summary>
-        /// 게임서버를 실행함
+        /// 게임서버를 실행한다
         /// </summary>
         public void Run(Scene firstScene)
         {
-            _server.Listen(MAX_PLAYER, (string client_id) =>
+            // TODO: 이미 접속된 클라이언트의 연결이 끊어진 후 재접속했을 때 정보를 유지해야한다. 
+            _server.Listen(MAX_PLAYER, (string clientId) =>
             {
                 if(_scenes.Count == 0)
                 {
                     //준비안됨
                     //server.DisconnectClient(client_id);
                 }
-                if (!_clients.ContainsKey(client_id))
-                    _clients.Add(client_id, new GameClient(client_id));
+                if (!_clients.ContainsKey(clientId))
+                    _clients.Add(clientId, new GameClient(clientId));
                 else //클라 재접속
                 {
 
@@ -47,7 +50,7 @@ namespace CSRServer
             firstScene.Load();
         }
         /// <summary>
-        /// 게임서버 종료
+        /// 게임서버 종료한다
         /// </summary>
         public void Close()
         {
@@ -59,7 +62,7 @@ namespace CSRServer
         }
         
         /// <summary>
-        /// 씬 추가
+        /// 씬을 추가한다
         /// </summary>
         public void AddScene(params Scene[] scenes)
         {
@@ -68,7 +71,7 @@ namespace CSRServer
         }
         
         /// <summary>
-        /// 다음 씬으로 변경함
+        /// 다음 씬으로 변경한다
         /// </summary>
         public void ChangeToNextScene()
         {

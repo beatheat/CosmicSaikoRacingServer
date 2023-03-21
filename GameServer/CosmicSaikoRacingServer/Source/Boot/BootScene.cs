@@ -17,9 +17,7 @@ namespace CSRServer.Lobby
 
 		public override void Load()
 		{
-			// 랜덤 매칭 게임 생성
 			server.AddResponse("CreateGame", CreateGame);
-			// 커스텀 게임 생성
 			server.AddResponse("CreateCustomGame", CreateCustomGame);
 		}
 
@@ -29,6 +27,11 @@ namespace CSRServer.Lobby
 			server.RemoveResponse("CreateCustomGame");
 		}
 
+		#region Receive/Response Methods
+		
+		/// <summary>
+		/// 랜덤 매칭 게임 생성
+		/// </summary>
 		private EdenData CreateGame(string clientId, EdenData data)
 		{
 			//Scene scene = scenes.Peek();
@@ -44,11 +47,16 @@ namespace CSRServer.Lobby
 			return new EdenData();
 		}
 
+		/// <summary>
+		/// 커스텀 게임 생성
+		/// </summary>
 		private EdenData CreateCustomGame(string clientId, EdenData data)
 		{
+			// 매칭서버에 접속
 			EdenNetClient client = new EdenNetClient(Program.config.matchingServerAddress, Program.config.matchingServerPort);
 			if (client.Connect() == ConnectionState.OK)
 			{
+				// 매칭서버에 로비를 생성하고 방번호를 받는다
 				EdenData matchingServerData = client.Request("CreateLobby", 5, Program.config.port);
 				client.Close();
 				if (data.type == EdenData.Type.ERROR)
@@ -63,12 +71,16 @@ namespace CSRServer.Lobby
 				this.passingData.Add("hostId", clientId);
 				this.passingData.Add("roomNumber", roomNumber);
 				
+				// 로비씬으로 바꾼다
 				gameManager.ChangeToNextScene();
 
+				// 로비 생성을 성공했음을 클라이언트에 반환한다
 				return new EdenData(new Dictionary<string, object> {["state"] = true, ["message"] = "OK"});
 			}
 
 			return new EdenData(new Dictionary<string, object> {["state"] = false, ["message"] = "Cannot Create Game : cannot connect Matching Server"});
 		}
+		#endregion
+
 	}
 }

@@ -13,7 +13,7 @@ namespace CSRServer.Game
 	[JsonDerivedType(typeof(BuffMimesis))]
 	[JsonDerivedType(typeof(BuffProliferation))]
 	[JsonDerivedType(typeof(BuffRefine))]
-	public class Buff
+	public abstract class Buff
 	{
 		public enum Type
 		{
@@ -36,13 +36,15 @@ namespace CSRServer.Game
 		{
 			this.count += count;
 		}
-		
+
+		#region Buff Activation Methods
+
 		public virtual void OnTurnStart() { }
 		public virtual bool BeforeUseCard(ref Card card) { return true; }
-		public virtual void AfterUseCard(ref Card card, ref CardEffect.Result[] results) { }
+		public virtual void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results) { }
 
-		public virtual void BeforeRollResource(ref List<int>? resourceFixed) { }
-		public virtual void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel) { }
+		public virtual void BeforeRerollResource(ref List<int>? resourceFixed) { }
+		public virtual void AfterRerollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel) { }
 		public virtual void OnThrowCard(Card card) { }
 		public virtual void OnDrawCard(ref Card card) { }
 
@@ -57,5 +59,7 @@ namespace CSRServer.Game
 		{
 			Release();
 		}
+		
+		#endregion
 	}
 }

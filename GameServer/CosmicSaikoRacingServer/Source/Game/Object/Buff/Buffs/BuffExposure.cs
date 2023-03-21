@@ -9,6 +9,9 @@
 			type = Buff.Type.Exposure;
 		}
 
+		/// <summary>
+		/// 랜덤한 카드 조건을 생성한다
+		/// </summary>
 		public CardCondition GetRandomCondition()
 		{
 			CardCondition cardCondition;
@@ -38,6 +41,9 @@
 			return cardCondition;
 		}
 
+		/// <summary>
+		/// 카드에 피폭버프 적용
+		/// </summary>
 		public void SetExposure(Card card)
 		{
 			card.isExposure = true;
@@ -45,7 +51,9 @@
 			exposureCards.Add(card);
 		}
 		
-		
+		/// <summary>
+		/// 턴 시작 시 피폭이 있다면 손패의 랜덤한 카드에 적용한다
+		/// </summary>
 		public override void OnTurnStart()
 		{
 			if (count == 0) return;
@@ -61,6 +69,9 @@
 			}
 		}
 
+		/// <summary>
+		/// 드로우시 남은 피폭버프가 있다면 드로우 한 카드에 적용한다
+		/// </summary>
 		public override void OnDrawCard(ref Card card)
 		{
 			if (count == 0) return;
@@ -70,6 +81,9 @@
 			}
 		}
 
+		/// <summary>
+		/// 사용한 카드가 피폭된 카드라면 피폭버프스택 1감소
+		/// </summary>
 		public override bool BeforeUseCard(ref Card card)
 		{
 			if (count > 0 && card.isExposure)
@@ -80,9 +94,12 @@
 			return true;
 		}
 		
-		
-		public override void AfterUseCard(ref Card card, ref CardEffect.Result[] results)
+		/// <summary>
+		/// 카드 사용 후 피폭버프에 변동이 있을 경우
+		/// </summary>
+		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
+			//피폭된 카드 수가 피폭버프스택보다 적고 손패의 개수보다 많을때만 발동 
 			if(!(exposureCards.Count < count && exposureCards.Count < player.hand.Count))
 				return;
 

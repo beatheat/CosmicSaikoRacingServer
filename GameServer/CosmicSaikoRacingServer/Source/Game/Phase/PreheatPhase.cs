@@ -26,6 +26,9 @@ namespace CSRServer.Game
         }
 
     
+        /// <summary>
+        /// 예열 페이즈 시작
+        /// </summary>
         public void PreheatStart()
         {
             _time = INITIAL_TIME;
@@ -34,7 +37,7 @@ namespace CSRServer.Game
                 player.PreheatStart();
             }
 
-            //TurnStart로 대체하자 -> playerList, playerIndex, turn
+            // 예열 페이즈 시작시 턴 데이터 클라이언트와 동기화
             var monitorPlayerList = _parent.GetMonitorPlayerList();
             foreach (var player in _turnData.playerList)
             {
@@ -51,9 +54,11 @@ namespace CSRServer.Game
             _server.AddResponse("UseCard", UseCard);
             _server.AddResponse("RerollResource", RerollResource);
             _server.AddReceiveEvent("PreheatReady", PreheatReady);
-
         }
 
+        /// <summary>
+        /// 예열 페이즈 종료
+        /// </summary>
         private void PreheatEnd()
         {
             _timer?.Dispose();
@@ -63,7 +68,9 @@ namespace CSRServer.Game
             _parent.DepartStart();
         }
         
-        // 1초에 한번씩 실행함
+        /// <summary>
+        /// 예열 페이즈 타이머
+        /// </summary>
         private void GameTimer(object? sender)
         {
             if (_time >= 0)
@@ -77,24 +84,32 @@ namespace CSRServer.Game
             }
         }
 
+        #region Receive/Response Methods
+        /// <summary>
+        /// 예열턴 준비완료 API
+        /// </summary>
         private void PreheatReady(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-            player.turnReady = true;
+            player.phaseReady = true;
 
-            //모든 플레이어가 예열턴을 마쳤는지 체크
+            //모든 플레이어가 예열페이즈를 마쳤는지 체크
             bool checkAllReady = true;
             foreach (var p in _turnData.playerList)
-                checkAllReady = checkAllReady && p.turnReady;
+                checkAllReady = checkAllReady && p.phaseReady;
+            //모든 플레이어가 예열페이즈를 마쳤다면 예열페이즈 종료
             if (checkAllReady)
                 PreheatEnd();
 
         }
 
+        /// <summary>
+        /// 카드 사용 API
+        /// </summary>
         private EdenData UseCard(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-            if (player.turnReady)
+            if (player.phaseReady)
                 return EdenData.Error("UseCard - Player turn ends");
             if (!data.TryGet<int>(out var useCardIndex))
                 return EdenData.Error("UseCard - Card index is missing");
@@ -107,19 +122,22 @@ namespace CSRServer.Game
 
         }
 
+        /// <summary>
+        /// 리롤 리소스 API
+        /// </summary>
         private EdenData RerollResource(string clientId, EdenData data)
         {
 
             GamePlayer player = _turnData.playerMap[clientId];
-            if (player.turnReady)
+            if (player.phaseReady)
                 return EdenData.Error("RollResource - Player turn ends");
             if (!data.TryGet<List<int>>(out var resourceFixed))
                 return EdenData.Error("RollResource - resourceFixed data is missing");
-            var result = player.RollResource(resourceFixed);
+            var result = player.RerollResource(resourceFixed);
             if (result == null)
                 return EdenData.Error("RollResource - Reroll Count is 0");
             return new EdenData(player);
         }
-
+        #endregion
     }
 }

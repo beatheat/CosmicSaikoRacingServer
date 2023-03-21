@@ -76,7 +76,7 @@ namespace CSRServer.Game
 			return check;
 		}
 		
-		public void AfterUseCard(ref Card card, ref CardEffect.Result[] results)
+		public void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
 			foreach (var buff in buffList)
 			{
@@ -84,22 +84,21 @@ namespace CSRServer.Game
 			}
 		}
 
-		public void BeforeRollResource(ref List<int>? resourceFixed)
+		public void BeforeRerollResource(ref List<int>? resourceFixed)
 		{
 			foreach (var buff in buffList)
 			{
-				buff.BeforeRollResource(ref resourceFixed);
+				buff.BeforeRerollResource(ref resourceFixed);
 			}
 		}
 
-		public void AfterRollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
+		public void AfterRerollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
 		{
 			foreach (var buff in buffList)
 			{
-				buff.AfterRollResource(ref resourceFixed, ref resourceReel);
+				buff.AfterRerollResource(ref resourceFixed, ref resourceReel);
 			}
 		}
-		
 
 		public void OnDrawCard(ref Card card)
 		{

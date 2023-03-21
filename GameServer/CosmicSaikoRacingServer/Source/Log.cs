@@ -6,6 +6,9 @@ namespace CSRServer
 		private static StreamWriter? _stream = null;
 		private static Thread? _flushThread = null;
 
+		/// <summary>
+		/// 로그 스트림을 생성한다
+		/// </summary>
 		public static void Load(string path)
 		{
 			try
@@ -37,6 +40,9 @@ namespace CSRServer
 			}
 		}
 
+		/// <summary>
+		/// 로글 스트림을 닫는다
+		/// </summary>
 		public static void Close()
 		{
 			_flushThread?.Interrupt();
@@ -48,6 +54,9 @@ namespace CSRServer
 		}
 
 
+		/// <summary>
+		/// 콘솔의 출력된 라인을 한줄 삭제한다
+		/// </summary>
 		public static void ClearLine()
 		{
 			Console.SetCursorPosition(0, Console.CursorTop - 1);

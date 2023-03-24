@@ -99,6 +99,7 @@ namespace MatchingServer
                 return EdenData.Error("Wrong port number");
             }
             
+
             string address = (string) (StringToAddress(client_id))["address"];
             address += ":" + port.ToString();
             
@@ -108,7 +109,7 @@ namespace MatchingServer
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
             } while (room.ContainsKey(roomNum));
             if (address.Contains("192.168"))
-                room.Add(roomNum, "58.141.131.141:17979");
+                room.Add(roomNum, "127.0.0.1:17979");
             else
                 room.Add(roomNum, address);
 

@@ -5,7 +5,7 @@ namespace CSRServer.Game
 	public class BuffManager
 	{
 		public List<Buff> buffList;
-
+		
 		public BuffManager(GamePlayer owner)
 		{
 			buffList = new List<Buff>
@@ -66,21 +66,21 @@ namespace CSRServer.Game
 		}
 		
 		//false반환시 카드 사용 불가
-		public bool BeforeUseCard(ref Card card)
+		public bool BeforeUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
 			bool check = true;
 			foreach (var buff in buffList)
 			{
-				check = check && buff.BeforeUseCard(ref card);
+				check = check && buff.BeforeUseCard(ref card, ref results);
 			}
 			return check;
 		}
 		
-		public void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
+		public void AfterUseCard(ref Card card)
 		{
 			foreach (var buff in buffList)
 			{
-				buff.AfterUseCard(ref card,ref results);
+				buff.AfterUseCard(ref card);
 			}
 		}
 

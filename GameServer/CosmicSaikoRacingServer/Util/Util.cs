@@ -9,15 +9,14 @@ namespace CSRServer
     internal static class Util
     {
         /// <summary>
-        /// big리스트에 있는 값들을 size개 만큼 small리스트에 랜덤으로 옮긴다
+        /// big리스트에 있는 값들을 size개 만큼 small리스트에 랜덤으로 옮긴다, size가 big.count보다 클경우 최대값에 맞춘다
         /// </summary>
         public static bool DistributeOnList<T>(List<T> big, int size, out List<T> small)
         {
             small = new List<T>();
             if (size > big.Count)
-            {
-                return false;
-            }
+                size = big.Count;
+            
             List<T> bigClone = new List<T>(big);
             Random random = new Random();
             for (int i = 0; i < size; i++)

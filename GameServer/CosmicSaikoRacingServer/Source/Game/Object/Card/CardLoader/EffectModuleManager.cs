@@ -1,4 +1,6 @@
 ﻿
+using EdenNetwork;
+
 namespace CSRServer.Game
 {
 	using ParameterList =  CardEffectModule.ParameterList;
@@ -93,7 +95,7 @@ namespace CSRServer.Game
 		private static Result Multiply(Card card, GamePlayer player, ParameterList parameters)
 		{
 			double amount = parameters.Get<double>(0, card, player);
-			player.turnDistance = (int)(player.turnDistance * amount);
+			player.turnDistance = (int)Math.Round(player.turnDistance * amount);
 			return new Result{result = amount, type = Type.Multiply};;
 		}
 
@@ -264,6 +266,7 @@ namespace CSRServer.Game
 
 			player.AddBuff((Buff.Type) id, amount);
 			var result = new Dictionary<string, object> {["buffType"] = (Buff.Type) id, ["count"] = amount};
+			
 			return new Result {result = result, type = Type.BuffToMe};
 		}	
 		

@@ -15,7 +15,7 @@ namespace CSRServer.Game
 			this._cardEffectModules = cardCardEffectElements;
 		}
 
-		public static CardEffect Nothing()
+		public static CardEffect Nothing() 
 		{
 			EffectModuleManager.TryGet("Nothing", out var nothingEffect, out var type);
 			return new CardEffect(new List<CardEffectModule>{new CardEffectModule(nothingEffect, null!, type)});
@@ -23,7 +23,8 @@ namespace CSRServer.Game
 
 		public CardEffectModule.Result[] Use(Card card, GamePlayer player)
 		{
-			CardEffectModule.Result[] results = new CardEffectModule.Result[_cardEffectModules.Count];
+			// CardEffectModule.Result[] results = new CardEffectModule.Result[_cardEffectModules.Count];
+			List<CardEffectModule.Result> results = new List<CardEffectModule.Result>();
 			for (int i = 0; i < _cardEffectModules.Count; i++)
 			{
 				// 버리기 효과는 무시
@@ -31,9 +32,9 @@ namespace CSRServer.Game
 					continue;
 				
 				if(card.enable)
-					results[i] = _cardEffectModules[i].effectModule(card, player, _cardEffectModules[i].parameterList);
+					results.Add(_cardEffectModules[i].effectModule(card, player, _cardEffectModules[i].parameterList));
 			}
-			return results;
+			return results.ToArray();
 		}
 
 		public CardEffectModule.Result[] UseLeak(Card card, GamePlayer player)

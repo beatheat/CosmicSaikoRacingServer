@@ -34,21 +34,30 @@
 
 			public T? Get<T>(Card card, GamePlayer player)
 			{
+				object returnData;
 				if (_type == Type.Data)
-				{
-					if (typeof(T) == typeof(int))
-					{
-						if (!double.TryParse(_data.ToString(), out var dataParsed))
-							return default(T)!;
-						return (T) (object) (int) dataParsed;
-					}
-
-					return (T) _data;
-				}
+					returnData = _data;
 				else if (_type == Type.Expression)
-					return (T) ParameterExpressionParser.Parse(card, player, _data.ToString()!);
+					returnData = ParameterExpressionParser.Parse(card, player, _data.ToString()!);
 				else
 					return default(T)!;
+				
+				if (typeof(T) == typeof(int))
+				{
+					if (!double.TryParse(returnData.ToString(), out var dataParsed))
+						return default(T)!;
+					return (T) (object) (int) dataParsed;
+				}
+
+				if (typeof(T) == typeof(List<int>))
+				{
+					List<double>? numberList = returnData as List<double>;
+					if (numberList == null)
+						return default(T);
+					return (T) (object) numberList.ConvertAll(Convert.ToInt32);
+				}
+
+				return (T) returnData;
 			}
 		}
 

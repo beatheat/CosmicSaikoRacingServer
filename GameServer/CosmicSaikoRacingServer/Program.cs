@@ -61,8 +61,8 @@ namespace CSRServer
             try
             {
                 //게임서버 초기화 및 실행
-                while (!EdenNetServer.IsPortAvailable(config.port))
-                    config.port++;
+                // while (!EdenNetServer.IsPortAvailable(config.port))
+                //     config.port++;
                 _server = new EdenNetServer(config.port, config.networklogPath);
                 _gameManager = new GameManager(_server);
                 Logger.Load(config.gamelogPath);

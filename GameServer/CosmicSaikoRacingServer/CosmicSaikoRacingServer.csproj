@@ -21,7 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="1.4.3" />
     <PackageReference Include="Mono.Nat" Version="3.0.4" />
     <PackageReference Include="NLua" Version="1.6.0" />
   </ItemGroup>
@@ -40,6 +39,10 @@
 
   <ItemGroup>
     <Folder Include="Data" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\EdenNetwork\Source\EdenNetwork\EdenNetwork.csproj" />
   </ItemGroup>
 
 </Project>

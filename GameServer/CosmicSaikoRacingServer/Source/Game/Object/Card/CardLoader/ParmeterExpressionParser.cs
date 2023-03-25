@@ -141,7 +141,9 @@ namespace CSRServer.Game
 		/// </summary>
 		private static object Calculate(string varString)
 		{
-			return new DataTable().Compute(varString, null);
+			object calcValue = new DataTable().Compute(varString, null);
+			double.TryParse(calcValue.ToString(), out var value);
+			return value;
 		}
 
 		/// <summary>

@@ -40,8 +40,8 @@
 			//가장 많은 타입이 리롤시 가장 등장할 확률이 높다
 
 			int resourceTypeCount = Enum.GetValues((typeof(Resource.Type))).Length;
-			double highPercentage = 100.0 / player.resourceReelCount + REFINE_COEFFICIENT * count;
-			double[] resourcePercentage = Enumerable.Repeat( (100.0-highPercentage) / (resourceTypeCount-1), player.resourceReelCount).ToArray();
+			double highPercentage = 100.0 / Resource.COUNT + REFINE_COEFFICIENT * count;
+			double[] resourcePercentage = Enumerable.Repeat( (100.0-highPercentage) / (resourceTypeCount-1), Resource.COUNT).ToArray();
 			resourcePercentage[mostFqCardType] = highPercentage;
 			
 			for (int i = 0; i < player.resourceReelCount; i++)

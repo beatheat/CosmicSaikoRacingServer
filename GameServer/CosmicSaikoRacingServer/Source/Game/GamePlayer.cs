@@ -201,10 +201,13 @@ namespace CSRServer.Game
             }
             Card card = hand[index];
             result = null!;
-
+            //패에서 카드를 삭제
+            hand.RemoveAt(index);
             // 카드 사용전 버프 적용
-            if (buffManager.BeforeUseCard(ref card) == false)
+            if (buffManager.BeforeUseCard(ref card, ref result) == false)
             {
+                //제거한 카드를 묘지로 보낸다
+                MoveCardToGrave(card);
                 return false;
             }
             //카드 사용
@@ -212,9 +215,9 @@ namespace CSRServer.Game
             //카드 사용가능 복구, 고장시 false로 바뀌어 복구한다.
             card.enable = true;
             //카드 사용후 버프 적용
-            buffManager.AfterUseCard(ref card, ref result);
-            //패에서 카드 제거
-            DiscardCard(index);
+            buffManager.AfterUseCard(ref card);
+            //제거한 카드를 묘지로 보낸다
+            MoveCardToGrave(card);
             //이번턴에 사용한 카드 리스트에 추가
             turnUsedCard.Add(card);
             return true;
@@ -223,7 +226,7 @@ namespace CSRServer.Game
         /// <summary>
         /// 리소스릴에 있는 리소스를 랜덤으로 다시 뽑는다
         /// </summary>
-        public List<Resource.Type>? RollResource(List<int>? resourceFixed = null)
+        public List<Resource.Type> RollResource(List<int>? resourceFixed = null)
         {
             for (int i = 0; i < resourceReelCount; i++)
             {
@@ -283,6 +286,10 @@ namespace CSRServer.Game
                 Random rand = new Random();
                 int drawIndex = rand.Next(unusedCard.Count);
                 Card card = unusedCard[drawIndex];
+                //카드를 뽑았을 때 적용된 버프 제거
+                card.isExposure = false;
+                card.isMimesis = false; 
+                
                 hand.Add(unusedCard[drawIndex]);
                 cards.Add(unusedCard[drawIndex]);
                 unusedCard.RemoveAt(drawIndex);
@@ -304,6 +311,9 @@ namespace CSRServer.Game
                     Random rand = new Random();
                     int drawIndex = rand.Next(unusedCard.Count);
                     Card card = unusedCard[drawIndex];
+                    //카드를 뽑았을 때 적용된 버프 제거
+                    card.isExposure = false;
+                    card.isMimesis = false; 
 
                     hand.Add(unusedCard[drawIndex]);
                     cards.Add(unusedCard[drawIndex]);
@@ -336,7 +346,7 @@ namespace CSRServer.Game
             foreach (var c in card)
             {
                 deck.Add(c);
-                usedCard.Add(c);
+                unusedCard.Add(c);
             }
         }
 
@@ -355,20 +365,10 @@ namespace CSRServer.Game
         }
 
         /// <summary>
-        /// 패에서 카드를 제거한다
+        /// 카드를 묘지로 옮긴다.
         /// </summary>
-        public void DiscardCard(int index)
+        public void MoveCardToGrave(Card card)
         {
-            if (index >= hand.Count || index < 0)
-            {
-                return;
-            }
-            Card card = hand[index];
-            //카드가 묘지로 갈때 카드에 적용된 버프 제거
-            card.isExposure = false;
-            card.isMimesis = false; 
-            //패에서 삭제
-            hand.RemoveAt(index);
             //제거한 카드를 묘지로 보낸다
             if (card.death)
             {
@@ -378,6 +378,23 @@ namespace CSRServer.Game
             }
             else
                 usedCard.Add(card);
+        }
+
+        /// <summary>
+        /// 패에서 카드를 제거한다
+        /// </summary>
+        public void DiscardCard(int index)
+        {
+            if (index >= hand.Count || index < 0)
+            {
+                return;
+            }
+            Card card = hand[index];
+
+            //패에서 삭제
+            hand.RemoveAt(index);
+            //제거한 카드를 묘지로 보낸다
+            MoveCardToGrave(card);
         }
         
         /// <summary>

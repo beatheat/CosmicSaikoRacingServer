@@ -13,11 +13,14 @@
 		/// <summary>
 		/// 의태 버프를 적용한다
 		/// </summary>
-		private void SetMimesis(Card card)
+		private void SetMimesis(params Card[] cards)
 		{
-			card.isExposure = true;
-			card.condition = new CardCondition(0);
-			mimesisCards.Add(card);
+			foreach (var card in cards)
+			{
+				card.isMimesis = true;
+				card.condition = new CardCondition(0);
+				mimesisCards.Add(card);
+			}
 		}
 		
 		/// <summary>
@@ -55,9 +58,9 @@
 		/// <summary>
 		/// 카드 사용 시 의태한 카드면 의태버프스택 1 감소한다
 		/// </summary>
-		public override bool BeforeUseCard(ref Card card)
+		public override bool BeforeUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
-			if (count > 0 && card.isExposure)
+			if (count > 0 && card.isMimesis)
 			{
 				count--;
 				mimesisCards.Remove(card);
@@ -68,15 +71,16 @@
 		/// <summary>
 		/// 카드 사용 후 의태 버프에 변동이 있으면 적용한다
 		/// </summary>
-		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
+		public override void AfterUseCard(ref Card card)
 		{
-			//의태한 카드 수가 의태버프스택보다 적고 손패의 개수보다 많을때만 발동 
-			if(!(mimesisCards.Count < count && mimesisCards.Count < player.hand.Count))
-				return;
-
-			var nonExposureHand = player.hand.FindAll(x => x.isMimesis == false);
-			Util.DistributeOnList(nonExposureHand, 1, out var selectedCards);
-			SetMimesis(selectedCards[0]);
+			//의태한 카드 수가 피폭버프스택보다 적을 때 발동
+			if (mimesisCards.Count < count)
+			{
+				int mimesisCount = count - mimesisCards.Count;
+				var nonMimesisHand = player.hand.FindAll(x => x.isExposure == false);
+				Util.DistributeOnList(nonMimesisHand, mimesisCount, out var selectedCards);
+				SetMimesis(selectedCards.ToArray());
+			}
 		}
 
 
@@ -84,7 +88,7 @@
 		{
 			foreach (var card in mimesisCards)
 			{
-				card.isExposure = false;
+				card.isMimesis = false;
 				card.condition = CardManager.GetCard(card.id).condition;
 			}
 			mimesisCards.Clear();

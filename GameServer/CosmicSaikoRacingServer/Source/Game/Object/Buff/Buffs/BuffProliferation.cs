@@ -59,7 +59,7 @@
 		/// <summary>
 		/// 증식버프 조건을 만족하지 않았다면 카드 사용불가
 		/// </summary>
-		public override bool BeforeUseCard(ref Card card)
+		public override bool BeforeUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
 			return count == 0;
 		}
@@ -67,7 +67,7 @@
 		/// <summary>
 		/// 카드 사용후 증식버프스택에 변동이 있으면 적용
 		/// </summary>
-		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
+		public override void AfterUseCard(ref Card card)
 		{
 			if(resourceCondition.Count >= count)
 				return;

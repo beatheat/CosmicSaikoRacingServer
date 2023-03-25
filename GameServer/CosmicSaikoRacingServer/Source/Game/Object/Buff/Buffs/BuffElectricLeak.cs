@@ -40,7 +40,7 @@ namespace CSRServer.Game
 		/// <summary>
 		/// 카드 사용 후 누전 버프 변동이 있다면 누전적용
 		/// </summary>
-		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
+		public override void AfterUseCard(ref Card card)
 		{
 			//누전된 리소스가 리소스 릴 최대치 보다 적고 버프카운트가 이전에 누전된 리소스보다 많을 때만 작동함 
 			if (!(resourceLockIndexList.Count < player.resourceReelCount && resourceLockIndexList.Count < count)) 

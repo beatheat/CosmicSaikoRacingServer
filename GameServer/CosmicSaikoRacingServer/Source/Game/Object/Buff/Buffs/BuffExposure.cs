@@ -44,11 +44,14 @@
 		/// <summary>
 		/// 카드에 피폭버프 적용
 		/// </summary>
-		public void SetExposure(Card card)
+		public void SetExposure(params Card[] cards)
 		{
-			card.isExposure = true;
-			card.condition = GetRandomCondition();
-			exposureCards.Add(card);
+			foreach (var card in cards)
+			{
+				card.isExposure = true;
+				card.condition = GetRandomCondition();
+				exposureCards.Add(card);
+			}
 		}
 		
 		/// <summary>
@@ -84,7 +87,7 @@
 		/// <summary>
 		/// 사용한 카드가 피폭된 카드라면 피폭버프스택 1감소
 		/// </summary>
-		public override bool BeforeUseCard(ref Card card)
+		public override bool BeforeUseCard(ref Card card, ref CardEffectModule.Result[] results)
 		{
 			if (count > 0 && card.isExposure)
 			{
@@ -97,15 +100,16 @@
 		/// <summary>
 		/// 카드 사용 후 피폭버프에 변동이 있을 경우
 		/// </summary>
-		public override void AfterUseCard(ref Card card, ref CardEffectModule.Result[] results)
+		public override void AfterUseCard(ref Card card)
 		{
-			//피폭된 카드 수가 피폭버프스택보다 적고 손패의 개수보다 많을때만 발동 
-			if(!(exposureCards.Count < count && exposureCards.Count < player.hand.Count))
-				return;
-
-			var nonExposureHand = player.hand.FindAll(x => x.isExposure == false);
-			Util.DistributeOnList(nonExposureHand, 1, out var selectedCards);
-			SetExposure(selectedCards[0]);
+			//피폭된 카드 수가 피폭버프스택보다 적을 때 발동
+			if (exposureCards.Count < count)
+			{
+				int exposureCount = count - exposureCards.Count;
+				var nonExposureHand = player.hand.FindAll(x => x.isExposure == false);
+				Util.DistributeOnList(nonExposureHand, exposureCount, out var selectedCards);
+				SetExposure(selectedCards.ToArray());
+			}
 		}
 
 		public override int Release()

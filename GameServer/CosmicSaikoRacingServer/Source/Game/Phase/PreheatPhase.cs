@@ -2,7 +2,7 @@
 
 namespace CSRServer.Game
 {
-    internal class PreheatPhase
+    public class PreheatPhase
     {
 
         private const int INITIAL_TIME = 99;
@@ -25,22 +25,32 @@ namespace CSRServer.Game
             this._time = 0;
         }
 
-    
         /// <summary>
         /// 예열 페이즈 시작
         /// </summary>
         public void PreheatStart()
         {
+            _server.AddResponse("UseCard", UseCard);
+            _server.AddResponse("RerollResource", RerollResource);
+            _server.AddReceiveEvent("PreheatReady", PreheatReady);
+
+            
             _time = INITIAL_TIME;
             foreach (var player in _turnData.playerList)
             {
                 player.PreheatStart();
             }
+            
+            //플레이어 rank 정해주기
+            var orderedPlayerList = _turnData.playerList.OrderBy(p => p.currentDistance).ToList();
+            for (int i = 0; i < orderedPlayerList.Count; i++)
+                orderedPlayerList[i].rank = i + 1;
 
             // 예열 페이즈 시작시 턴 데이터 클라이언트와 동기화
             var monitorPlayerList = _parent.GetMonitorPlayerList();
             foreach (var player in _turnData.playerList)
             {
+                
                 _server.SendAsync("PreheatStart", player.clientId, new Dictionary<string, object>
                 {
                     ["player"] = player,
@@ -48,12 +58,26 @@ namespace CSRServer.Game
                     ["turn"] = _turnData.turn,
                     ["timer"] = _time
                 });
+
             }
 
-            _timer = new Timer(GameTimer, null, 0, 1000);
-            _server.AddResponse("UseCard", UseCard);
-            _server.AddResponse("RerollResource", RerollResource);
-            _server.AddReceiveEvent("PreheatReady", PreheatReady);
+            // _timer = new Timer(GameTimer, null, 0, 1000);
+        }
+
+        /// <summary>
+        /// 예열 페이즈 준비완료
+        /// </summary>
+        public void Ready(GamePlayer player)
+        {
+            player.phaseReady = true;
+
+            //모든 플레이어가 예열페이즈를 마쳤는지 체크
+            bool checkAllReady = true;
+            foreach (var p in _turnData.playerList)
+                checkAllReady = checkAllReady && p.phaseReady;
+            //모든 플레이어가 예열페이즈를 마쳤다면 예열페이즈 종료
+            if (checkAllReady)
+                PreheatEnd();
         }
 
         /// <summary>
@@ -86,21 +110,13 @@ namespace CSRServer.Game
 
         #region Receive/Response Methods
         /// <summary>
-        /// 예열턴 준비완료 API
+        /// 예열턴 준비완료 API 
+        /// TurnEnd 효과 때문에 public으로 선언
         /// </summary>
         private void PreheatReady(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-            player.phaseReady = true;
-
-            //모든 플레이어가 예열페이즈를 마쳤는지 체크
-            bool checkAllReady = true;
-            foreach (var p in _turnData.playerList)
-                checkAllReady = checkAllReady && p.phaseReady;
-            //모든 플레이어가 예열페이즈를 마쳤다면 예열페이즈 종료
-            if (checkAllReady)
-                PreheatEnd();
-
+            Ready(player);
         }
 
         /// <summary>

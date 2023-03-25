@@ -2,8 +2,7 @@
 
 namespace CSRServer.Game
 {
-
-	internal class DepartPhase
+	public class DepartPhase
 	{
 		private const int INITIAL_TIME = 99;
 		private readonly TurnData _turnData;

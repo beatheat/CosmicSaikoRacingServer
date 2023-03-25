@@ -2,8 +2,7 @@
 
 namespace CSRServer.Game
 {
-
-    internal class MaintainPhase
+    public class MaintainPhase
 	{
 		private const int INITIAL_TIME = 99;
 		private readonly TurnData _turnData;
@@ -32,14 +31,16 @@ namespace CSRServer.Game
         /// 정비 페이즈 시작
         /// </summary>
         public void MaintainStart()
-        {
+        {            
+            _server.AddReceiveEvent("MaintainReady", MaintainReady);
+            _server.AddResponse("RerollStore", RerollStore);
+            _server.AddResponse("RerollRemoveCard", RerollRemoveCard);
+            _server.AddResponse("BuyExp", BuyExp);
+            _server.AddResponse("BuyCard", BuyCard);
+            _server.AddResponse("RemoveCard", RemoveCard);
+            
             _time = INITIAL_TIME;
 
-            //플레이어 rank 정해주기
-            var orderedPlayerList = _turnData.playerList.OrderBy(p => p.currentDistance).ToList();
-            for (int i = 0; i < orderedPlayerList.Count; i++)
-                orderedPlayerList[i].rank = i + 1;
-            
             //정비 페이즈 구성요소 클라이언트와 동기화
             foreach (var player in _turnData.playerList)
             {
@@ -54,13 +55,7 @@ namespace CSRServer.Game
             }
 
             _timer = new Timer(GameTimer, null, 0, 1000);
-            
-            _server.AddReceiveEvent("MaintainReady", MaintainReady);
-            _server.AddResponse("RerollStore", RerollStore);
-            _server.AddResponse("RerollRemoveCard", RerollRemoveCard);
-            _server.AddResponse("BuyExp", BuyExp);
-            _server.AddResponse("BuyCard", BuyCard);
-            _server.AddResponse("RemoveCard", RemoveCard);
+
         }
 
         /// <summary>

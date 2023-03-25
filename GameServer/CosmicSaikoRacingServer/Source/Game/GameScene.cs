@@ -18,13 +18,13 @@ namespace CSRServer
         public int turn = 1;
     }
 
-    internal class GameScene : Scene
+    public class GameScene : Scene
     {
         private readonly TurnData _turnData;
 
-        private PreheatPhase _preheatPhase = null!;
-        private DepartPhase _departPhase = null!;
-        private MaintainPhase _maintainPhase = null!;
+        public PreheatPhase preheatPhase = null!;
+        public DepartPhase departPhase = null!;
+        public MaintainPhase maintainPhase = null!;
         
         public GameScene(GameManager gameManager, EdenNetServer server) : base(gameManager, server)
         {
@@ -42,17 +42,16 @@ namespace CSRServer
 
             foreach(LobbyPlayer lbPlayer in lbPlayerList)
             {
-                GamePlayer gamePlayer = new GamePlayer(lbPlayer.clientId, _turnData.playerList.Count, lbPlayer.nickname, _turnData.playerList);
+                GamePlayer gamePlayer = new GamePlayer(lbPlayer.clientId, _turnData.playerList.Count, lbPlayer.nickname, _turnData.playerList, this);
                 _turnData.playerList.Add(gamePlayer);
                 _turnData.playerMap.Add(gamePlayer.clientId, gamePlayer);
             }
 
-            _preheatPhase = new PreheatPhase(gameManager, server, _turnData, this);
-            _departPhase = new DepartPhase(gameManager, server, _turnData, this);
-            _maintainPhase = new MaintainPhase(gameManager, server, _turnData, this);
+            preheatPhase = new PreheatPhase(gameManager, server, _turnData, this);
+            departPhase = new DepartPhase(gameManager, server, _turnData, this);
+            maintainPhase = new MaintainPhase(gameManager, server, _turnData, this);
 
             server.AddReceiveEvent("PlayerReady", PlayerReady);
-                
             server.BroadcastAsync("LobbyGameStart");
         }
 
@@ -64,17 +63,17 @@ namespace CSRServer
 
         public void PreheatStart()
         {
-            _preheatPhase.PreheatStart();
+            preheatPhase.PreheatStart();
         }
 
         public void DepartStart()
         {
-            _departPhase.DepartStart();
+            departPhase.DepartStart();
         }
 
         public void MaintainStart()
         {
-            _maintainPhase.MaintainStart();
+            maintainPhase.MaintainStart();
         }
         
         /// <summary>

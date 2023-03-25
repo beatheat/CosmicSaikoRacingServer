@@ -537,7 +537,7 @@ namespace CSRServer.Game
 		private static Result TurnEnd(Card card, GamePlayer player, ParameterList parameters)
 		{
 			card.enable = false;
-			player.phaseReady = true;
+			player.scene.preheatPhase.Ready(player);
 			return new Result{result = null, type = Type.TurnEnd};
 		}
 		#endregion

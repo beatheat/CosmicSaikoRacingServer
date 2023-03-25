@@ -100,15 +100,19 @@ namespace CSRServer.Game
         public int level;
         //턴 당 시작 코인 수
         public int turnCoinCount;
-
         
-        public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent)
+        //페이즈
+        [JsonIgnore]
+        public GameScene scene;
+        
+        public GamePlayer(string clientId, int index, string nickname, List<GamePlayer> parent, GameScene scene)
         {
             this.clientId = clientId;
             this.index = index;
             this.nickname = nickname;
 
             this.parent = parent;
+            this.scene = scene;
 
             rank = 1;
             deck = new List<Card>();

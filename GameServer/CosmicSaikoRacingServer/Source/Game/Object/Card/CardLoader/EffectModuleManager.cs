@@ -470,17 +470,13 @@ namespace CSRServer.Game
 			List<Result[]> leakResults = new List<Result[]>();
 			List<Result[]> discardResults = new List<Result[]>();
 			List<int> throwIndexList = new List<int>();
-			//amount장의 카드를 버린다.
+			//amount장의 카드를 버리고 leak효과+ discard특수효과를 발동한다.
 			for (int i = 0; i < amount; i++)
 			{
 				int throwIndex = random.Next(player.hand.Count);
 				throwIndexList.Add(throwIndex);
 				Result[] throwResult = player.ThrowCard(throwIndex);
 				leakResults.Add(throwResult);
-			}
-			//amount번의 특수효과를 발동한다.
-			for (int i = 0; i < amount; i++)
-			{
 				Result[] discardResult = effect.Use(card, player);
 				discardResults.Add(discardResult);
 			}

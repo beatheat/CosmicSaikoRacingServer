@@ -10,10 +10,12 @@
 		/// <summary>
 		/// 턴 종료시 고효율 버프수 * 0.1 만큼 더 전진함
 		/// </summary>
-		public override void OnTurnEnd()
+		public override void OnDepartStart()
 		{
 			player.turnDistance = (int) (Math.Round(player.turnDistance * (1.0 + 0.1 * count)));
 			base.Release();
 		}
+
+		public override void OnPreheatEnd() { }
 	}
 }

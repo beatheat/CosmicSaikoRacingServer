@@ -57,11 +57,11 @@ namespace CSRServer.Game
 			return buffList[buffIndex].count;
 		}
 
-		public void OnTurnStart()
+		public void OnPreheatStart()
 		{
 			foreach (var buff in buffList)
 			{
-				buff.OnTurnStart();
+				buff.OnPreheatStart();
 			}
 		}
 		
@@ -116,11 +116,19 @@ namespace CSRServer.Game
 			}
 		}
 
-		public void OnTurnEnd()
+		public void OnPreheatEnd()
 		{
 			foreach (var buff in buffList)
 			{
-				buff.OnTurnEnd();
+				buff.OnPreheatEnd();
+			}
+		}
+		
+		public void OnDepartStart()
+		{
+			foreach (var buff in buffList)
+			{
+				buff.OnDepartStart();
 			}
 		}
 	}

@@ -2,11 +2,15 @@
 {
 	internal class BuffExposure : Buff
 	{
-		public List<Card> exposureCards;
+		private readonly List<Card> _exposureCards;
+		private bool _turnStart;
+		
 		public BuffExposure(GamePlayer player) : base(player)
 		{
-			exposureCards = new List<Card>();
 			type = Buff.Type.Exposure;
+
+			_exposureCards = new List<Card>();
+			_turnStart = false;
 		}
 
 		/// <summary>
@@ -32,9 +36,9 @@
 			else
 			{
 				int randomNumber = random.Next(1, 6);
-				var lockCondition = new List<Resource.Type>(randomNumber);
+				var lockCondition = new List<Resource.Type>();
 				for (int j = 0; j < randomNumber; j++)
-					lockCondition[j] = Util.GetRandomEnumValue<Resource.Type>();
+					lockCondition.Add(Util.GetRandomEnumValue<Resource.Type>());
 				cardCondition = new CardCondition(lockCondition);
 			}
 			
@@ -50,15 +54,16 @@
 			{
 				card.isExposure = true;
 				card.condition = GetRandomCondition();
-				exposureCards.Add(card);
+				_exposureCards.Add(card);
 			}
 		}
 		
 		/// <summary>
 		/// 턴 시작 시 피폭이 있다면 손패의 랜덤한 카드에 적용한다
 		/// </summary>
-		public override void OnTurnStart()
+		public override void OnPreheatStart()
 		{
+			_exposureCards.Clear();
 			if (count == 0) return;
 
 			//패 수만큼만 피폭
@@ -70,6 +75,8 @@
 			{
 				SetExposure(card);
 			}
+
+			_turnStart = true;
 		}
 
 		/// <summary>
@@ -77,8 +84,9 @@
 		/// </summary>
 		public override void OnDrawCard(ref Card card)
 		{
-			if (count == 0) return;
-			if (count - player.hand.Count > 0)
+			if (count == 0) 
+				return;
+			if (_turnStart && count - player.hand.Count > 0)
 			{
 				SetExposure(card);
 			}
@@ -92,7 +100,7 @@
 			if (count > 0 && card.isExposure)
 			{
 				count--;
-				exposureCards.Remove(card);
+				_exposureCards.Remove(card);
 			}
 			return true;
 		}
@@ -103,23 +111,29 @@
 		public override void AfterUseCard(ref Card card)
 		{
 			//피폭된 카드 수가 피폭버프스택보다 적을 때 발동
-			if (exposureCards.Count < count)
+			if (_exposureCards.Count < count)
 			{
-				int exposureCount = count - exposureCards.Count;
+				int exposureCount = count - _exposureCards.Count;
 				var nonExposureHand = player.hand.FindAll(x => x.isExposure == false);
 				Util.DistributeOnList(nonExposureHand, exposureCount, out var selectedCards);
 				SetExposure(selectedCards.ToArray());
 			}
 		}
 
+		public override void OnPreheatEnd()
+		{
+			base.OnPreheatEnd();
+			_turnStart = false;
+		}
+
 		public override int Release()
 		{
-			foreach (var card in exposureCards)
+			foreach (var card in _exposureCards)
 			{
 				card.isExposure = false;
 				card.condition = CardManager.GetCard(card.id).condition;
 			}
-			exposureCards.Clear();
+			_exposureCards.Clear();
 			return base.Release();
 		}
 	}

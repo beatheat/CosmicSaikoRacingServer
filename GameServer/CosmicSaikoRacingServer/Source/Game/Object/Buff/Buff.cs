@@ -39,7 +39,7 @@ namespace CSRServer.Game
 
 		#region Buff Activation Methods
 
-		public virtual void OnTurnStart() { }
+		public virtual void OnPreheatStart() { }
 		public virtual bool BeforeUseCard(ref Card card, ref CardEffectModule.Result[] results) { return true; }
 		public virtual void AfterUseCard(ref Card card) { }
 
@@ -47,6 +47,8 @@ namespace CSRServer.Game
 		public virtual void AfterRerollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel) { }
 		public virtual void OnThrowCard(Card card) { }
 		public virtual void OnDrawCard(ref Card card) { }
+		
+		public virtual void OnDepartStart() { }
 
 		public virtual int Release()
 		{
@@ -55,7 +57,7 @@ namespace CSRServer.Game
 			return releaseCount;
 		}
 
-		public virtual void OnTurnEnd()
+		public virtual void OnPreheatEnd()
 		{
 			Release();
 		}

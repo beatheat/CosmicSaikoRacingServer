@@ -204,7 +204,7 @@ namespace CSRServer.Game
 			else if (target is >= 1 and <= 4)
 			{
 				var p = player.parent.Find(x => x.rank == target);
-				if (p != player)
+				if (p != player && p != null)
 					targetPlayerIndex.Add(p!.index);
 			}
 			//자신 바로 앞 플레이어
@@ -213,7 +213,8 @@ namespace CSRServer.Game
 				if (player.rank > 1)
 				{
 					var p = player.parent.Find(x => x.rank == player.rank - 1);
-					targetPlayerIndex.Add(p!.index);
+					if(p != null)
+						targetPlayerIndex.Add(p.index);
 				}
 			}
 			//자신 바로 뒤 플레이어
@@ -222,7 +223,8 @@ namespace CSRServer.Game
 				if (player.rank < 4)
 				{
 					var p = player.parent.Find(x => x.rank == player.rank + 1);
-					targetPlayerIndex.Add(p!.index);
+					if(p != null)
+						targetPlayerIndex.Add(p.index);
 				}
 			}
 			// target->distance 범위 안의 플레이어
@@ -231,7 +233,7 @@ namespace CSRServer.Game
 				int distance = target;
 				foreach (var p in player.parent)
 				{
-					if (Math.Abs(p.currentDistance - player.currentDistance) <= distance)
+					if (p != player && Math.Abs(p.currentDistance - player.currentDistance) <= distance)
 						targetPlayerIndex.Add(p.index);
 				}
 			}
@@ -291,7 +293,7 @@ namespace CSRServer.Game
             else if (target is >= 1 and <= 4)
             {
             	var p = player.parent.Find(x => x.rank == target);
-            	if (p != player)
+            	if (p!= null && p != player)
             		targetPlayerIndex.Add(p!.index);
             }
             //자신 바로 앞 플레이어
@@ -300,8 +302,9 @@ namespace CSRServer.Game
             	if (player.rank > 1)
             	{
             		var p = player.parent.Find(x => x.rank == player.rank - 1);
-            		targetPlayerIndex.Add(p!.index);
-            	}
+                    if (p != null)
+	                    targetPlayerIndex.Add(p.index);
+                }
             }
             //자신 바로 뒤 플레이어
             else if (target == 6)
@@ -309,8 +312,9 @@ namespace CSRServer.Game
             	if (player.rank < 4)
             	{
             		var p = player.parent.Find(x => x.rank == player.rank + 1);
-            		targetPlayerIndex.Add(p!.index);
-            	}
+                    if (p != null)
+	                    targetPlayerIndex.Add(p.index);
+                }
             }
             // target->distance 범위 안의 플레이어
             else if (target >= 7)
@@ -318,7 +322,7 @@ namespace CSRServer.Game
             	int distance = target;
             	foreach (var p in player.parent)
             	{
-            		if (Math.Abs(p.currentDistance - player.currentDistance) <= distance)
+	                if (p != player && Math.Abs(p.currentDistance - player.currentDistance) <= distance)
             			targetPlayerIndex.Add(p.index);
             	}
             }
@@ -335,7 +339,7 @@ namespace CSRServer.Game
 			{
 				foreach (int idx in targetPlayerIndex)
 				{
-					player.parent[idx].AddBuff((Buff.Type)idx, amount);
+					player.parent[idx].AddBuff((Buff.Type)id, amount);
 				}
 				return new Result{result = result, type = Type.BuffToOther};
 			}

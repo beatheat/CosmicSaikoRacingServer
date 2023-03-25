@@ -89,6 +89,8 @@ namespace CSRServer.Game
             _server.RemoveResponse("UseCard");
             _server.RemoveResponse("RerollResource");
             _server.AddReceiveEvent("PreheatReady", PreheatReady);
+            foreach (var player in _turnData.playerList)
+                player.PreheatEnd();
             _parent.DepartStart();
         }
         

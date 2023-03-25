@@ -28,7 +28,7 @@ namespace CSRServer.Game
 		/// <summary>
 		/// 턴 시작시 누전버프가 있다면 누전적용
 		/// </summary>
-		public override void OnTurnStart()
+		public override void OnPreheatStart()
 		{
 			if (count == 0) return;
 			

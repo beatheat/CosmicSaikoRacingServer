@@ -36,7 +36,7 @@
 		/// <summary>
 		/// 턴 시작시 증식버프가 있다면 적용한다
 		/// </summary>
-		public override void OnTurnStart()
+		public override void OnPreheatStart()
 		{
 			if (count == 0) return;
 			MakeRandomCondition();

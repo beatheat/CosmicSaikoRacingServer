@@ -2,12 +2,14 @@
 {
 	internal class BuffMimesis : Buff
 	{
-		public List<Card> mimesisCards;
+		private readonly List<Card> _mimesisCards;
+		private bool _turnStart;
 
 		public BuffMimesis(GamePlayer player) : base(player)
 		{
 			type = Buff.Type.Mimesis;
-			mimesisCards = new List<Card>();
+			_mimesisCards = new List<Card>();
+			_turnStart = false;
 		}
 
 		/// <summary>
@@ -19,15 +21,16 @@
 			{
 				card.isMimesis = true;
 				card.condition = new CardCondition(0);
-				mimesisCards.Add(card);
+				_mimesisCards.Add(card);
 			}
 		}
 		
 		/// <summary>
 		/// 턴 시작 시 의태버프가 존재하면 적용한다
 		/// </summary>
-		public override void OnTurnStart()
+		public override void OnPreheatStart()
 		{
+			_mimesisCards.Clear();;
 			if (count == 0) return;
 			
 
@@ -41,6 +44,8 @@
 			{
 				SetMimesis(card);
 			}
+
+			_turnStart = true;
 		}
 		
 		/// <summary>
@@ -49,7 +54,7 @@
 		public override void OnDrawCard(ref Card card)
 		{
 			if (count == 0) return;
-			if (count - player.hand.Count > 0)
+			if (_turnStart && count - player.hand.Count > 0)
 			{
 				SetMimesis(card);
 			}
@@ -63,7 +68,7 @@
 			if (count > 0 && card.isMimesis)
 			{
 				count--;
-				mimesisCards.Remove(card);
+				_mimesisCards.Remove(card);
 			}
 			return true;
 		}
@@ -74,24 +79,29 @@
 		public override void AfterUseCard(ref Card card)
 		{
 			//의태한 카드 수가 피폭버프스택보다 적을 때 발동
-			if (mimesisCards.Count < count)
+			if (_mimesisCards.Count < count)
 			{
-				int mimesisCount = count - mimesisCards.Count;
+				int mimesisCount = count - _mimesisCards.Count;
 				var nonMimesisHand = player.hand.FindAll(x => x.isExposure == false);
 				Util.DistributeOnList(nonMimesisHand, mimesisCount, out var selectedCards);
 				SetMimesis(selectedCards.ToArray());
 			}
 		}
 
+		public override void OnPreheatEnd()
+		{
+			base.OnPreheatEnd();
+			_turnStart = false;
+		}
 
 		public override int Release()
 		{
-			foreach (var card in mimesisCards)
+			foreach (var card in _mimesisCards)
 			{
 				card.isMimesis = false;
 				card.condition = CardManager.GetCard(card.id).condition;
 			}
-			mimesisCards.Clear();
+			_mimesisCards.Clear();
 			return base.Release();
 		}
 	}

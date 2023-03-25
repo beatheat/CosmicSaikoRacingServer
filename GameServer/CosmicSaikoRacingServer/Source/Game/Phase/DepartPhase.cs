@@ -50,7 +50,7 @@ namespace CSRServer.Game
             
 			foreach (var player in _turnData.playerList)
 			{
-				player.PreheatEnd(out var attackResult);
+				player.DepartStart(out var attackResult);
 				attackResults.AddRange(attackResult);
 				// obstacleResults.AddRange(obstacleResult);
 				player.phaseReady = false;

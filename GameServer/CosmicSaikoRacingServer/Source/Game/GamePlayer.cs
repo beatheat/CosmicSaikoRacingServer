@@ -444,13 +444,13 @@ namespace CSRServer.Game
             RollResource();
             DrawCard(drawCount);
             
-            buffManager.OnTurnStart();
+            buffManager.OnPreheatStart();
         }
         
         /// <summary>
         /// 예열 페이즈가 끝날때 플레이어 정보를 설정한다
         /// </summary>
-        public void PreheatEnd(out CardEffectModule.Result[] attackResult)
+        public void PreheatEnd()
         {
             //손패 전부 버리기
             while (hand.Count > 0)
@@ -462,7 +462,16 @@ namespace CSRServer.Game
             turnUsedCard.Clear();
             
             //버프 적용
-            buffManager.OnTurnEnd();
+            buffManager.OnPreheatEnd();
+        }
+
+        /// <summary>
+        /// 발진 페이즈 시작시 공격 후 이동거리를 늘린다
+        /// </summary>
+        public void DepartStart(out CardEffectModule.Result[] attackResult)
+        {
+            //버프 적용
+            buffManager.OnDepartStart();
 
             //발진 페이즈 시 발생할 공격정보를 보여준다
             CardEffectModule.Result[] _attackResult = new CardEffectModule.Result[_departEvents.Count];

@@ -108,10 +108,8 @@ namespace MatchingServer
             {
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
             } while (room.ContainsKey(roomNum));
-            if (address.Contains("192.168"))
-                room.Add(roomNum, "127.0.0.1:17979");
-            else
-                room.Add(roomNum, address);
+
+            room.Add(roomNum, address);
 
             return new EdenData(roomNum);
         }
@@ -140,7 +138,12 @@ namespace MatchingServer
             if(!data.TryGet<int>(out var roomNum))
                 return new EdenData(new EdenError("ERR:Unauthorized Access"));
             if (room.ContainsKey(roomNum))
-                return new EdenData(StringToAddress(room[roomNum]));
+            {
+                if (client_id.Contains("192.168"))
+                    return new EdenData(StringToAddress("127.0.0.1:17979"));
+                else
+                    return new EdenData(StringToAddress(room[roomNum]));
+            }
             else
                 return new EdenData(new EdenError("ERR:Wrong Lobby Number"));
         }

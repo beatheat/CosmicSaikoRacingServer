@@ -56,7 +56,7 @@ namespace CSRServer.Game
         [JsonIgnore] 
         public int usedCount = 0;
 
-        public Card(int id, Type type, int rank, CardCondition condition, CardEffect effect, Dictionary<string,Variable> variable)
+        public Card(int id, Type type, int rank, CardCondition condition, CardEffect effect, Dictionary<string,Variable> variable, bool death = false)
         {
             this.id = id;
             this.type = type;
@@ -64,6 +64,7 @@ namespace CSRServer.Game
             this.condition = condition;
             this.effect = effect;
             this.variable = variable;
+            this.death = death;
         }
         
         public Card Clone()

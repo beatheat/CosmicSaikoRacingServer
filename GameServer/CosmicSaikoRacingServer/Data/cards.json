@@ -66,7 +66,7 @@
     "rank": 1,
     "type": "Normal",
     "condition": "#yacht",
-    "effect-string": "이동 거리를 50 더합니다. 소멸.",
+    "effect-string": "이동 거리를 50 더합니다.",
     "effect": "Add(50), Death()",
     "keyword-id": "소멸"
   },
@@ -178,7 +178,6 @@
     "rank": 1,
     "type": "Normal",
     "condition": "#yacht",
-    "effect-string": "소멸",
     "effect": "Death()",
     "keyword-id": "소멸"
   },
@@ -386,7 +385,7 @@
     "type": "fossil",
     "condition": "f2",
     "variable": "percent(0~100) = 20",
-    "effect-string": "이동 거리를 10 더합니다. 과열[{percent} + 10]: 2등급 화석 카드를 생성해 덱에 넣고 소멸합니다.",
+    "effect-string": "이동 거리를 10 더합니다. 과열[{percent} + 10]: 2등급 화석 카드를 생성해 덱에 넣습니다. 소멸.",
     "effect": "Add(10), Overload(\"percent\", 10, { CreateCardToDeck(%randomCardId[Fossil, 2, 2], 1), Death() } )",
     "keyword-id": "소멸, 과열"
   },
@@ -1242,7 +1241,7 @@
     "type": "Cosmic",
     "condition": "#pair",
     "effect-string": "자신을 포함해 랜덤한 대상에게 고장을 1 부여합니다.",
-    "effect": "Choice({BuffToMe(3, 1), BuffToOther(3, 1, %randomNum[0, 6])})"
+    "effect": "Choice({BuffToMe(3, 1), \nBuffToOther(3, 1, 0), \nBuffToOther(3, 1, %randomNum[1, 4]), \nBuffToOther(3, 1, %randomNum[5, 6])})"
   },
   {
     "id": "144",
@@ -1419,7 +1418,7 @@
     "type": "Cosmic",
     "condition": "#two-pair",
     "effect-string": "자신을 포함해 랜덤한 대상에게 고장을 1 부여합니다. 핸드의 카드 수 만큼 반복합니다.",
-    "effect": "Repeat(%currentHandNum, Choice({BuffToMe(3, 1), BuffToOther(3, 1, %randomNum[0, 6])}))"
+    "effect": "Repeat(%currentHandNum, Choice( {BuffToMe(3, 1), BuffToOther(3, 1, %randomNum[0, 6]) } ) )"
   },
   {
     "id": "166",

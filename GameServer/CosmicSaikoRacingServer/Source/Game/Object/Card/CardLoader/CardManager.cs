@@ -82,7 +82,7 @@ namespace CSRServer.Game
 				CardCondition condition;
 				CardEffect effect;
 				Dictionary<string, Card.Variable> variable = new Dictionary<string, Card.Variable>();
-
+				bool death;
 				try
 				{
 					if (jsonId == null || !int.TryParse(jsonId.ToString(), out id))
@@ -102,14 +102,14 @@ namespace CSRServer.Game
 					else
 						throw new Exception($"CardManager::Load - index({i}) : condition attribute is missing");
 
-					effect = ParseEffect(jsonEffect != null ? jsonEffect.ToString() : "Nothing()");
+					effect = ParseEffect(jsonEffect != null ? jsonEffect.ToString() : "Nothing()", out death);
 				}
 				catch (Exception e)
 				{
 					throw new Exception($"CardManager::Load - index({i}) : \n" + e.Message);
 				}
 
-				_cards.Add(new Card(id, type, rank, condition, effect, variable));
+				_cards.Add(new Card(id, type, rank, condition, effect, variable, death));
 			}
 			Logger.LogWithClear("Card data parsing ends");
 			_isLoaded = true;
@@ -241,10 +241,15 @@ namespace CSRServer.Game
 		/// <summary>
 		/// 카드 효과를 파싱한다
 		/// </summary>
-		private static CardEffect ParseEffect(string effectString)
+		private static CardEffect ParseEffect(string effectString, out bool includeDeath)
 		{
 			string[] effectModuleStringList = SplitEffectModule(effectString);
 			var cardEffectModules = new List<CardEffectModule>();
+			
+			includeDeath = false;
+			if (effectModuleStringList.Contains("Death()"))
+				includeDeath = true;
+			
 			foreach (var effectModuleString in effectModuleStringList)
 			{
 				// 이펙트 모듈 이름 파싱
@@ -289,13 +294,13 @@ namespace CSRServer.Game
 					else if (identifier == '{')
 					{
 						var effectListString = parameterString.Substring(1, parameterString.Length - 2);
-						var effectInEffect = ParseEffect(effectListString);
+						var effectInEffect = ParseEffect(effectListString, out _);
 						parameters.Add(new CardEffectModule.Parameter(effectInEffect));
 					}
 					//Module일때
 					else if (Regex.IsMatch(parameterString,"[a-zA-Z]*[(].*[)]"))
 					{
-						var effectInEffect = ParseEffect(parameterString);
+						var effectInEffect = ParseEffect(parameterString, out _);
 						parameters.Add(new CardEffectModule.Parameter(effectInEffect));
 					}
 					//Number List일때

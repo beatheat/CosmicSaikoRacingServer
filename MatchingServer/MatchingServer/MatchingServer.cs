@@ -109,7 +109,10 @@ namespace MatchingServer
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
             } while (room.ContainsKey(roomNum));
 
-            room.Add(roomNum, address);
+            if(address.Contains("192.168"))
+                room.Add(roomNum, "58.141.131.141:17979");
+            else
+                room.Add(roomNum, address);
 
             return new EdenData(roomNum);
         }

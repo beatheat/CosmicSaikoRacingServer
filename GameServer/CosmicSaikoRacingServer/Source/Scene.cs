@@ -19,7 +19,7 @@ namespace CSRServer
         public Dictionary<string, object> passingData = new Dictionary<string, object>();
         public Dictionary<string, object>? passedData = null;
 
-        public Scene(GameManager gameManager, EdenNetServer server)
+        protected Scene(GameManager gameManager, EdenNetServer server)
         {
             this.gameManager = gameManager;
             this.server = server;

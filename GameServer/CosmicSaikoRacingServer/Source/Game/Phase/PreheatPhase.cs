@@ -51,7 +51,7 @@ namespace CSRServer.Game
             foreach (var player in _turnData.playerList)
             {
                 
-                _server.SendAsync("PreheatStart", player.clientId, new Dictionary<string, object>
+                _server.Send("PreheatStart", player.clientId, new Dictionary<string, object>
                 {
                     ["player"] = player,
                     ["playerList"] = monitorPlayerList,
@@ -61,7 +61,7 @@ namespace CSRServer.Game
 
             }
 
-            // _timer = new Timer(GameTimer, null, 0, 1000);
+            _timer = new Timer(GameTimer, null, 0, 1000);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace CSRServer.Game
             _timer?.Dispose();
             _server.RemoveResponse("UseCard");
             _server.RemoveResponse("RerollResource");
-            _server.AddReceiveEvent("PreheatReady", PreheatReady);
+            _server.RemoveReceiveEvent("PreheatReady");
             foreach (var player in _turnData.playerList)
                 player.PreheatEnd();
             _parent.DepartStart();
@@ -102,7 +102,7 @@ namespace CSRServer.Game
             if (_time >= 0)
             {
                 _time--;
-                _server.BroadcastAsync("PreheatTime", _time);
+                _server.BroadcastAsync("PreheatTime", _time, false);
             }
             else
             {

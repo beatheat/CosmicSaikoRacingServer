@@ -47,7 +47,7 @@ namespace CSRServer.Game
                 player.phaseReady = false;
                 _maintainStore.ShowRandomCards(player, out var storeCards);
                 _maintainStore.ShowRandomRemoveCards(player, out var removeCards);
-                _server.SendAsync("MaintainStart", player.clientId, new Dictionary<string, object>
+                _server.Send("MaintainStart", player.clientId, new Dictionary<string, object>
                 {
                     ["storeCards"] = storeCards,
                     ["removeCards"] = removeCards
@@ -81,7 +81,7 @@ namespace CSRServer.Game
             if (_time >= 0)
             {
                 _time--;
-                _server.BroadcastAsync("MaintainTime", _time);
+                _server.BroadcastAsync("MaintainTime", _time, false);
             }
             else
             {

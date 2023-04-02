@@ -30,7 +30,7 @@ namespace CSRServer.Game
 			if (_time >= 0)
 			{
 				_time--;
-				_server.BroadcastAsync("MaintainTime", _time);
+				_server.BroadcastAsync("MaintainTime", _time, false);
 			}
 			else
 			{
@@ -57,7 +57,7 @@ namespace CSRServer.Game
 			}
 			
 			//발진 페이즈 데이터 클라이언트와 동기화
-			_server.BroadcastAsync("DepartStart", new Dictionary<string, object>
+			_server.Broadcast("DepartStart", new Dictionary<string, object>
 			{
 				["playerList"] = _parent.GetMonitorPlayerList(),
 				["attackResults"] = attackResults,

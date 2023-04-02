@@ -1,7 +1,7 @@
 {
   "port": 17979,
-  "gamelogPath": "EdenGameServerLog.txt",
-  "networklogPath": "EdenNetworkLog.txt",
+  "gameLogPath": "CSRGameServerLog.txt",
+  "networkLogPath": "EdenNetworkLog.txt",
 
   "moduleChipPath" :  "Data/ModuleChip",
 

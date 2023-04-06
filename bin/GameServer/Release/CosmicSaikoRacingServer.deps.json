@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v7.0": {
       "CosmicSaikoRacingServer/1.0.0": {
         "dependencies": {
-          "EdenNetwork": "1.4.8",
+          "EdenNetwork": "1.4.10",
           "Mono.Nat": "3.0.4",
           "NLua": "1.6.0"
         },
@@ -125,7 +125,7 @@
           }
         }
       },
-      "EdenNetwork/1.4.8": {
+      "EdenNetwork/1.4.10": {
         "runtime": {
           "EdenNetwork.dll": {}
         }
@@ -159,7 +159,7 @@
       "path": "nlua/1.6.0",
       "hashPath": "nlua.1.6.0.nupkg.sha512"
     },
-    "EdenNetwork/1.4.8": {
+    "EdenNetwork/1.4.10": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

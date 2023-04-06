@@ -1,11 +1,13 @@
 {
-  "port": 17979,
+  "localServerPort": 18989,
+  "gameServerPort": 17979,
   "gameLogPath": "CSRGameServerLog.txt",
-  "networkLogPath": "EdenNetworkLog.txt",
+  "localNetworkLogPath": "LocalNetworkLog.txt",
+  "gameNetworkLogPath": "GameNetworkLog.txt",
 
   "moduleChipPath" :  "Data/ModuleChip",
 
-  "matchingServerAddress": "192.168.0.11",
+  "matchingServerAddress": "125.240.225.185",
   "matchingServerPort" :  16969,
   
   "cardDataPath" : "Data/cards.json"

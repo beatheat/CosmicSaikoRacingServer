@@ -86,22 +86,14 @@ namespace MatchingServer
         }
 
 
-        public EdenData CreateLobby(string client_id, EdenData data)
+        public EdenData CreateLobby(string clientId, EdenData data)
         {
             if (room.Count >= 100000)
             {
                 return EdenData.Error("There is no room remain");
             }
-            if (!data.TryGet<int>(out var port))
-                return EdenData.Error("Wrong formatted port number");
-            if (port < 0 || port > 65535)
-            {
-                return EdenData.Error("Wrong port number");
-            }
-            
-
-            string address = (string) (StringToAddress(client_id))["address"];
-            address += ":" + port.ToString();
+            if (!data.TryGet<string>(out var privateAddress))
+                return EdenData.Error("Wrong formatted address number");
             
             int roomNum;
             do
@@ -109,21 +101,46 @@ namespace MatchingServer
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
             } while (room.ContainsKey(roomNum));
 
-            if(address.Contains("192.168"))
-                room.Add(roomNum, "58.141.131.141:17979");
-            else
-                room.Add(roomNum, address);
-
+            room.Add(roomNum, privateAddress + "," + clientId);
+            Task.Run(HeartBeat);
             return new EdenData(roomNum);
+            
+            async void HeartBeat()
+            {
+                var address = clientId.Split(":");
+                EdenNetClient client = new EdenNetClient(address[0], int.Parse(address[1]));
+                bool connection = true;
+                client.SetServerDisconnectEvent(() =>
+                {
+                    connection = false;
+                });
+                int count = 0;
+                while (await client.ConnectAsync() != ConnectionState.OK)
+                {
+                    await Task.Delay(300);
+                    count++;
+                    if (count > 10)
+                    {
+                        Console.WriteLine("GameServer connection failed");
+                        return;
+                    }
+                }
+
+                while (connection)
+                {
+                    await client.SendAsync("HeartBeat");
+                    await Task.Delay(3000);
+                }
+            }
         }
 
-        public EdenData DestroyLobby(string client_id, EdenData data)
+        public EdenData DestroyLobby(string clientId, EdenData data)
         {
             if (!data.TryGet<int>(out var roomNum))
                 return EdenData.Error("Wrong formatted room number");
             if (room.ContainsKey(roomNum))
             {
-                if (client_id == room[roomNum])
+                if (clientId == room[roomNum])
                 {
                     room.Remove(roomNum);
                     return new EdenData("Room destroyed");
@@ -134,7 +151,7 @@ namespace MatchingServer
 
         }
 
-        public EdenData GetRoomAddress(string client_id, EdenData data)
+        public EdenData GetRoomAddress(string clientId, EdenData data)
         {
             if (data.type != EdenData.Type.SINGLE)
                 return new EdenData(new EdenError("ERR:Unauthorized Access"));
@@ -142,27 +159,33 @@ namespace MatchingServer
                 return new EdenData(new EdenError("ERR:Unauthorized Access"));
             if (room.ContainsKey(roomNum))
             {
-                if (client_id.Contains("192.168"))
-                    return new EdenData(StringToAddress("127.0.0.1:17979"));
-                else
-                    return new EdenData(StringToAddress(room[roomNum]));
+                // if (clientId.Contains("192.168"))
+                //     return new EdenData(StringToAddress("127.0.0.1:17979"));
+                // else
+                string privateAddress = room[roomNum].Split(",")[0];
+                string publicAddress = room[roomNum].Split(",")[1];
+                return new EdenData(new Dictionary<string, object>
+                {
+                    ["privateAddress"] = privateAddress,
+                    ["publicAddress"] = publicAddress
+                });
             }
             else
                 return new EdenData(new EdenError("ERR:Wrong Lobby Number"));
         }
 
-        public void MatchMake(string client_id, EdenData data)
+        public void MatchMake(string clientId, EdenData data)
         {
-            MatchInfo matchInfo = new MatchInfo { id = client_id, canceled = false };
+            MatchInfo matchInfo = new MatchInfo { id = clientId, canceled = false };
             matchQueue.Enqueue(matchInfo);
             matchMap.Add(matchInfo.id, matchInfo);
         }
 
-        public void CancelMatchMake(string client_id, EdenData data)
+        public void CancelMatchMake(string clientId, EdenData data)
         {
-            if(matchMap.ContainsKey(client_id))
+            if(matchMap.ContainsKey(clientId))
             {
-                matchMap[client_id].canceled = true;
+                matchMap[clientId].canceled = true;
             }
         }
 

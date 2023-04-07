@@ -121,11 +121,11 @@ namespace MatchingServer
                     count++;
                     if (count > 10)
                     {
-                        Console.WriteLine("GameServer connection failed");
+                        Console.WriteLine($"GameServer connection fail on {clientId}");
                         return;
                     }
                 }
-
+                Console.WriteLine($"GameServer connection success on {clientId}");
                 while (connection)
                 {
                     await client.SendAsync("HeartBeat");

@@ -107,6 +107,7 @@ namespace MatchingServer
             
             async void HeartBeat()
             {
+                Console.WriteLine("Ready to Login to GameServer");
                 var address = clientId.Split(":");
                 EdenNetClient client = new EdenNetClient(address[0], int.Parse(address[1]));
                 bool connection = true;
@@ -117,6 +118,7 @@ namespace MatchingServer
                 int count = 0;
                 while (await client.ConnectAsync() != ConnectionState.OK)
                 {
+                    Console.WriteLine($"Trying Login {count}");
                     await Task.Delay(300);
                     count++;
                     if (count > 10)

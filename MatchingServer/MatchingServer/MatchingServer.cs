@@ -116,10 +116,9 @@ namespace MatchingServer
                     connection = false;
                 });
                 int count = 0;
-                while (await client.ConnectAsync() != ConnectionState.OK)
+                while (await client.ConnectAsync(1) != ConnectionState.OK)
                 {
                     Console.WriteLine($"Trying Login {count}");
-                    await Task.Delay(300);
                     count++;
                     if (count > 10)
                     {

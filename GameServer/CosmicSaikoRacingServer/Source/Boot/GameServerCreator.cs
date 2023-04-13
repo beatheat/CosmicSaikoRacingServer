@@ -73,7 +73,7 @@ namespace CSRServer
 				int gameServerPort = matchClient.GetLocalEndPort();
 				// 매칭서버에 로비를 생성하고 방번호를 받는다
 				EdenData matchingServerData = matchClient.Request("CreateLobby", GetLocalIPAddress() + ":" + gameServerPort);
-				matchClient.Close();
+				
 				if (data.type == EdenData.Type.ERROR)
 					return new EdenData(new Dictionary<string, object> {["state"] = false, ["message"] = "Cannot Create Game : cannot create lobby"});
 
@@ -92,6 +92,7 @@ namespace CSRServer
 
 				// lobbyScene.passingData.Add("hostId", clientId);
 				lobbyScene.passingData.Add("roomNumber", roomNumber);
+				lobbyScene.passingData.Add("matchingServerClient", matchClient);
 				
 				// 게임서버를 실행한다.
 				_gameManager.Run();

@@ -21,6 +21,7 @@ namespace CSRServer
         private readonly Dictionary<string, LobbyPlayer> _playerMap;
         //로비의 방번호
         private int _roomNumber;
+        private EdenUdpClient _matchClient;
 
 
         public LobbyScene(GameManager gameManager, EdenUdpServer server) : base(gameManager, server)
@@ -38,6 +39,7 @@ namespace CSRServer
                 throw new Exception("LobbyScene - passedData is null");
             }
             _roomNumber = (int)passedData["roomNumber"];
+            _matchClient = (EdenUdpClient) passedData["matchingServerClient"];
             
             server.AddResponse("LobbyLogin", Login);
             server.AddReceiveEvent("LobbyLogout", Logout);
@@ -134,13 +136,16 @@ namespace CSRServer
         /// <summary>
         /// 모든 클라이언트가 준비완료하고 호스트가 게임을 시작했을 때 게임을 시작한다
         /// </summary>
-        private void GameStart(string clientId, EdenData data)
+        private async void GameStart(string clientId, EdenData data)
         {
             foreach (var player in _playerList)
             {
                 if (!player.isReady)
                     return;
             }
+
+            await _matchClient.RequestAsync("DestroyLobby");
+            _matchClient.Close();
             ChangeScene();
         }
 

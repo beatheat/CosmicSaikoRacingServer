@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EdenNetwork;
+using EdenNetwork.Udp;
 
 namespace CSRServer
 {
@@ -13,13 +14,13 @@ namespace CSRServer
     public abstract class Scene
     {
         protected GameManager gameManager;
-        protected EdenNetServer server;
+        protected EdenUdpServer server;
 
         //씬을 변경할때 넘길 데이터를 저장
         public Dictionary<string, object> passingData = new Dictionary<string, object>();
         public Dictionary<string, object>? passedData = null;
 
-        protected Scene(GameManager gameManager, EdenNetServer server)
+        protected Scene(GameManager gameManager, EdenUdpServer server)
         {
             this.gameManager = gameManager;
             this.server = server;

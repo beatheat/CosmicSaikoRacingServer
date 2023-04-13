@@ -1,4 +1,5 @@
 ﻿using EdenNetwork;
+using EdenNetwork.Udp;
 
 namespace CSRServer.Game
 {
@@ -9,13 +10,13 @@ namespace CSRServer.Game
         
         private readonly TurnData _turnData;
         private readonly GameManager _gameManager;
-        private readonly EdenNetServer _server;
+        private readonly EdenUdpServer _server;
         private readonly GameScene _parent;
 
         private Timer? _timer;
         private int _time;
 
-        public PreheatPhase(GameManager gameManager, EdenNetServer server, TurnData turnData, GameScene parent)
+        public PreheatPhase(GameManager gameManager, EdenUdpServer server, TurnData turnData, GameScene parent)
         {
             this._gameManager = gameManager;
             this._server = server;
@@ -42,7 +43,7 @@ namespace CSRServer.Game
             }
             
             //플레이어 rank 정해주기
-            var orderedPlayerList = _turnData.playerList.OrderBy(p => p.currentDistance).ToList();
+            var orderedPlayerList = _turnData.playerList.OrderByDescending(p => p.currentDistance).ToList();
             for (int i = 0; i < orderedPlayerList.Count; i++)
                 orderedPlayerList[i].rank = i + 1;
 
@@ -97,12 +98,12 @@ namespace CSRServer.Game
         /// <summary>
         /// 예열 페이즈 타이머
         /// </summary>
-        private void GameTimer(object? sender)
+        private async void GameTimer(object? sender)
         {
             if (_time >= 0)
             {
                 _time--;
-                _server.BroadcastAsync("PreheatTime", _time, false);
+                await _server.BroadcastAsync("PreheatTime", _time, log: false);
             }
             else
             {

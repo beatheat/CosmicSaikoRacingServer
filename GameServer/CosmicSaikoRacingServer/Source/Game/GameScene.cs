@@ -1,6 +1,7 @@
 ﻿using EdenNetwork;
 using CSRServer.Lobby;
 using CSRServer.Game;
+using EdenNetwork.Udp;
 
 
 namespace CSRServer
@@ -26,7 +27,7 @@ namespace CSRServer
         public DepartPhase departPhase = null!;
         public MaintainPhase maintainPhase = null!;
         
-        public GameScene(GameManager gameManager, EdenNetServer server) : base(gameManager, server)
+        public GameScene(GameManager gameManager, EdenUdpServer server) : base(gameManager, server)
         {
             _turnData = new TurnData();
         }

@@ -21,11 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mono.Nat" Version="3.0.4" />
-    <PackageReference Include="NLua" Version="1.6.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

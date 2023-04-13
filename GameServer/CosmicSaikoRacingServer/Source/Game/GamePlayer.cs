@@ -8,7 +8,7 @@ namespace CSRServer.Game
         //목표 이동거리
         [JsonIgnore] public const int INITIAL_TARGET_DISTANCE = 100;
         //최초 리롤 카운트
-        [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 5;
+        [JsonIgnore] public const int INITIAL_RESOURCE_REROLL_COUNT = 4;
         //최초 카드 드로우 카운트
         [JsonIgnore] public const int INITIAL_DRAW_COUNT = 5;
         //최초 리소스릴 카운트
@@ -158,16 +158,24 @@ namespace CSRServer.Game
                 {21,21,25,25,26,26,30,30,32,32},
                 {51,51,52,52,53,53,54,54,55,55},
                 {52,52,53,53,54,54,56,56,57,57},
-                {80,80,84,84,85,85,87,87,92,92},
+                // {80,80,84,84,85,85,87,87,92,92},
                 {110,110,110,115,115,115,115,121,121,121},
                 {140,140,144,144,146,146,157,157,151,151}
             };
             Random random = new Random();
-            int randomNumber = random.Next(8);
+            int randomNumber = random.Next(7);
             for (int i = 0; i < 10; i++)
             {
                 AddCardToDeck(CardManager.GetCard(card[randomNumber,i]));
+                // AddCardToDeck(CardManager.GetCard(140));
             }
+
+
+            // for (int i = 160; i < 170; i++)
+            // {
+            //     AddCardToDeck(CardManager.GetCard(20));
+            //     // AddCardToDeck(CardManager.GetCard(60));
+            // }
         }
 
         /// <summary>

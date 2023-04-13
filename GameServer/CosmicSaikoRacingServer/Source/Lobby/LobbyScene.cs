@@ -9,6 +9,7 @@ using CSRServer;
 using CSRServer.Lobby;
 using System.Drawing;
 using System.Numerics;
+using EdenNetwork.Udp;
 
 namespace CSRServer
 {
@@ -20,16 +21,13 @@ namespace CSRServer
         private readonly Dictionary<string, LobbyPlayer> _playerMap;
         //로비의 방번호
         private int _roomNumber;
-        //로비 호스트의 clientId
-        private string _hostId;
-        
-        
-        public LobbyScene(GameManager gameManager, EdenNetServer server) : base(gameManager, server)
+
+
+        public LobbyScene(GameManager gameManager, EdenUdpServer server) : base(gameManager, server)
         {
             _playerList = new List<LobbyPlayer>();
             _playerMap = new Dictionary<string, LobbyPlayer>();
             _roomNumber = 0;
-            _hostId = "";
         }
 
         public override void Load()
@@ -40,7 +38,6 @@ namespace CSRServer
                 throw new Exception("LobbyScene - passedData is null");
             }
             _roomNumber = (int)passedData["roomNumber"];
-            _hostId = (string)passedData["hostId"];
             
             server.AddResponse("LobbyLogin", Login);
             server.AddReceiveEvent("LobbyLogout", Logout);
@@ -68,7 +65,7 @@ namespace CSRServer
         /// <summary>
         /// 로비에서 클라이언트 접속이 끊어질 시 해당 클라이언트 리스트에서 제거한다.
         /// </summary>
-        private void RemovePlayer(string clientId)
+        private void RemovePlayer(string clientId, DisconnectReason reason)
         {
             if (_playerMap.ContainsKey(clientId))
             {
@@ -87,9 +84,12 @@ namespace CSRServer
         {
             if (!data.TryGet<string>(out var nickname))
                 return new EdenData(new EdenError("Login nickname is missing"));
+            if (_playerMap.ContainsKey(clientId))
+                return EdenData.Error("Already login");
+            
             LobbyPlayer player = new LobbyPlayer(clientId, nickname, _playerList.Count);
             _playerMap.Add(clientId, player);
-            if (clientId == _hostId)
+            if (clientId.Contains("127.0.0.1"))
             {
                 player.host = true;
                 _playerList.Insert(0, player);
@@ -113,7 +113,7 @@ namespace CSRServer
         /// </summary>
         private void Logout(string clientId, EdenData data)
         {
-            RemovePlayer(clientId);
+            RemovePlayer(clientId, DisconnectReason.RemoteConnectionClose);
         }
 
         /// <summary>

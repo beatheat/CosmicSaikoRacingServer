@@ -1,4 +1,5 @@
 ﻿using EdenNetwork;
+using EdenNetwork.Udp;
 
 namespace CSRServer.Game
 {
@@ -7,7 +8,7 @@ namespace CSRServer.Game
 		private const int INITIAL_TIME = 99;
 		private readonly TurnData _turnData;
 		private readonly GameManager _gameManager;
-		private readonly EdenNetServer _server;
+		private readonly EdenUdpServer _server;
         private readonly GameScene _parent;
         
         private readonly MaintainStore _maintainStore;
@@ -15,7 +16,7 @@ namespace CSRServer.Game
         private Timer? _timer;
 		private int _time;
 
-		public MaintainPhase(GameManager gameManager, EdenNetServer server, TurnData turnData, GameScene parent)
+		public MaintainPhase(GameManager gameManager, EdenUdpServer server, TurnData turnData, GameScene parent)
 		{
 			this._gameManager = gameManager;
 			this._server = server;
@@ -76,12 +77,12 @@ namespace CSRServer.Game
         }
         
         // 정비 페이즈 타이머
-        private void GameTimer(object? sender)
+        private async void GameTimer(object? sender)
         {
             if (_time >= 0)
             {
                 _time--;
-                _server.BroadcastAsync("MaintainTime", _time, false);
+                await _server.BroadcastAsync("MaintainTime", _time, log: false);
             }
             else
             {

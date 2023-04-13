@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CSRServer.Game;
 using EdenNetwork;
+using EdenNetwork.Udp;
 
 namespace CSRServer
 {
@@ -14,12 +15,12 @@ namespace CSRServer
     public class GameManager
     {
         public const int MAX_PLAYER = 8;
-        private readonly EdenNetServer _server;
+        private readonly EdenUdpServer _server;
         private readonly Dictionary<string, GameClient> _clients;
         private readonly Queue<Scene> _scenes;
         
 
-        public GameManager(EdenNetServer server)
+        public GameManager(EdenUdpServer server)
         {
             this._server = server;
             this._clients = new Dictionary<string, GameClient>();
@@ -29,7 +30,7 @@ namespace CSRServer
         /// <summary>
         /// 게임서버를 실행한다
         /// </summary>
-        public void Run(Scene firstScene)
+        public void Run()
         {
             // TODO: 이미 접속된 클라이언트의 연결이 끊어진 후 재접속했을 때 정보를 유지해야한다. 
             _server.Listen(MAX_PLAYER, (string clientId) =>
@@ -46,7 +47,13 @@ namespace CSRServer
 
                 }
             });
-            _scenes.Enqueue(firstScene);
+            _server.SetClientDisconnectEvent((string clientId, DisconnectReason info) =>
+            {
+                
+            });
+            
+            var firstScene = _scenes.Peek();
+            firstScene.passedData = firstScene.passingData;
             firstScene.Load();
         }
         /// <summary>
@@ -59,6 +66,7 @@ namespace CSRServer
                 Scene scene = _scenes.Dequeue();
                 scene.Destroy();
             }
+            _server?.Close();
         }
         
         /// <summary>

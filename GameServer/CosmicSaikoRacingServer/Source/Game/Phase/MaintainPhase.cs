@@ -15,6 +15,7 @@ namespace CSRServer.Game
 
         private Timer? _timer;
 		private int _time;
+        private bool _turnEnd;
 
 		public MaintainPhase(GameManager gameManager, EdenUdpServer server, TurnData turnData, GameScene parent)
 		{
@@ -41,6 +42,7 @@ namespace CSRServer.Game
             _server.AddResponse("RemoveCard", RemoveCard);
             
             _time = INITIAL_TIME;
+            _turnEnd = false;
 
             //정비 페이즈 구성요소 클라이언트와 동기화
             foreach (var player in _turnData.playerList)
@@ -56,7 +58,6 @@ namespace CSRServer.Game
             }
 
             _timer = new Timer(GameTimer, null, 0, 1000);
-
         }
 
         /// <summary>
@@ -64,16 +65,23 @@ namespace CSRServer.Game
         /// </summary>
         private void MaintainEnd()
         {
-            _timer?.Dispose();
-            
-            _server.RemoveReceiveEvent("MaintainReady");
-            _server.RemoveResponse("RerollStore");
-            _server.RemoveResponse("RerollRemoveCard");
-            _server.RemoveResponse("BuyExp");
-            _server.RemoveResponse("BuyCard");
-            _server.RemoveResponse("RemoveCard");        
-            
-            _parent.PreheatStart();
+            lock (this)
+            {
+                if (_turnEnd == false)
+                {
+                    _timer?.Dispose();
+
+                    _server.RemoveReceiveEvent("MaintainReady");
+                    _server.RemoveResponse("RerollStore");
+                    _server.RemoveResponse("RerollRemoveCard");
+                    _server.RemoveResponse("BuyExp");
+                    _server.RemoveResponse("BuyCard");
+                    _server.RemoveResponse("RemoveCard");
+
+                    _parent.PreheatStart();
+                    _turnEnd = true;
+                }
+            }
         }
         
         // 정비 페이즈 타이머

@@ -150,7 +150,7 @@ namespace MatchingServer
                 }
                 else return new EdenData("Not permitted access");
             }
-            else return new EdenData("Room deos not exist");
+            else return new EdenData("Room does not exist");
 
         }
 

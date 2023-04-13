@@ -13,6 +13,7 @@ namespace CSRServer.Game
 
 		private Timer? _timer;
 		private int _time;
+		private bool _turnEnd;
 
 		public DepartPhase(GameManager gameManager, EdenUdpServer server, TurnData turnData, GameScene parent)
 		{
@@ -22,6 +23,7 @@ namespace CSRServer.Game
 			this._parent = parent;
 			this._timer = null;
 			this._time = 0;
+			this._turnEnd = false;
 		}
 		
 		
@@ -35,7 +37,7 @@ namespace CSRServer.Game
 			}
 			else
 			{
-				_parent.MaintainStart();
+				DepartEnd();
 			}
 		}
 		
@@ -47,6 +49,7 @@ namespace CSRServer.Game
 			_server.AddReceiveEvent("DepartReady", DepartReady);
 			
 			_time = INITIAL_TIME;
+			_turnEnd = false;
 			List<CardEffectModule.Result> attackResults = new List<CardEffectModule.Result>();
             
 			foreach (var player in _turnData.playerList)
@@ -72,9 +75,16 @@ namespace CSRServer.Game
 		/// </summary>
 		private void DepartEnd()
 		{
-			_timer?.Dispose();
-			_server.RemoveReceiveEvent("DepartReady");
-			_parent.MaintainStart();
+			lock (this)
+			{
+				if (_turnEnd == false)
+				{
+					_timer?.Dispose();
+					_server.RemoveReceiveEvent("DepartReady");
+					_parent.MaintainStart();
+					_turnEnd = true;
+				}
+			}
 		}
 
 		#region Receive/Response Methods

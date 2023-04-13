@@ -15,6 +15,7 @@ namespace CSRServer.Game
 
         private Timer? _timer;
         private int _time;
+        private bool _turnEnd;
 
         public PreheatPhase(GameManager gameManager, EdenUdpServer server, TurnData turnData, GameScene parent)
         {
@@ -24,6 +25,7 @@ namespace CSRServer.Game
             this._parent = parent;
             this._timer = null;
             this._time = 0;
+            this._turnEnd = false;
         }
 
         /// <summary>
@@ -37,6 +39,8 @@ namespace CSRServer.Game
 
             
             _time = INITIAL_TIME;
+            _turnEnd = false;
+            
             foreach (var player in _turnData.playerList)
             {
                 player.PreheatStart();
@@ -86,13 +90,20 @@ namespace CSRServer.Game
         /// </summary>
         private void PreheatEnd()
         {
-            _timer?.Dispose();
-            _server.RemoveResponse("UseCard");
-            _server.RemoveResponse("RerollResource");
-            _server.RemoveReceiveEvent("PreheatReady");
-            foreach (var player in _turnData.playerList)
-                player.PreheatEnd();
-            _parent.DepartStart();
+            lock (this)
+            {
+                if (_turnEnd == false)
+                {
+                    _timer?.Dispose();
+                    _server.RemoveResponse("UseCard");
+                    _server.RemoveResponse("RerollResource");
+                    _server.RemoveReceiveEvent("PreheatReady");
+                    foreach (var player in _turnData.playerList)
+                        player.PreheatEnd();
+                    _parent.DepartStart();
+                    _turnEnd = true;
+                }
+            }
         }
         
         /// <summary>

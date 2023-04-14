@@ -103,7 +103,10 @@ namespace MatchingServer
             } while (room.ContainsKey(roomNum));
 
             room.Add(roomNum, privateAddress + "," + clientId);
-
+            var addr = StringToAddress(clientId);
+            EdenUdpClient client = new EdenUdpClient(addr["address"].ToString(), int.Parse(addr["port"].ToString()));
+            var conn = client.Connect();
+            Console.WriteLine(conn);
             return new EdenData(roomNum);
             
             // async void HeartBeat()

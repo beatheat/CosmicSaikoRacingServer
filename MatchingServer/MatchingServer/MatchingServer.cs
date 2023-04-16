@@ -138,10 +138,14 @@ namespace MatchingServer
                 string type = data.Split("/")[0];
                 int roomNumber = int.Parse(data.Split("/")[1]);
                 
+                Console.WriteLine($"{data}");
                 if (type == "host")
                 {
                     if (room.ContainsKey(roomNumber))
-                        room[roomNumber] = new NatPeer {localEndPoint = peer.localEndPoint, remoteEndPoint = peer.remoteEndPoint};
+                    {
+                        room[roomNumber] = peer;
+                        Console.WriteLine($"Host Registered {peer.localEndPoint}/{peer.remoteEndPoint}");
+                    }
                 }
                 else if(type == "client")
                 {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
@@ -20,16 +22,18 @@ namespace MatchingServer
         }
 
         public EdenUdpServer server;
-        public Dictionary<int, string> room;
+        public Dictionary<int, NatPeer> room;
         public Queue<MatchInfo> matchQueue;
         public Dictionary<string, MatchInfo> matchMap;
 
         public MatchingServer(EdenUdpServer server)
         {
             this.server = server;
-            room = new Dictionary<int, string>();
+            room = new Dictionary<int, NatPeer>();
             matchQueue = new Queue<MatchInfo>();
+
         }
+
 
         public void Run()
         {
@@ -37,7 +41,7 @@ namespace MatchingServer
             server.AddReceiveEvent("CancelMatchMake", CancelMatchMake);
             server.AddResponse("CreateLobby", CreateLobby);
             server.AddResponse("DestroyLobby", DestroyLobby);
-            server.AddResponse("GetRoomAddress", GetRoomAddress);
+            server.AddResponse("GetRoomAddress", NatRequestEvent);
 
             // Task.Run(async () =>
             // {
@@ -76,10 +80,13 @@ namespace MatchingServer
             //     }
             // });
 
+            
+            server.SetNatRequestEvent(NatRequestEvent);
             server.Listen(99999, (string client_id) =>
             {
             });
         }
+
 
         public void Close()
         {
@@ -93,6 +100,7 @@ namespace MatchingServer
             {
                 return EdenData.Error("There is no room remain");
             }
+            
             if (!data.TryGet<string>(out var privateAddress))
                 return EdenData.Error("Wrong formatted address number");
               
@@ -101,44 +109,13 @@ namespace MatchingServer
             {
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
             } while (room.ContainsKey(roomNum));
-
-            room.Add(roomNum, privateAddress + "," + clientId);
-            var addr = StringToAddress(clientId);
-            EdenUdpClient client = new EdenUdpClient(addr["address"].ToString(), int.Parse(addr["port"].ToString()));
-            var conn = client.Connect();
-            Console.WriteLine(conn);
-            return new EdenData(roomNum);
             
-            // async void HeartBeat()
-            // {
-            //     Console.WriteLine("Ready to Login to GameServer");
-            //     var address = clientId.Split(":");
-            //     EdenUdpClient client = new EdenUdpClient(address[0], int.Parse(address[1]));
-            //     bool connection = true;
-            //     client.SetDisconnectEvent(() =>
-            //     {
-            //         connection = false;
-            //     });
-            //     int count = 0;
-            //     while (await client.ConnectAsync() != ConnectionState.OK)
-            //     {
-            //         Console.WriteLine($"Trying Login {count}");
-            //         await Task.Delay(300);
-            //         count++;
-            //         if (count > 10)
-            //         {
-            //             Console.WriteLine($"GameServer connection fail on {clientId}");
-            //             return;
-            //         }
-            //     }
-            //     Console.WriteLine($"GameServer connection success on {clientId}");
-            //     while (connection)
-            //     {
-            //         await client.SendAsync("HeartBeat");
-            //         await Task.Delay(3000);
-            //     }
-            // }
+            
+            room.Add(roomNum, new NatPeer{localEndPoint = null!, remoteEndPoint = null!});
+            
+            return new EdenData(roomNum);
         }
+        
 
         public EdenData DestroyLobby(string clientId, EdenData data)
         {
@@ -146,7 +123,8 @@ namespace MatchingServer
                 return EdenData.Error("Wrong formatted room number");
             if (room.ContainsKey(roomNum))
             {
-                if (clientId == room[roomNum])
+                if (clientId == room[roomNum].remoteEndPoint.ToString() ||
+                    clientId == room[roomNum].localEndPoint.ToString())
                 {
                     room.Remove(roomNum);
                     return new EdenData("Room destroyed");
@@ -157,24 +135,30 @@ namespace MatchingServer
 
         }
 
-        public EdenData GetRoomAddress(string clientId, EdenData data)
+        private NatPeer? NatRequestEvent(NatPeer peer, string data)
         {
-            if (data.type != EdenData.Type.SINGLE)
-                return new EdenData(new EdenError("ERR:Unauthorized Access"));
-            if(!data.TryGet<int>(out var roomNum))
-                return new EdenData(new EdenError("ERR:Unauthorized Access"));
-            if (room.ContainsKey(roomNum))
+            try
             {
-                string privateAddress = room[roomNum].Split(",")[0];
-                string publicAddress = room[roomNum].Split(",")[1];
-                return new EdenData(new Dictionary<string, object>
+                string type = data.Split("/")[0];
+                int roomNumber = int.Parse(data.Split("/")[1]);
+                
+                if (type == "host")
                 {
-                    ["privateAddress"] = privateAddress,
-                    ["publicAddress"] = publicAddress
-                });
+                    if (room.ContainsKey(roomNumber))
+                        room[roomNumber] = new NatPeer {localEndPoint = peer.localEndPoint, remoteEndPoint = peer.remoteEndPoint};
+                }
+                else if(type == "client")
+                {
+                    if (room.TryGetValue(roomNumber, out var hostNatPeer))
+                        return hostNatPeer;
+                }
             }
-            else
-                return new EdenData(new EdenError("ERR:Wrong Lobby Number"));
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            return null;
         }
 
         public void MatchMake(string clientId, EdenData data)
@@ -203,5 +187,32 @@ namespace MatchingServer
             return sendData;
         }
 
+        // Handles IPv4 and IPv6 notation.
+        public static IPEndPoint CreateIPEndPoint(string endPoint)
+        {
+            string[] ep = endPoint.Split(':');
+            if (ep.Length < 2) throw new FormatException("Invalid endpoint format");
+            IPAddress ip;
+            if (ep.Length > 2)
+            {
+                if (!IPAddress.TryParse(string.Join(":", ep, 0, ep.Length - 1), out ip))
+                {
+                    throw new FormatException("Invalid ip-adress");
+                }
+            }
+            else
+            {
+                if (!IPAddress.TryParse(ep[0], out ip))
+                {
+                    throw new FormatException("Invalid ip-adress");
+                }
+            }
+            int port;
+            if (!int.TryParse(ep[ep.Length - 1], NumberStyles.None, NumberFormatInfo.CurrentInfo, out port))
+            {
+                throw new FormatException("Invalid port");
+            }
+            return new IPEndPoint(ip, port);
+        }
     }
 }

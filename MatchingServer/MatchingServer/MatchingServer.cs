@@ -100,9 +100,6 @@ namespace MatchingServer
                 return EdenData.Error("There is no room remain");
             }
             
-            if (!data.TryGet<string>(out var privateAddress))
-                return EdenData.Error("Wrong formatted address number");
-              
             int roomNum;
             do
             {

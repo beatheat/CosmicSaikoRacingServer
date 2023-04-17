@@ -21,17 +21,24 @@ namespace MatchingServer
             public bool canceled = false;
         }
 
+        public class Room
+        {
+            public NatPeer host = null!;
+            public DateTime createdTime;
+        }
+        
         public EdenUdpServer server;
-        public Dictionary<int, NatPeer> room;
+        public Dictionary<int, Room> rooms;
         public Queue<MatchInfo> matchQueue;
         public Dictionary<string, MatchInfo> matchMap;
 
+        private  bool closed = false;
         public MatchingServer(EdenUdpServer server)
         {
             this.server = server;
-            room = new Dictionary<int, NatPeer>();
+            rooms = new Dictionary<int, Room>();
             matchQueue = new Queue<MatchInfo>();
-
+            closed = false;
         }
 
 
@@ -81,21 +88,33 @@ namespace MatchingServer
 
             
             server.SetNatRequestEvent(NatRequestEvent);
-            server.Listen(99999, (string client_id) =>
-            {
-            });
+            server.Listen();
+
+            new Thread(CleanUnusedRooms).Start();
         }
 
+        public void CleanUnusedRooms()
+        {
+            while (!closed)
+            {
+                var removeRoomNumbers = rooms.Where(item => DateTime.Now - item.Value.createdTime > TimeSpan.FromHours(1)).Select(item => item.Key).ToList();
+                foreach (var roomNumber in removeRoomNumbers)
+                    rooms.Remove(roomNumber);
+
+                Thread.Sleep(10 * 1000);
+            }
+        }
 
         public void Close()
         {
+            closed = true;
             server.Close();
         }
 
 
         public EdenData CreateLobby(string clientId, EdenData data)
         {
-            if (room.Count >= 100000)
+            if (rooms.Count >= 100000)
             {
                 return EdenData.Error("There is no room remain");
             }
@@ -104,10 +123,10 @@ namespace MatchingServer
             do
             {
                 roomNum = (int)(DateTime.Now.Ticks % 100000L);
-            } while (room.ContainsKey(roomNum));
+            } while (rooms.ContainsKey(roomNum));
             
             
-            room.Add(roomNum, new NatPeer{localEndPoint = null!, remoteEndPoint = null!});
+            rooms.Add(roomNum, new Room {host = new NatPeer{localEndPoint = null!, remoteEndPoint = null!}, createdTime = DateTime.Now});
             
             return new EdenData(roomNum);
         }
@@ -117,12 +136,12 @@ namespace MatchingServer
         {
             if (!data.TryGet<int>(out var roomNum))
                 return EdenData.Error("Wrong formatted room number");
-            if (room.ContainsKey(roomNum))
+            if (rooms.ContainsKey(roomNum))
             {
-                if (clientId == room[roomNum].remoteEndPoint.ToString() ||
-                    clientId == room[roomNum].localEndPoint.ToString())
+                //게임 호스트만 삭제가능하다
+                if (clientId.Split(":")[0] == rooms[roomNum].host.remoteEndPoint.Address.ToString())
                 {
-                    room.Remove(roomNum);
+                    rooms.Remove(roomNum);
                     return new EdenData("Room destroyed");
                 }
                 else return new EdenData("Not permitted access");
@@ -141,16 +160,16 @@ namespace MatchingServer
                 Console.WriteLine($"{data}");
                 if (type == "host")
                 {
-                    if (room.ContainsKey(roomNumber))
+                    if (rooms.ContainsKey(roomNumber))
                     {
-                        room[roomNumber] = peer;
+                        rooms[roomNumber].host = peer;
                         Console.WriteLine($"Host Registered {peer.localEndPoint}/{peer.remoteEndPoint}");
                     }
                 }
                 else if(type == "client")
                 {
-                    if (room.TryGetValue(roomNumber, out var hostNatPeer))
-                        return hostNatPeer;
+                    if (rooms.TryGetValue(roomNumber, out var hostNatPeer))
+                        return hostNatPeer.host;
                 }
             }
             catch (Exception e)

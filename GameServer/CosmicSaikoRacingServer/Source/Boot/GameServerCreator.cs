@@ -10,17 +10,22 @@ namespace CSRServer
 	{
 		private readonly EdenUdpServer _server;
 		private GameManager? _gameManager;
+		private EdenUdpClient? _matchClient;
+
+		//TODO: 출시 시 1로 변경
+		private const int MAX_LOCAL_SERVER_PLAYER = 4;
 		
 		public GameServerCreator(EdenUdpServer server)
 		{
 			this._server = server;
 			this._gameManager = null;
+			this._matchClient = null;
 		}
 
 		public void Run()
 		{
 			// TODO: 이미 접속된 클라이언트의 연결이 끊어진 후 재접속했을 때 정보를 유지해야한다. 
-			_server.Listen(1);
+			_server.Listen(MAX_LOCAL_SERVER_PLAYER);
 			
 			_server.AddResponse("CreateGame", CreateGame);
 			_server.AddResponse("CreateCustomGame", CreateCustomGame);
@@ -65,14 +70,14 @@ namespace CSRServer
 		
 		private EdenData CreateCustomGame(string clientId, EdenData data)
 		{
+			_matchClient?.Close();;
 			// 매칭서버에 접속
-			EdenUdpClient matchClient = new EdenUdpClient(Program.config.matchingServerAddress, Program.config.matchingServerPort,"MatchNetworkLog.txt");
-			
-			if (matchClient.Connect() == ConnectionState.OK)
+			_matchClient = new EdenUdpClient(Program.config.matchingServerAddress, Program.config.matchingServerPort,"MatchNetworkLog.txt");
+
+			if (_matchClient.Connect() == ConnectionState.OK)
 			{
-				int gameServerPort = matchClient.GetLocalEndPort();
 				// 매칭서버에 로비를 생성하고 방번호를 받는다
-				EdenData matchingServerData = matchClient.Request("CreateLobby", GetLocalIPAddress() + ":" + gameServerPort);
+				EdenData matchingServerData = _matchClient.Request("CreateLobby");
 				
 				if (data.type == EdenData.Type.ERROR)
 					return new EdenData(new Dictionary<string, object> {["state"] = false, ["message"] = "Cannot Create Game : cannot create lobby"});
@@ -83,38 +88,26 @@ namespace CSRServer
 				// 게임서버가 존재한다면 닫는다
 				_gameManager?.Close();
 				// 게임서버를 생성한다.
-				EdenUdpServer gameServer = new EdenUdpServer(gameServerPort, Program.config.gameNetworkLogPath);
-				gameServer.AddReceiveEvent("HeartBeat", (_, _) => { Logger.Log("asdf"); }, false);
+				EdenUdpServer gameServer = new EdenUdpServer(Program.config.gameServerPort, Program.config.gameNetworkLogPath);
 				_gameManager = new GameManager(gameServer);
 
 				var lobbyScene = new LobbyScene(_gameManager, gameServer);
 				_gameManager.AddScene(lobbyScene, new GameScene(_gameManager, gameServer));
 
-				// lobbyScene.passingData.Add("hostId", clientId);
 				lobbyScene.passingData.Add("roomNumber", roomNumber);
-				lobbyScene.passingData.Add("matchingServerClient", matchClient);
+				lobbyScene.passingData.Add("matchingServerClient", _matchClient);
 				
 				// 게임서버를 실행한다.
 				_gameManager.Run();
+				
+				gameServer.RequestNatHolePunching(Program.config.matchingServerAddress, Program.config.matchingServerPort, "host/" + roomNumber);
 
 				// 로비 생성을 성공했음을 클라이언트에 반환한다
-				return new EdenData(new Dictionary<string, object> {["state"] = true, ["message"] = "OK", ["port"] = gameServerPort});
+				return new EdenData(new Dictionary<string, object> {["state"] = true, ["message"] = "OK", ["port"] = Program.config.gameServerPort});
 			}
 
 			return new EdenData(new Dictionary<string, object> {["state"] = false, ["message"] = "Cannot Create Game : cannot connect Matching Server"});
 		}
 		
-		public static string GetLocalIPAddress()
-		{
-			var host = Dns.GetHostEntry(Dns.GetHostName());
-			foreach (var ip in host.AddressList)
-			{
-				if (ip.AddressFamily == AddressFamily.InterNetwork)
-				{
-					return ip.ToString();
-				}
-			}
-			throw new Exception("No network adapters with an IPv4 address in the system!");
-		}
 	}
 }

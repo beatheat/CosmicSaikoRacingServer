@@ -47,6 +47,7 @@ namespace CSRServer
 
                 }
             });
+
             _server.SetClientDisconnectEvent((string clientId, DisconnectReason info) =>
             {
                 

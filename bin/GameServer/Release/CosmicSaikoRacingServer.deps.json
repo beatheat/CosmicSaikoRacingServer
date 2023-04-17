@@ -8,13 +8,24 @@
     ".NETCoreApp,Version=v7.0": {
       "CosmicSaikoRacingServer/1.0.0": {
         "dependencies": {
-          "EdenNetwork": "1.4.12"
+          "EdenNetwork": "2.0.4"
         },
         "runtime": {
           "CosmicSaikoRacingServer.dll": {}
         }
       },
-      "EdenNetwork/1.4.12": {
+      "LiteNetLib/1.0.1.1": {
+        "runtime": {
+          "lib/net6.0/LiteNetLib.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EdenNetwork/2.0.4": {
+        "dependencies": {
+          "LiteNetLib": "1.0.1.1"
+        },
         "runtime": {
           "EdenNetwork.dll": {}
         }
@@ -27,7 +38,14 @@
       "serviceable": false,
       "sha512": ""
     },
-    "EdenNetwork/1.4.12": {
+    "LiteNetLib/1.0.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hoZKauEZ1g254ChhQKkg79wlmr6e1otSI+AxXNZCMfLmNXb2GXvlDlPoqY0QBA9L+grSRFtY55l1YFo48+ohMQ==",
+      "path": "litenetlib/1.0.1.1",
+      "hashPath": "litenetlib.1.0.1.1.nupkg.sha512"
+    },
+    "EdenNetwork/2.0.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

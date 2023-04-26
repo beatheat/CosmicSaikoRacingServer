@@ -5,7 +5,6 @@ namespace CSRServer.Game
 {
     public class PreheatPhase
     {
-
         private const int INITIAL_TIME = 99;
         
         private readonly TurnData _turnData;
@@ -36,7 +35,6 @@ namespace CSRServer.Game
             _server.AddResponse("UseCard", UseCard);
             _server.AddResponse("RerollResource", RerollResource);
             _server.AddReceiveEvent("PreheatReady", PreheatReady);
-
             
             _time = INITIAL_TIME;
             _turnEnd = false;
@@ -46,8 +44,8 @@ namespace CSRServer.Game
                 player.PreheatStart();
             }
             
-            //플레이어 rank 정해주기
             var orderedPlayerList = _turnData.playerList.OrderByDescending(p => p.currentDistance).ToList();
+            //플레이어 rank 정해주기
             for (int i = 0; i < orderedPlayerList.Count; i++)
                 orderedPlayerList[i].rank = i + 1;
 
@@ -55,7 +53,6 @@ namespace CSRServer.Game
             var monitorPlayerList = _parent.GetMonitorPlayerList();
             foreach (var player in _turnData.playerList)
             {
-                
                 _server.Send("PreheatStart", player.clientId, new Dictionary<string, object>
                 {
                     ["player"] = player,
@@ -63,7 +60,6 @@ namespace CSRServer.Game
                     ["turn"] = _turnData.turn,
                     ["timer"] = _time
                 });
-
             }
 
             _timer = new Timer(GameTimer, null, 0, 1000);
@@ -111,7 +107,7 @@ namespace CSRServer.Game
         /// </summary>
         private async void GameTimer(object? sender)
         {
-            if (_time >= 0)
+            if (_time > 0)
             {
                 _time--;
                 await _server.BroadcastAsync("PreheatTime", _time, log: false);
@@ -143,10 +139,10 @@ namespace CSRServer.Game
                 return EdenData.Error("UseCard - Player turn ends");
             if (!data.TryGet<int>(out var useCardIndex))
                 return EdenData.Error("UseCard - Card index is missing");
-            if (!player.IsCardEnable(useCardIndex))
+            if (!player.cardSystem.IsCardEnable(useCardIndex))
                 return EdenData.Error("UseCard - Card does not satisfy resource condition");
 
-            if (!player.UseCard(useCardIndex, out var result))
+            if (!player.cardSystem.UseCard(useCardIndex, out var result))
                 return new EdenData(new EdenError("UseCard - Cannot use card"));
             return new EdenData(new Dictionary<string, object> {["player"] = player, ["results"] = result});
 
@@ -163,7 +159,7 @@ namespace CSRServer.Game
                 return EdenData.Error("RollResource - Player turn ends");
             if (!data.TryGet<List<int>>(out var resourceFixed))
                 return EdenData.Error("RollResource - resourceFixed data is missing");
-            var result = player.RerollResource(resourceFixed);
+            var result = player.resourceSystem.RerollResource(resourceFixed);
             if (result == null)
                 return EdenData.Error("RollResource - Reroll Count is 0");
             return new EdenData(player);

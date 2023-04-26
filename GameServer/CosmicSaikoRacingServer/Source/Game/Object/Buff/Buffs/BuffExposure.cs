@@ -67,10 +67,10 @@
 			if (count == 0) return;
 
 			//패 수만큼만 피폭
-			int exposureCount = count > player.hand.Count ? player.hand.Count : count;
+			int exposureCount = count > player.cardSystem.hand.Count ? player.cardSystem.hand.Count : count;
 			
 			//랜덤 패에 부여
-			Util.DistributeOnList(player.hand, exposureCount, out var selectedCards);
+			Util.DistributeOnList(player.cardSystem.hand, exposureCount, out var selectedCards);
 			foreach (var card in selectedCards)
 			{
 				SetExposure(card);
@@ -86,7 +86,7 @@
 		{
 			if (count == 0) 
 				return;
-			if (_turnStart && count - player.hand.Count > 0)
+			if (_turnStart && count - player.cardSystem.hand.Count > 0)
 			{
 				SetExposure(card);
 			}
@@ -114,7 +114,7 @@
 			if (_exposureCards.Count < count)
 			{
 				int exposureCount = count - _exposureCards.Count;
-				var nonExposureHand = player.hand.FindAll(x => x.isExposure == false);
+				var nonExposureHand = player.cardSystem.hand.FindAll(x => x.isExposure == false);
 				Util.DistributeOnList(nonExposureHand, exposureCount, out var selectedCards);
 				SetExposure(selectedCards.ToArray());
 			}
@@ -122,7 +122,7 @@
 
 		public override void OnPreheatEnd()
 		{
-			base.OnPreheatEnd();
+			Release();
 			_turnStart = false;
 		}
 

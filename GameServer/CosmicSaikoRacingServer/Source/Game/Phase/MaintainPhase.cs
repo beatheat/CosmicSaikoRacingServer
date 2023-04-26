@@ -11,8 +11,6 @@ namespace CSRServer.Game
 		private readonly EdenUdpServer _server;
         private readonly GameScene _parent;
         
-        private readonly MaintainStore _maintainStore;
-
         private Timer? _timer;
 		private int _time;
         private bool _turnEnd;
@@ -26,7 +24,6 @@ namespace CSRServer.Game
 			
             this._time = 0;
             this._timer = null;
-            _maintainStore = new MaintainStore(_turnData.playerList.Count);
         }
 
         /// <summary>
@@ -35,7 +32,7 @@ namespace CSRServer.Game
         public void MaintainStart()
         {            
             _server.AddReceiveEvent("MaintainReady", MaintainReady);
-            _server.AddResponse("RerollStore", RerollStore);
+            _server.AddResponse("RerollShop", RerollShop);
             _server.AddResponse("RerollRemoveCard", RerollRemoveCard);
             _server.AddResponse("BuyExp", BuyExp);
             _server.AddResponse("BuyCard", BuyCard);
@@ -43,17 +40,14 @@ namespace CSRServer.Game
             
             _time = INITIAL_TIME;
             _turnEnd = false;
-
             //정비 페이즈 구성요소 클라이언트와 동기화
             foreach (var player in _turnData.playerList)
             {
-                player.phaseReady = false;
-                _maintainStore.ShowRandomCards(player, out var storeCards);
-                _maintainStore.ShowRandomRemoveCards(player, out var removeCards);
+                player.MaintainStart();
                 _server.Send("MaintainStart", player.clientId, new Dictionary<string, object>
                 {
-                    ["storeCards"] = storeCards,
-                    ["removeCards"] = removeCards
+                    ["shopCards"] = player.maintainSystem.shopCards,
+                    ["removeCards"] = player.maintainSystem.removeCards,
                 });
             }
 
@@ -72,12 +66,15 @@ namespace CSRServer.Game
                     _timer?.Dispose();
 
                     _server.RemoveReceiveEvent("MaintainReady");
-                    _server.RemoveResponse("RerollStore");
+                    _server.RemoveResponse("RerollShop");
                     _server.RemoveResponse("RerollRemoveCard");
                     _server.RemoveResponse("BuyExp");
                     _server.RemoveResponse("BuyCard");
                     _server.RemoveResponse("RemoveCard");
-
+                    
+                    foreach (var player in _turnData.playerList)
+                        player.MaintainEnd();
+                    
                     _parent.PreheatStart();
                     _turnEnd = true;
                 }
@@ -87,7 +84,7 @@ namespace CSRServer.Game
         // 정비 페이즈 타이머
         private async void GameTimer(object? sender)
         {
-            if (_time >= 0)
+            if (_time > 0)
             {
                 _time--;
                 await _server.BroadcastAsync("MaintainTime", _time, log: false);
@@ -120,19 +117,20 @@ namespace CSRServer.Game
         /// <summary>
         /// 구매카드 상점 리롤 API
         /// </summary>
-        private EdenData RerollStore(string clientId, EdenData data)
+        private EdenData RerollShop(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
             if (player.phaseReady)
-                return EdenData.Error("RerollStore - Player turn ends");
-            
-            if (_maintainStore.RerollStore(player, out var storeCards) == false)
-                return EdenData.Error("RerollStore - Coin is not enough");
+                return EdenData.Error("RerollShop - Player turn ends");
+
+            var errorCode = player.maintainSystem.RerollShop();
+            if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
+                return EdenData.Error("RerollShop - Coin is not enough");
 
             return new EdenData(new Dictionary<string, object>
             {
-                ["storeCards"] = storeCards!,
-                ["coin"] = player.coin
+                ["shopCards"] = player.maintainSystem.shopCards,
+                ["coin"] = player.maintainSystem.coin
             });
 
         }
@@ -146,13 +144,15 @@ namespace CSRServer.Game
                 GamePlayer player = _turnData.playerMap[clientId];
                 if (player.phaseReady)
                     return EdenData.Error("RerollRemoveCard - Player turn ends");
-                if (_maintainStore.RerollRemoveCard(player, out var removeCards) == false)
-                    return EdenData.Error("RerollRemoveCard - Coin is not enough");
                 
+                var errorCode = player.maintainSystem.RerollRemoveCard();
+                if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
+                    return EdenData.Error("RerollRemoveCard - Coin is not enough");
+
                 return new EdenData(new Dictionary<string, object>
                 {
-                    ["removeCards"] = removeCards!,
-                    ["coin"] = player.coin
+                    ["removeCards"] = player.maintainSystem.removeCards,
+                    ["coin"] = player.maintainSystem.coin
                 });
         }
 
@@ -164,12 +164,20 @@ namespace CSRServer.Game
             GamePlayer player = _turnData.playerMap[clientId];
             if (player.phaseReady)
                 return EdenData.Error("BuyExp - Player turn ends");
-            if (player.level == GamePlayer.MAX_LEVEL)
-                return EdenData.Error("BuyExp - Player level is max");
-            if (_maintainStore.BuyExp(player) == false)
-                return EdenData.Error("BuyExp - Coin is not enough");
 
-            return new EdenData(new Dictionary<string, object> {["level"] = player.level, ["exp"] = player.exp, ["expLimit"] = player.expLimit, ["coin"] = player.coin});
+            var errorCode = player.maintainSystem.BuyExp();
+            
+            if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
+                return EdenData.Error("BuyExp - Coin is not enough");
+            else if (errorCode == MaintainSystem.ErrorCode.MAX_LEVEL)
+                return EdenData.Error("BuyExp - Player level is max");
+
+            return new EdenData(new Dictionary<string, object>
+            {
+                ["level"] = player.maintainSystem.level, 
+                ["exp"] = player.maintainSystem.exp, 
+                ["coin"] = player.maintainSystem.coin
+            });
         }
 
         /// <summary>
@@ -178,23 +186,27 @@ namespace CSRServer.Game
         private EdenData BuyCard(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-                if (player.phaseReady)
-                    return EdenData.Error("BuyCard - Player turn ends");
-                if (player.coin < MaintainStore.COIN_BUY_CARD)
-                    return EdenData.Error("BuyCard - Coin is not enough");
-                if (!data.TryGet<int>(out var buyIndex))
-                    return EdenData.Error("BuyCard - Buy index is missing");
-                if (_maintainStore.BuyCard(player, buyIndex, out var storeCards, out var buyCard) == false)
-                    return EdenData.Error($"BuyCard - Wrong store card index : {buyIndex}");
+            if (player.phaseReady)
+                return EdenData.Error("BuyCard - Player turn ends");
+            
+            if (!data.TryGet<int>(out var buyIndex))
+                return EdenData.Error("BuyCard - Buy index is missing");
 
-                player.AddCardToDeck(buyCard!);
-                return new EdenData(new Dictionary<string, object>
-                {
-                    ["storeCards"] = storeCards,
-                    ["buyCard"] = buyCard!,
-                    ["deck"] = player.deck,
-                    ["coin"] = player.coin
-                });
+            var errorCode = player.maintainSystem.BuyCard(buyIndex, out var boughtCard);
+            if(errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
+                return EdenData.Error("BuyCard - Coin is not enough");
+            else if(errorCode == MaintainSystem.ErrorCode.WRONG_INDEX)
+                return EdenData.Error("BuyCard - Shop card index is wrong");
+            
+
+            player.cardSystem.AddCardToDeck(boughtCard);
+            return new EdenData(new Dictionary<string, object>
+            {
+                ["shopCards"] = player.maintainSystem.shopCards,
+                ["buyCard"] = boughtCard,
+                ["deck"] = player.cardSystem.deck,
+                ["coin"] = player.maintainSystem.coin
+            });
         }
 
         /// <summary>
@@ -203,21 +215,26 @@ namespace CSRServer.Game
         private EdenData RemoveCard(string clientId, EdenData data)
         {
             GamePlayer player = _turnData.playerMap[clientId];
-                if (player.phaseReady)
-                    return EdenData.Error("RemoveCard - Player turn ends");
-                if (player.coin < MaintainStore.COIN_REMOVE_CARD)
-                    return EdenData.Error("BuyCard - Coin is not enough");
-                if (!data.TryGet<int>(out var removeIndex))
-                    return EdenData.Error("RemoveCard - remove index is missing");
-                if (_maintainStore.RemoveCard(player, removeIndex, out var removeCards) == false)
-                    return EdenData.Error($"RemoveCard - Cannot find remove card index {removeIndex}");
+            if (player.phaseReady)
+                return EdenData.Error("RemoveCard - Player turn ends");
+            
+            if (!data.TryGet<int>(out var removeIndex))
+                return EdenData.Error("RemoveCard - remove index is missing");
+            
+            var errorCode = player.maintainSystem.RemoveCard(removeIndex, out var removeCard);
+            
+            if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
+                return EdenData.Error("RemoveCard - Coin is not enough");
+            
+            if (errorCode == MaintainSystem.ErrorCode.WRONG_INDEX)
+                return EdenData.Error($"RemoveCard - Remove card index is wrong");
 
-                return new EdenData(new Dictionary<string, object>
-                {
-                    ["removeCards"] = removeCards,
-                    ["deck"] = player.deck,
-                    ["coin"] = player.coin
-                });
+            return new EdenData(new Dictionary<string, object>
+            {
+                ["removeCards"] = player.maintainSystem.removeCards,
+                ["deck"] = player.cardSystem.deck,
+                ["coin"] = player.maintainSystem.coin
+            });
         }
         
         #endregion

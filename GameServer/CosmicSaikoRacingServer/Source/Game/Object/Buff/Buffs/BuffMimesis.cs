@@ -35,11 +35,11 @@
 			
 
 			//최대 패 수 만큼 의태
-			int mimesisCount = count > player.hand.Count ? player.hand.Count : count;
+			int mimesisCount = count > player.cardSystem.hand.Count ? player.cardSystem.hand.Count : count;
 
 			
 			//랜덤 패에 부여
-			Util.DistributeOnList(player.hand, mimesisCount, out var selectedCards);
+			Util.DistributeOnList(player.cardSystem.hand, mimesisCount, out var selectedCards);
 			foreach (var card in selectedCards)
 			{
 				SetMimesis(card);
@@ -54,7 +54,7 @@
 		public override void OnDrawCard(ref Card card)
 		{
 			if (count == 0) return;
-			if (_turnStart && count - player.hand.Count > 0)
+			if (_turnStart && count - player.cardSystem.hand.Count > 0)
 			{
 				SetMimesis(card);
 			}
@@ -82,7 +82,7 @@
 			if (_mimesisCards.Count < count)
 			{
 				int mimesisCount = count - _mimesisCards.Count;
-				var nonMimesisHand = player.hand.FindAll(x => x.isExposure == false);
+				var nonMimesisHand = player.cardSystem.hand.FindAll(x => x.isExposure == false);
 				Util.DistributeOnList(nonMimesisHand, mimesisCount, out var selectedCards);
 				SetMimesis(selectedCards.ToArray());
 			}
@@ -90,7 +90,7 @@
 
 		public override void OnPreheatEnd()
 		{
-			base.OnPreheatEnd();
+			Release();
 			_turnStart = false;
 		}
 

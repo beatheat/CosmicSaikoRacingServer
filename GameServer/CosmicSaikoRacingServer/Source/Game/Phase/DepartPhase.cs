@@ -26,11 +26,10 @@ namespace CSRServer.Game
 			this._turnEnd = false;
 		}
 		
-		
 		// 발진 페이즈 타이머
 		private async void GameTimer(object? sender)
 		{
-			if (_time >= 0)
+			if (_time > 0)
 			{
 				_time--;
 				await _server.BroadcastAsync("MaintainTime", _time, log: false);
@@ -56,8 +55,6 @@ namespace CSRServer.Game
 			{
 				player.DepartStart(out var attackResult);
 				attackResults.AddRange(attackResult);
-				// obstacleResults.AddRange(obstacleResult);
-				player.phaseReady = false;
 			}
 			
 			//발진 페이즈 데이터 클라이언트와 동기화
@@ -103,7 +100,7 @@ namespace CSRServer.Game
 			if (checkAllReady)
 				DepartEnd();
 		}
+		
 		#endregion
-
 	}
 }

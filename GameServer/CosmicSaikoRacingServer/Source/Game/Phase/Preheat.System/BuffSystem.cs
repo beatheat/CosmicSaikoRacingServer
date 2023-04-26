@@ -2,11 +2,11 @@
 
 namespace CSRServer.Game
 {
-	public class BuffManager
+	public class BuffSystem
 	{
-		public List<Buff> buffList;
+		public List<Buff> buffList { get; }
 		
-		public BuffManager(GamePlayer owner)
+		public BuffSystem(GamePlayer owner)
 		{
 			buffList = new List<Buff>
 			{
@@ -22,6 +22,7 @@ namespace CSRServer.Game
 				new BuffMimesis(owner)
 			};
 		}
+
 
 		public void AddBuff(Buff.Type buff, int count)
 		{

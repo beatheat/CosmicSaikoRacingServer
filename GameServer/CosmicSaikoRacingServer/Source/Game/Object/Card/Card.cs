@@ -20,6 +20,8 @@ namespace CSRServer.Game
             public int value;
             public int lowerBound;
             public int upperBound;
+
+            public Variable Clone() => (Variable)this.MemberwiseClone();
         }
         
         //카드의 식별자
@@ -69,7 +71,14 @@ namespace CSRServer.Game
         
         public Card Clone()
         {
-            return (Card)this.MemberwiseClone();
+            var card = (Card)this.MemberwiseClone();
+            var cloneVariables = new Dictionary<string, Variable>(card.variable.Count, card.variable.Comparer);
+            foreach (var entry in card.variable)
+            {
+                cloneVariables.Add(entry.Key, entry.Value.Clone());
+            }
+            card.variable = cloneVariables;
+            return card;
         }
         
         /// <summary>
@@ -81,14 +90,5 @@ namespace CSRServer.Game
             var results = isDiscard ? effect.UseLeak(this, gamePlayer) : effect.Use(this, gamePlayer);
             return results;
         }
-
-        /// <summary>
-        /// 카드 조건 만족하는지 체크
-        /// </summary>
-        public bool CheckCondition(List<Resource.Type> resource)
-        {
-            return condition.Check(resource);
-        }
-        
     }
 }

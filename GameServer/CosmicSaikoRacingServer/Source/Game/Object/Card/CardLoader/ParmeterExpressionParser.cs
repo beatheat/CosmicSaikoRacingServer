@@ -75,11 +75,11 @@ namespace CSRServer.Game
 			//각 변수를 attribute와 함께 파싱한다
 			int result = variable switch
 			{
-				"currentUnusedCardNum" => player.unusedCard.Count,
-				"currentUsedCardNum" => player.usedCard.Count,
-				"currentHandNum" => player.hand.Count,
-				"currentDeckNum" => player.deck.Count,
-				"currentResourceReelNum" => player.resourceReelCount,
+				"currentUnusedCardNum" => player.cardSystem.unusedCard.Count,
+				"currentUsedCardNum" => player.cardSystem.usedCard.Count,
+				"currentHandNum" => player.cardSystem.hand.Count,
+				"currentDeckNum" => player.cardSystem.deck.Count,
+				"currentResourceReelNum" => player.resourceSystem.reelCount,
 				"currentResourceNum" => GetCurrentResourceNum(player, attribute),
 				"thisTurnUsedCardNum" => GetThisTurnUsedCardNum(player, attribute),
 				"randomCardId" => GetRandomCardId(attribute),
@@ -155,13 +155,13 @@ namespace CSRServer.Game
 				return 0;
 			//all일 경우 모든 리소스릴 개수
 			if (attribute[0] == "all")
-				return player.resourceReel.Count;
+				return player.resourceSystem.reel.Count;
 			
 			// resource.type에 맞는 리소스 개수
 			if (_symbolToResourceType.TryGetValue(attribute[0], out var resourceType))
 			{
 				int count = 0;
-				foreach (var resourceElement in player.resourceReel)
+				foreach (var resourceElement in player.resourceSystem.reel)
 				{
 					if (resourceType == resourceElement)
 						count++;
@@ -180,12 +180,12 @@ namespace CSRServer.Game
 				return 0;
 			//all일 경우 사용된 모든 카드 개수
 			if (attribute[0] == "all")
-				return player.turnUsedCard.Count;
+				return player.cardSystem.turnUsedCard.Count;
 			//card.type에 맞는 카드 개수
 			if (_symbolToCardType.TryGetValue(attribute[0], out var cardType))
 			{
 				int count = 0;
-				foreach (var usedCard in player.turnUsedCard)
+				foreach (var usedCard in player.cardSystem.turnUsedCard)
 				{
 					if (cardType == usedCard.type)
 						count++;
@@ -247,14 +247,14 @@ namespace CSRServer.Game
 		{
 			if (attribute == null)
 			{
-				return player.buffManager.buffList.Sum(buff => buff.count);
+				return player.buffSystem.buffList.Sum(buff => buff.count);
 			}
 			if (attribute.Length >= 2)
 				return 0;
 			//버프 id의 버프스택이 몇개나 있는지 반환
 			if (int.TryParse(attribute[0], out int buffId))
 			{
-				return player.buffManager.GetBuffCount((Buff.Type) buffId);
+				return player.buffSystem.GetBuffCount((Buff.Type) buffId);
 			}
 			return 0;
 		}

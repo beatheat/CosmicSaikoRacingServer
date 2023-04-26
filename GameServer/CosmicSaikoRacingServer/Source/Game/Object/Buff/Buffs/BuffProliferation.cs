@@ -29,7 +29,7 @@
 				lockCondition = new List<Resource.Type>();
 				for (int i = 0; i < conditionCount; i++)
 					lockCondition.Add(Util.GetRandomEnumValue<Resource.Type>());
-			} while (lockCondition.IsSame(player.resourceReel));
+			} while (player.resourceSystem.reel.Contains(lockCondition));
 			resourceCondition = lockCondition;
 		}
 
@@ -48,7 +48,7 @@
 		/// </summary>
 		public override void AfterRerollResource(ref List<int>? resourceFixed, ref List<Resource.Type> resourceReel)
 		{
-			if (player.resourceReel.Contains(resourceCondition))
+			if (player.resourceSystem.reel.Contains(resourceCondition))
 			{
 				resourceCondition.Clear();
 				count = 0;

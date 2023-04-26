@@ -6,7 +6,6 @@ using EdenNetwork.Udp;
 
 namespace CSRServer
 {
-
     /// <summary>
     /// 게임 내 모든 페이즈가 공유하는 정보를 담은 클래스
     /// </summary>
@@ -61,7 +60,6 @@ namespace CSRServer
             server.RemoveReceiveEvent("PlayerReady");
         }
         
-
         public void PreheatStart()
         {
             preheatPhase.PreheatStart();

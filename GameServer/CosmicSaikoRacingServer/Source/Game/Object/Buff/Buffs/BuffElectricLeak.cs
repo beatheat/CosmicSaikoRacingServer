@@ -20,7 +20,7 @@ namespace CSRServer.Game
 		/// </summary>
 		private void LockResources(int count)
 		{
-			var remainResourceReel = Enumerable.Range(0, player.resourceReelCount).Except(resourceLockIndexList).ToList();
+			var remainResourceReel = Enumerable.Range(0, player.resourceSystem.reelCount).Except(resourceLockIndexList).ToList();
 			Util.DistributeOnList(remainResourceReel, count, out var additionalLockIndexList);
 			resourceLockIndexList.AddRange(additionalLockIndexList);
 		}
@@ -32,7 +32,7 @@ namespace CSRServer.Game
 		{
 			if (count == 0) return;
 			
-			int lockCount = count > player.resourceReelCount ?  player.resourceReelCount : count;
+			int lockCount = count > player.resourceSystem.reelCount ?  player.resourceSystem.reelCount : count;
 
 			LockResources(lockCount);
 		}
@@ -43,11 +43,11 @@ namespace CSRServer.Game
 		public override void AfterUseCard(ref Card card)
 		{
 			//누전된 리소스가 리소스 릴 최대치 보다 적고 버프카운트가 이전에 누전된 리소스보다 많을 때만 작동함 
-			if (!(resourceLockIndexList.Count < player.resourceReelCount && resourceLockIndexList.Count < count)) 
+			if (!(resourceLockIndexList.Count < player.resourceSystem.reelCount && resourceLockIndexList.Count < count)) 
 				return;
 
 			int lockCount = count - resourceLockIndexList.Count;
-			int remainResourceReelCount = player.resourceReelCount - resourceLockIndexList.Count;
+			int remainResourceReelCount = player.resourceSystem.reelCount - resourceLockIndexList.Count;
 			//최대로, 남은 리소스릴 개수만큼만 누전됨
 			lockCount = lockCount < remainResourceReelCount ? lockCount : remainResourceReelCount;
 			LockResources(lockCount);

@@ -18,7 +18,7 @@
 			int[] frequentList = Enumerable.Repeat<int>(0,cardTypeCount).ToArray();
 
 			//현재 패에서 가장 많은 카드 타입을 찾는다
-			foreach (var card in player.hand)
+			foreach (var card in player.cardSystem.hand)
 			{
 				frequentList[(int) card.type]++;
 			}
@@ -44,7 +44,7 @@
 			double[] resourcePercentage = Enumerable.Repeat( (100.0-highPercentage) / (resourceTypeCount-1), Resource.COUNT).ToArray();
 			resourcePercentage[mostFqCardType] = highPercentage;
 			
-			for (int i = 0; i < player.resourceReelCount; i++)
+			for (int i = 0; i < player.resourceSystem.reelCount; i++)
 			{
 				Resource.Type resource = Util.GetRandomEnumValue<Resource.Type>(resourcePercentage);
 				if (i >= resourceReel.Count)

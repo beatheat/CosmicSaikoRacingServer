@@ -102,13 +102,13 @@ namespace CSRServer.Game
 		private static Result Draw(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
-			return new Result{result = player.DrawCard(amount), type = Type.Draw};
+			return new Result{result = player.cardSystem.DrawCard(amount), type = Type.Draw};
 		}
 		
 		private static Result RerollCountUp(Card card, GamePlayer player, ParameterList parameters)
 		{
 			int amount = parameters.Get<int>(0, card, player);
-			player.resourceRerollCount += amount;
+			player.resourceSystem.AddRerollCount(amount);
 			return new Result{result = amount, type = Type.RerollCountUp};
 		}
 		
@@ -132,11 +132,11 @@ namespace CSRServer.Game
 		
 		private static Result ForceReroll(Card card, GamePlayer player, ParameterList parameters)
 		{
-			for (int i = 0; i < player.resourceReelCount; i++)
+			for (int i = 0; i < player.resourceSystem.reelCount; i++)
 			{
-				player.resourceReel[i] = Util.GetRandomEnumValue<Resource.Type>();
+				player.resourceSystem.reel[i] = Util.GetRandomEnumValue<Resource.Type>();
 			}
-			return new Result{result = player.resourceReel, type = Type.ForceReroll};
+			return new Result{result = player.resourceSystem.reel, type = Type.ForceReroll};
 		}
 
 		private static Result CreateCardToHand(Card card, GamePlayer player, ParameterList parameters)
@@ -151,7 +151,7 @@ namespace CSRServer.Game
 				createdCards[i] = CardManager.GetCard(id);
 				if(isDeath)
 					createdCards[i].death = true;
-				player.AddCardToHand(createdCards[i]);
+				player.cardSystem.AddCardToHand(createdCards[i]);
 
 			}
 			return new Result{result = createdCards, type = Type.CreateCardToHand};
@@ -169,7 +169,7 @@ namespace CSRServer.Game
 				createdCards[i] = CardManager.GetCard(id);
 				if(isDeath)
 					createdCards[i].death = true;
-				player.AddCardToDeck(createdCards[i]);
+				player.cardSystem.AddCardToDeck(createdCards[i]);
 			}
 			return new Result{result = createdCards, type = Type.CreateCardToDeck};
 		}
@@ -249,7 +249,7 @@ namespace CSRServer.Game
 			{
 				foreach (int idx in targetPlayerIndex)
                 {
-                	player.parent[idx].AddCardToDeck(createdCards);
+                	player.parent[idx].cardSystem.AddCardToDeck(createdCards);
                 }
 				return new Result{result = result, type = Type.CreateCardToOther};
 			}
@@ -257,7 +257,7 @@ namespace CSRServer.Game
 			if (targetPlayerIndex.Count == 0)
 				return Nothing(card, player, parameters);
 			
-			player.AddDepartEvent(CreateToOther);
+			player.departSystem.AddEvent(CreateToOther);
 			return new Result{result = result, type = Type.CreateCardToOther};
 		}	
 		
@@ -266,7 +266,7 @@ namespace CSRServer.Game
 			int id = parameters.Get<int>(0, card, player);
 			int amount = parameters.Get<int>(1, card, player);
 
-			player.AddBuff((Buff.Type) id, amount);
+			player.buffSystem.AddBuff((Buff.Type) id, amount);
 			var result = new Dictionary<string, object> {["buffType"] = (Buff.Type) id, ["count"] = amount};
 			
 			return new Result {result = result, type = Type.BuffToMe};
@@ -339,7 +339,7 @@ namespace CSRServer.Game
 			{
 				foreach (int idx in targetPlayerIndex)
 				{
-					player.parent[idx].AddBuff((Buff.Type)id, amount);
+					player.parent[idx].buffSystem.AddBuff((Buff.Type)id, amount);
 				}
 				return new Result{result = result, type = Type.BuffToOther};
 			}
@@ -348,7 +348,7 @@ namespace CSRServer.Game
 			{
 				return Nothing(card, player, parameters);
 			}
-			player.AddDepartEvent(_BuffToOther);
+			player.departSystem.AddEvent(_BuffToOther);
 			return new Result{result = result, type = Type.BuffToOther};
 		}	
 		
@@ -360,14 +360,14 @@ namespace CSRServer.Game
 			//모든 버프 제거
 			if (id == 99)
 			{
-				int amount = player.buffManager.ReleaseAll();
+				int amount = player.buffSystem.ReleaseAll();
 				for (int i = 0; i < amount; i++)
 					results.Add(effect.Use(card, player));
 			}
 			//특정버프제거
 			else
 			{
-				int amount = player.buffManager.Release((Buff.Type) id);
+				int amount = player.buffSystem.Release((Buff.Type) id);
 				for (int i = 0; i < amount; i++)
 					results.Add(effect.Use(card, player));
 
@@ -429,17 +429,17 @@ namespace CSRServer.Game
 			
 			if (card.variable.ContainsKey(percent))
 			{
-				var _percent = card.variable[percent];
+				var overloadPercent = card.variable[percent];
 				Random random = new Random();
-				if (random.Next(100) < _percent.value)
+				if (random.Next(100) < overloadPercent.value)
 				{
 					result = effect.Use(card, player);
 				}
-				_percent.value += amount;
-				if (_percent.value < _percent.lowerBound)
-					_percent.value = _percent.lowerBound;
-				if (_percent.value > _percent.upperBound)
-					_percent.value = _percent.upperBound;
+				overloadPercent.value += amount;
+				if (overloadPercent.value < overloadPercent.lowerBound)
+					overloadPercent.value = overloadPercent.lowerBound;
+				if (overloadPercent.value > overloadPercent.upperBound)
+					overloadPercent.value = overloadPercent.upperBound;
 			}
 			return new Result{result = result, type = Type.DoPercent};
 		}	
@@ -453,7 +453,7 @@ namespace CSRServer.Game
 			bool isComboReady = true;
 			foreach (var id in idList)
 			{
-				Card? find = player.turnUsedCard.Find(x => x.id == id);
+				Card? find = player.cardSystem.turnUsedCard.Find(x => x.id == id);
 				isComboReady = isComboReady && (find != null);
 			}
 
@@ -471,8 +471,8 @@ namespace CSRServer.Game
 			CardEffect effect = parameters.Get<CardEffect>(1, card, player) ?? CardEffect.Nothing();
 			Random random = new Random();
 			
-			if (amount > player.hand.Count)
-				amount = player.hand.Count();
+			if (amount > player.cardSystem.hand.Count)
+				amount = player.cardSystem.hand.Count;
 
 			List<Result[]> leakResults = new List<Result[]>();
 			List<Result[]> discardResults = new List<Result[]>();
@@ -480,9 +480,9 @@ namespace CSRServer.Game
 			//amount장의 카드를 버리고 leak효과+ discard특수효과를 발동한다.
 			for (int i = 0; i < amount; i++)
 			{
-				int throwIndex = random.Next(player.hand.Count);
+				int throwIndex = random.Next(player.cardSystem.hand.Count);
 				throwIndexList.Add(throwIndex);
-				Result[] throwResult = player.ThrowCard(throwIndex);
+				Result[] throwResult = player.cardSystem.ThrowCard(throwIndex);
 				leakResults.Add(throwResult);
 				Result[] discardResult = effect.Use(card, player);
 				discardResults.Add(discardResult);

@@ -1,78 +1,46 @@
 [
   {
     "id": "0",
-    "name": "단거리 이동 모듈 Ⅰ",
+    "name": "폐기물",
     "rank": 1,
     "type": "Normal",
-    "condition": "#pair",
-    "effect-string": "이동 거리를 4 더합니다.",
-    "effect": "Add(4)"
+    "condition": "e1",
+    "effect": "TurnEnd()"
   },
   {
     "id": "1",
-    "name": "찬스",
     "rank": 1,
     "type": "Normal",
     "condition": "#pair",
-    "effect-string": "리롤 횟수를 1회 추가합니다.",
-    "effect": "RerollCountUp(1)"
+    "effect-string": "이동 거리를 3 더합니다.",
+    "effect": "Add(3)"
   },
   {
     "id": "2",
-    "name": "연료 재연소 장치Ⅰ",
     "rank": 1,
     "type": "Normal",
-    "condition": "#two-pair",
-    "effect-string": "이동 거리를 3 더하고 카드를 1장 뽑습니다.",
-    "effect": "Add(3), Draw(1)"
+    "condition": "#triple",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
   },
   {
     "id": "3",
     "rank": 1,
     "type": "Normal",
-    "condition": "#two-pair",
-    "effect-string": "이동 거리를 5 더하고 리롤 횟수를 1회 추가합니다.",
-    "effect": "Add(5), RerollCountUp(1)"
+    "condition": "#triple",
+    "effect-string": "리롤 횟수를 2회 더합니다.",
+    "effect": "RerollCountUp(2)"
   },
   {
     "id": "4",
-    "name": "연료보급",
     "rank": 1,
     "type": "Normal",
-    "condition": "#triple",
-    "effect-string": "카드를 2장 뽑습니다.",
-    "effect": "Draw(2)"
+    "condition": "#two-pair",
+    "effect-string": "이동 거리를 10 더합니다.",
+    "effect": "Add(10)"
   },
   {
     "id": "5",
-    "name": "급발진",
-    "rank": 1,
-    "type": "Normal",
-    "condition": "#triple",
-    "effect-string": "이동 거리를 12 더합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Add(12), ForceReroll()"
-  },
-  {
-    "id": "6",
-    "rank": 1,
-    "type": "Normal",
-    "condition": "#four-card",
-    "effect-string": "이동 거리를 5 더합니다. 카드를 1장 뽑습니다. 리롤 횟수를 1회 추가합니다.",
-    "effect": "Add(5), Draw(1), RerollCountUp(1)"
-  },
-  {
-    "id": "7",
-    "name": "우-효☆ 초럭키다제",
-    "rank": 1,
-    "type": "Normal",
-    "condition": "#yacht",
-    "effect-string": "이동 거리를 50 더합니다.",
-    "effect": "Add(50), Death()",
-    "keyword-id": "소멸"
-  },
-  {
-    "id": "8",
-    "name": "단거리 이동 모듈 Ⅱ",
     "rank": 2,
     "type": "Normal",
     "condition": "#pair",
@@ -80,614 +48,292 @@
     "effect": "Add(6)"
   },
   {
-    "id": "9",
-    "name": "연료 재연소 장치Ⅱ",
-    "rank": 2,
-    "type": "Normal",
-    "condition": "#pair",
-    "effect-string": "리롤 횟수를 2회 추가합니다.",
-    "effect": "RerollCountUp(2)"
-  },
-  {
-    "id": "10",
-    "name": "도박수",
-    "rank": 2,
-    "type": "Normal",
-    "condition": "#two-pair",
-    "effect-string": "이동 거리를 초기화 합니다. 카드를 2장 뽑습니다.",
-    "effect": "Initialize(), Draw(2)"
-  },
-  {
-    "id": "11",
-    "name": "(시스템)오버라이드",
-    "rank": 2,
-    "type": "Normal",
-    "condition": "#two-pair",
-    "effect-string": "카드를 2장 뽑습니다. 리롤 횟수를 2회 추가합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Draw(2), RerollCountUp(2), ForceReroll()"
-  },
-  {
-    "id": "12",
+    "id": "6",
     "rank": 2,
     "type": "Normal",
     "condition": "#triple",
-    "effect-string": "이동 거리를 1.2 곱합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Multiply(1.2), ForceReroll()"
+    "effect-string": "리롤 횟수를 5회 더합니다.",
+    "effect": "RerollCountUp(5)"
   },
   {
-    "id": "13",
-    "name": "불법개조 추진장치",
+    "id": "7",
     "rank": 2,
     "type": "Normal",
-    "condition": "#triple",
-    "effect-string": "이동 거리를 초기화 합니다. 핸드가 10장이 될 때 까지 카드를 뽑습니다.",
-    "effect": "Initialize(), Draw(10-%currentHandNum)"
+    "condition": "#yacht",
+    "effect-string": "이동 거리를 30 더합니다.",
+    "effect": "Add(30)"
   },
   {
-    "id": "14",
-    "rank": 2,
+    "id": "8",
+    "rank": 3,
     "type": "Normal",
     "condition": "#four-card",
     "effect-string": "이동 거리를 1.2 곱합니다.",
     "effect": "Multiply(1.2)"
   },
   {
-    "id": "15",
-    "rank": 3,
-    "type": "Normal",
-    "condition": "#two-pair",
-    "effect-string": "이동 거리를 18 더합니다.",
-    "effect": "Add(18)"
-  },
-  {
-    "id": "16",
-    "name": "아무튼 생성됨",
-    "rank": 3,
-    "type": "Normal",
-    "condition": "#triple",
-    "effect-string": "이동 거리를 1.5 곱합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Multiply(1.5), ForceReroll()"
-  },
-  {
-    "id": "17",
-    "rank": 3,
-    "type": "Normal",
-    "condition": "#four-card",
-    "effect-string": "카드를 3장 뽑습니다. 리롤 횟수를 2회 추가합니다.",
-    "effect": "Draw(3), RerollCountUp(2)"
-  },
-  {
-    "id": "18",
+    "id": "9",
     "rank": 3,
     "type": "Normal",
     "condition": "#yacht",
-    "effect-string": "이동 거리를 2 곱합니다.",
-    "effect": "Multiply(2)"
+    "effect-string": "카드를 2장 뽑습니다.",
+    "effect": "Draw(2)"
   },
   {
-    "id": "19",
+    "id": "10",
     "rank": 3,
     "type": "Normal",
-    "condition": "f1/e1/b1/n1/c1",
-    "effect-string": "이동 거리를 50 더합니다.",
-    "effect": "Add(50)"
+    "condition": "#yacht",
+    "effect-string": "이동 거리를 1.5 곱합니다.",
+    "effect": "Multiply(1.5)"
   },
   {
-    "id": "20",
-    "name": "폐기물",
+    "id": "11",
     "rank": 1,
     "type": "Normal",
-    "condition": "#yacht",
-    "effect": "Death()",
+    "condition": "#pair",
+    "effect-string": "리롤 횟수를 3회 더합니다. 모든 릴을 강제로 리롤합니다.",
+    "effect": "RerollCountUp(3), ForceReroll()"
+  },
+  {
+    "id": "12",
+    "rank": 1,
+    "type": "Normal",
+    "condition": "f1/e1/b1/n1/c1",
+    "effect-string": "이동 거리를 25 더합니다.",
+    "effect": "Add(25)"
+  },
+  {
+    "id": "13",
+    "rank": 2,
+    "type": "Normal",
+    "condition": "#triple",
+    "effect-string": "이동 거리를 15 더합니다. 소멸.",
+    "effect": "Add(15), Death()",
     "keyword-id": "소멸"
   },
   {
-    "id": "21",
-    "name": "화석",
-    "rank": 1,
-    "type": "fossil",
-    "condition": "f1",
-    "effect-string": "이동 거리를 10 더합니다. 화석 리소스의 개수 하나당 핸드에 폐기물을 1장씩 생성합니다.",
-    "effect": "Add(10), CreateCardToHand(20, %currentResourceNum[Fossil])"
+    "id": "14",
+    "rank": 2,
+    "type": "Normal",
+    "condition": "#two-pair",
+    "effect-string": "이동 거리를 초기화 합니다. 카드를 3장 뽑습니다.",
+    "effect": "Initialize(), Draw(3)"
   },
   {
-    "id": "22",
-    "name": "배기가스 분사",
-    "rank": 1,
-    "type": "fossil",
-    "condition": "f1",
-    "effect-string": "자신에게 정제를 1 부여합니다.",
-    "effect": "BuffToMe(5, 1)"
+    "id": "15",
+    "rank": 3,
+    "type": "Normal",
+    "condition": "#triple",
+    "effect-string": "이동 거리를 5 더합니다. 리롤 횟수를 1회 더합니다. 카드를 1장 뽑습니다.",
+    "effect": "Add(5), RerollCountUp(1), Draw(1)"
   },
   {
-    "id": "23",
-    "name": "휘발유",
+    "id": "16",
     "rank": 1,
     "type": "fossil",
     "condition": "f1",
     "variable": "percent(0~100) = 0",
-    "effect-string": "과열[{percent}+3%]: 실패. 이동 거리를 6 더합니다.",
+    "effect-string": "과열[{percent}%]: 실패. 이동 거리를 6 더합니다.",
     "effect": "Overload(\"percent\", 3, Fail()), Add(6)",
     "keyword-id": "실패, 과열"
   },
   {
-    "id": "24",
+    "id": "17",
+    "rank": 1,
+    "type": "fossil",
+    "condition": "#four-card",
+    "variable": "percent(0~100) = 10",
+    "effect-string": "카드를 2장 뽑습니다. 과열[{percent}%]: 대신 핸드에 폐기물을 2장 생성합니다.",
+    "effect": "Overload(\"percent\", 5, { CreateCardToHand(0, 2), Fail() }), Draw(2)",
+    "keyword-id": "과열"
+  },
+  {
+    "id": "18",
+    "rank": 2,
+    "type": "fossil",
+    "condition": "f3",
+    "variable": "percent(0~100) = 5",
+    "effect-string": "핸드의 카드 한 장 당 이동 거리를 3씩 더합니다. 과열[{percent}%]: 턴을 종료합니다.",
+    "effect": "Add(%currentHandNum*3), Overload(\"percent\", 5, TurnEnd())",
+    "keyword-id": "과열"
+  },
+  {
+    "id": "19",
+    "rank": 3,
+    "type": "fossil",
+    "condition": "#triple",
+    "variable": "percent(0~100) = 10",
+    "effect-string": "이동 거리를 10 더합니다. 과열[{percent}%]: 랜덤한 화석 카드를 생성해 덱에 넣습니다. 소멸.",
+    "effect": "Add(10), Overload(\"percent\", 10, { CreateCardToDeck(%randomCardId[Fossil, 1, 3], 1), Death() } )",
+    "keyword-id": "소멸, 과열"
+  },
+  {
+    "id": "20",
+    "rank": 3,
+    "type": "fossil",
+    "condition": "f5",
+    "variable": "percent(0~100) = 25",
+    "effect-string": "이동 거리를 3 곱합니다. 과열[{percent}%]: 이동 거리를 초기화 합니다.",
+    "effect": "Multiply(3), Overload(\"percent\", 10, Initialize())",
+    "keyword-id": "과열"
+  },
+  {
+    "id": "21",
     "rank": 1,
     "type": "fossil",
     "condition": "#pair",
     "effect-string": "4등 플레이어의 덱에 폐기물을 1장 넣습니다.",
-    "effect": "CreateCardToOther(20, 1, 4)"
+    "effect": "CreateCardToOther(0, 1, 4)"
+  },
+  {
+    "id": "22",
+    "rank": 1,
+    "type": "fossil",
+    "condition": "#two-pair",
+    "effect-string": "다른 모든 플레이어의 덱에 폐기물을 1장 넣습니다.",
+    "effect": "CreateCardToOther(0, 1, 0)"
+  },
+  {
+    "id": "23",
+    "rank": 2,
+    "type": "fossil",
+    "condition": "f2",
+    "effect-string": "자신 뒤 순위의 플레이어의 덱에 폐기물을 2장 넣습니다.",
+    "effect": "CreateCardToOther(0, 2, 6)"
+  },
+  {
+    "id": "24",
+    "rank": 2,
+    "type": "fossil",
+    "condition": "f4",
+    "effect-string": "자신 주변 50거리 이내의 모든 플레이어의 덱에 폐기물을 3장 넣습니다.",
+    "effect": "CreateCardToOther(0, 3, 50)"
   },
   {
     "id": "25",
-    "rank": 1,
+    "rank": 3,
     "type": "fossil",
-    "condition": "#pair",
-    "effect-string": "카드를 2장 뽑습니다. 덱에 폐기물을 1장 넣습니다.",
-    "effect": "Draw(2), CreateCardToDeck(20, 1)"
+    "condition": "#yacht",
+    "variable": "percent(0~100) = 10",
+    "effect-string": "모든 플레이어의 덱에 핸드의 카드 수 만큼 폐기물을 넣습니다.\n과열[{percent}%]: 대신 자신의 덱에 핸드의 카드 수 만큼 폐기물을 넣습니다.",
+    "effect": "Overload(\"percent\", 10, { CreateCardToDeck(20, %currentHandNum), Fail() } ),\nCreateCardToOther(20, %currentHandNum, 0)",
+    "keyword-id": "과열"
   },
   {
     "id": "26",
     "rank": 1,
     "type": "fossil",
-    "condition": "f2",
-    "variable": "percent(0~100) = 0",
-    "effect-string": "이동 거리를 10 더합니다. 과열[{percent} + 5%]: 턴을 종료합니다.",
-    "effect": "Add(10), Overload(\"percent\", 5, TurnEnd())",
-    "keyword-id": "과열"
+    "condition": "f1",
+    "effect-string": "이동 거리를 3 더합니다.",
+    "effect": "Add(3)"
   },
   {
     "id": "27",
     "rank": 1,
     "type": "fossil",
-    "condition": "f2",
-    "effect-string": "화석 리소스의 개수 하나당 정제를 1씩 획득합니다.",
-    "effect": "BuffToMe(5, %currentResourceNum[Fossil])"
+    "condition": "#triple",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
   },
   {
     "id": "28",
-    "name": "공해",
     "rank": 1,
     "type": "fossil",
-    "condition": "#two-pair",
-    "effect-string": "다른 모든 플레이어의 덱에 폐기물을 1장 넣습니다.",
-    "effect": "CreateCardToOther(20, 1, 0)"
+    "condition": "f2",
+    "effect-string": "리롤 횟수를 2회 더합니다.",
+    "effect": "RerollCountUp(2)"
   },
   {
     "id": "29",
     "rank": 1,
     "type": "fossil",
     "condition": "#two-pair",
-    "variable": "percent(0~100) = 0",
-    "effect-string": "1등 플레이어의 덱에 폐기물을 3장 넣습니다. 과열:[{percent} + 5]: 자신의 덱에 폐기물을 3장 넣습니다.",
-    "effect": "CreateCardToOther(20, 3, 1), Overload(\"percent\", 5, CreateCardToDeck(20, 3))",
-    "keyword-id": "과열"
+    "effect-string": "이동 거리를 10 더합니다.",
+    "effect": "Add(10)"
   },
   {
     "id": "30",
-    "rank": 1,
-    "type": "fossil",
-    "condition": "#triple",
-    "variable": "percent(0~100) = 0",
-    "effect-string": "리롤 횟수를 3회 추가합니다. 과열[{percent} + 7]: 모든 릴을 강제로 리롤합니다.",
-    "effect": "RerollCountUp(2), Overload(\"percent\", 7, ForceReroll())",
-    "keyword-id": "과열"
-  },
-  {
-    "id": "31",
-    "name": "엔진 오일 교체",
-    "rank": 1,
-    "type": "fossil",
-    "condition": "#triple",
-    "effect-string": "자신에게 적용된 효과를 모두 지우고 지운 효과 만큼 덱에 폐기물을 넣습니다.",
-    "effect": "EraseBuff(99, CreateCardToDeck(20, 1))"
-  },
-  {
-    "id": "32",
-    "rank": 1,
-    "type": "fossil",
-    "condition": "f3",
-    "effect-string": "화석 리소스의 개수 하나당 카드를 1장씩 뽑습니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Draw(%currentResourceNum[Fossil]), ForceReroll()"
-  },
-  {
-    "id": "33",
-    "rank": 1,
-    "type": "fossil",
-    "condition": "f4",
-    "variable": "drawNum",
-    "effect-string": "핸드가 10장이 될 때 까지 카드를 뽑고 카드를 뽑은 만큼 덱에 폐기물을 넣습니다.",
-    "effect": "Check(%currentDeckNum>=10, SetVariable(\"drawNum\", 10-%currentHandNum)), \nCheck(%currentDeckNum<10, SetVariable(\"drawNum\", %currentDeckNum-%currentHandNum)), \nDraw($drawNum), CreateCardToDeck(20, $drawNum)"
-  },
-  {
-    "id": "34",
-    "rank": 2,
-    "type": "fossil",
-    "condition": "f1",
-    "effect-string": "자신 뒤 순위의 플레이어의 덱에 폐기물을 2장 넣습니다.",
-    "effect": "CreateCardToOther(20, 2, 6)"
-  },
-  {
-    "id": "35",
     "rank": 2,
     "type": "fossil",
     "condition": "#pair",
-    "effect-string": "모든 플레이어의 덱에 핸드의 카드 수 만큼 폐기물을 넣습니다.",
-    "effect": "CreateCardToOther(20, %currentHandNum, 0), CreateCardToDeck(20, %currentHandNum)"
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "31",
+    "rank": 2,
+    "type": "fossil",
+    "condition": "f3",
+    "effect-string": "리롤 횟수를 5회 더합니다.",
+    "effect": "RerollCountUp(5)"
+  },
+  {
+    "id": "32",
+    "rank": 2,
+    "type": "fossil",
+    "condition": "#yacht",
+    "effect-string": "이동 거리를 30 더합니다.",
+    "effect": "Add(30)"
+  },
+  {
+    "id": "33",
+    "rank": 3,
+    "type": "fossil",
+    "condition": "f4",
+    "effect-string": "이동 거리를 1.5 곱합니다.",
+    "effect": "Multiply(1.5)"
+  },
+  {
+    "id": "34",
+    "rank": 3,
+    "type": "fossil",
+    "condition": "#yacht",
+    "effect-string": "카드를 2장 뽑습니다.",
+    "effect": "Draw(2)"
+  },
+  {
+    "id": "35",
+    "rank": 3,
+    "type": "fossil",
+    "condition": "f5",
+    "effect-string": "이동 거리를 2 곱합니다.",
+    "effect": "Multiply(2)"
   },
   {
     "id": "36",
-    "rank": 2,
-    "type": "fossil",
-    "condition": "f2",
-    "variable": "percent(0~100) = 0",
-    "effect-string": "과열[{percent} + 5]: 실패. 카드를 3장 뽑습니다.",
-    "effect": "Overload(\"percent\", 5, Fail()), Draw(3)",
-    "keyword-id": "실패, 과열"
+    "rank": 1,
+    "type": "Electric",
+    "condition": "e2",
+    "effect-string": "이동 거리를 3 더합니다. 카드를 1장 뽑습니다.",
+    "effect": "Add(3), Draw(1)"
   },
   {
     "id": "37",
-    "rank": 2,
-    "type": "fossil",
-    "condition": "f2",
-    "variable": "percent(0~100) = 0",
-    "effect-string": "이동 거리를 10 더합니다. 과열[{percent} + 7]: 1등급 화석 카드를 생성해 덱에 넣습니다. 소멸.",
-    "effect": "Add(10), Overload(\"percent\", 7, { CreateCardToDeck(%randomCardId[Fossil, 1, 1], 1), Death() } )",
-    "keyword-id": "소멸, 과열"
+    "rank": 1,
+    "type": "Electric",
+    "condition": "#four-card",
+    "effect-string": "카드를 3장 뽑습니다. 모든 릴을 강제로 리롤합니다.",
+    "effect": "Draw(3), ForceReroll()"
   },
   {
     "id": "38",
     "rank": 2,
-    "type": "fossil",
-    "condition": "#two-pair",
-    "variable": "percent(0~100) = 10",
-    "effect-string": "이동 거리를 1.2 곱합니다. 과열[{percent} + 3]: 이동 거리를 초기화 합니다.",
-    "effect": "Multiply(1.2), Overload(\"percent\", 3, Initialize())",
-    "keyword-id": "과열"
+    "type": "Electric",
+    "condition": "#triple",
+    "effect-string": "전기 리소스의 개수 하나당 카드를 1장씩 뽑습니다. 모든 릴을 강제로 리롤합니다.",
+    "effect": "Draw(%currentResourceNum[Electric]), ForceReroll()"
   },
   {
     "id": "39",
     "rank": 2,
-    "type": "fossil",
-    "condition": "#triple",
-    "effect-string": "자신에게 적용된 효과를 모두 지웁니다.",
-    "effect": "EraseBuff(99)"
-  },
-  {
-    "id": "40",
-    "rank": 2,
-    "type": "fossil",
-    "condition": "f3",
-    "variable": "percent(0~100) = 5",
-    "effect-string": "핸드의 카드 한 장 당 이동 거리를 3씩 더합니다. 과열[{percent} + 5]: 턴을 종료합니다.",
-    "effect": "Add(%currentHandNum*3), Overload(\"percent\", 5, TurnEnd())",
-    "keyword-id": "과열"
-  },
-  {
-    "id": "41",
-    "rank": 2,
-    "type": "fossil",
-    "condition": "f4",
-    "effect-string": "이동 거리에 2를 곱합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Multiply(2), ForceReroll()"
-  },
-  {
-    "id": "42",
-    "rank": 2,
-    "type": "fossil",
-    "condition": "f5",
-    "effect-string": "자신에게 적용된 효과를 모두 지우고 지운 효과 하나당 자신에게 정제를 1씩 부여합니다.",
-    "effect": "EraseBuff(99, BuffToMe(5, 1))"
-  },
-  {
-    "id": "43",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "f2",
-    "variable": "percent(0~100) = 20",
-    "effect-string": "이동 거리를 10 더합니다. 과열[{percent} + 10]: 2등급 화석 카드를 생성해 덱에 넣습니다. 소멸.",
-    "effect": "Add(10), Overload(\"percent\", 10, { CreateCardToDeck(%randomCardId[Fossil, 2, 2], 1), Death() } )",
-    "keyword-id": "소멸, 과열"
-  },
-  {
-    "id": "44",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "f2",
-    "effect-string": "이동 거리를 절반으로 만듭니다. 리롤 횟수를 3회 추가합니다.",
-    "effect": "Multiply(0.5), RerollCountUp(3)"
-  },
-  {
-    "id": "45",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "#two-pair",
-    "effect-string": "이동 거리를 5 더합니다. 자신 주변 30거리 이내의 모든 플레이어의 덱에 폐기물을 3장 넣습니다.",
-    "effect": "Add(5), CreateCardToOther(20, 3, 30)"
-  },
-  {
-    "id": "46",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "#triple",
-    "effect-string": "자신에게 적용된 효과를 모두 지우고 지운 효과 하나당 이동 거리에 3씩 더합니다.",
-    "effect": "EraseBuff(99, Add(3))"
-  },
-  {
-    "id": "47",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "f3",
-    "variable": "percent(0~100) = 15",
-    "effect-string": "과열[{percent} + 5]: 실패. 이동 거리에 1.5를 곱합니다.",
-    "effect": "Overload(\"percent\", 5, Fail()), Multiply(1.5)",
-    "keyword-id": "실패, 과열"
-  },
-  {
-    "id": "48",
-    "name": "공해 \"500배\"",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "f4",
-    "effect-string": "다른 모든 플레이어의 덱에 폐기물을 5장 넣습니다.",
-    "effect": "CreateCardToOther(20, 5, 0)"
-  },
-  {
-    "id": "49",
-    "rank": 3,
-    "type": "fossil",
-    "condition": "f5",
-    "variable": "percent(0~100) = 25",
-    "effect-string": "이동 거리를 3 곱합니다. 과열[{percent} + 10]: 이동 거리를 초기화 합니다.",
-    "effect": "Multiply(3), Overload(\"percent\", 10, Initialize())",
-    "keyword-id": "과열"
-  },
-  {
-    "id": "50",
-    "name": "a세트",
-    "rank": 1,
     "type": "Electric",
-    "condition": "e1",
-    "effect-string": "자신의 모든 릴을 누전시킵니다.",
-    "effect": "BuffToMe(0, %currentResourceNum[All])"
-  },
-  {
-    "id": "51",
-    "name": "b세트 1",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e1",
-    "effect-string": "1등 플레이어에게 누전을 1 부여합니다.",
-    "effect": "BuffToOther(0, 1, 1)"
-  },
-  {
-    "id": "52",
-    "name": "c세트",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e1",
-    "effect-string": "자신에게 고효율을 1 부여합니다. 이동 거리를 3 더합니다.",
-    "effect": "BuffToMe(4, 1), Add(3)"
-  },
-  {
-    "id": "53",
-    "name": "a세트",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2",
-    "effect-string": "이동 거리를 5 더합니다. 카드를 2장 뽑습니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Add(5), Draw(2), ForceReroll()"
-  },
-  {
-    "id": "54",
-    "name": "b세트 2",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2",
-    "effect-string": "카드를 1장 뽑습니다. 리롤 횟수를 1회 추가합니다.",
-    "effect": "Draw(1), RerollCountUp(1)"
-  },
-  {
-    "id": "55",
-    "name": "c세트",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "e2",
-    "effect-string": "자신에게 고효율을 1 부여합니다. 리롤 횟수를 2회 추가합니다.",
-    "effect": "BuffToMe(4, 1), RerollCountUp(2)"
-  },
-  {
-    "id": "56",
-    "name": "a세트",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#triple",
-    "effect-string": "자신 주변 15거리 이내의 모든 플레이어에게 누전을 2 부여합니다.",
-    "effect": "BuffToOther(0, 2, 15)"
-  },
-  {
-    "id": "57",
-    "name": "b세트 3",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#triple",
-    "effect-string": "이동 거리를 3 더합니다. 이번 턴에 b세트 1, b세트 4를 사용한 경우 추가로 이동 거리를 5 더합니다.",
-    "effect": "Add(3), Combo([51, 60], Add(5))"
-  },
-  {
-    "id": "58",
-    "name": "c세트",
-    "rank": 1,
-    "type": "Electric",
-    "condition": "#triple",
-    "effect-string": "자신에게 적용된 모든 효과를 고효율로 전환합니다.",
-    "effect": "EraseBuff(99, BuffToMe(4, 1))"
-  },
-  {
-    "id": "59",
-    "name": "a세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#pair",
-    "effect-string": "전기 리소스의 개수 하나당 이동 거리를 3씩 더하고 카드를 1장씩 뽑습니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Add(%currentResourceNum[Electric]*3), Draw(%currentResourceNum[Electric]), ForceReroll()"
-  },
-  {
-    "id": "60",
-    "name": "b세트 4",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#pair",
-    "effect-string": "카드를 1장 뽑습니다. 이번 턴에 b세트 2를 사용한 경우 추가로 카드를 1장 뽑습니다.",
-    "effect": "Draw(1), Combo([54], Draw(1))"
-  },
-  {
-    "id": "61",
-    "name": "c세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#pair",
-    "effect-string": "자신에게 고효율을 3 부여합니다.",
-    "effect": "BuffToMe(4, 3)"
-  },
-  {
-    "id": "62",
-    "name": "a세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#two-pair",
-    "effect-string": "리롤 횟수를 3회 추가합니다.",
-    "effect": "RerollCountUp(3)"
-  },
-  {
-    "id": "63",
-    "name": "b세트 5",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#two-pair",
-    "effect-string": "이동 거리를 5 더합니다. 이번 턴에 b세트 2, b세트 3, b세트 5를 사용한 경우 리롤 횟수를 2회 추가합니다.",
-    "effect": "Add(5), Combo([54, 57, 63], RerollCountUp(2))"
-  },
-  {
-    "id": "64",
-    "name": "c세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "#two-pair",
-    "effect-string": "전기 리소스의 개수 하나당 자신에게 고효율을 1씩 부여합니다. 이동 거리를 3 더합니다.",
-    "effect": "BuffToMe(4, %currentResourceNum[Electric]), Add(3)"
-  },
-  {
-    "id": "65",
-    "name": "a세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e3",
+    "condition": "#yacht",
     "effect-string": "카드를 5장 뽑습니다. 모든 릴을 강제로 리롤합니다.",
     "effect": "Draw(5), ForceReroll()"
   },
   {
-    "id": "66",
-    "name": "b세트 6",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e3",
-    "effect-string": "이동 거리를 8 더합니다. 이번 턴에 b세트 3, b세트 5를 사용한 경우 추가로 이동 거리를 12 더합니다.",
-    "effect": "Add(8), Combo([57, 63], Add(12))"
-  },
-  {
-    "id": "67",
-    "name": "c세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e3",
-    "effect-string": "자신 뒤 순위 플레이어에게 누전을 4 부여합니다.",
-    "effect": "BuffToOther(0, 4, 6)"
-  },
-  {
-    "id": "68",
-    "name": "a세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e4",
-    "effect-string": "핸드의 카드 한 장 당 이동 거리를 5씩 더합니다.",
-    "effect": "Add(%currentHandNum*5)"
-  },
-  {
-    "id": "69",
-    "name": "b세트 7",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e4",
-    "effect-string": "자신 앞 순위 플레이어에게 누전을 2 부여합니다. 이번 턴에 b세트 1, b세트 8을 사용한 경우 추가로 누전을 2 부여합니다.",
-    "effect": "BuffToOther(0, 2, 5), Combo([51, 72], BuffToOther(0, 2, 5))"
-  },
-  {
-    "id": "70",
-    "name": "c세트",
-    "rank": 2,
-    "type": "Electric",
-    "condition": "e4",
-    "effect-string": "핸드의 카드 한 장 당 자신에게 고효율을 3씩 부여합니다. 이동 거리를 5 더합니다.",
-    "effect": "BuffToMe(4, %currentHandNum*3), Add(5)"
-  },
-  {
-    "id": "71",
-    "name": "a세트",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "#four-card",
-    "effect-string": "다른 모든 플레이어에게 누전을 3 부여합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "BuffToOther(0, 3, 0), ForceReroll()"
-  },
-  {
-    "id": "72",
-    "name": "b세트 8",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "#four-card",
-    "effect-string": "이동 거리에 1.2를 곱합니다. 이번 턴에 b세트 4, b세트 6, b세트 7을 사용한 경우 추가로 이동 거리에 1.2를 곱합니다.",
-    "effect": "Multiply(1.2), Combo([60, 66, 69], Multiply(1.2))"
-  },
-  {
-    "id": "73",
-    "name": "c세트",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "#four-card",
-    "effect-string": "자신에게 적용된 고효율 중첩을 0으로 만들고 없엔 고효율 중첩마다 이동 거리를 5씩 더합니다.",
-    "effect": "EraseBuff(4, Add(5))"
-  },
-  {
-    "id": "74",
-    "name": "a세트",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "#yacht",
-    "effect-string": "이동 거리를 30 더합니다. 모든 릴을 강제로 리롤합니다.",
-    "effect": "Add(30), ForceReroll()"
-  },
-  {
-    "id": "75",
-    "name": "b세트 9",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "#yacht",
-    "effect-string": "리롤 횟수를 5회 추가합니다. 이번 턴에 b세트 6, b세트 7, b세트 8을 사용한 경우 카드를 5장 뽑습니다.",
-    "effect": "RerollCountUp(5), Combo([66, 69, 72], Draw(5))"
-  },
-  {
-    "id": "76",
-    "name": "c세트",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "#yacht",
-    "effect-string": "자신에게 적용된 고효율 중첩 수를 2배로 만듭니다. 이동 거리를 10 더합니다.",
-    "effect": "BuffToMe(4, %currentMyBuffNum[4]), Add(5)"
-  },
-  {
-    "id": "77",
-    "name": "a세트",
+    "id": "40",
     "rank": 3,
     "type": "Electric",
     "condition": "e5",
@@ -695,34 +341,127 @@
     "effect": "Add(%thisTurnUsedCardNum[Electric]*5)"
   },
   {
-    "id": "78",
-    "name": "b세트 10",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "e5",
-    "effect-string": "이동 거리를 1.5 곱합니다. 이번 턴에 다른 9종류의 b세트 카드를 모두 사용한 경우 추가로 이동 거리를 2 곱합니다.",
-    "effect": "Multiply(1.5), Combo([51, 54, 57, 60, 63, 66, 69, 72, 75], Multiply(2))"
-  },
-  {
-    "id": "79",
-    "name": "c세트",
-    "rank": 3,
-    "type": "Electric",
-    "condition": "e5",
-    "effect-string": "이번 턴에 사용한 전기 카드 1장당 자신에게 고효율을 1씩 부여합니다.",
-    "effect": "BuffToMe(4, %thisTurnUsedCardNum[Electric])"
-  },
-  {
-    "id": "80",
+    "id": "41",
     "rank": 1,
-    "type": "Nuclear",
-    "condition": "n1",
-    "effect-string": "이동 거리를 3 더합니다. 재처리.",
-    "effect": "Add(3), Leak(Add(3))",
-    "keyword-id": "재처리"
+    "type": "Electric",
+    "condition": "#pair",
+    "effect-string": "자신의 모든 릴을 누전시킵니다.",
+    "effect": "BuffToMe(0, %currentResourceNum[All])"
   },
   {
-    "id": "81",
+    "id": "42",
+    "rank": 1,
+    "type": "Electric",
+    "condition": "e1",
+    "effect-string": "1등 플레이어에게 누전을 1 부여합니다.",
+    "effect": "BuffToOther(0, 1, 1)"
+  },
+  {
+    "id": "43",
+    "rank": 1,
+    "type": "Electric",
+    "condition": "#two-pair",
+    "effect-string": "자신 주변 30거리 이내의 모든 플레이어에게 누전을 2 부여합니다.",
+    "effect": "BuffToOther(0, 2, 30)"
+  },
+  {
+    "id": "44",
+    "rank": 2,
+    "type": "Electric",
+    "condition": "e3",
+    "effect-string": "자신 앞 순위 플레이어에게 누전을 2 부여합니다.",
+    "effect": "BuffToOther(0, 2, 5)"
+  },
+  {
+    "id": "45",
+    "rank": 3,
+    "type": "Electric",
+    "condition": "e4",
+    "effect-string": "다른 모든 플레이어에게 누전을 5 부여합니다.",
+    "effect": "BuffToOther(0, 5, 0)"
+  },
+  {
+    "id": "46",
+    "rank": 1,
+    "type": "Electric",
+    "condition": "e1",
+    "effect-string": "이동 거리를 3 더합니다.",
+    "effect": "Add(3)"
+  },
+  {
+    "id": "47",
+    "rank": 1,
+    "type": "Electric",
+    "condition": "#triple",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "48",
+    "rank": 1,
+    "type": "Electric",
+    "condition": "e2",
+    "effect-string": "리롤 횟수를 2회 더합니다.",
+    "effect": "RerollCountUp(2)"
+  },
+  {
+    "id": "49",
+    "rank": 1,
+    "type": "Electric",
+    "condition": "#two-pair",
+    "effect-string": "이동 거리를 10 더합니다.",
+    "effect": "Add(10)"
+  },
+  {
+    "id": "50",
+    "rank": 2,
+    "type": "Electric",
+    "condition": "#pair",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "51",
+    "rank": 2,
+    "type": "Electric",
+    "condition": "e3",
+    "effect-string": "카드를 2장 뽑습니다.",
+    "effect": "Draw(2)"
+  },
+  {
+    "id": "52",
+    "rank": 2,
+    "type": "Electric",
+    "condition": "#yacht",
+    "effect-string": "이동 거리를 30 더합니다.",
+    "effect": "Add(30)"
+  },
+  {
+    "id": "53",
+    "rank": 3,
+    "type": "Electric",
+    "condition": "e4",
+    "effect-string": "이동 거리를 1.2 곱합니다.",
+    "effect": "Multiply(1.2)"
+  },
+  {
+    "id": "54",
+    "rank": 3,
+    "type": "Electric",
+    "condition": "#yacht",
+    "effect-string": "카드를 3장 뽑습니다.",
+    "effect": "Draw(3)"
+  },
+  {
+    "id": "55",
+    "rank": 3,
+    "type": "Electric",
+    "condition": "e5",
+    "effect-string": "이동 거리를 1.5 곱합니다.",
+    "effect": "Multiply(1.5)"
+  },
+  {
+    "id": "56",
     "rank": 1,
     "type": "Nuclear",
     "condition": "n1",
@@ -730,136 +469,57 @@
     "effect": "Add(5), Discard(1)"
   },
   {
-    "id": "82",
+    "id": "57",
     "rank": 1,
     "type": "Nuclear",
-    "condition": "n1",
-    "effect-string": "1등 플레이어에게 피폭을 1 부여합니다. 재처리.",
-    "effect": "BuffToOther(2, 1, 1), Leak(BuffToOther(2, 1, 1))",
-    "keyword-id": "재처리"
+    "condition": "#triple",
+    "effect-string": "리롤 횟수를 3회 더합니다. 카드를 2장 버립니다.",
+    "effect": "RerollCountUp(3), Discard(2)"
   },
   {
-    "id": "83",
-    "rank": 1,
+    "id": "58",
+    "rank": 2,
     "type": "Nuclear",
-    "condition": "#pair",
-    "effect-string": "카드를 1장 뽑습니다. 재처리.",
-    "effect": "Draw(1), Leak(Draw(1))",
-    "keyword-id": "재처리"
+    "condition": "#yacht",
+    "effect-string": "핸드의 카드 중 절반을 버리고 버린 카드 한 장 당 리롤 횟수를 1회씩 더합니다.",
+    "effect": "Discard(%currentHandNum/2, RerollCountUp(1))"
   },
   {
-    "id": "84",
-    "rank": 1,
+    "id": "59",
+    "rank": 3,
     "type": "Nuclear",
-    "condition": "#pair",
-    "effect-string": "리롤 횟수를 2회 더합니다. 카드를 1장 버립니다.",
-    "effect": "RerollCountUp(2), Discard(1)"
+    "condition": "#two-pair",
+    "effect-string": "카드를 모두 버리고 버린 카드 한 장 당 이동 거리를 3씩 더합니다.\n원자력 리소스의 개수 하나당 카드를 1장씩 뽑습니다.",
+    "effect": "Discard(%currentHandNum, Add(3)),\nDraw(%currentResourceNum[Nuclear])"
   },
   {
-    "id": "85",
-    "rank": 1,
+    "id": "60",
+    "rank": 3,
     "type": "Nuclear",
-    "condition": "n2",
-    "effect-string": "이동 거리를 12 더합니다. 카드를 2장 버립니다.",
-    "effect": "Add(12), Discard(2)"
-  },
-  {
-    "id": "86",
-    "rank": 1,
-    "type": "Nuclear",
-    "condition": "n2",
-    "effect-string": "이동 거리를 8 더합니다. 누출: 핸드에 폐기물을 1장 생성합니다.",
-    "effect": "Add(8), Leak(CreateCardToHand(20, 1))",
+    "condition": "n5",
+    "effect-string": "이동 거리를 10 더합니다. 누출: 자신과 같은 카드 2장을 핸드에 생성하여 이번 턴에만 사용합니다.",
+    "effect": "Add(10), Leak(CreateCardToHand(107, 2, true))",
     "keyword-id": "누출"
   },
   {
-    "id": "87",
+    "id": "61",
     "rank": 1,
     "type": "Nuclear",
-    "condition": "#two-pair",
+    "condition": "#pair",
+    "effect-string": "1등 플레이어에게 피폭을 2 부여합니다.",
+    "effect": "BuffToOther(2, 1, 1)"
+  },
+  {
+    "id": "62",
+    "rank": 1,
+    "type": "Nuclear",
+    "condition": "#four-card",
     "effect-string": "자신 앞 순위 플레이어에게 피폭을 3 부여합니다. 누출: 자신에게 피폭을 3 부여합니다.",
     "effect": "BuffToOther(2, 3, 5), Leak(BuffToMe(2, 3))",
     "keyword-id": "누출"
   },
   {
-    "id": "88",
-    "rank": 1,
-    "type": "Nuclear",
-    "condition": "#two-pair",
-    "effect-string": "자신에게 고밀화를 2 부여합니다. 재처리.",
-    "effect": "BuffToMe(6, 2), Leak(BuffToMe(6, 2))",
-    "keyword-id": "재처리"
-  },
-  {
-    "id": "89",
-    "rank": 1,
-    "type": "Nuclear",
-    "condition": "#triple",
-    "effect-string": "카드를 2장 뽑습니다. 누출: 모든 릴을 강제로 리롤합니다.",
-    "effect": "Draw(2), Leak(ForceReroll())",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "90",
-    "rank": 1,
-    "type": "Nuclear",
-    "condition": "#triple",
-    "effect-string": "핸드의 모든 카드를 버리고 버린 카드 한 장 당 이동 거리를 3씩 더합니다.",
-    "effect": "Discard(%currentHandNum, Add(3))"
-  },
-  {
-    "id": "91",
-    "rank": 1,
-    "type": "Nuclear",
-    "condition": "n3",
-    "effect-string": "이동 거리를 10 더합니다. 재처리.",
-    "effect": "Add(10), Leak(Add(10))",
-    "keyword-id": "재처리"
-  },
-  {
-    "id": "92",
-    "rank": 1,
-    "type": "Nuclear",
-    "condition": "n4",
-    "effect-string": "이동 거리를 20 더합니다. 모든 카드를 버립니다.",
-    "effect": "Add(20), Discard(%currentHandNum)"
-  },
-  {
-    "id": "93",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "n1",
-    "effect-string": "원자력 리소스의 개수 하나당 카드를 1장씩 버리고 다시 카드를 1장씩 뽑습니다.",
-    "effect": "Discard(%currentResourceNum[Nuclear]), Draw(%currentResourceNum[Nuclear])"
-  },
-  {
-    "id": "94",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "n1",
-    "effect-string": "자신에게 고밀화를 2 부여합니다. 카드를 1장 버립니다.",
-    "effect": "BuffToMe(6, 2), Discard(1)"
-  },
-  {
-    "id": "95",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "#pair",
-    "effect-string": "이동 거리를 5 더합니다. 누출: 턴을 종료합니다.",
-    "effect": "Add(5), Leak(TurnEnd())",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "96",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "n2",
-    "effect-string": "리롤 횟수를 2회 추가합니다. 누출: 카드를 2장 뽑습니다.",
-    "effect": "RerollCountUp(2), Leak(Draw(2))",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "97",
+    "id": "63",
     "rank": 2,
     "type": "Nuclear",
     "condition": "n2",
@@ -867,111 +527,111 @@
     "effect": "BuffToOther(2, 2, 6), Discard(2)"
   },
   {
-    "id": "98",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "#two-pair",
-    "effect-string": "자신에게 고밀화를 3 부여합니다. 누출: 자신에게 피폭을 2 부여합니다.",
-    "effect": "BuffToMe(6, 3), Leak(BuffToMe(2, 2))",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "99",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "#triple",
-    "effect-string": "카드를 3장 뽑습니다. 누출: 핸드를 폐기물로 가득 채웁니다.",
-    "effect": "Draw(3), Leak(CreateCardToHand(20, 10-%currentHandNum))",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "100",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "n3",
-    "effect-string": "핸드의 카드 중 절반을 버리고 버린 카드 한 장 당 자신에게 고밀화를 1씩 부여합니다.",
-    "effect": "Discard(%currentHandNum/2, BuffToMe(6, 1))"
-  },
-  {
-    "id": "101",
-    "rank": 2,
-    "type": "Nuclear",
-    "condition": "n3",
-    "effect-string": "이동 거리를 30 더합니다. 누출: 이동 거리를 초기화 합니다.",
-    "effect": "Add(30), Leak(Initialize())",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "102",
+    "id": "64",
     "rank": 2,
     "type": "Nuclear",
     "condition": "n4",
-    "effect-string": "모든 플레이어에게 피폭을 2 부여합니다. 재처리.",
-    "effect": "BuffToOther(2, 2, 0), Leak(BuffToOther(2, 2, 0))",
+    "effect-string": "모든 플레이어에게 피폭을 3 부여합니다. 재처리.",
+    "effect": "BuffToOther(2, 3, 0), Leak(BuffToOther(2, 3, 0))",
     "keyword-id": "재처리"
   },
   {
-    "id": "103",
-    "rank": 3,
-    "type": "Nuclear",
-    "condition": "n2",
-    "effect-string": "카드를 3장 버립니다. 누출: 이동 거리를 10 더합니다.",
-    "effect": "Discard(3), Leak(Add(10))",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "104",
-    "rank": 3,
-    "type": "Nuclear",
-    "condition": "n2",
-    "effect-string": "이동 거리를 20 더합니다. 카드를 3장 버립니다.",
-    "effect": "Add(20), Discard(3)"
-  },
-  {
-    "id": "105",
-    "rank": 3,
-    "type": "Nuclear",
-    "condition": "#two-pair",
-    "effect-string": "자신 주변 30거리 이내의 모든 플레이어에게 피폭을 2 부여합니다. 재처리.",
-    "effect": "BuffToOther(2, 2, 30), Leak(BuffToOther(2, 2, 30))",
-    "keyword-id": "재처리"
-  },
-  {
-    "id": "106",
-    "rank": 3,
-    "type": "Nuclear",
-    "condition": "#triple",
-    "effect-string": "카드를 모두 버리고 버린 카드 한 장 당 이동 거리를 3씩 더합니다. 원자력 리소스의 개수 하나당 카드를 1장씩 뽑습니다.",
-    "effect": "Discard(%currentHandNum, Add(3)), Draw(%currentResourceNum[Nuclear])"
-  },
-  {
-    "id": "107",
+    "id": "65",
     "rank": 3,
     "type": "Nuclear",
     "condition": "n3",
-    "effect-string": "이동 거리를 10 더합니다. 누출: 자신과 같은 효과를 가진 카드 2장을 핸드에 생성하여 이번 턴에만 사용합니다.",
-    "effect": "Add(10), Leak(CreateCardToHand(107, 2, true))",
-    "keyword-id": "누출"
-  },
-  {
-    "id": "108",
-    "rank": 3,
-    "type": "Nuclear",
-    "condition": "n4",
-    "effect-string": "이동 거리를 30 더합니다. 재처리.",
-    "effect": "Add(30), Leak(Add(30))",
+    "effect-string": "자신 주변 50거리 이내의 모든 플레이어에게 피폭을 2 부여합니다. 재처리.",
+    "effect": "BuffToOther(2, 2, 50), Leak(BuffToOther(2, 2, 50))",
     "keyword-id": "재처리"
   },
   {
-    "id": "109",
+    "id": "66",
+    "rank": 1,
+    "type": "Nuclear",
+    "condition": "n1",
+    "effect-string": "이동 거리를 3 더합니다. 재처리.",
+    "effect": "Add(3), Leak(Add(5))",
+    "keyword-id": "재처리"
+  },
+  {
+    "id": "67",
+    "rank": 1,
+    "type": "Nuclear",
+    "condition": "#triple",
+    "effect-string": "이동 거리를 8 더합니다. 누출: 모든 릴을 강제로 리롤합니다.",
+    "effect": "Add(8), Leak(ForceReroll())",
+    "keyword-id": "누출"
+  },
+  {
+    "id": "68",
+    "rank": 1,
+    "type": "Nuclear",
+    "condition": "n2",
+    "effect-string": "리롤 횟수를 2회 더합니다.",
+    "effect": "RerollCountUp(2)"
+  },
+  {
+    "id": "69",
+    "rank": 1,
+    "type": "Nuclear",
+    "condition": "#two-pair",
+    "effect-string": "이동 거리를 10 더합니다.",
+    "effect": "Add(10)"
+  },
+  {
+    "id": "70",
+    "rank": 2,
+    "type": "Nuclear",
+    "condition": "#pair",
+    "effect-string": "이동 거리를 6 더합니다. 누출: 턴을 종료합니다.",
+    "effect": "Add(6), Leak(TurnEnd())",
+    "keyword-id": "누출"
+  },
+  {
+    "id": "71",
+    "rank": 2,
+    "type": "Nuclear",
+    "condition": "n3",
+    "effect-string": "리롤 횟수를 5회 더합니다. 재처리.",
+    "effect": "RerollCountUp(5), Leak(RerollCountUp(5))",
+    "keyword-id": "재처리"
+  },
+  {
+    "id": "72",
+    "rank": 2,
+    "type": "Nuclear",
+    "condition": "#yacht",
+    "effect-string": "이동 거리를 30 더합니다.",
+    "effect": "Add(30)"
+  },
+  {
+    "id": "73",
+    "rank": 3,
+    "type": "Nuclear",
+    "condition": "n4",
+    "effect-string": "이동 거리를 1.2 곱합니다.",
+    "effect": "Multiply(1.2), Leak(Multiply(1.2))",
+    "keyword-id": "재처리"
+  },
+  {
+    "id": "74",
+    "rank": 3,
+    "type": "Nuclear",
+    "condition": "#yacht",
+    "effect-string": "카드를 2장 뽑습니다.",
+    "effect": "Draw(2)"
+  },
+  {
+    "id": "75",
     "rank": 3,
     "type": "Nuclear",
     "condition": "n5",
-    "effect-string": "핸드의 모든 카드를 버립니다. 이후 카드를 10장 뽑습니다. 리롤 횟수를 3회 추가합니다.",
-    "effect": "Discard(%currentHandNum), Draw(10), RerollCountUp(3)"
+    "effect-string": "이동 거리를 1.5 곱합니다. 누출: 이동 거리를 초기화 합니다.",
+    "effect": "Multiply(1.5), Leak(Initialize())",
+    "keyword-id": "누출"
   },
   {
-    "id": "110",
+    "id": "76",
     "rank": 1,
     "type": "Bio",
     "condition": "b1",
@@ -979,280 +639,167 @@
     "effect": "CreateCardToHand(%randomCardId[Bio, 1, 1], 1, true)"
   },
   {
-    "id": "111",
+    "id": "77",
     "rank": 1,
     "type": "Bio",
-    "condition": "b1/f1",
-    "effect-string": "이동 거리를 5 더합니다.",
-    "effect": "Add(5)"
-  },
-  {
-    "id": "112",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b1/e1",
-    "effect-string": "리롤 횟수를 2회 더합니다.",
-    "effect": "RerollCountUp(2)"
-  },
-  {
-    "id": "113",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b1/n1",
-    "effect-string": "1등 플레이어에게 증식을 2 부여합니다.",
-    "effect": "BuffToOther(1, 2, 1)"
-  },
-  {
-    "id": "114",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b1/c1",
-    "effect-string": "자신에게 의태를 2 부여합니다.",
-    "effect": "BuffToMe(7, 2)"
-  },
-  {
-    "id": "115",
-    "name": "급속 배양",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b2",
-    "effect-string": "1등급 카드 3장을 핸드에 생성하여 이번 턴에만 사용합니다.",
-    "effect": "Repeat(3, CreateCardToHand(%randomCardId[All, 1, 1], 1, true))"
-  },
-  {
-    "id": "116",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b2",
-    "effect-string": "이동 거리를 7 더합니다. 자신을 1장 복제하여 덱에 넣습니다.",
-    "effect": "Add(7), CreateCardToDeck(116, 1)"
-  },
-  {
-    "id": "117",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b2/f1",
-    "effect-string": "자신 앞 순위 플레이어에게 증식을 3 부여합니다.",
-    "effect": "BuffToOther(1, 3, 5)"
-  },
-  {
-    "id": "118",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b2/e1",
-    "effect-string": "리롤 횟수를 3회 추가합니다.",
-    "effect": "RerollCountUp(3)"
-  },
-  {
-    "id": "119",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b2/n1",
-    "effect-string": "이동 거리를 10 더합니다.",
-    "effect": "Add(10)"
-  },
-  {
-    "id": "120",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b1/e1/n1/c1",
-    "effect-string": "바이오 리소스의 개수 하나당 의태를 1씩 부여합니다.",
-    "effect": "BuffToMe(7, %currentResourceNum[Bio])"
-  },
-  {
-    "id": "121",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b3",
-    "effect-string": "1등급 바이오 카드 3장을 핸드에 생성하여 이번 턴에만 사용합니다.",
-    "effect": "Repeat(3, CreateCardToHand(%randomCardId[Bio, 1, 1], 1, true))"
-  },
-  {
-    "id": "122",
-    "rank": 1,
-    "type": "Bio",
-    "condition": "b2/f1/c1",
-    "effect-string": "바이오 리소스의 개수 하나당 이동 거리를 7 더합니다.",
-    "effect": "Add(%currentResourceNum[Bio]*7)"
-  },
-  {
-    "id": "123",
-    "rank": 2,
-    "type": "Bio",
-    "condition": "b1",
-    "effect-string": "2등급까지의 바이오 카드 1장을 핸드에 생성하여 이번 턴에만 사용합니다.",
-    "effect": "CreateCardToHand(%randomCardId[Bio, 1, 2], 1, true)"
-  },
-  {
-    "id": "124",
-    "rank": 2,
-    "type": "Bio",
-    "condition": "b1/e1",
-    "effect-string": "자신 주변 20거리 이내의 모든 플레이어에게 바이오가 아닌 리소스의 개수 만큼 증식을 부여합니다.",
-    "effect": "BuffToOther(1, %currentResourceNum[All]-%currentResourceNum[Bio], 20)"
-  },
-  {
-    "id": "125",
-    "rank": 2,
-    "type": "Bio",
-    "condition": "b1/n1",
-    "effect-string": "카드를 2장 뽑습니다.",
-    "effect": "Draw(2)"
-  },
-  {
-    "id": "126",
-    "rank": 2,
-    "type": "Bio",
-    "condition": "b2",
+    "condition": "#two-pair",
     "effect-string": "2등급까지의 카드 3장을 핸드에 생성하여 이번 턴에만 사용합니다.",
     "effect": "Repeat(3, CreateCardToHand(%randomCardId[All, 1, 2], 1, true))"
   },
   {
-    "id": "127",
+    "id": "78",
     "rank": 2,
     "type": "Bio",
-    "condition": "b1/f1/c1",
-    "effect-string": "자신에게 의태를 4 부여합니다.",
-    "effect": "BuffToMe(7, 4)"
+    "condition": "#triple",
+    "effect-string": "2등급 바이오 카드 2장을 핸드에 생성하여 이번 턴에만 사용합니다.",
+    "effect": "Repeat(2, CreateCardToHand(%randomCardId[Bio, 2, 2], 1, true))"
   },
   {
-    "id": "128",
-    "rank": 2,
+    "id": "79",
+    "rank": 3,
     "type": "Bio",
-    "condition": "b1/e1/n1",
-    "effect-string": "이동 거리를 20 더합니다.",
-    "effect": "Add(20)"
+    "condition": "b4",
+    "effect-string": "3등급 바이오 카드 3장을 핸드에 생성하여 이번 턴에만 사용합니다.",
+    "effect": "Repeat(3, CreateCardToHand(%randomCardId[Bio, 3, 3], 1, true))"
   },
   {
-    "id": "129",
-    "rank": 2,
+    "id": "80",
+    "rank": 3,
     "type": "Bio",
-    "condition": "b2/f1/e1",
-    "effect-string": "핸드의 카드 1장당 이동 거리를 5씩 더합니다.",
-    "effect": "Add(%currentHandNum*5)"
+    "condition": "b5",
+    "effect-string": "3등급까지의 카드를 핸드에 가득 채우게 생성하여 이번 턴에만 사용합니다.",
+    "effect": "Repeat(10-%currentHandNum, CreateCardToHand(%randomCardId[All, 1, 3], 1, true))"
   },
   {
-    "id": "130",
+    "id": "81",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "#pair",
+    "effect-string": "1등 플레이어에게 증식을 1 부여합니다.",
+    "effect": "BuffToOther(1, 2, 1)"
+  },
+  {
+    "id": "82",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "b2",
+    "effect-string": "자신 앞 순위 플레이어에게 증식을 2 부여합니다.",
+    "effect": "BuffToOther(1, 2, 5)"
+  },
+  {
+    "id": "83",
     "rank": 2,
     "type": "Bio",
-    "condition": "b2/n1/c1",
+    "condition": "b3",
+    "effect-string": "자신 주변 40거리 이내의 모든 플레이어에게 바이오가 아닌 리소스의 개수 만큼 증식을 부여합니다.",
+    "effect": "BuffToOther(1, %currentResourceNum[All]-%currentResourceNum[Bio], 40)"
+  },
+  {
+    "id": "84",
+    "rank": 2,
+    "type": "Bio",
+    "condition": "#four-card",
+    "effect-string": "1등 플레이어에게 핸드의 수의 절반만큼 증식을 부여합니다.",
+    "effect": "BuffToOther(1, 2, %currentHandNum/2)"
+  },
+  {
+    "id": "85",
+    "rank": 3,
+    "type": "Bio",
+    "condition": "#yacht",
+    "effect-string": "다른 모든 플레이어에게 증식을 4 부여합니다.",
+    "effect": "BuffToOther(1, 4, 0)"
+  },
+  {
+    "id": "86",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "b1",
+    "effect-string": "이동 거리를 3 더합니다.",
+    "effect": "Add(3)"
+  },
+  {
+    "id": "87",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "#triple",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "88",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "b2",
+    "effect-string": "리롤 횟수를 3회 더합니다.",
+    "effect": "RerollCountUp(3)"
+  },
+  {
+    "id": "89",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "#two-pair",
+    "effect-string": "이동 거리를 10 더합니다.",
+    "effect": "Add(10)"
+  },
+  {
+    "id": "90",
+    "rank": 1,
+    "type": "Bio",
+    "condition": "#pair",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "91",
+    "rank": 2,
+    "type": "Bio",
+    "condition": "b3",
+    "effect-string": "리롤 횟수를 7회 더합니다.",
+    "effect": "RerollCountUp(7)"
+  },
+  {
+    "id": "92",
+    "rank": 2,
+    "type": "Bio",
+    "condition": "#yacht",
+    "effect-string": "이동 거리를 30 더합니다.",
+    "effect": "Add(30)"
+  },
+  {
+    "id": "93",
+    "rank": 2,
+    "type": "Bio",
+    "condition": "b4",
     "effect-string": "이동 거리를 1.2 곱합니다.",
     "effect": "Multiply(1.2)"
   },
   {
-    "id": "131",
-    "rank": 2,
-    "type": "Bio",
-    "condition": "b3",
-    "effect-string": "3등급 카드 1장을 생성하여 이번 턴에만 사용합니다.",
-    "effect": "CreateCardToHand(%randomCardId[All, 3, 3], 1, true)"
-  },
-  {
-    "id": "132",
-    "rank": 2,
-    "type": "Bio",
-    "condition": "b4",
-    "effect-string": "3등급까지의 바이오 카드 3장을 생성하여 이번 턴에만 사용합니다.",
-    "effect": "Repeat(3, CreateCardToHand(%randomCardId[Bio, 1, 3], 1, true))"
-  },
-  {
-    "id": "133",
+    "id": "94",
     "rank": 3,
     "type": "Bio",
-    "condition": "b2",
-    "effect-string": "3등급까지의 바이오 카드 1장을 생성하여 이번 턴에만 사용합니다.",
-    "effect": "CreateCardToHand(%randomCardId[Bio, 1, 3], 1, true)"
+    "condition": "#yacht",
+    "effect-string": "카드를 2장 뽑습니다.",
+    "effect": "Draw(2)"
   },
   {
-    "id": "134",
-    "rank": 3,
-    "type": "Bio",
-    "condition": "b1/f1/n1/c1",
-    "effect-string": "핸드의 카드 1장당 의태를 1씩 부여합니다.",
-    "effect": "BuffToMe(7, %currentHandNum)"
-  },
-  {
-    "id": "135",
-    "rank": 3,
-    "type": "Bio",
-    "condition": "f1/e1/b1/n1/c1",
-    "effect-string": "이동 거리를 2 곱합니다.",
-    "effect": "Multiply(2)"
-  },
-  {
-    "id": "136",
-    "rank": 3,
-    "type": "Bio",
-    "condition": "b3/f1",
-    "effect-string": "다른 모든 플레이어에게 증식을 3 부여합니다.",
-    "effect": "BuffToOther(1, 3, 0)"
-  },
-  {
-    "id": "137",
-    "rank": 3,
-    "type": "Bio",
-    "condition": "b3",
-    "effect-string": "3등급 바이오 카드 2장을 생성하여 이번 턴에만 사용합니다.",
-    "effect": "Repeat(2, CreateCardToHand(%randomCardId[Bio, 3, 3], 1, true))"
-  },
-  {
-    "id": "138",
-    "rank": 3,
-    "type": "Bio",
-    "condition": "b3/e1",
-    "effect-string": "리롤 횟수를 7회 추가합니다.",
-    "effect": "RerollCountUp(7)"
-  },
-  {
-    "id": "139",
+    "id": "95",
     "rank": 3,
     "type": "Bio",
     "condition": "b5",
-    "effect-string": "핸드에 3등급까지의 바이오 카드를 가득 채우게 생성하여 이번 턴에만 사용합니다.",
-    "effect": "Repeat(10-%currentHandNum, CreateCardToHand(%randomCardId[Bio, 1, 3], 1, true))"
+    "effect-string": "이동 거리를 1.5 곱합니다.",
+    "effect": "Multiply(1.5)"
   },
   {
-    "id": "140",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "c1",
-    "effect-string": "이동 거리를 1~5 더합니다.",
-    "effect": "Add(%randomNum[1, 5])"
-  },
-  {
-    "id": "141",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "c1",
-    "effect-string": "카드를 0~2장 뽑습니다.",
-    "effect": "Draw(%randomNum[0, 2])"
-  },
-  {
-    "id": "142",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "c1",
-    "effect-string": "리롤 횟수를 0~2회 추가합니다.",
-    "effect": "RerollCountUp(%randomNum[0, 2])"
-  },
-  {
-    "id": "143",
+    "id": "96",
     "rank": 1,
     "type": "Cosmic",
     "condition": "#pair",
-    "effect-string": "자신을 포함해 랜덤한 대상에게 고장을 1 부여합니다.",
-    "effect": "Choice({BuffToMe(3, 1), \nBuffToOther(3, 1, 0), \nBuffToOther(3, 1, %randomNum[1, 4]), \nBuffToOther(3, 1, %randomNum[5, 6])})"
+    "effect-string": "리롤 횟수를 3회 추가합니다. 또는 모든 릴을 강제로 리롤합니다.",
+    "effect": "Choice({RerollCountUp(3), ForceReroll()})"
   },
   {
-    "id": "144",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "#pair",
-    "effect-string": "자신에게 랜덤한 버프를 1 부여합니다. 2번 반복합니다.",
-    "effect": "Repeat(2, BuffToMe(%randomNum[4, 7], 1))"
-  },
-  {
-    "id": "145",
+    "id": "97",
     "rank": 1,
     "type": "Cosmic",
     "condition": "c2",
@@ -1260,64 +807,7 @@
     "effect": "Add(%randomNum[3, 10])"
   },
   {
-    "id": "146",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "c2",
-    "effect-string": "다른 모든 플레이어에게 고장을 3 부여합니다. 또는 다른 모든 플레이어에게 랜덤한 버프를 3 부여합니다.",
-    "effect": "Choice({BuffToOther(3, 3, 0), BuffToOther(%randomNum[4, 7], 3, 0)})"
-  },
-  {
-    "id": "147",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "#two-pair",
-    "effect-string": "리롤 횟수를 3회 추가합니다. 또는 모든 릴을 강제로 리롤합니다.",
-    "effect": "Choice({RerollCountUp(3), ForceReroll()})"
-  },
-  {
-    "id": "148",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "#two-pair",
-    "effect-string": "자신에게 랜덤한 버프를 3 부여합니다. 또는 자신에게 랜덤한 디버프를 3 부여합니다.",
-    "effect": "Choice({BuffToMe(%randomNum[4, 7], 3), BuffToMe(%randomNum[0, 3], 3)})"
-  },
-  {
-    "id": "149",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "#triple",
-    "effect-string": "1등 플레이어에게 고장을 0~3 부여합니다.",
-    "effect": "BuffToOther(3, %randomNum[0, 3], 1)"
-  },
-  {
-    "id": "150",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "#triple",
-    "effect-string": "핸드가 10장이 될 때 까지 카드를 뽑습니다. 또는 모든 카드를 버립니다.",
-    "effect": "Choice({Draw(10-%currentHandNum), Discard(%currentHandNum)})"
-  },
-  {
-    "id": "151",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "c3",
-    "effect-string": "이동 거리를 20 더합니다. 또는 이동 거리를 5 뺍니다.",
-    "effect": "Choice({Add(20), Add(-5)})"
-  },
-  {
-    "id": "152",
-    "rank": 1,
-    "type": "Cosmic",
-    "condition": "c4",
-    "effect-string": "이동 거리를 30 더합니다. 또는 소멸.",
-    "effect": "Choice({Add(30), Death()})",
-    "keyword-id": "소멸"
-  },
-  {
-    "id": "153",
+    "id": "98",
     "rank": 2,
     "type": "Cosmic",
     "condition": "c1",
@@ -1325,131 +815,139 @@
     "effect": "Repeat(%currentResourceNum[Cosmic], Add(%randomNum[1, 5]))"
   },
   {
-    "id": "154",
-    "rank": 2,
-    "type": "Cosmic",
-    "condition": "c1",
-    "effect-string": "이동 거리를 10 더합니다. 또는 턴을 종료합니다.",
-    "effect": "Choice({Add(10), TurnEnd()})"
-  },
-  {
-    "id": "155",
-    "rank": 2,
-    "type": "Cosmic",
-    "condition": "#pair",
-    "effect-string": "카드를 2장 뽑습니다. 또는 리롤 횟수를 2회 추가합니다.",
-    "effect": "Choice({Draw(2), RerollCountUp(2)})"
-  },
-  {
-    "id": "156",
-    "rank": 2,
-    "type": "Cosmic",
-    "condition": "c2",
-    "effect-string": "카드를 0~5장 뽑습니다.",
-    "effect": "Draw(%randomNum[0, 5])"
-  },
-  {
-    "id": "157",
-    "rank": 2,
-    "type": "Cosmic",
-    "condition": "c2",
-    "effect-string": "자신에게 랜덤한 효과를 1 부여합니다. 핸드의 카드 수 만큼 반복합니다.",
-    "effect": "Repeat(%currentHandNum, BuffToMe(%randomNum[0, 7], 1))"
-  },
-  {
-    "id": "158",
-    "rank": 2,
+    "id": "99",
+    "rank": 3,
     "type": "Cosmic",
     "condition": "#two-pair",
-    "effect-string": "이동 거리를 5~12 더합니다.",
-    "effect": "Add(%randomNum[5, 12])"
+    "effect-string": "카드를 1장 뽑습니다. 또는 이동 거리를 5 뺍니다. 코스믹 리소스의 수 만큼 반복합니다.",
+    "effect": "Repeat(%currentResourceNum[Cosmic], Choice({Draw(1), Add(-5)}))"
   },
   {
-    "id": "159",
-    "rank": 2,
+    "id": "100",
+    "rank": 3,
+    "type": "Cosmic",
+    "condition": "c5",
+    "effect-string": "이동 거리를 0~2.5 곱합니다.",
+    "effect": "Multiply(%randomNum[0, 25]/10)"
+  },
+  {
+    "id": "101",
+    "rank": 1,
     "type": "Cosmic",
     "condition": "#triple",
-    "effect-string": "리롤 횟수를 0~5회 추가합니다.",
-    "effect": "RerollCountUp(%randomNum[0, 5])"
+    "effect-string": "1등 플레이어에게 랜덤한 디버프를 2 부여합니다.",
+    "effect": "BuffToOther(%randomNum[0, 2], 2, 1)"
   },
   {
-    "id": "160",
+    "id": "102",
+    "rank": 1,
+    "type": "Cosmic",
+    "condition": "#yacht",
+    "effect-string": "다른 모든 플레이어에게 랜덤한 디버프를 3 부여합니다.\n또는 자신에게 랜덤한 디버프를 3 부여합니다.",
+    "effect": "Choice({BuffToOther(%randomNum[0, 2], 3, 0), BuffToMe(%randomNum[0, 2], 3)})"
+  },
+  {
+    "id": "103",
     "rank": 2,
     "type": "Cosmic",
     "condition": "c3",
-    "effect-string": "다른 모든 플레이어에게 고장을 2 부여합니다. 또는 자신에게 고장을 2 부여합니다.",
-    "effect": "Choice({BuffToOther(3, 2, 0), BuffToMe(3, 2)})"
+    "effect-string": "자신 앞 순위 플레이어에게 랜덤한 디버프를 3 부여합니다.",
+    "effect": "BuffToOther(%randomNum[0, 2], 3, 5)"
   },
   {
-    "id": "161",
+    "id": "104",
     "rank": 2,
     "type": "Cosmic",
-    "condition": "c3",
-    "effect-string": "이동 거리를 1.5 곱합니다. 또는 이동 거리를 0.5 곱합니다.",
-    "effect": "Choice({Multiply(1.5), Multiply(0.5)})"
+    "condition": "#four-card",
+    "effect-string": "자신에게 랜덤한 디버프를 3 부여합니다. 또는 자신에게 적용된 모든 효과를 제거합니다.",
+    "effect": "Choice({BuffToMe(%randomNum[0, 2], 3), EraseBuff(99)})"
   },
   {
-    "id": "162",
-    "rank": 2,
+    "id": "105",
+    "rank": 3,
     "type": "Cosmic",
     "condition": "c4",
-    "effect-string": "이동 거리를 0~2 곱합니다.",
-    "effect": "Multiply(%randomNum[0, 2])"
+    "effect-string": "자신을 포함해 랜덤한 대상에게 랜덤한 디버프를 1 부여합니다. 핸드의 카드 수 만큼 반복합니다.",
+    "effect": "Repeat(%currentHandNum,\nChoice({BuffToMe(%randomNum[0, 2], 1), \nBuffToOther(%randomNum[0, 2], 1, 0), \nBuffToOther(%randomNum[0, 2], 1, %randomNum[1, 4]), \nBuffToOther(%randomNum[0, 2], 1, %randomNum[5, 6]) } ) )"
   },
   {
-    "id": "163",
-    "rank": 3,
+    "id": "106",
+    "rank": 1,
     "type": "Cosmic",
-    "condition": "c2",
-    "effect-string": "자신에게 랜덤한 효과를 3 부여합니다. 또는 자신에게 적용된 모든 효과를 제거합니다.",
-    "effect": "Choice({BuffToMe(%randomNum[4, 7], 3), EraseBuff(99)})"
+    "condition": "c1",
+    "effect-string": "이동 거리를 3 더합니다.",
+    "effect": "Add(3)"
   },
   {
-    "id": "164",
-    "rank": 3,
-    "type": "Cosmic",
-    "condition": "c2",
-    "effect-string": "카드를 1장 뽑습니다. 또는 리롤 횟수를 1회 추가합니다. 코스믹 리소스의 수 만큼 반복합니다.",
-    "effect": "Repeat(%currentResourceNum[Cosmic], Choice({Draw(1), RerollCountUp(1)}))"
-  },
-  {
-    "id": "165",
-    "rank": 3,
-    "type": "Cosmic",
-    "condition": "#two-pair",
-    "effect-string": "자신을 포함해 랜덤한 대상에게 고장을 1 부여합니다. 핸드의 카드 수 만큼 반복합니다.",
-    "effect": "Repeat(%currentHandNum, Choice( {BuffToMe(3, 1), BuffToOther(3, 1, %randomNum[0, 6]) } ) )"
-  },
-  {
-    "id": "166",
-    "rank": 3,
+    "id": "107",
+    "rank": 1,
     "type": "Cosmic",
     "condition": "#triple",
-    "effect-string": "자신에게 적용된 효과를 랜덤한 다른 버프로 변경합니다.",
-    "effect": "EraseBuff(99, BuffToMe(%randomNum[4, 7], 1))"
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
   },
   {
-    "id": "167",
-    "rank": 3,
+    "id": "108",
+    "rank": 1,
+    "type": "Cosmic",
+    "condition": "c2",
+    "effect-string": "리롤 횟수를 1~4회 더합니다.",
+    "effect": "RerollCountUp(%randomNum[1, 4])"
+  },
+  {
+    "id": "109",
+    "rank": 1,
+    "type": "Cosmic",
+    "condition": "#two-pair",
+    "effect-string": "이동 거리를 10 더합니다.",
+    "effect": "Add(10)"
+  },
+  {
+    "id": "110",
+    "rank": 1,
+    "type": "Cosmic",
+    "condition": "#pair",
+    "effect-string": "이동 거리를 6 더합니다.",
+    "effect": "Add(6)"
+  },
+  {
+    "id": "111",
+    "rank": 2,
     "type": "Cosmic",
     "condition": "c3",
+    "effect-string": "리롤 횟수를 5회 더합니다.",
+    "effect": "RerollCountUp(5)"
+  },
+  {
+    "id": "112",
+    "rank": 2,
+    "type": "Cosmic",
+    "condition": "#yacht",
     "effect-string": "이동 거리를 0~50 더합니다.",
     "effect": "Add(%randomNum[0, 50])"
   },
   {
-    "id": "168",
-    "rank": 3,
+    "id": "113",
+    "rank": 2,
     "type": "Cosmic",
     "condition": "c4",
-    "effect-string": "다른 모든 플레이어에게 랜덤한 효과를 1 부여합니다. 10번 반복합니다.",
-    "effect": "Repeat(10, BuffToOther(%randomNum[0, 7], 1, 0))"
+    "effect-string": "이동 거리를 1.2 곱합니다.",
+    "effect": "Multiply(1.2)"
   },
   {
-    "id": "169",
+    "id": "114",
+    "rank": 3,
+    "type": "Cosmic",
+    "condition": "#yacht",
+    "effect-string": "카드를 2장 뽑습니다.",
+    "effect": "Draw(2)"
+  },
+  {
+    "id": "115",
     "rank": 3,
     "type": "Cosmic",
     "condition": "c5",
-    "effect-string": "이동 거리를 1~3 곱합니다.",
-    "effect": "Multiply(%randomNum[1, 3])"
+    "effect-string": "이동 거리를 1.5 곱합니다.",
+    "effect": "Multiply(1.5)"
   }
 ]

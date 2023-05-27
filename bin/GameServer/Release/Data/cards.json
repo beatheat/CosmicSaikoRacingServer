@@ -4,8 +4,8 @@
     "name": "폐기물",
     "rank": 1,
     "type": "Normal",
-    "condition": "#yacht",
-    "keyword-id": "소멸"
+    "condition": "e1",
+    "effect": "TurnEnd()"
   },
   {
     "id": "1",

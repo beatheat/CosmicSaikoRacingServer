@@ -1,243 +1,225 @@
-﻿using EdenNetwork;
-using EdenNetwork.Udp;
+﻿using CSR.DataTransmission;
+using CSR.Game.GameObject;
+using CSR.Game.Player;
+using EdenNetwork;
 
-namespace CSRServer.Game
+namespace CSR.Game.Phase;
+
+public class MaintainPhase
 {
-    public class MaintainPhase
-	{
-		private const int INITIAL_TIME = 99;
-		private readonly TurnData _turnData;
-		private readonly GameManager _gameManager;
-		private readonly EdenUdpServer _server;
-        private readonly GameScene _parent;
-        
-        private Timer? _timer;
-		private int _time;
-        private bool _turnEnd;
+    private const int INITIAL_TIME = 99;
+    private readonly GameSession _parent;
+    private readonly EdenUdpServer _server;
 
-		public MaintainPhase(GameManager gameManager, EdenUdpServer server, TurnData turnData, GameScene parent)
-		{
-			this._gameManager = gameManager;
-			this._server = server;
-			this._turnData = turnData;
-            this._parent = parent;
-			
-            this._time = 0;
-            this._timer = null;
-        }
+    private Timer? _timer;
+    private int _time;
+    private bool _turnEnd;
 
-        /// <summary>
-        /// 정비 페이즈 시작
-        /// </summary>
-        public void MaintainStart()
-        {            
-            _server.AddReceiveEvent("MaintainReady", MaintainReady);
-            _server.AddResponse("RerollShop", RerollShop);
-            _server.AddResponse("RerollRemoveCard", RerollRemoveCard);
-            _server.AddResponse("BuyExp", BuyExp);
-            _server.AddResponse("BuyCard", BuyCard);
-            _server.AddResponse("RemoveCard", RemoveCard);
-            
-            _time = INITIAL_TIME;
-            _turnEnd = false;
-            //정비 페이즈 구성요소 클라이언트와 동기화
-            foreach (var player in _turnData.playerList)
-            {
-                player.MaintainStart();
-                _server.Send("MaintainStart", player.clientId, new Dictionary<string, object>
-                {
-                    ["shopCards"] = player.maintainSystem.shopCards,
-                    ["removeCards"] = player.maintainSystem.removeCards,
-                });
-            }
-
-            _timer = new Timer(GameTimer, null, 0, 1000);
-        }
-
-        /// <summary>
-        /// 정비 페이즈 종료
-        /// </summary>
-        private void MaintainEnd()
-        {
-            lock (this)
-            {
-                if (_turnEnd == false)
-                {
-                    _timer?.Dispose();
-
-                    _server.RemoveReceiveEvent("MaintainReady");
-                    _server.RemoveResponse("RerollShop");
-                    _server.RemoveResponse("RerollRemoveCard");
-                    _server.RemoveResponse("BuyExp");
-                    _server.RemoveResponse("BuyCard");
-                    _server.RemoveResponse("RemoveCard");
-                    
-                    foreach (var player in _turnData.playerList)
-                        player.MaintainEnd();
-                    
-                    _parent.PreheatStart();
-                    _turnEnd = true;
-                }
-            }
-        }
-        
-        // 정비 페이즈 타이머
-        private async void GameTimer(object? sender)
-        {
-            if (_time > 0)
-            {
-                _time--;
-                await _server.BroadcastAsync("MaintainTime", _time, log: false);
-            }
-            else
-            {
-                MaintainEnd();
-            }
-        }
-
-        #region Receive/Response Methods
-        
-        /// <summary>
-        /// 정비 페이즈 준비완료 API
-        /// </summary>
-        private void MaintainReady(string clientId, EdenData data)
-        {
-            GamePlayer player = _turnData.playerMap[clientId];
-            player.phaseReady = true;
-
-            //모든 플레이어가 예열턴을 마쳤는지 체크
-            bool checkAllReady = true;
-            foreach (var p in _turnData.playerList)
-                checkAllReady = checkAllReady && p.phaseReady;
-            if (checkAllReady)
-                MaintainEnd();
-        }
-
-
-        /// <summary>
-        /// 구매카드 상점 리롤 API
-        /// </summary>
-        private EdenData RerollShop(string clientId, EdenData data)
-        {
-            GamePlayer player = _turnData.playerMap[clientId];
-            if (player.phaseReady)
-                return EdenData.Error("RerollShop - Player turn ends");
-
-            var errorCode = player.maintainSystem.RerollShop();
-            if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
-                return EdenData.Error("RerollShop - Coin is not enough");
-
-            return new EdenData(new Dictionary<string, object>
-            {
-                ["shopCards"] = player.maintainSystem.shopCards,
-                ["coin"] = player.maintainSystem.coin
-            });
-
-        }
-        
-        /// <summary>
-        /// 제거카드 상점 리롤 API
-        /// </summary>
-        private EdenData RerollRemoveCard(string clientId, EdenData data)
-        {
-
-                GamePlayer player = _turnData.playerMap[clientId];
-                if (player.phaseReady)
-                    return EdenData.Error("RerollRemoveCard - Player turn ends");
-                
-                var errorCode = player.maintainSystem.RerollRemoveCard();
-                if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
-                    return EdenData.Error("RerollRemoveCard - Coin is not enough");
-
-                return new EdenData(new Dictionary<string, object>
-                {
-                    ["removeCards"] = player.maintainSystem.removeCards,
-                    ["coin"] = player.maintainSystem.coin
-                });
-        }
-
-        /// <summary>
-        /// 경험치 구매 API
-        /// </summary>
-        private EdenData BuyExp(string clientId, EdenData data)
-        {
-            GamePlayer player = _turnData.playerMap[clientId];
-            if (player.phaseReady)
-                return EdenData.Error("BuyExp - Player turn ends");
-
-            var errorCode = player.maintainSystem.BuyExp();
-            
-            if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
-                return EdenData.Error("BuyExp - Coin is not enough");
-            else if (errorCode == MaintainSystem.ErrorCode.MAX_LEVEL)
-                return EdenData.Error("BuyExp - Player level is max");
-
-            return new EdenData(new Dictionary<string, object>
-            {
-                ["level"] = player.maintainSystem.level, 
-                ["exp"] = player.maintainSystem.exp, 
-                ["coin"] = player.maintainSystem.coin
-            });
-        }
-
-        /// <summary>
-        /// 구매카드 상점 구매 API
-        /// </summary>
-        private EdenData BuyCard(string clientId, EdenData data)
-        {
-            GamePlayer player = _turnData.playerMap[clientId];
-            if (player.phaseReady)
-                return EdenData.Error("BuyCard - Player turn ends");
-            
-            if (!data.TryGet<int>(out var buyIndex))
-                return EdenData.Error("BuyCard - Buy index is missing");
-
-            var errorCode = player.maintainSystem.BuyCard(buyIndex, out var boughtCard);
-            if(errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
-                return EdenData.Error("BuyCard - Coin is not enough");
-            else if(errorCode == MaintainSystem.ErrorCode.WRONG_INDEX)
-                return EdenData.Error("BuyCard - Shop card index is wrong");
-            
-
-            player.cardSystem.AddCardToDeck(boughtCard);
-            return new EdenData(new Dictionary<string, object>
-            {
-                ["shopCards"] = player.maintainSystem.shopCards,
-                ["buyCard"] = boughtCard,
-                ["deck"] = player.cardSystem.deck,
-                ["coin"] = player.maintainSystem.coin
-            });
-        }
-
-        /// <summary>
-        /// 제커 카드 상점 제거 API
-        /// </summary>
-        private EdenData RemoveCard(string clientId, EdenData data)
-        {
-            GamePlayer player = _turnData.playerMap[clientId];
-            if (player.phaseReady)
-                return EdenData.Error("RemoveCard - Player turn ends");
-            
-            if (!data.TryGet<int>(out var removeIndex))
-                return EdenData.Error("RemoveCard - remove index is missing");
-            
-            var errorCode = player.maintainSystem.RemoveCard(removeIndex, out var removeCard);
-            
-            if (errorCode == MaintainSystem.ErrorCode.COIN_NOT_ENOUGH)
-                return EdenData.Error("RemoveCard - Coin is not enough");
-            
-            if (errorCode == MaintainSystem.ErrorCode.WRONG_INDEX)
-                return EdenData.Error($"RemoveCard - Remove card index is wrong");
-
-            return new EdenData(new Dictionary<string, object>
-            {
-                ["removeCards"] = player.maintainSystem.removeCards,
-                ["deck"] = player.cardSystem.deck,
-                ["coin"] = player.maintainSystem.coin
-            });
-        }
-        
-        #endregion
-
+    public MaintainPhase(GameSession parent, EdenUdpServer server)
+    {
+        this._server = server;
+        this._parent = parent;
+        this._timer = null;
+        this._time = 0;
+        this._turnEnd = false;
     }
+    
+
+    /// <summary>
+    /// 정비 페이즈 시작
+    /// </summary>
+    public void MaintainStart()
+    {
+        _server.AddEndpoints(this);
+
+        _time = INITIAL_TIME;
+        _turnEnd = false;
+        //정비 페이즈 구성요소 클라이언트와 동기화
+        foreach (var player in _parent.PlayerList)
+        {
+            player.MaintainStart();
+            _server.Send("MaintainStart", player.ClientId, new Packet_MaintainStart
+            {
+                ShopCards = player.Maintain.ShopCards,
+                RemoveCards = player.Maintain.RemoveCards
+            });
+        }
+
+        _timer = new Timer(GameTimer, null, 0, 1000);
+    }
+
+    /// <summary>
+    /// 정비 페이즈 종료
+    /// </summary>
+    private void MaintainEnd()
+    {
+        lock (this)
+        {
+            if (_turnEnd == false)
+            {
+                _timer?.Dispose();
+
+                _server.RemoveEndpoints(this);
+
+                foreach (var player in _parent.PlayerList)
+                    player.MaintainEnd();
+
+                _parent.PreheatStart();
+                _turnEnd = true;
+            }
+        }
+    }
+
+    // 정비 페이즈 타이머
+    private async void GameTimer(object? sender)
+    {
+        if (_time > 0)
+        {
+            _time--;
+            await _server.BroadcastAsync("MaintainTime", _time);
+        }
+        else
+        {
+            MaintainEnd();
+        }
+    }
+
+    #region Receive/Response Methods
+
+    /// <summary>
+    /// 정비 페이즈 준비완료 API
+    /// </summary>
+    [EdenReceive]
+    private void MaintainReady(PeerId clientId)
+    {
+        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        if (player == null)
+            return;
+        
+        player.PhaseReady = true;
+
+        //모든 플레이어가 정비턴을 마쳤는지 체크
+        bool checkAllReady = true;
+        foreach (var p in _parent.PlayerList)
+            checkAllReady = checkAllReady && p.PhaseReady;
+        if (checkAllReady)
+            MaintainEnd();
+    }
+
+
+    /// <summary>r
+    /// 구매카드 상점 리롤 API
+    /// </summary>
+    [EdenResponse]
+    private Response_RerollShop RerollShop(PeerId clientId)
+    {
+        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        if (player == null)
+            return new Response_RerollShop {ErrorCode = ErrorCode.PlayerNotExist};
+
+        if (player.PhaseReady)
+            return new Response_RerollShop {ErrorCode = ErrorCode.PlayerNotExist};
+
+        
+        if (player.RerollShop() == MaintainLogic.ErrorCode.COIN_NOT_ENOUGH)
+            return new Response_RerollShop {ErrorCode = ErrorCode.MaintainPhase_CoinNotEnough};
+        
+        return new Response_RerollShop {Coin = player.Maintain.Coin, ShopCards = player.Maintain.ShopCards};
+    }
+
+    /// <summary>
+    /// 제거카드 상점 리롤 API
+    /// </summary>
+    [EdenResponse]
+    private Response_RerollRemoveCard RerollRemoveCard(PeerId clientId)
+    {
+
+        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        if (player == null)
+            return new Response_RerollRemoveCard {ErrorCode = ErrorCode.PlayerNotExist};
+
+        if (player.PhaseReady)
+            return new Response_RerollRemoveCard {ErrorCode = ErrorCode.PlayerNotExist};
+
+        if (player.RerollRemoveCard() == MaintainLogic.ErrorCode.COIN_NOT_ENOUGH)
+            return new Response_RerollRemoveCard {ErrorCode = ErrorCode.MaintainPhase_CoinNotEnough};
+
+        return new Response_RerollRemoveCard {Coin = player.Maintain.Coin, RemoveCards = player.Maintain.RemoveCards};
+    }
+
+    /// <summary>
+    /// 경험치 구매 API
+    /// </summary>
+    [EdenResponse]
+    private Response_BuyExp BuyExp(PeerId clientId)
+    {
+        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        if (player == null)
+            return new Response_BuyExp {ErrorCode = ErrorCode.PlayerNotExist};
+
+        if (player.PhaseReady)
+            return new Response_BuyExp {ErrorCode = ErrorCode.PlayerNotExist};
+        
+        var errorCode = player.BuyExp();
+
+        if (errorCode == MaintainLogic.ErrorCode.COIN_NOT_ENOUGH)
+            return new Response_BuyExp {ErrorCode = ErrorCode.MaintainPhase_CoinNotEnough};
+        else if (errorCode == MaintainLogic.ErrorCode.MAX_LEVEL)
+            return new Response_BuyExp {ErrorCode = ErrorCode.MaintainPhase_MaxLevel};
+
+        return new Response_BuyExp {Coin = player.Maintain.Coin, Level = player.Level, Exp = player.Exp};
+    }
+
+    /// <summary>
+    /// 구매카드 상점 구매 API
+    /// </summary>
+    [EdenResponse]
+    private Response_BuyCard BuyCard(PeerId clientId, Request_BuyCard request)
+    {
+        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        if (player == null)
+            return new Response_BuyCard {ErrorCode = ErrorCode.PlayerNotExist};
+
+        if (player.PhaseReady)
+            return new Response_BuyCard {ErrorCode = ErrorCode.PlayerNotExist};
+        
+        var errorCode = player.BuyCard(request.Index, out var buyCard);
+        
+        if (errorCode == MaintainLogic.ErrorCode.COIN_NOT_ENOUGH)
+            return new Response_BuyCard {ErrorCode = ErrorCode.MaintainPhase_CoinNotEnough};
+        else if (errorCode == MaintainLogic.ErrorCode.WRONG_INDEX)
+            return new Response_BuyCard {ErrorCode = ErrorCode.BuyCard_WrongIndex};
+        
+        player.AddCardToDeck(buyCard);
+
+        return new Response_BuyCard {BuyCard = buyCard, ShopCards = player.Maintain.ShopCards, Coin = player.Maintain.Coin, Deck = player.Card.Deck};
+    }
+
+    /// <summary>
+    /// 제커 카드 상점 제거 API
+    /// </summary>
+    [EdenResponse]
+    private Response_RemoveCard RemoveCard(PeerId clientId, Request_RemoveCard request)
+    {
+        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        if (player == null)
+            return new Response_RemoveCard {ErrorCode = ErrorCode.PlayerNotExist};
+
+        if (player.PhaseReady)
+            return new Response_RemoveCard {ErrorCode = ErrorCode.PlayerNotExist};
+        
+
+        var errorCode = player.RemoveCard(request.Index, out var removeCard);
+
+        if (errorCode == MaintainLogic.ErrorCode.COIN_NOT_ENOUGH)
+            return new Response_RemoveCard {ErrorCode = ErrorCode.MaintainPhase_CoinNotEnough};
+
+        else if (errorCode == MaintainLogic.ErrorCode.WRONG_INDEX)
+            return new Response_RemoveCard {ErrorCode = ErrorCode.RemoveCard_WrongIndex};
+
+        return new Response_RemoveCard {Coin = player.Maintain.Coin, Deck = player.Card.Deck, RemoveCards = player.Maintain.RemoveCards};
+    }
+
+    #endregion
+
 }

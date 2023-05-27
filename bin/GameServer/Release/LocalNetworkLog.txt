@@ -1,0 +1,547 @@
+[2023-04-07 14:33:23.31]Eden Server is listening on  0.0.0.0:18989
+[2023-04-07 14:33:33.16]Remote client connected 127.0.0.1:51911
+[2023-04-07 14:34:14.27]Forced disconnection from client. 127.0.0.1:51911
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-04-07 14:34:37.67]Remote client connected 127.0.0.1:51936
+[2023-04-07 14:34:58.08]Forced disconnection from client. 127.0.0.1:51936
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-04-07 14:35:15.20]Remote client connected 127.0.0.1:51949
+[2023-04-07 14:36:28.19]Client disconnected.127.0.0.1:51949
+[2023-04-07 14:36:35.93]Remote client connected 127.0.0.1:51964
+[2023-04-07 14:37:02.26]Forced disconnection from client. 127.0.0.1:51964
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-04-07 14:37:10.32]Remote client connected 127.0.0.1:51976
+[2023-04-07 14:38:42.10]Forced disconnection from client. 127.0.0.1:51976
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-04-07 14:39:31.96]Remote client connected 127.0.0.1:52012
+[2023-04-07 14:41:38.60]Forced disconnection from client. 127.0.0.1:52012
+Unable to read data from the transport connection: 현재 연결은 원격 호스트에 의해 강제로 끊겼습니다..
+[2023-04-07 14:41:47.49]Remote client connected 127.0.0.1:52063
+[2023-04-07 14:41:48.45]Resp(127.0.0.1:52063/    59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-07 14:41:48.66]Send(127.0.0.1:52063/  84B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK"}
+[2023-04-07 14:46:10.73]Client disconnected.127.0.0.1:52063
+[2023-04-07 14:46:16.35]Remote client connected 127.0.0.1:52119
+[2023-04-07 14:46:17.40]Resp(127.0.0.1:52119/    59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-07 14:46:17.51]Send(127.0.0.1:52119/  84B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK"}
+[2023-04-07 14:51:13.85]Client disconnected.127.0.0.1:52119
+[2023-04-07 14:51:14.80]Remote client connected 127.0.0.1:52258
+[2023-04-07 14:51:15.96]Resp(127.0.0.1:52258/    59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-07 14:51:16.07]Send(127.0.0.1:52258/  84B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK"}
+[2023-04-13 20:47:30.79]Eden Server is listening on  0.0.0.0:18989
+[2023-04-13 20:47:41.82]Remote client connected: 127.0.0.1:64506
+[2023-04-13 20:47:43.31]Rqst(127.0.0.1:64506/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 20:47:43.42]Resp(127.0.0.1:64506/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-13 20:50:05.71]Remote client connected: 127.0.0.1:56423
+[2023-04-13 20:50:06.44]Rqst(127.0.0.1:56423/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 20:50:06.55]Resp(127.0.0.1:56423/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-13 20:52:51.80]Eden Server is listening on  0.0.0.0:18989
+[2023-04-13 20:52:55.94]Remote client connected: 127.0.0.1:60714
+[2023-04-13 20:52:56.78]Rqst(127.0.0.1:60714/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 20:52:56.78]Resp(127.0.0.1:60714/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-13 21:01:23.46]Eden Server is listening on  0.0.0.0:18989
+[2023-04-13 21:01:31.34]Remote client connected: 127.0.0.1:61358
+[2023-04-13 21:01:32.30]Rqst(127.0.0.1:61358/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 21:01:32.41]Resp(127.0.0.1:61358/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-13 21:42:55.06]Eden Server is listening on  0.0.0.0:18989
+[2023-04-13 21:43:01.03]Remote client connected: 127.0.0.1:60443
+[2023-04-13 21:43:05.25]Rqst(127.0.0.1:60443/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 21:43:05.36]Resp(127.0.0.1:60443/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-13 21:47:28.92]Eden Server is listening on  0.0.0.0:18989
+[2023-04-13 21:47:34.58]Remote client connected: 127.0.0.1:62418
+[2023-04-13 21:47:35.85]Rqst(127.0.0.1:62418/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 21:47:35.95]Resp(127.0.0.1:62418/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-13 21:51:29.34]Eden Server is listening on  0.0.0.0:18989
+[2023-04-13 21:51:29.66]Remote client connected: 127.0.0.1:54624
+[2023-04-13 21:51:33.72]Remote client connected: 127.0.0.1:60941
+[2023-04-13 21:51:35.10]Rqst(127.0.0.1:60941/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-13 21:51:35.20]Resp(127.0.0.1:60941/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":16969}
+[2023-04-14 22:14:30.48]Eden Server is listening on  0.0.0.0:18989
+[2023-04-14 22:15:12.38]Remote client connected: 127.0.0.1:52084
+[2023-04-14 22:15:13.45]Rqst(127.0.0.1:52084/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-14 22:15:19.59]Resp(127.0.0.1:52084/  123B) : [TAG] *r*CreateCustomGame [DATA] {"state":false,"message":"Cannot Create Game : cannot create lobby"}
+[2023-04-17 02:27:13.47]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 02:28:24.40]Remote client connected: 127.0.0.1:60587
+[2023-04-17 02:28:25.47]Rqst(127.0.0.1:60587/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 02:28:25.68]Resp(127.0.0.1:60587/  123B) : [TAG] *r*CreateCustomGame [DATA] {"state":false,"message":"Cannot Create Game : cannot create lobby"}
+[2023-04-17 02:34:29.00]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 02:35:04.28]Remote client connected: 127.0.0.1:58263
+[2023-04-17 02:35:05.35]Rqst(127.0.0.1:58263/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 02:35:05.78]Resp(127.0.0.1:58263/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 02:35:54.44]Remote client connected: 127.0.0.1:55646
+[2023-04-17 02:54:09.42]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 02:54:16.15]Remote client connected: 127.0.0.1:49595
+[2023-04-17 02:54:17.32]Rqst(127.0.0.1:49595/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 02:54:17.64]Resp(127.0.0.1:49595/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 02:54:28.95]Remote client connected: 127.0.0.1:54701
+[2023-04-17 03:07:46.14]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 03:08:07.83]Remote client connected: 127.0.0.1:64980
+[2023-04-17 03:08:09.12]Rqst(127.0.0.1:64980/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:08:09.44]Resp(127.0.0.1:64980/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:08:13.38]Remote client connected: 127.0.0.1:64986
+[2023-04-17 03:08:18.25]NatIntroductionSuccess to 192.168.0.3:50665, type: External, connection created: True
+[2023-04-17 03:09:11.52]Remote client connected: 127.0.0.1:61338
+[2023-04-17 03:09:19.42]NatIntroductionSuccess to 192.168.0.3:53449, type: External, connection created: True
+[2023-04-17 03:17:13.47]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 03:17:24.90]Remote client connected: 127.0.0.1:65478
+[2023-04-17 03:17:28.08]Rqst(127.0.0.1:65478/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:17:28.39]Resp(127.0.0.1:65478/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:17:35.08]Remote client connected: 127.0.0.1:58580
+[2023-04-17 03:17:42.11]NatIntroductionSuccess to 192.168.0.3:57797, type: External, connection created: True
+[2023-04-17 03:38:43.54]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 03:38:48.51]Remote client connected: 127.0.0.1:58151
+[2023-04-17 03:38:49.78]Rqst(127.0.0.1:58151/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:38:50.10]Resp(127.0.0.1:58151/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:38:54.98]Remote client connected: 127.0.0.1:55682
+[2023-04-17 03:39:06.41]NatIntroductionSuccess to 192.168.0.3:50118, type: External, connection created: True
+[2023-04-17 03:43:44.45]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 03:43:52.75]Remote client connected: 127.0.0.1:58103
+[2023-04-17 03:43:53.91]Rqst(127.0.0.1:58103/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:43:54.23]Resp(127.0.0.1:58103/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:44:41.62]Remote client connected: 127.0.0.1:63863
+[2023-04-17 03:44:45.35]NatIntroductionSuccess to 192.168.0.3:49881, type: External, connection created: True
+[2023-04-17 03:50:28.19]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 03:50:58.24]Remote client connected: 127.0.0.1:57306
+[2023-04-17 03:50:59.83]Rqst(127.0.0.1:57306/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:51:00.25]Resp(127.0.0.1:57306/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:51:09.94]Remote client connected: 127.0.0.1:57310
+[2023-04-17 03:53:07.29]Remote client connected: 127.0.0.1:54197
+[2023-04-17 03:53:08.78]Rqst(127.0.0.1:54197/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:53:08.88]Resp(127.0.0.1:54197/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:53:26.10]Remote client connected: 127.0.0.1:51546
+[2023-04-17 03:56:10.97]Remote client connected: 127.0.0.1:63816
+[2023-04-17 03:56:12.78]Remote client connected: 127.0.0.1:63820
+[2023-04-17 03:56:13.52]Rqst(127.0.0.1:63820/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:56:13.84]Resp(127.0.0.1:63820/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:58:50.36]Remote client connected: 127.0.0.1:58169
+[2023-04-17 03:58:51.43]Rqst(127.0.0.1:58169/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 03:58:51.64]Resp(127.0.0.1:58169/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 03:58:53.46]Remote client connected: 127.0.0.1:49511
+[2023-04-17 04:00:54.33]Remote client connected: 127.0.0.1:60678
+[2023-04-17 04:01:02.15]Remote client connected: 127.0.0.1:60681
+[2023-04-17 04:01:04.38]Rqst(127.0.0.1:60681/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 04:01:04.59]Resp(127.0.0.1:60681/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 04:21:36.32]Remote client connected: 127.0.0.1:52671
+[2023-04-17 04:22:23.98]Remote client connected: 127.0.0.1:49409
+[2023-04-17 14:20:18.84]Remote client connected: 127.0.0.1:61190
+[2023-04-17 14:20:20.33]Rqst(127.0.0.1:61190/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 14:20:20.65]Resp(127.0.0.1:61190/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 14:22:31.41]Remote client connected: 127.0.0.1:59242
+[2023-04-17 14:26:21.91]Remote client connected: 127.0.0.1:57101
+[2023-04-17 14:26:22.87]Rqst(127.0.0.1:57101/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 14:26:23.08]Resp(127.0.0.1:57101/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 14:26:38.98]Remote client connected: 127.0.0.1:53079
+[2023-04-17 14:54:25.28]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 14:54:29.40]Remote client connected: 127.0.0.1:64504
+[2023-04-17 14:54:30.35]Rqst(127.0.0.1:64504/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 14:54:30.77]Resp(127.0.0.1:64504/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 14:54:53.92]Remote client connected: 127.0.0.1:56485
+[2023-04-17 14:57:04.11]Remote client connected: 127.0.0.1:65237
+[2023-04-17 14:57:05.07]Rqst(127.0.0.1:65237/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 14:57:05.28]Resp(127.0.0.1:65237/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 14:57:20.14]Remote client connected: 127.0.0.1:54120
+[2023-04-17 16:07:53.00]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 16:08:00.13]Remote client connected: 127.0.0.1:56592
+[2023-04-17 16:08:01.73]Rqst(127.0.0.1:56592/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 16:08:02.05]Resp(127.0.0.1:56592/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 16:08:22.81]Remote client connected: 127.0.0.1:49701
+[2023-04-17 16:10:15.49]Remote client Disconnected: 127.0.0.1:56592 - RemoteConnectionClose
+[2023-04-17 16:10:21.45]Remote client Disconnected: 127.0.0.1:49701 - RemoteConnectionClose
+[2023-04-17 16:10:29.51]Remote client connected: 127.0.0.1:53234
+[2023-04-17 16:10:33.64]Rqst(127.0.0.1:53234/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 16:10:33.85]Resp(127.0.0.1:53234/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 16:10:36.07]Remote client connected: 127.0.0.1:62572
+[2023-04-17 17:04:15.99]Remote client Disconnected: 127.0.0.1:53234 - RemoteConnectionClose
+[2023-04-17 17:04:29.76]Remote client Disconnected: 127.0.0.1:62572 - RemoteConnectionClose
+[2023-04-17 17:06:49.36]Remote client connected: 127.0.0.1:51643
+[2023-04-17 17:06:50.31]Rqst(127.0.0.1:51643/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 17:06:50.53]Resp(127.0.0.1:51643/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 17:07:32.24]Remote client connected: 127.0.0.1:51633
+[2023-04-17 17:07:45.69]Remote client Disconnected: 127.0.0.1:51633 - Timeout
+[2023-04-17 18:00:38.11]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 18:01:07.71]Remote client connected: 127.0.0.1:58936
+[2023-04-17 18:01:08.88]Rqst(127.0.0.1:58936/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 18:01:09.09]Resp(127.0.0.1:58936/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 18:01:11.43]Remote client connected: 127.0.0.1:58548
+[2023-04-17 18:01:23.33]Remote client Disconnected: 127.0.0.1:58936 - RemoteConnectionClose
+[2023-04-17 18:01:44.24]Remote client Disconnected: 127.0.0.1:58548 - RemoteConnectionClose
+[2023-04-17 18:48:13.48]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 18:48:27.65]Remote client connected: 127.0.0.1:58738
+[2023-04-17 18:48:28.70]Rqst(127.0.0.1:58738/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 18:48:28.91]Resp(127.0.0.1:58738/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 18:48:38.17]Remote client connected: 127.0.0.1:54122
+[2023-04-17 18:48:52.75]Remote client Disconnected: 127.0.0.1:54122 - RemoteConnectionClose
+[2023-04-17 18:48:54.24]Remote client Disconnected: 127.0.0.1:58738 - RemoteConnectionClose
+[2023-04-17 18:48:56.03]Remote client connected: 127.0.0.1:65074
+[2023-04-17 18:49:29.84]Remote client connected: 127.0.0.1:61248
+[2023-04-17 18:49:31.12]Rqst(127.0.0.1:61248/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 18:49:31.34]Resp(127.0.0.1:61248/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 18:49:40.49]Remote client Disconnected: 127.0.0.1:61248 - RemoteConnectionClose
+[2023-04-17 18:49:42.94]Remote client Disconnected: 127.0.0.1:65074 - RemoteConnectionClose
+[2023-04-17 19:09:19.97]Remote client connected: 127.0.0.1:50731
+[2023-04-17 19:09:20.72]Rqst(127.0.0.1:50731/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:09:20.93]Resp(127.0.0.1:50731/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:11:12.40]Remote client connected: 127.0.0.1:52219
+[2023-04-17 19:11:32.08]Remote client Disconnected: 127.0.0.1:52219 - RemoteConnectionClose
+[2023-04-17 19:12:03.43]Remote client Disconnected: 127.0.0.1:50731 - RemoteConnectionClose
+[2023-04-17 19:12:28.55]Remote client connected: 127.0.0.1:63815
+[2023-04-17 19:12:29.39]Rqst(127.0.0.1:63815/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:12:29.61]Resp(127.0.0.1:63815/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:12:36.20]Remote client connected: 127.0.0.1:63821
+[2023-04-17 19:13:21.18]Remote client Disconnected: 127.0.0.1:63821 - RemoteConnectionClose
+[2023-04-17 19:14:01.82]Remote client connected: 127.0.0.1:57062
+[2023-04-17 19:14:20.08]Remote client Disconnected: 127.0.0.1:57062 - Timeout
+[2023-04-17 19:15:52.20]Remote client Disconnected: 127.0.0.1:63815 - RemoteConnectionClose
+[2023-04-17 19:16:06.00]Remote client connected: 127.0.0.1:59526
+[2023-04-17 19:16:07.27]Rqst(127.0.0.1:59526/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:16:07.49]Resp(127.0.0.1:59526/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:16:21.77]Remote client connected: 127.0.0.1:54042
+[2023-04-17 19:16:39.11]Remote client Disconnected: 127.0.0.1:54042 - Timeout
+[2023-04-17 19:19:36.86]Remote client Disconnected: 127.0.0.1:59526 - RemoteConnectionClose
+[2023-04-17 19:21:13.71]Remote client connected: 127.0.0.1:55266
+[2023-04-17 19:21:14.67]Rqst(127.0.0.1:55266/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:21:14.88]Resp(127.0.0.1:55266/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:21:17.64]Remote client connected: 127.0.0.1:55270
+[2023-04-17 19:23:51.68]Remote client Disconnected: 127.0.0.1:55266 - RemoteConnectionClose
+[2023-04-17 19:23:55.51]Remote client Disconnected: 127.0.0.1:55270 - RemoteConnectionClose
+[2023-04-17 19:24:03.29]Remote client connected: 127.0.0.1:52404
+[2023-04-17 19:24:04.45]Rqst(127.0.0.1:52404/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:24:04.66]Resp(127.0.0.1:52404/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:24:08.48]Remote client connected: 127.0.0.1:50810
+[2023-04-17 19:26:26.06]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 19:26:26.59]Remote client connected: 127.0.0.1:58172
+[2023-04-17 19:26:30.51]Rqst(127.0.0.1:58172/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:26:30.83]Resp(127.0.0.1:58172/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:26:33.17]Remote client Disconnected: 127.0.0.1:58172 - RemoteConnectionClose
+[2023-04-17 19:26:35.18]Remote client connected: 127.0.0.1:51591
+[2023-04-17 19:26:36.45]Rqst(127.0.0.1:51591/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:26:36.66]Resp(127.0.0.1:51591/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:26:44.24]Remote client connected: 127.0.0.1:51595
+[2023-04-17 19:26:56.65]Remote client Disconnected: 127.0.0.1:51591 - RemoteConnectionClose
+[2023-04-17 19:26:58.46]Remote client Disconnected: 127.0.0.1:51595 - RemoteConnectionClose
+[2023-04-17 19:27:41.02]Remote client connected: 127.0.0.1:50081
+[2023-04-17 19:27:42.09]Rqst(127.0.0.1:50081/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:27:42.30]Resp(127.0.0.1:50081/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:35:34.39]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 19:35:34.71]Remote client connected: 127.0.0.1:62975
+[2023-04-17 19:35:34.82]Rqst(127.0.0.1:62975/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:35:35.14]Resp(127.0.0.1:62975/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:35:35.14]Remote client Disconnected: 127.0.0.1:62975 - RemoteConnectionClose
+[2023-04-17 19:44:51.12]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 19:44:59.72]Remote client connected: 127.0.0.1:53201
+[2023-04-17 19:44:59.72]Rqst(127.0.0.1:53201/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:45:00.04]Resp(127.0.0.1:53201/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:45:00.14]Remote client Disconnected: 127.0.0.1:53201 - RemoteConnectionClose
+[2023-04-17 19:46:49.71]Remote client connected: 127.0.0.1:51384
+[2023-04-17 19:46:49.71]Rqst(127.0.0.1:51384/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:46:50.03]Resp(127.0.0.1:51384/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:46:50.03]Remote client Disconnected: 127.0.0.1:51384 - RemoteConnectionClose
+[2023-04-17 19:47:36.57]Remote client connected: 127.0.0.1:59914
+[2023-04-17 19:47:36.57]Rqst(127.0.0.1:59914/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:47:36.79]Resp(127.0.0.1:59914/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:47:36.79]Remote client Disconnected: 127.0.0.1:59914 - RemoteConnectionClose
+[2023-04-17 19:48:01.09]Remote client connected: 127.0.0.1:64666
+[2023-04-17 19:48:01.09]Rqst(127.0.0.1:64666/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 19:48:01.30]Resp(127.0.0.1:64666/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 19:48:01.30]Remote client Disconnected: 127.0.0.1:64666 - RemoteConnectionClose
+[2023-04-17 22:11:13.62]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 22:11:18.28]Remote client connected: 127.0.0.1:49315
+[2023-04-17 22:11:18.28]Rqst(127.0.0.1:49315/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:11:18.60]Resp(127.0.0.1:49315/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:11:18.60]Remote client Disconnected: 127.0.0.1:49315 - RemoteConnectionClose
+[2023-04-17 22:14:17.58]Remote client connected: 127.0.0.1:49401
+[2023-04-17 22:14:17.69]Rqst(127.0.0.1:49401/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:14:17.90]Resp(127.0.0.1:49401/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:14:17.90]Remote client Disconnected: 127.0.0.1:49401 - RemoteConnectionClose
+[2023-04-17 22:15:45.60]Remote client connected: 127.0.0.1:53071
+[2023-04-17 22:15:45.60]Rqst(127.0.0.1:53071/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:15:45.81]Resp(127.0.0.1:53071/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:15:45.81]Remote client Disconnected: 127.0.0.1:53071 - RemoteConnectionClose
+[2023-04-17 22:17:36.16]Remote client connected: 127.0.0.1:56439
+[2023-04-17 22:17:36.37]Rqst(127.0.0.1:56439/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:17:36.58]Resp(127.0.0.1:56439/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:17:36.58]Remote client Disconnected: 127.0.0.1:56439 - RemoteConnectionClose
+[2023-04-17 22:19:25.52]Remote client connected: 127.0.0.1:60090
+[2023-04-17 22:19:25.73]Rqst(127.0.0.1:60090/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:19:25.94]Resp(127.0.0.1:60090/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:19:25.94]Remote client Disconnected: 127.0.0.1:60090 - RemoteConnectionClose
+[2023-04-17 22:21:54.51]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 22:21:57.15]Remote client connected: 127.0.0.1:58902
+[2023-04-17 22:21:57.26]Rqst(127.0.0.1:58902/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:21:57.57]Resp(127.0.0.1:58902/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:21:57.57]Remote client Disconnected: 127.0.0.1:58902 - RemoteConnectionClose
+[2023-04-17 22:54:09.82]Eden Server is listening on  0.0.0.0:18989
+[2023-04-17 22:54:09.82]Remote client connected: 127.0.0.1:65120
+[2023-04-17 22:54:09.93]Rqst(127.0.0.1:65120/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:54:10.14]Resp(127.0.0.1:65120/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:54:10.14]Remote client Disconnected: 127.0.0.1:65120 - RemoteConnectionClose
+[2023-04-17 22:55:51.28]Remote client connected: 127.0.0.1:56832
+[2023-04-17 22:55:51.28]Rqst(127.0.0.1:56832/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-17 22:55:51.49]Resp(127.0.0.1:56832/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-17 22:55:51.49]Remote client Disconnected: 127.0.0.1:56832 - RemoteConnectionClose
+[2023-04-19 13:45:17.64]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 13:49:22.84]Remote client connected: 127.0.0.1:49397
+[2023-04-19 13:49:23.05]Rqst(127.0.0.1:49397/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 13:49:23.27]Resp(127.0.0.1:49397/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 13:49:23.37]Remote client Disconnected: 127.0.0.1:49397 - RemoteConnectionClose
+[2023-04-19 13:52:40.93]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 13:52:42.41]Remote client connected: 127.0.0.1:51526
+[2023-04-19 13:52:42.41]Rqst(127.0.0.1:51526/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 13:52:42.73]Resp(127.0.0.1:51526/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 13:52:42.73]Remote client Disconnected: 127.0.0.1:51526 - RemoteConnectionClose
+[2023-04-19 13:57:15.09]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 13:57:17.11]Remote client connected: 127.0.0.1:49687
+[2023-04-19 13:57:17.22]Rqst(127.0.0.1:49687/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 13:57:17.43]Resp(127.0.0.1:49687/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 13:57:17.43]Remote client Disconnected: 127.0.0.1:49687 - RemoteConnectionClose
+[2023-04-19 14:05:04.43]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 14:05:22.55]Remote client connected: 127.0.0.1:55033
+[2023-04-19 14:05:22.55]Rqst(127.0.0.1:55033/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 14:05:22.87]Resp(127.0.0.1:55033/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 14:05:22.87]Remote client Disconnected: 127.0.0.1:55033 - RemoteConnectionClose
+[2023-04-19 14:13:14.71]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 14:13:14.92]Remote client connected: 127.0.0.1:52225
+[2023-04-19 14:13:15.02]Rqst(127.0.0.1:52225/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 14:13:15.34]Resp(127.0.0.1:52225/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 14:13:15.34]Remote client Disconnected: 127.0.0.1:52225 - RemoteConnectionClose
+[2023-04-19 14:16:43.59]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 14:16:48.02]Remote client connected: 127.0.0.1:64298
+[2023-04-19 14:16:48.02]Rqst(127.0.0.1:64298/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 14:16:48.34]Resp(127.0.0.1:64298/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 14:16:48.34]Remote client Disconnected: 127.0.0.1:64298 - RemoteConnectionClose
+[2023-04-19 14:20:07.70]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 14:20:08.34]Remote client connected: 127.0.0.1:52592
+[2023-04-19 14:20:08.45]Rqst(127.0.0.1:52592/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 14:20:08.77]Resp(127.0.0.1:52592/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 14:20:08.77]Remote client Disconnected: 127.0.0.1:52592 - RemoteConnectionClose
+[2023-04-19 14:34:58.90]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 14:35:00.38]Remote client connected: 127.0.0.1:61329
+[2023-04-19 14:35:00.48]Rqst(127.0.0.1:61329/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 14:35:00.69]Resp(127.0.0.1:61329/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 14:35:00.80]Remote client Disconnected: 127.0.0.1:61329 - RemoteConnectionClose
+[2023-04-19 17:00:55.93]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 17:00:56.15]Remote client connected: 127.0.0.1:59655
+[2023-04-19 17:00:56.25]Rqst(127.0.0.1:59655/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 17:00:56.68]Resp(127.0.0.1:59655/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 17:00:56.68]Remote client Disconnected: 127.0.0.1:59655 - RemoteConnectionClose
+[2023-04-19 17:07:36.95]Eden Server is listening on  0.0.0.0:18989
+[2023-04-19 17:07:38.97]Remote client connected: 127.0.0.1:63815
+[2023-04-19 17:07:38.97]Rqst(127.0.0.1:63815/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-19 17:07:39.29]Resp(127.0.0.1:63815/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-19 17:07:39.39]Remote client Disconnected: 127.0.0.1:63815 - RemoteConnectionClose
+[2023-04-20 22:41:10.57]Eden Server is listening on  0.0.0.0:18989
+[2023-04-20 22:41:13.35]Remote client connected: 127.0.0.1:54255
+[2023-04-20 22:41:13.45]Rqst(127.0.0.1:54255/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-20 22:41:13.77]Resp(127.0.0.1:54255/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-20 22:41:13.77]Remote client Disconnected: 127.0.0.1:54255 - RemoteConnectionClose
+[2023-04-20 22:55:56.67]Eden Server is listening on  0.0.0.0:18989
+[2023-04-20 22:55:57.74]Remote client connected: 127.0.0.1:55831
+[2023-04-20 22:55:57.85]Rqst(127.0.0.1:55831/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-20 22:55:58.07]Resp(127.0.0.1:55831/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-20 22:55:58.07]Remote client Disconnected: 127.0.0.1:55831 - RemoteConnectionClose
+[2023-04-20 23:34:42.88]Eden Server is listening on  0.0.0.0:18989
+[2023-04-20 23:34:48.22]Remote client connected: 127.0.0.1:50458
+[2023-04-20 23:34:48.32]Rqst(127.0.0.1:50458/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-20 23:34:48.54]Resp(127.0.0.1:50458/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-20 23:34:48.64]Remote client Disconnected: 127.0.0.1:50458 - RemoteConnectionClose
+[2023-04-24 01:44:06.57]Eden Server is listening on  0.0.0.0:18989
+[2023-04-24 01:44:15.55]Remote client connected: 127.0.0.1:51534
+[2023-04-24 01:44:15.76]Rqst(127.0.0.1:51534/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-24 01:44:15.97]Resp(127.0.0.1:51534/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-24 01:44:16.08]Remote client Disconnected: 127.0.0.1:51534 - RemoteConnectionClose
+[2023-04-26 18:56:12.66]Eden Server is listening on  0.0.0.0:18989
+[2023-04-26 18:58:30.56]Remote client connected: 127.0.0.1:64695
+[2023-04-26 18:58:32.78]Rqst(127.0.0.1:64695/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 18:58:33.10]Resp(127.0.0.1:64695/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 18:58:33.10]Remote client Disconnected: 127.0.0.1:64695 - RemoteConnectionClose
+[2023-04-26 21:23:49.14]Eden Server is listening on  0.0.0.0:18989
+[2023-04-26 21:23:52.44]Remote client connected: 127.0.0.1:64124
+[2023-04-26 21:23:52.55]Rqst(127.0.0.1:64124/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 21:23:52.87]Resp(127.0.0.1:64124/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 21:23:52.87]Remote client Disconnected: 127.0.0.1:64124 - RemoteConnectionClose
+[2023-04-26 21:34:27.38]Eden Server is listening on  0.0.0.0:18989
+[2023-04-26 21:34:30.79]Remote client connected: 127.0.0.1:57235
+[2023-04-26 21:34:30.79]Rqst(127.0.0.1:57235/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 21:34:31.11]Resp(127.0.0.1:57235/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 21:34:31.11]Remote client Disconnected: 127.0.0.1:57235 - RemoteConnectionClose
+[2023-04-26 21:44:20.19]Remote client connected: 127.0.0.1:64550
+[2023-04-26 21:44:20.40]Rqst(127.0.0.1:64550/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 21:44:20.62]Resp(127.0.0.1:64550/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 21:44:20.62]Remote client Disconnected: 127.0.0.1:64550 - RemoteConnectionClose
+[2023-04-26 21:51:25.34]Eden Server is listening on  0.0.0.0:18989
+[2023-04-26 21:51:25.34]Remote client connected: 127.0.0.1:62611
+[2023-04-26 21:51:25.66]Rqst(127.0.0.1:62611/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 21:51:25.98]Resp(127.0.0.1:62611/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 21:51:25.98]Remote client Disconnected: 127.0.0.1:62611 - RemoteConnectionClose
+[2023-04-26 21:54:45.93]Remote client connected: 127.0.0.1:60670
+[2023-04-26 21:54:45.93]Rqst(127.0.0.1:60670/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 21:54:46.15]Resp(127.0.0.1:60670/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 21:54:46.15]Remote client Disconnected: 127.0.0.1:60670 - RemoteConnectionClose
+[2023-04-26 22:24:59.38]Eden Server is listening on  0.0.0.0:18989
+[2023-04-26 22:25:24.40]Remote client connected: 127.0.0.1:65449
+[2023-04-26 22:25:24.40]Rqst(127.0.0.1:65449/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 22:25:24.73]Resp(127.0.0.1:65449/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 22:25:24.73]Remote client Disconnected: 127.0.0.1:65449 - RemoteConnectionClose
+[2023-04-26 22:26:01.36]Remote client connected: 127.0.0.1:55603
+[2023-04-26 22:26:01.36]Rqst(127.0.0.1:55603/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-26 22:26:01.68]Resp(127.0.0.1:55603/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-26 22:26:01.68]Remote client Disconnected: 127.0.0.1:55603 - RemoteConnectionClose
+[2023-04-30 01:54:34.54]Eden Server is listening on  0.0.0.0:18989
+[2023-04-30 01:55:42.81]Remote client connected: 127.0.0.1:58497
+[2023-04-30 01:55:43.03]Rqst(127.0.0.1:58497/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-04-30 01:55:43.24]Resp(127.0.0.1:58497/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-04-30 01:55:43.24]Remote client Disconnected: 127.0.0.1:58497 - RemoteConnectionClose
+[2023-05-07 22:01:02.60]Eden Server is listening on  0.0.0.0:18989
+[2023-05-07 22:01:06.75]Remote client connected: 127.0.0.1:60450
+[2023-05-07 22:01:06.75]Rqst(127.0.0.1:60450/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:01:06.97]Resp(127.0.0.1:60450/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:01:07.08]Remote client Disconnected: 127.0.0.1:60450 - RemoteConnectionClose
+[2023-05-07 22:03:56.88]Remote client connected: 127.0.0.1:54769
+[2023-05-07 22:03:57.09]Rqst(127.0.0.1:54769/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:03:57.30]Resp(127.0.0.1:54769/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:03:57.30]Remote client Disconnected: 127.0.0.1:54769 - RemoteConnectionClose
+[2023-05-07 22:05:12.69]Remote client connected: 127.0.0.1:55761
+[2023-05-07 22:05:12.79]Rqst(127.0.0.1:55761/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:05:12.90]Resp(127.0.0.1:55761/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:05:13.00]Remote client Disconnected: 127.0.0.1:55761 - RemoteConnectionClose
+[2023-05-07 22:06:17.37]Remote client connected: 127.0.0.1:62116
+[2023-05-07 22:06:17.59]Rqst(127.0.0.1:62116/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:06:17.69]Resp(127.0.0.1:62116/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:06:17.80]Remote client Disconnected: 127.0.0.1:62116 - RemoteConnectionClose
+[2023-05-07 22:06:50.75]Remote client connected: 127.0.0.1:59094
+[2023-05-07 22:06:50.96]Rqst(127.0.0.1:59094/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:06:51.18]Resp(127.0.0.1:59094/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:06:51.18]Remote client Disconnected: 127.0.0.1:59094 - RemoteConnectionClose
+[2023-05-07 22:09:09.59]Remote client connected: 127.0.0.1:53548
+[2023-05-07 22:09:09.70]Rqst(127.0.0.1:53548/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:09:09.92]Resp(127.0.0.1:53548/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:09:09.92]Remote client Disconnected: 127.0.0.1:53548 - RemoteConnectionClose
+[2023-05-07 22:10:17.59]Remote client connected: 127.0.0.1:64901
+[2023-05-07 22:10:17.81]Rqst(127.0.0.1:64901/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:10:18.02]Resp(127.0.0.1:64901/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:10:18.02]Remote client Disconnected: 127.0.0.1:64901 - RemoteConnectionClose
+[2023-05-07 22:11:06.09]Remote client connected: 127.0.0.1:50643
+[2023-05-07 22:11:06.31]Rqst(127.0.0.1:50643/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:11:06.52]Resp(127.0.0.1:50643/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:11:06.63]Remote client Disconnected: 127.0.0.1:50643 - RemoteConnectionClose
+[2023-05-07 22:49:30.25]Remote client connected: 127.0.0.1:51300
+[2023-05-07 22:49:30.35]Rqst(127.0.0.1:51300/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:49:30.46]Resp(127.0.0.1:51300/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:49:30.46]Remote client Disconnected: 127.0.0.1:51300 - RemoteConnectionClose
+[2023-05-07 22:50:01.76]Remote client connected: 127.0.0.1:61092
+[2023-05-07 22:50:02.08]Rqst(127.0.0.1:61092/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:50:02.19]Resp(127.0.0.1:61092/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:50:02.30]Remote client Disconnected: 127.0.0.1:61092 - RemoteConnectionClose
+[2023-05-07 22:50:25.90]Remote client connected: 127.0.0.1:58787
+[2023-05-07 22:50:26.11]Rqst(127.0.0.1:58787/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:50:26.32]Resp(127.0.0.1:58787/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:50:26.43]Remote client Disconnected: 127.0.0.1:58787 - RemoteConnectionClose
+[2023-05-07 22:51:30.51]Remote client connected: 127.0.0.1:63587
+[2023-05-07 22:51:30.62]Rqst(127.0.0.1:63587/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 22:51:30.83]Resp(127.0.0.1:63587/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 22:51:30.94]Remote client Disconnected: 127.0.0.1:63587 - RemoteConnectionClose
+[2023-05-07 23:22:00.93]Remote client connected: 127.0.0.1:49920
+[2023-05-07 23:22:01.04]Rqst(127.0.0.1:49920/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:22:01.25]Resp(127.0.0.1:49920/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:22:01.25]Remote client Disconnected: 127.0.0.1:49920 - RemoteConnectionClose
+[2023-05-07 23:22:30.84]Remote client connected: 127.0.0.1:58484
+[2023-05-07 23:22:30.94]Rqst(127.0.0.1:58484/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:22:31.05]Resp(127.0.0.1:58484/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:22:31.15]Remote client Disconnected: 127.0.0.1:58484 - RemoteConnectionClose
+[2023-05-07 23:23:12.72]Remote client connected: 127.0.0.1:61483
+[2023-05-07 23:23:12.94]Rqst(127.0.0.1:61483/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:23:13.04]Resp(127.0.0.1:61483/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:23:13.15]Remote client Disconnected: 127.0.0.1:61483 - RemoteConnectionClose
+[2023-05-07 23:24:23.29]Remote client connected: 127.0.0.1:50835
+[2023-05-07 23:24:23.39]Rqst(127.0.0.1:50835/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:24:23.60]Resp(127.0.0.1:50835/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:24:23.71]Remote client Disconnected: 127.0.0.1:50835 - RemoteConnectionClose
+[2023-05-07 23:42:38.18]Remote client connected: 127.0.0.1:59012
+[2023-05-07 23:42:38.39]Rqst(127.0.0.1:59012/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:42:38.50]Resp(127.0.0.1:59012/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:42:38.50]Remote client Disconnected: 127.0.0.1:59012 - RemoteConnectionClose
+[2023-05-07 23:45:56.56]Remote client connected: 127.0.0.1:61122
+[2023-05-07 23:45:56.66]Rqst(127.0.0.1:61122/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:45:56.88]Resp(127.0.0.1:61122/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:45:56.88]Remote client Disconnected: 127.0.0.1:61122 - RemoteConnectionClose
+[2023-05-07 23:46:38.75]Remote client connected: 127.0.0.1:57999
+[2023-05-07 23:46:38.96]Rqst(127.0.0.1:57999/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:46:39.07]Resp(127.0.0.1:57999/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:46:39.17]Remote client Disconnected: 127.0.0.1:57999 - RemoteConnectionClose
+[2023-05-07 23:47:26.32]Remote client connected: 127.0.0.1:49794
+[2023-05-07 23:47:26.42]Rqst(127.0.0.1:49794/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:47:26.64]Resp(127.0.0.1:49794/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:47:26.64]Remote client Disconnected: 127.0.0.1:49794 - RemoteConnectionClose
+[2023-05-07 23:48:34.89]Remote client connected: 127.0.0.1:63036
+[2023-05-07 23:48:35.00]Rqst(127.0.0.1:63036/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:48:35.10]Resp(127.0.0.1:63036/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:48:35.10]Remote client Disconnected: 127.0.0.1:63036 - RemoteConnectionClose
+[2023-05-07 23:48:50.12]Remote client connected: 127.0.0.1:51804
+[2023-05-07 23:48:50.23]Rqst(127.0.0.1:51804/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:48:50.44]Resp(127.0.0.1:51804/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:48:50.44]Remote client Disconnected: 127.0.0.1:51804 - RemoteConnectionClose
+[2023-05-07 23:50:40.84]Remote client connected: 127.0.0.1:57070
+[2023-05-07 23:50:41.06]Rqst(127.0.0.1:57070/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:50:41.16]Resp(127.0.0.1:57070/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:50:41.16]Remote client Disconnected: 127.0.0.1:57070 - RemoteConnectionClose
+[2023-05-07 23:52:31.26]Remote client connected: 127.0.0.1:58330
+[2023-05-07 23:52:31.48]Rqst(127.0.0.1:58330/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:52:31.59]Resp(127.0.0.1:58330/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:52:31.70]Remote client Disconnected: 127.0.0.1:58330 - RemoteConnectionClose
+[2023-05-07 23:53:33.67]Remote client connected: 127.0.0.1:54310
+[2023-05-07 23:53:33.88]Rqst(127.0.0.1:54310/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:53:33.99]Resp(127.0.0.1:54310/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:53:34.09]Remote client Disconnected: 127.0.0.1:54310 - RemoteConnectionClose
+[2023-05-07 23:54:18.92]Remote client connected: 127.0.0.1:64343
+[2023-05-07 23:54:19.13]Rqst(127.0.0.1:64343/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:54:19.24]Resp(127.0.0.1:64343/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:54:19.35]Remote client Disconnected: 127.0.0.1:64343 - RemoteConnectionClose
+[2023-05-07 23:57:18.27]Remote client connected: 127.0.0.1:58742
+[2023-05-07 23:57:18.38]Rqst(127.0.0.1:58742/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:57:18.49]Resp(127.0.0.1:58742/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:57:18.59]Remote client Disconnected: 127.0.0.1:58742 - RemoteConnectionClose
+[2023-05-07 23:58:56.51]Remote client connected: 127.0.0.1:60882
+[2023-05-07 23:58:56.62]Rqst(127.0.0.1:60882/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-07 23:58:56.83]Resp(127.0.0.1:60882/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-07 23:58:56.83]Remote client Disconnected: 127.0.0.1:60882 - RemoteConnectionClose
+[2023-05-08 00:00:56.74]Remote client connected: 127.0.0.1:53233
+[2023-05-08 00:00:56.96]Rqst(127.0.0.1:53233/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:00:57.18]Resp(127.0.0.1:53233/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:00:57.18]Remote client Disconnected: 127.0.0.1:53233 - RemoteConnectionClose
+[2023-05-08 00:01:40.78]Remote client connected: 127.0.0.1:55978
+[2023-05-08 00:01:40.78]Rqst(127.0.0.1:55978/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:01:40.89]Resp(127.0.0.1:55978/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:01:40.89]Remote client Disconnected: 127.0.0.1:55978 - RemoteConnectionClose
+[2023-05-08 00:03:48.58]Remote client connected: 127.0.0.1:61263
+[2023-05-08 00:03:48.58]Rqst(127.0.0.1:61263/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:03:48.68]Resp(127.0.0.1:61263/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:03:48.79]Remote client Disconnected: 127.0.0.1:61263 - RemoteConnectionClose
+[2023-05-08 00:04:41.12]Remote client connected: 127.0.0.1:57372
+[2023-05-08 00:04:41.24]Rqst(127.0.0.1:57372/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:04:41.34]Resp(127.0.0.1:57372/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:04:41.45]Remote client Disconnected: 127.0.0.1:57372 - RemoteConnectionClose
+[2023-05-08 00:05:36.55]Remote client connected: 127.0.0.1:52526
+[2023-05-08 00:05:36.65]Rqst(127.0.0.1:52526/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:05:36.76]Resp(127.0.0.1:52526/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:05:36.87]Remote client Disconnected: 127.0.0.1:52526 - RemoteConnectionClose
+[2023-05-08 00:06:07.74]Remote client connected: 127.0.0.1:52126
+[2023-05-08 00:06:07.74]Rqst(127.0.0.1:52126/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:06:07.85]Resp(127.0.0.1:52126/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:06:07.85]Remote client Disconnected: 127.0.0.1:52126 - RemoteConnectionClose
+[2023-05-08 00:15:57.73]Eden Server is listening on  0.0.0.0:18989
+[2023-05-08 00:16:01.35]Remote client connected: 127.0.0.1:61057
+[2023-05-08 00:16:01.35]Rqst(127.0.0.1:61057/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:16:01.56]Resp(127.0.0.1:61057/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:16:01.56]Remote client Disconnected: 127.0.0.1:61057 - RemoteConnectionClose
+[2023-05-08 00:19:57.81]Eden Server is listening on  0.0.0.0:18989
+[2023-05-08 00:20:01.02]Remote client connected: 127.0.0.1:57682
+[2023-05-08 00:20:01.12]Rqst(127.0.0.1:57682/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:20:01.23]Resp(127.0.0.1:57682/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:20:01.34]Remote client Disconnected: 127.0.0.1:57682 - RemoteConnectionClose
+[2023-05-08 00:21:15.30]Remote client connected: 127.0.0.1:63694
+[2023-05-08 00:21:15.30]Rqst(127.0.0.1:63694/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:21:15.51]Resp(127.0.0.1:63694/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:21:15.51]Remote client Disconnected: 127.0.0.1:63694 - RemoteConnectionClose
+[2023-05-08 00:22:07.95]Remote client connected: 127.0.0.1:61548
+[2023-05-08 00:22:07.95]Rqst(127.0.0.1:61548/   59B) : [TAG] CreateCustomGame [DATA] 
+[2023-05-08 00:22:08.17]Resp(127.0.0.1:61548/   97B) : [TAG] *r*CreateCustomGame [DATA] {"state":true,"message":"OK","port":17979}
+[2023-05-08 00:22:08.17]Remote client Disconnected: 127.0.0.1:61548 - RemoteConnectionClose

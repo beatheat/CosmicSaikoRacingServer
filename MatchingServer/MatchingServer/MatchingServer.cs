@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using EdenNetwork;
 using System.Runtime.CompilerServices;
-using EdenNetwork.Udp;
 
 namespace MatchingServer
 {
@@ -17,7 +16,7 @@ namespace MatchingServer
     {
         public class MatchInfo
         {
-            public string id;
+            public PeerId id;
             public bool canceled = false;
         }
 
@@ -30,7 +29,7 @@ namespace MatchingServer
         public EdenUdpServer server;
         public Dictionary<int, Room> rooms;
         public Queue<MatchInfo> matchQueue;
-        public Dictionary<string, MatchInfo> matchMap;
+        public Dictionary<PeerId, MatchInfo> matchMap;
 
         private  bool closed = false;
         public MatchingServer(EdenUdpServer server)
@@ -44,11 +43,8 @@ namespace MatchingServer
 
         public void Run()
         {
-            server.AddReceiveEvent("MatchMake", MatchMake);
-            server.AddReceiveEvent("CancelMatchMake", CancelMatchMake);
-            server.AddResponse("CreateLobby", CreateLobby);
-            server.AddResponse("DestroyLobby", DestroyLobby);
 
+            server.AddEndpoints(this);
             // Task.Run(async () =>
             // {
             //     while (true)
@@ -87,8 +83,9 @@ namespace MatchingServer
             // });
 
             
-            server.SetNatRequestEvent(NatRequestEvent);
-            server.Listen();
+            server.SetNatRequestListener();
+            // server.SetNatRequestEvent(NatRequestEvent);
+            server.Listen(9999);
 
             new Thread(CleanUnusedRooms).Start();
         }
@@ -112,11 +109,13 @@ namespace MatchingServer
         }
 
 
-        public EdenData CreateLobby(string clientId, EdenData data)
+        [EdenResponse]
+        public int CreateLobby(PeerId clientId)
         {
             if (rooms.Count >= 100000)
             {
-                return EdenData.Error("There is no room remain");
+                // return EdenData.Error("There is no room remain");
+                return -1;
             }
             
             int roomNum;
@@ -126,44 +125,41 @@ namespace MatchingServer
             } while (rooms.ContainsKey(roomNum));
             
             
-            rooms.Add(roomNum, new Room {host = new NatPeer{localEndPoint = null!, remoteEndPoint = null!}, createdTime = DateTime.Now});
+            rooms.Add(roomNum, new Room {host = new NatPeer(), createdTime = DateTime.Now});
             
-            return new EdenData(roomNum);
+            return roomNum;
         }
         
 
-        public EdenData DestroyLobby(string clientId, EdenData data)
+        [EdenReceive]
+        public void DestroyLobby(PeerId clientId, int roomNumber)
         {
-            if (!data.TryGet<int>(out var roomNum))
-                return EdenData.Error("Wrong formatted room number");
-            if (rooms.ContainsKey(roomNum))
+
+            if (rooms.ContainsKey(roomNumber))
             {
                 //게임 호스트만 삭제가능하다
-                if (clientId.Split(":")[0] == rooms[roomNum].host.remoteEndPoint.Address.ToString())
+                if (clientId.Ip == rooms[roomNumber].host.RemoteEndPoint.Ip)
                 {
-                    rooms.Remove(roomNum);
-                    return new EdenData("Room destroyed");
+                    rooms.Remove(roomNumber);
                 }
-                else return new EdenData("Not permitted access");
             }
-            else return new EdenData("Room does not exist");
-
         }
 
-        private NatPeer? NatRequestEvent(NatPeer peer, string data)
+        [EdenNatRelay]
+        private NatPeer? NatRequestEvent(NatPeer peer, string additionalData)
         {
             try
             {
-                string type = data.Split("/")[0];
-                int roomNumber = int.Parse(data.Split("/")[1]);
+                string type = additionalData.Split("/")[0];
+                int roomNumber = int.Parse(additionalData.Split("/")[1]);
                 
-                Console.WriteLine($"{data}");
+                Console.WriteLine($"{additionalData}");
                 if (type == "host")
                 {
                     if (rooms.ContainsKey(roomNumber))
                     {
                         rooms[roomNumber].host = peer;
-                        Console.WriteLine($"Host Registered {peer.localEndPoint}/{peer.remoteEndPoint}");
+                        Console.WriteLine($"Host Registered {peer.LocalEndPoint}/{peer.RemoteEndPoint}");
                     }
                 }
                 else if(type == "client")
@@ -180,14 +176,16 @@ namespace MatchingServer
             return null;
         }
 
-        public void MatchMake(string clientId, EdenData data)
+        [EdenReceive]
+        public void MatchMake(PeerId clientId)
         {
             MatchInfo matchInfo = new MatchInfo { id = clientId, canceled = false };
             matchQueue.Enqueue(matchInfo);
             matchMap.Add(matchInfo.id, matchInfo);
         }
 
-        public void CancelMatchMake(string clientId, EdenData data)
+        [EdenReceive]
+        public void CancelMatchMake(PeerId clientId)
         {
             if(matchMap.ContainsKey(clientId))
             {

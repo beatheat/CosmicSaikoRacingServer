@@ -43,4 +43,8 @@
     <ProjectReference Include="..\..\..\EdenNetwork\Source\EdenNetwork\EdenNetwork.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EdenNetwork" Version="3.0.1" />
+  </ItemGroup>
+
 </Project>

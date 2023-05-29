@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CosmicSaikoRacingServer", "CosmicSaikoRacingServer\CosmicSaikoRacingServer.csproj", "{A43815C7-9698-430D-8568-EF062BC1679D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdenNetwork", "..\..\EdenNetwork\Source\EdenNetwork\EdenNetwork.csproj", "{19A8ACD3-3722-41D0-955A-32FE9A36C870}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{A43815C7-9698-430D-8568-EF062BC1679D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A43815C7-9698-430D-8568-EF062BC1679D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A43815C7-9698-430D-8568-EF062BC1679D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19A8ACD3-3722-41D0-955A-32FE9A36C870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19A8ACD3-3722-41D0-955A-32FE9A36C870}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19A8ACD3-3722-41D0-955A-32FE9A36C870}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19A8ACD3-3722-41D0-955A-32FE9A36C870}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

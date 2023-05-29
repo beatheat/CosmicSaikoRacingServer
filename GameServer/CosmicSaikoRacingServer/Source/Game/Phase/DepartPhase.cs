@@ -59,7 +59,7 @@ public class DepartPhase
 		var monitorPlayerList = _parent.GetMonitorPlayerList();
 		foreach (var player in _parent.PlayerList)
 		{
-			_server.Send("DepartStart", player.ClientId, new Packet_DepartStart
+			_server.Send("DepartStart", player.clientId, new Packet_DepartStart
 			{
 				PlayerList = _parent.GetMonitorPlayerList(),
 				AttackResults = attackResults
@@ -96,7 +96,7 @@ public class DepartPhase
 	[EdenReceive]
 	private void DepartReady(PeerId clientId)
 	{
-		var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+		var player = _parent.PlayerList.Find(player => player.clientId == clientId);
 		if (player == null)
 			return;
 		player.PhaseReady = true;

@@ -5,8 +5,6 @@ namespace CSR;
 
 class Program
 {
-
-
     private static SessionManager? _sessionManager;
 
     static void Close()
@@ -40,6 +38,9 @@ class Program
         }
 
         Close();
+        
+        
+        
     }
     //
     // //UPnP로 (internal port:external port)=16969:16969적용

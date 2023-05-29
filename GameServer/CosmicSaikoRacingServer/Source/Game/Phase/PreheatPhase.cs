@@ -50,7 +50,7 @@ public class PreheatPhase
         var monitorPlayerList = _parent.GetMonitorPlayerList();
         foreach (var player in _parent.PlayerList)
         {
-            _server.Send("PreheatStart", player.ClientId, new Packet_PreheatStart
+            _server.Send("PreheatStart", player.clientId, new Packet_PreheatStart
             {
                 PlayerList = monitorPlayerList,
                 Player = player,
@@ -122,7 +122,7 @@ public class PreheatPhase
     [EdenReceive]
     private void PreheatReady(PeerId clientId)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return;
         Ready(player);
@@ -134,7 +134,7 @@ public class PreheatPhase
     [EdenResponse]
     private Response_UseCard UseCard(PeerId clientId, Request_UseCard request)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return new Response_UseCard{ErrorCode = ErrorCode.PlayerNotExist};
 
@@ -159,7 +159,7 @@ public class PreheatPhase
     [EdenResponse]
     private Response_RerollResource RerollResource(PeerId clientId, Request_RerollResource request)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         
         if (player == null)
             return new Response_RerollResource {ErrorCode = ErrorCode.PlayerNotExist};

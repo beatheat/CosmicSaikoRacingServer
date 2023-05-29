@@ -6,10 +6,7 @@ namespace CSR.Lobby;
 
 public class LobbySession : SessionBase
 {
-        // 로비에 접속한 플레이어를 리스트와 맵 두가지로 관리함
-        // clientId를 id값으로 playerMap에서 LobbyPlayer를 검색하고 클라이언트에게는 playerList만 보내줌
         private readonly List<LobbyPlayer> _playerList;
-        //로비의 방번호
         private readonly EdenUdpClient _matchClient;
         private readonly int _lobbyNumber;
         

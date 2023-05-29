@@ -38,7 +38,7 @@ public class MaintainPhase
         foreach (var player in _parent.PlayerList)
         {
             player.MaintainStart();
-            _server.Send("MaintainStart", player.ClientId, new Packet_MaintainStart
+            _server.Send("MaintainStart", player.clientId, new Packet_MaintainStart
             {
                 ShopCards = player.Maintain.ShopCards,
                 RemoveCards = player.Maintain.RemoveCards
@@ -92,7 +92,7 @@ public class MaintainPhase
     [EdenReceive]
     private void MaintainReady(PeerId clientId)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return;
         
@@ -113,7 +113,7 @@ public class MaintainPhase
     [EdenResponse]
     private Response_RerollShop RerollShop(PeerId clientId)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return new Response_RerollShop {ErrorCode = ErrorCode.PlayerNotExist};
 
@@ -134,7 +134,7 @@ public class MaintainPhase
     private Response_RerollRemoveCard RerollRemoveCard(PeerId clientId)
     {
 
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return new Response_RerollRemoveCard {ErrorCode = ErrorCode.PlayerNotExist};
 
@@ -153,7 +153,7 @@ public class MaintainPhase
     [EdenResponse]
     private Response_BuyExp BuyExp(PeerId clientId)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return new Response_BuyExp {ErrorCode = ErrorCode.PlayerNotExist};
 
@@ -176,7 +176,7 @@ public class MaintainPhase
     [EdenResponse]
     private Response_BuyCard BuyCard(PeerId clientId, Request_BuyCard request)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return new Response_BuyCard {ErrorCode = ErrorCode.PlayerNotExist};
 
@@ -201,7 +201,7 @@ public class MaintainPhase
     [EdenResponse]
     private Response_RemoveCard RemoveCard(PeerId clientId, Request_RemoveCard request)
     {
-        var player = _parent.PlayerList.Find(player => player.ClientId == clientId);
+        var player = _parent.PlayerList.Find(player => player.clientId == clientId);
         if (player == null)
             return new Response_RemoveCard {ErrorCode = ErrorCode.PlayerNotExist};
 

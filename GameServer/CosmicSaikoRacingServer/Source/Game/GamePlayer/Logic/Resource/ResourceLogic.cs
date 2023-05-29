@@ -9,33 +9,7 @@ public static class ResourceLogic
 	private const int INITIAL_REROLL_COUNT = 4;
 	//최초 리소스릴 카운트
 	private const int INITIAL_REEL_COUNT = 4;
-	
-	// //리소스릴
-	// private List<Resource.Type> _reel;
-	// //리소스릴의 리롤 카운트
-	// private int _rerollCount;
-	// //턴 시작 시 부여받는 리롤 카운트
-	// private int _availableRerollCount;
-	// //리소스 릴 카운트
-	// private int _reelCount;
-	//
-	//
-	//
-	// public List<Resource.Type> reel => _reel;
-	// public int rerollCount => _rerollCount;
-	// public int reelCount => _reelCount;
-	//
-	// private readonly GamePlayer _player;
-	
-	// public ResourceSystem(GamePlayer player)
-	// {
-	// 	this._player = player;
-	// 	
-	// 	_reel = new List<Resource.Type>();
-	// 	_availableRerollCount = INITIAL_REROLL_COUNT;
-	// 	_rerollCount = _availableRerollCount;
-	// 	_reelCount = INITIAL_REEL_COUNT;
-	// }
+
 
 	public static void InitResource(this GamePlayer player)
 	{

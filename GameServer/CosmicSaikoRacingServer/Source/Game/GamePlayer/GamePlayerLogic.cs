@@ -12,7 +12,7 @@ public partial class GamePlayer
         
         public GamePlayer(PeerId clientId, int index, string nickname, List<GamePlayer> parent, PreheatPhase preheatPhase)
         {
-            ClientId = clientId;
+            this.clientId = clientId;
             Index = index;
             Nickname = nickname;
             Exp = 0;

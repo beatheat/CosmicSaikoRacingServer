@@ -7,8 +7,8 @@ namespace CSR.Game.Player;
 public partial class GamePlayer
 {
 	//플레이어의 고유식별자
-	public PeerId ClientId { get; set; }
-
+	public PeerId clientId;
+	
 	//플레이어가 속한 리스트
 	public List<GamePlayer> parent;
 

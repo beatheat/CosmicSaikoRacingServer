@@ -82,7 +82,7 @@ public class GameSession : SessionBase
 	[EdenReceive]
 	private void PlayerReady(PeerId clientId)
 	{
-		var player = PlayerList.Find(player => player.ClientId == clientId);
+		var player = PlayerList.Find(player => player.clientId == clientId);
 		if (player == null)
 			return;
 		player.PhaseReady = true;

@@ -16,6 +16,8 @@ public class PreheatPhase
     private int _time;
     private bool _turnEnd;
     
+    private object _turnEndLock;
+
     public PreheatPhase(GameSession parent, EdenUdpServer server)
     {
         _server = server;
@@ -23,6 +25,7 @@ public class PreheatPhase
         _timer = null;
         _time = 0;
         _turnEnd = false;
+        _turnEndLock = new object();
     }
 
     /// <summary>
@@ -83,7 +86,7 @@ public class PreheatPhase
     /// </summary>
     private void PreheatEnd()
     {
-        lock (this)
+        lock (_turnEndLock)
         {
             if (_turnEnd == false)
             {
@@ -167,8 +170,8 @@ public class PreheatPhase
         if (player.PhaseReady)
             return new Response_RerollResource{ErrorCode = ErrorCode.PlayerTurnEnd};
 
-        if (request.ResourceFixed == null)
-            return new Response_RerollResource {ErrorCode = ErrorCode.MissingPacketData};
+        // if (request.ResourceFixed == null)
+        //     return new Response_RerollResource {ErrorCode = ErrorCode.MissingPacketData};
         
         var result = player.RerollResource(request.ResourceFixed);
         if (result == null)

@@ -15,6 +15,8 @@ public class DepartPhase
     private int _time;
     private bool _turnEnd;
 
+    private object _turnEndLock;
+
 	public DepartPhase(GameSession parent, EdenUdpServer server)
 	{
 		this._server = server;
@@ -22,6 +24,7 @@ public class DepartPhase
 		this._timer = null;
 		this._time = 0;
 		this._turnEnd = false;
+		this._turnEndLock = new object();
 	}
 	
 	// 발진 페이즈 타이머
@@ -76,7 +79,7 @@ public class DepartPhase
 	/// </summary>
 	private void DepartEnd()
 	{
-		lock (this)
+		lock (_turnEndLock)
 		{
 			if (_turnEnd == false)
 			{

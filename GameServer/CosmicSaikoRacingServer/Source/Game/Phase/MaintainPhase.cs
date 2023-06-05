@@ -15,6 +15,8 @@ public class MaintainPhase
     private int _time;
     private bool _turnEnd;
 
+    private object _turnEndLock;
+    
     public MaintainPhase(GameSession parent, EdenUdpServer server)
     {
         this._server = server;
@@ -22,6 +24,7 @@ public class MaintainPhase
         this._timer = null;
         this._time = 0;
         this._turnEnd = false;
+        this._turnEndLock = new object();
     }
     
 
@@ -53,7 +56,7 @@ public class MaintainPhase
     /// </summary>
     private void MaintainEnd()
     {
-        lock (this)
+        lock (_turnEndLock)
         {
             if (_turnEnd == false)
             {

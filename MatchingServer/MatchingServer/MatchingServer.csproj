@@ -9,6 +9,7 @@
     <PackageOutputPath>$(OutputPath)</PackageOutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,10 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EdenNetwork" Version="3.0.1" />
-    <PackageReference Include="LiteNetLib" Version="1.0.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-    <PackageReference Include="ZLogger" Version="1.7.0" />
+    <PackageReference Include="protobuf-net" Version="3.2.26" />
   </ItemGroup>
 
 </Project>

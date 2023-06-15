@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography;
-using EdenNetwork;
-using System.Runtime.CompilerServices;
+﻿using EdenNetwork;
 
 namespace MatchingServer
 {
@@ -20,14 +10,14 @@ namespace MatchingServer
             public bool canceled = false;
         }
 
-        public class Room
+        public class LobbyRoom
         {
             public NatPeer host = null!;
             public DateTime createdTime;
         }
         
         public EdenUdpServer server;
-        public Dictionary<int, Room> rooms;
+        public Dictionary<int, LobbyRoom> lobbyRooms;
         public Queue<MatchInfo> matchQueue;
         public Dictionary<PeerId, MatchInfo> matchMap;
 
@@ -35,7 +25,7 @@ namespace MatchingServer
         public MatchingServer(EdenUdpServer server)
         {
             this.server = server;
-            rooms = new Dictionary<int, Room>();
+            lobbyRooms = new Dictionary<int, LobbyRoom>();
             matchQueue = new Queue<MatchInfo>();
             closed = false;
         }
@@ -94,9 +84,9 @@ namespace MatchingServer
         {
             while (!closed)
             {
-                var removeRoomNumbers = rooms.Where(item => DateTime.Now - item.Value.createdTime > TimeSpan.FromHours(1)).Select(item => item.Key).ToList();
+                var removeRoomNumbers = lobbyRooms.Where(item => DateTime.Now - item.Value.createdTime > TimeSpan.FromHours(1)).Select(item => item.Key).ToList();
                 foreach (var roomNumber in removeRoomNumbers)
-                    rooms.Remove(roomNumber);
+                    lobbyRooms.Remove(roomNumber);
 
                 Thread.Sleep(10 * 1000);
             }
@@ -108,39 +98,58 @@ namespace MatchingServer
             server.Close();
         }
 
+        //
+        // [EdenResponse]
+        // public NatPeer? GetLobbyAddress(PeerId clientId, int lobbyNumber)
+        // {
+        //     int roomNum;
+        //     do
+        //     {
+        //         roomNum = (int)(DateTime.Now.Ticks % 100000L);
+        //     } while (lobbyRooms.ContainsKey(roomNum));
+        //     
+        //     
+        //     lobbyRooms.Add(roomNum, new LobbyRoom {host = new NatPeer(), createdTime = DateTime.Now});
+        //
+        //     if (lobbyRooms.TryGetValue(lobbyNumber, out var lobbyRoom))
+        //         return lobbyRoom.host;
+        //     return null;
+        // }
+        //
+        //
 
         [EdenResponse]
         public int CreateLobby(PeerId clientId)
         {
-            if (rooms.Count >= 100000)
+            if (lobbyRooms.Count >= 100000)
             {
-                // return EdenData.Error("There is no room remain");
+                // return EdenData.Error("There is no room remain");    
                 return -1;
             }
             
-            int roomNum;
+            int lobbyNumer;
             do
             {
-                roomNum = (int)(DateTime.Now.Ticks % 100000L);
-            } while (rooms.ContainsKey(roomNum));
+                lobbyNumer = (int)(DateTime.Now.Ticks % 100000L);
+            } while (lobbyRooms.ContainsKey(lobbyNumer));
             
             
-            rooms.Add(roomNum, new Room {host = new NatPeer(), createdTime = DateTime.Now});
+            lobbyRooms.Add(lobbyNumer, new LobbyRoom {host = new NatPeer(), createdTime = DateTime.Now});
             
-            return roomNum;
+            return lobbyNumer;
         }
         
 
         [EdenReceive]
-        public void DestroyLobby(PeerId clientId, int roomNumber)
+        public void DestroyLobby(PeerId clientId, int lobbyNumber)
         {
 
-            if (rooms.ContainsKey(roomNumber))
+            if (lobbyRooms.ContainsKey(lobbyNumber))
             {
                 //게임 호스트만 삭제가능하다
-                if (clientId.Ip == rooms[roomNumber].host.RemoteEndPoint.Ip)
+                if (clientId.Ip == lobbyRooms[lobbyNumber].host.RemoteEndPoint.Ip)
                 {
-                    rooms.Remove(roomNumber);
+                    lobbyRooms.Remove(lobbyNumber);
                 }
             }
         }
@@ -151,20 +160,20 @@ namespace MatchingServer
             try
             {
                 string type = additionalData.Split("/")[0];
-                int roomNumber = int.Parse(additionalData.Split("/")[1]);
+                int lobbyNumber = int.Parse(additionalData.Split("/")[1]);
                 
                 Console.WriteLine($"{additionalData}");
                 if (type == "host")
                 {
-                    if (rooms.ContainsKey(roomNumber))
+                    if (lobbyRooms.ContainsKey(lobbyNumber))
                     {
-                        rooms[roomNumber].host = peer;
+                        lobbyRooms[lobbyNumber].host = peer;
                         Console.WriteLine($"Host Registered {peer.LocalEndPoint}/{peer.RemoteEndPoint}");
                     }
                 }
                 else if(type == "client")
                 {
-                    if (rooms.TryGetValue(roomNumber, out var hostNatPeer))
+                    if (lobbyRooms.TryGetValue(lobbyNumber, out var hostNatPeer))
                         return hostNatPeer.host;
                 }
             }
@@ -193,16 +202,5 @@ namespace MatchingServer
             }
         }
 
-        public static Dictionary<string,object> StringToAddress(string address)
-        {
-            var splitAddress = address.Split(':');
-            var sendData = new Dictionary<string, object>
-            {
-                ["address"] = splitAddress[0],
-                ["port"] = Int32.Parse(splitAddress[1])
-            };
-            return sendData;
-        }
-        
     }
 }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EdenNetwork" Version="3.0.8" />
     <PackageReference Include="protobuf-net" Version="3.2.26" />
   </ItemGroup>
 

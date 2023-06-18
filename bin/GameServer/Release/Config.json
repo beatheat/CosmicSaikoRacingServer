@@ -1,5 +1,4 @@
 {
-  "LocalServerPort": 18989,
   "GameServerPort": 17979,
   "GameLogPath": "CSRGameServerLog.txt",
   "LocalNetworkLogPath": "LocalNetworkLog.txt",

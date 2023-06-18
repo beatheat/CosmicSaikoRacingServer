@@ -1,7 +1,6 @@
-﻿
-using CSR.Game.GameObject;
+﻿using CSR.Game.GameObject;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 public static class MaintainLogic
 {
@@ -48,29 +47,7 @@ public static class MaintainLogic
 	//레벨별 경험치 최대치 0~5레벨 
 	//TODO: 마스터 데이터에 추가하기
 	private static readonly int[] _expLimit = {0, 1, 3, 7, 10};
-
-	// private readonly GamePlayer _player;
-	//
-	// //상점 카드
-	// public List<Card> shopCards => _shopCards;
-	// //제거 카드
-	// public List<Card> removeCards => _removeCards;
-	//
-	/// <summary>
-	/// 상점 초기화 count는 플레이어 수
-	/// </summary>
-	// public MaintainSystem(GamePlayer player)
-	// {
-	// 	_player = player;
-	// 	_shopCards = new List<Card>();
-	// 	_removeCards = new List<Card>();
-	//
-	// 	exp = 0;
-	// 	level = 1;
-	//
-	// 	coin = INITIAL_COIN_COUNT;
-	// 	turnCoinCount = INITIAL_COIN_COUNT;
-	// }
+	
 
 	public static void InitMaintain(this GamePlayer player)
 	{
@@ -79,6 +56,8 @@ public static class MaintainLogic
 
 		player.Maintain.Coin = INITIAL_COIN_COUNT;
 		player.Maintain.TurnCoinCount = INITIAL_COIN_COUNT;
+		player.Exp = 0;
+		player.ExpLimit = _expLimit[player.Level];
 	}
 
 
@@ -229,6 +208,7 @@ public static class MaintainLogic
 		{
 			player.Level++;
 			player.Exp = 0;
+			player.ExpLimit = _expLimit[player.Level];
 
 			switch (player.Level)
 			{

@@ -1,5 +1,4 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
 namespace CSR.Game.GameObject;

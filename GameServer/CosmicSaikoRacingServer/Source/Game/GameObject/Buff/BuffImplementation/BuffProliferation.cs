@@ -1,5 +1,4 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
 namespace CSR.Game.GameObject;
@@ -67,7 +66,7 @@ internal class BuffProliferation : Buff
 	/// <summary>
 	/// 증식버프 조건을 만족하지 않았다면 카드 사용불가
 	/// </summary>
-	public override bool BeforeUseCard(Card card, ref CardEffectModule.Result[] results)
+	public override bool BeforeUseCard(Card card, ref CardEffect.Result result)
 	{
 		return Count == 0;
 	}

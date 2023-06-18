@@ -1,4 +1,5 @@
 ﻿using CSR.DataTransmission;
+using CSR.Game;
 using CSR.Game.GameObject;
 using EdenNetwork;
 
@@ -7,13 +8,11 @@ namespace CSR.Lobby;
 public class LobbySession : SessionBase
 {
         private readonly List<LobbyPlayer> _playerList;
-        private readonly EdenUdpClient _matchClient;
         private readonly int _lobbyNumber;
         
-        public LobbySession(SessionManager sessionManager, EdenUdpServer server, EdenUdpClient matchClient, int lobbyNumber) : base(sessionManager, server)
+        public LobbySession(SessionManager sessionManager, IEdenNetServer server, int lobbyNumber) : base(sessionManager, server)
         {
             _playerList = new List<LobbyPlayer>();
-            _matchClient = matchClient;
             _lobbyNumber = lobbyNumber;
         }
 
@@ -26,8 +25,9 @@ public class LobbySession : SessionBase
         {
             server.RemoveEndpoints(this);
         }
-        
 
+        
+        
         /// <summary>
         /// 클라이언트가 최초에 로비에 접속한 뒤 필요한 로비정보를 응답해준다
         /// </summary>
@@ -48,7 +48,7 @@ public class LobbySession : SessionBase
             {
                 LobbyPlayers = _playerList
             });
-            
+                
             return new Response_LobbyLogin
             {
                 PlayerId = player.Id,
@@ -71,6 +71,17 @@ public class LobbySession : SessionBase
             }
         }
 
+        [EdenClientDisconnect]
+        private void ClientDisconnect(PeerId clientId, DisconnectReason _)
+        {
+            var player = _playerList.Find(player => player.ClientId == clientId);
+            if (player != null)
+            {
+                _playerList.Remove(player);
+                server.BroadcastAsync("LobbyPlayerUpdate", new Packet_LobbyPlayerUpdate {LobbyPlayers = _playerList});
+            }
+        }
+        
         /// <summary>
         /// 클라이언트가 게임준비를 했음을 알린다
         /// </summary>
@@ -100,16 +111,19 @@ public class LobbySession : SessionBase
                 if (!player.IsReady)
                     return;
             }
+            
+            sessionManager.ChangeSession<GameSession>(_playerList);
 
             // 매치서버에서 로비를 삭제하라는 요청을 보낸다
             Task.Run(() =>
             {
-                _matchClient.Request<int>("DestroyLobby", _lobbyNumber);
-                _matchClient.Close();
+                var matchClient = new EdenUdpClient(ConfigManager.Config.MatchingServerAddress, ConfigManager.Config.MatchingServerPort);
+                if (matchClient.Connect() == ConnectionState.Ok)
+                {
+                    matchClient.Send("DestroyLobby", _lobbyNumber);
+                    matchClient.Close();
+                }
             });
-
-            sessionManager.ChangeSession<GameSession>(_playerList);
-            Destroy();
         }
 
 

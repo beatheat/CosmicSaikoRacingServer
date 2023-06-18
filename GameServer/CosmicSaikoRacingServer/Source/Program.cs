@@ -1,4 +1,5 @@
 ﻿using CSR.Home;
+using EdenNetwork.Log;
 
 
 namespace CSR;
@@ -9,22 +10,24 @@ class Program
 
     static void Close()
     {
+        EdenLogManager.Close();
         _sessionManager?.Close();
     }
 
     static void Main(string[] args)
     {
         Console.Title = "CosmicSaikoRacing - GameServer";
-  
+        
         ConfigManager.Load();
         Logger.Load(ConfigManager.Config.GameLogPath);
         CardManager.Load(ConfigManager.Config.CardDataPath);
-
+        EdenLogManager.SettingLogger("EdenNetwork", ConfigManager.Config.GameNetworkLogPath, printConsole: true);
+        
         _sessionManager = new SessionManager();
         
         //게임서버 시작
         _sessionManager.Run<HomeSession>();
-
+        
         //콘솔창 관리    
         Console.WriteLine("Type quit to close server");
         while (true)
@@ -36,11 +39,8 @@ class Program
             if (isQuit == "help")
                 Console.WriteLine("Type quit to close server");
         }
-
+        
         Close();
-        
-        
-        
     }
     //
     // //UPnP로 (internal port:external port)=16969:16969적용

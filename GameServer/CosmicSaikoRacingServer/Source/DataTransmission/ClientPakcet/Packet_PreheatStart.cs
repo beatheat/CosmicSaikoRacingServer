@@ -1,15 +1,17 @@
-﻿using CSR.Game.Player;
+﻿using CSR.Game;
 using ProtoBuf;
+
+#pragma warning disable CS8618
 
 namespace CSR.DataTransmission;
 
 [ProtoContract]
 public class Packet_PreheatStart
 {
-	[ProtoMember(1)]
-	public GamePlayer Player { get; set; }
-	[ProtoMember(2)]
-	public List<GamePlayer> PlayerList { get; set; }
+	[ProtoMember(1)] 
+	public GamePlayer Player { get; set; } = null!;
+	[ProtoMember(2)] 
+	public List<GamePlayer> PlayerList { get; set; } = new();
 	[ProtoMember(3)]
 	public int Turn { get; set; }
 	[ProtoMember(4)]

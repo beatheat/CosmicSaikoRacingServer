@@ -1,5 +1,5 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
+using CSR.Home;
 using CSR.Lobby;
 using EdenNetwork;
 
@@ -14,7 +14,7 @@ public class GameSession : SessionBase
 	private DepartPhase _departPhase;
 	private MaintainPhase _maintainPhase;
 	
-	public GameSession(SessionManager sessionManager, EdenUdpServer server, List<LobbyPlayer> lobbyPlayers) : base(sessionManager, server)
+	public GameSession(SessionManager sessionManager, IEdenNetServer server, List<LobbyPlayer> lobbyPlayers) : base(sessionManager, server)
 	{
 		PlayerList = new List<GamePlayer>();
 		Turn = 1;
@@ -25,23 +25,15 @@ public class GameSession : SessionBase
 		
 		foreach(LobbyPlayer lbPlayer in lobbyPlayers)
 		{
-			GamePlayer gamePlayer = new GamePlayer(lbPlayer.ClientId, PlayerList.Count, lbPlayer.Nickname, PlayerList, _preheatPhase);
+			var gamePlayer = new GamePlayer(lbPlayer.ClientId, PlayerList.Count, lbPlayer.Nickname, PlayerList, _preheatPhase);
 			PlayerList.Add(gamePlayer);
 		}
 	}
 
 	public override void Load()
 	{
-		_preheatPhase = new PreheatPhase(this, server);
-		_departPhase = new DepartPhase(this,server);
-		_maintainPhase = new MaintainPhase(this,server);
-
 		server.AddEndpoints(this);
-		
 		server.BroadcastAsync("LobbyGameStart");
-		
-		
-		server.AddEndpoints(this);
 	}
 	
 	public override void Destroy()
@@ -97,6 +89,18 @@ public class GameSession : SessionBase
 		{
 			Turn = 1;
 			PreheatStart();
+		}
+	}
+
+	[EdenReceive]
+	private void DestroyGame(PeerId clientId)
+	{
+		var player = PlayerList.Find(player => player.clientId == clientId);
+		if (player == null) return;
+		// 호스트인지 체크
+		if (player.Index == 0)
+		{
+			sessionManager.ChangeSession<HomeSession>();
 		}
 	}
 }

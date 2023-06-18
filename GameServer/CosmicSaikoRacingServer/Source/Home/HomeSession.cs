@@ -1,20 +1,24 @@
-﻿using CSR.Lobby;
+﻿using CSR.DataTransmission;
+using CSR.Lobby;
 using EdenNetwork;
+using EdenNetwork.EdenException;
 
 namespace CSR.Home;
 
 public class HomeSession : SessionBase
 {
-	private EdenUdpClient _matchClient;
+	private readonly EdenUdpClient _matchClient;
 
-	public HomeSession(SessionManager manager, EdenUdpServer server) : base(manager, server)
+	public HomeSession(SessionManager manager, IEdenNetServer server) : base(manager, server)
 	{
 		_matchClient = new EdenUdpClient(ConfigManager.Config.MatchingServerAddress, ConfigManager.Config.MatchingServerPort);
 	}
 
 	public override void Load()
 	{
-		server.AddEndpoints(this);
+		server.AddEndpoints(this);	
+		// 새 게임 시작시 가비지 수집
+		System.GC.Collect();
 	}
 
 	public override void Destroy()
@@ -29,23 +33,32 @@ public class HomeSession : SessionBase
 	}
 	
 	[EdenResponse]
-	public void CreateCustomGame(PeerId peerId)
+	public Response_CreateCustomGame CreateCustomGame(PeerId peerId)
 	{
-		if (_matchClient.Connect() == ConnectionState.OK)
+		if (_matchClient.Connect() == ConnectionState.Ok)
 		{
 			int lobbyNumber;
 			try
 			{
 				lobbyNumber = _matchClient.Request<int>("CreateLobby");
 			}
+			catch (EdenTimeoutException)
+			{
+				return new Response_CreateCustomGame {ErrorCode = ErrorCode.MatchingServerNotReady, Message = "MatchingServer Timeout"};
+			}
 			catch(Exception e)
 			{
-				Console.WriteLine(e.Message);
-				throw new Exception();
+				return new Response_CreateCustomGame {ErrorCode = ErrorCode.MatchingServerNotReady, Message = e.Message};
 			}
 
-			server.RegisterNatHolePunching(ConfigManager.Config.MatchingServerAddress, ConfigManager.Config.MatchingServerPort, $"host/{lobbyNumber}");
-			sessionManager.ChangeSession<LobbySession>(_matchClient, lobbyNumber);
+			if (lobbyNumber < 0)
+				return new Response_CreateCustomGame {ErrorCode = ErrorCode.NoRoomRemain};
+			
+			((EdenUdpServer)server).RegisterNatHolePunching(ConfigManager.Config.MatchingServerAddress, ConfigManager.Config.MatchingServerPort, $"host/{lobbyNumber}");
+			sessionManager.ChangeSession<LobbySession>(lobbyNumber);
+		
+			return new Response_CreateCustomGame {Message = "OK"};
 		}
+		return new Response_CreateCustomGame {ErrorCode = ErrorCode.MatchingServerNotReady, Message = "Cannot Connect to MatchingServer"};
 	}
 }

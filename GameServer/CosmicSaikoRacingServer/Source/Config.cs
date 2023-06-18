@@ -1,5 +1,7 @@
 ﻿using System.Text.Json;
 
+#pragma warning disable CS8618
+
 namespace CSR;
 
 public class Config

@@ -1,6 +1,6 @@
 ﻿
 using System.Data;
-using CSR.Game.Player;
+using CSR.Game;
 
 namespace CSR.Game.GameObject;
 

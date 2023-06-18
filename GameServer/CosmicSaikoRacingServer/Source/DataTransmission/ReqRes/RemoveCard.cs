@@ -1,13 +1,15 @@
 ﻿using CSR.Game.GameObject;
 using ProtoBuf;
 
+#pragma warning disable CS8618
+
 namespace CSR.DataTransmission;
 
 [ProtoContract]
 public class Request_RemoveCard
 {
     [ProtoMember(1)]
-    public int Index { get; set; }
+    public int Index { get; set; } = -1;
 }
 
 [ProtoContract]

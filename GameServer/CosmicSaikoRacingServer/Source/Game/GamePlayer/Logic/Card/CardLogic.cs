@@ -1,8 +1,7 @@
-﻿
-using CSR.Game.GameObject;
+﻿using CSR.Game.GameObject;
 using CSR.Game.Phase;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 public static class CardLogic
 {
@@ -67,10 +66,10 @@ public static class CardLogic
 	/// <summary>
 	/// 패에서 카드를 사용한다
 	/// </summary>
-	public static bool UseCard(this GamePlayer player, int index, PreheatPhase phase, out GameObject.CardEffectModule.Result[] result)
+	public static bool UseCard(this GamePlayer player, int index, PreheatPhase phase, out CardEffect.Result result)
 	{
 		Card card = player.Card.Hand[index];
-		result = Array.Empty<GameObject.CardEffectModule.Result>();
+		result = new CardEffect.Result();
 		//패에서 카드를 삭제
 		player.Card.Hand.RemoveAt(index);
 		// 카드 사용전 버프 적용
@@ -98,10 +97,10 @@ public static class CardLogic
 	/// <summary>
 	/// 덱에서 카드를 한장 뽑는다
 	/// </summary>
-	public static List<Card>? DrawCard(this GamePlayer player, int count)
+	public static List<Card> DrawCard(this GamePlayer player, int count)
 	{
 		if (count < 0)
-			return null;
+			return new List<Card>();
 		int remainCount = 0;
 
 		List<Card> cards = new List<Card>();
@@ -234,11 +233,11 @@ public static class CardLogic
 	/// <summary>
 	/// 패에서 카드제거와는 다른 "버리기"를 수행한다 
 	/// </summary>
-	public static GameObject.CardEffectModule.Result[] ThrowCard(this GamePlayer player, int index, PreheatPhase phase)
+	public static CardEffect.Result ThrowCard(this GamePlayer player, int index, PreheatPhase phase)
 	{
 		if (index >= player.Card.Hand.Count || index < 0)
 		{
-			return Array.Empty<GameObject.CardEffectModule.Result>();
+			return new CardEffect.Result();
 		}
 
 		Card card = player.Card.Hand[index];

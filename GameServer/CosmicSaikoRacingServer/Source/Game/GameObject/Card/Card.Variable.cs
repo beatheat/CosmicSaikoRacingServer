@@ -13,5 +13,4 @@ public partial class Card
 
 		public Variable Clone() => (Variable) this.MemberwiseClone();
 	}
-
 }

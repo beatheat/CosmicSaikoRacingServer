@@ -5,9 +5,9 @@ namespace CSR;
 public abstract class SessionBase
 {
 	protected readonly SessionManager sessionManager;
-	protected readonly EdenUdpServer server;
+	protected readonly IEdenNetServer server;
 
-	protected SessionBase(SessionManager sessionManager, EdenUdpServer server)
+	protected SessionBase(SessionManager sessionManager, IEdenNetServer server)
 	{
 		this.sessionManager = sessionManager;
 		this.server = server;

@@ -1,9 +1,9 @@
-﻿using CSR.Game.GameObject;
+﻿using CSR.Game;
+using CSR.Game.GameObject;
 using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
-namespace CSR;
+namespace CSR.Game.GameObject;
 
 
 [ProtoContract]

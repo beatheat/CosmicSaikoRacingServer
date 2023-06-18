@@ -1,5 +1,4 @@
-﻿using CSR.Game.Player;
-
+﻿
 namespace CSR.Game.GameObject;
 
 public partial class CardEffectModule

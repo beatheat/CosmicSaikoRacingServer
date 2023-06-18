@@ -1,15 +1,15 @@
 ﻿using CSR.Lobby;
 using ProtoBuf;
 
+#pragma warning disable CS8618
+
 namespace CSR.DataTransmission;
-
-
 
 [ProtoContract]
 public class Request_LobbyLogin
 {
-	[ProtoMember(1)]
-	public string Nickname { get; set; }
+	[ProtoMember(1)] 
+	public string Nickname { get; set; } = "";
 }
 
 [ProtoContract]

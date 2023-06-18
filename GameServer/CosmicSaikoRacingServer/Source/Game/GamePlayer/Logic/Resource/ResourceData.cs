@@ -1,9 +1,9 @@
-﻿
-using CSR.Game.GameObject;
+﻿using CSR.Game.GameObject;
 using ProtoBuf;
 
+#pragma warning disable CS8618
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 [ProtoContract]
 public class ResourceData

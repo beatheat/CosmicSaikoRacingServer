@@ -1,14 +1,15 @@
 ﻿using CSR.Game.GameObject;
 using ProtoBuf;
 
-namespace CSR.DataTransmission;
+#pragma warning disable CS8618
 
+namespace CSR.DataTransmission;
 
 [ProtoContract]
 public class Request_BuyCard
 {
-    [ProtoMember(1)]
-    public int Index { get; set; }
+    [ProtoMember(1)] 
+    public int Index { get; set; } = -1;
 }
 
 [ProtoContract]

@@ -1,15 +1,38 @@
-﻿namespace CSR.Game.GameObject;
+﻿using System.Reflection;
+using CSR.Game.Phase;
 
-public partial class CardEffectModule
+namespace CSR.Game.GameObject;
+
+public abstract partial class CardEffectModule
 {
-	public readonly EffectModule effectModule;
-	public readonly ParameterList parameterList;
+	public readonly ParameterList parameters;
 	public readonly Type type;
 
-	public CardEffectModule(EffectModule effectModule, List<Parameter> parameterList, Type type)
+	protected CardEffectModule(List<Parameter> parameters, Type type)
 	{
-		this.effectModule = effectModule;
-		this.parameterList = new ParameterList(parameterList);
+		this.parameters = new ParameterList(parameters);
 		this.type = type;
+	}
+
+	public abstract Result Activate(PreheatPhase preheatPhase, Card card, GamePlayer player);
+	
+	public static CardEffectModule Create(string moduleName, List<Parameter> parameters)
+	{
+		var baseType = typeof(CardEffectModule);
+		var currentAssembly = Assembly.GetExecutingAssembly();
+		var derivedTypes = currentAssembly.GetTypes().Where(type => type != baseType && baseType.IsAssignableFrom(type)).ToList();
+
+		CardEffectModule? cardEffectModule = null;
+		foreach (var derivedType in derivedTypes)
+		{
+			if (derivedType.Name == moduleName)
+			{
+				cardEffectModule = (CardEffectModule) Activator.CreateInstance(derivedType, parameters)!;
+			}
+		}
+
+		if (cardEffectModule == null)
+			throw new Exception("There is no Effect Module with such a name : "  + moduleName);
+		return cardEffectModule;
 	}
 }

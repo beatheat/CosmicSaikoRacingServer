@@ -1,6 +1,6 @@
 ﻿using CSR.Game.GameObject;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 
 public static class DepartLogic
@@ -18,16 +18,16 @@ public static class DepartLogic
 		player.Depart.events.Enqueue(departEvent);
 	}
 
-	public static void DepartOnTurnStart(this GamePlayer player, out CardEffectModule.Result[] attackResult)
+	public static void DepartOnTurnStart(this GamePlayer player, out CardEffect.Result attackResult)
 	{
 		//발진 페이즈 시 발생할 공격정보를 보여준다
-		CardEffectModule.Result[] _attackResult = new CardEffectModule.Result[player.Depart.events.Count];
+		var turnEndEventResults = new List<CardEffectModule.Result>();
 		for (int idx = 0; player.Depart.events.Count > 0; idx++)
 		{
 			var turnEndEvent = player.Depart.events.Dequeue();
-			_attackResult[idx] = turnEndEvent();
+			turnEndEventResults.Add(turnEndEvent());
 		}
 
-		attackResult = _attackResult;
+		attackResult = new CardEffect.Result(turnEndEventResults);
 	}
 }

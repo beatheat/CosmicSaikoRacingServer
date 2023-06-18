@@ -1,7 +1,7 @@
 ﻿using CSR.Game.GameObject;
 using CSR.Game.Phase;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 public static class BuffLogic
 {
@@ -66,12 +66,12 @@ public static class BuffLogic
 	}
 
 	//false반환시 카드 사용 불가
-	public static bool BuffBeforeUseCard(this GamePlayer player, Card card, ref CardEffectModule.Result[] results)
+	public static bool BuffBeforeUseCard(this GamePlayer player, Card card, ref CardEffect.Result result)
 	{
 		bool check = true;
 		foreach (var buff in player.Buff.List)
 		{
-			check = check && buff.BeforeUseCard(card, ref results);
+			check = check && buff.BeforeUseCard(card, ref result);
 		}
 
 		return check;

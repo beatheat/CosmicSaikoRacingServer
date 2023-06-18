@@ -1,7 +1,9 @@
 ﻿using CSR.Game.GameObject;
 using ProtoBuf;
 
-namespace CSR.Game.Player;
+#pragma warning disable CS8618
+
+namespace CSR.Game;
 
 [ProtoContract]
 public class CardData

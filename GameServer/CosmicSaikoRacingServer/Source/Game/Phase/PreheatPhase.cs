@@ -1,6 +1,6 @@
-﻿using CSR.DataTransmission;
+﻿using CSR.Game;
+using CSR.DataTransmission;
 using CSR.Game.GameObject;
-using CSR.Game.Player;
 using EdenNetwork;
 
 namespace CSR.Game.Phase;
@@ -9,7 +9,7 @@ public class PreheatPhase
 {
     private const int INITIAL_TIME = 99;
     
-    private readonly EdenUdpServer _server;
+    private readonly IEdenNetServer _server;
     private readonly GameSession _parent;
 
     private Timer? _timer;
@@ -18,7 +18,7 @@ public class PreheatPhase
     
     private object _turnEndLock;
 
-    public PreheatPhase(GameSession parent, EdenUdpServer server)
+    public PreheatPhase(GameSession parent, IEdenNetServer server)
     {
         _server = server;
         _parent = parent;
@@ -62,7 +62,7 @@ public class PreheatPhase
             });
         }
 
-        _timer = new Timer(GameTimer, null, 0, 1000);
+        // _timer = new Timer(GameTimer, null, 0, 1000);
     }
 
     /// <summary>
@@ -153,7 +153,7 @@ public class PreheatPhase
         if (!player.UseCard(request.Index, this, out var results))
             return new Response_UseCard{ErrorCode = ErrorCode.UseCard_CardRestrictedByBuff};
         
-        return new Response_UseCard {Player = player, Results = results};
+        return new Response_UseCard {Player = player, Result = results};
     }
 
     /// <summary>
@@ -163,10 +163,10 @@ public class PreheatPhase
     private Response_RerollResource RerollResource(PeerId clientId, Request_RerollResource request)
     {
         var player = _parent.PlayerList.Find(player => player.clientId == clientId);
-        
+
         if (player == null)
             return new Response_RerollResource {ErrorCode = ErrorCode.PlayerNotExist};
-        
+
         if (player.PhaseReady)
             return new Response_RerollResource{ErrorCode = ErrorCode.PlayerTurnEnd};
 
@@ -174,6 +174,7 @@ public class PreheatPhase
         //     return new Response_RerollResource {ErrorCode = ErrorCode.MissingPacketData};
         
         var result = player.RerollResource(request.ResourceFixed);
+
         if (result == null)
             return new Response_RerollResource {ErrorCode = ErrorCode.RerollResource_RerollCountZero};
         

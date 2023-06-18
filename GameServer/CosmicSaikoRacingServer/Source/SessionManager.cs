@@ -7,9 +7,9 @@ public class SessionManager
 {
 	private const int MAX_PLAYER_NUMBER = 4;
 	
-	private readonly EdenUdpServer _server;
+	private readonly IEdenNetServer _server;
 
-	private SessionBase _currentSession;
+	private SessionBase _currentSession = null!;
 	
 	public SessionManager()
 	{
@@ -45,7 +45,7 @@ public class SessionManager
 
 	private SessionBase CreateSession<T>(params object[] parameters) where T : SessionBase
 	{
-		var parameterTypes = new[] {typeof(SessionManager), typeof(EdenUdpServer)};
+		var parameterTypes = new[] {typeof(SessionManager), typeof(IEdenNetServer)};
 		
 		foreach (var param in parameters)
 		{

@@ -1,7 +1,8 @@
 ﻿using CSR.Game.GameObject;
 
-namespace CSR.Game.Player;
+#pragma warning disable CS8618
 
+namespace CSR.Game;
 
 public delegate CardEffectModule.Result DepartEvent();
 

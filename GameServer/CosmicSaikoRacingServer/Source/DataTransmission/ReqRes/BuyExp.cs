@@ -1,5 +1,6 @@
 ﻿using ProtoBuf;
 
+
 namespace CSR.DataTransmission;
 
 [ProtoContract]

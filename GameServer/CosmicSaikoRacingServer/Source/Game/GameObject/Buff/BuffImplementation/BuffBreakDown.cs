@@ -1,5 +1,4 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
 namespace CSR.Game.GameObject;
@@ -15,7 +14,7 @@ internal class BuffBreakDown : Buff
 	/// <summary>
 	/// 고장 버프: 카드 사용하기 전 50%확률로 카드가 불발한다
 	/// </summary>
-	public override bool BeforeUseCard(Card card, ref CardEffectModule.Result[] results)
+	public override bool BeforeUseCard(Card card, ref CardEffect.Result result)
 	{
 		//고장(BREAK_DOWN)버프
 		if (Count > 0)

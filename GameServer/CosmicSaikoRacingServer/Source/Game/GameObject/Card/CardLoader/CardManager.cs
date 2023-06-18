@@ -48,10 +48,6 @@ internal static class CardManager
 	public static void Load(string path)
 	{
 		if (_isLoaded) return;
-		Logger.Log("Card effect module is loading...");
-		//이펙트 모듈을 로드
-		EffectModuleManager.Load();
-		Logger.LogWithClear("Card effect module is loaded");
 		_cards.Clear();
 
 		Logger.Log($"Card data is loading on {path} ...");
@@ -85,6 +81,7 @@ internal static class CardManager
 			CardEffect effect;
 			Dictionary<string, Card.Variable> variables = new Dictionary<string, Card.Variable>();
 			bool death;
+			
 			try
 			{
 				if (jsonId == null || !int.TryParse(jsonId.ToString(), out id))
@@ -274,9 +271,6 @@ internal static class CardManager
 				continue;
 			string moduleName = effectModuleString.Substring(0, delimiterIndex);
 
-			if (!EffectModuleManager.TryGet(moduleName, out var module, out var type))
-				throw new Exception($"CardManager::ParseEffect - {moduleName} is not parsable on module");
-
 			// 이펙 모듈 파라미터 파싱
 			string parameterListString = effectModuleString.Substring(delimiterIndex);
 			var parameterStringSplit = SplitEffectParameter(parameterListString);
@@ -341,13 +335,15 @@ internal static class CardManager
 				}
 			}
 
-			cardEffectModules.Add(new CardEffectModule(module, parameters, type));
+			cardEffectModules.Add(CardEffectModule.Create(moduleName,parameters));
 		}
 
 		if (cardEffectModules.Count == 0)
 			return CardEffect.Nothing();
 		return new CardEffect(cardEffectModules);
 
+		
+		
 		string[] SplitEffectModule(string moduleString)
 		{
 			string stringSplitByAt = "";

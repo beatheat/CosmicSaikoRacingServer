@@ -1,6 +1,5 @@
 ﻿using CSR.DataTransmission;
 using CSR.Game.GameObject;
-using CSR.Game.Player;
 using EdenNetwork;
 
 namespace CSR.Game.Phase;
@@ -9,7 +8,7 @@ public class MaintainPhase
 {
     private const int INITIAL_TIME = 99;
     private readonly GameSession _parent;
-    private readonly EdenUdpServer _server;
+    private readonly IEdenNetServer _server;
 
     private Timer? _timer;
     private int _time;
@@ -17,7 +16,7 @@ public class MaintainPhase
 
     private object _turnEndLock;
     
-    public MaintainPhase(GameSession parent, EdenUdpServer server)
+    public MaintainPhase(GameSession parent, IEdenNetServer server)
     {
         this._server = server;
         this._parent = parent;
@@ -36,7 +35,7 @@ public class MaintainPhase
         _server.AddEndpoints(this);
 
         _time = INITIAL_TIME;
-        _turnEnd = false;
+        _turnEnd = false;   
         //정비 페이즈 구성요소 클라이언트와 동기화
         foreach (var player in _parent.PlayerList)
         {
@@ -48,7 +47,7 @@ public class MaintainPhase
             });
         }
 
-        _timer = new Timer(GameTimer, null, 0, 1000);
+        // _timer = new Timer(GameTimer, null, 0, 1000);
     }
 
     /// <summary>

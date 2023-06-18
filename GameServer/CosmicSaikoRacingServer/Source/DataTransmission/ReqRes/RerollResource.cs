@@ -1,12 +1,15 @@
-﻿using CSR.Game.Player;
+﻿using CSR.Game;
 using ProtoBuf;
+
+#pragma warning disable CS8618
 
 namespace CSR.DataTransmission;
 
 [ProtoContract]
 public class Request_RerollResource
 {
-	public List<int> ResourceFixed { get; set; }
+	[ProtoMember(1)]
+	public List<int> ResourceFixed { get; set; } = new List<int>();
 }
 
 [ProtoContract]

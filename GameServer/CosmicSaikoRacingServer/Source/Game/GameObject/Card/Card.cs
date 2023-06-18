@@ -1,11 +1,9 @@
-﻿using System.Text.Json.Serialization;
-using CSR.Game.GameObject;
-using ProtoBuf;
+﻿using ProtoBuf;
+
+#pragma warning disable CS8618
 
 namespace CSR.Game.GameObject;
 
-
-// [JsonConverter(typeof(CardJsonConverter))]
 [ProtoContract]
 public partial class Card
 {

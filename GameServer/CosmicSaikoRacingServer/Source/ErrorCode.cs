@@ -2,12 +2,15 @@
 
 public enum ErrorCode : ushort
 {
-	// Global 0 ~ 99
+	// Global 0 ~ 49
 	None = 0,
 	PlayerNotExist = 1,
 	PlayerTurnEnd = 2,
 	MissingPacketData = 3,
 	
+	// Home 50 ~ 99
+	MatchingServerNotReady = 50,
+	NoRoomRemain = 51,
 	
 	// PreheatPhase 100 ~ 199
 	// UseCard 110 ~

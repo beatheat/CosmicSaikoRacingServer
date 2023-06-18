@@ -2,7 +2,7 @@
 using CSR.Game.Phase;
 using EdenNetwork;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 public partial class GamePlayer
 {
@@ -21,12 +21,15 @@ public partial class GamePlayer
             this.parent = parent;
             this.Rank = 1;
 
+            Buff = new BuffData();
             this.InitBuff(preheatPhase);
+            Resource = new ResourceData();
             this.InitResource();
+            Card = new CardData();
             this.InitCard();
-
+            Depart = new DepartData();
             this.InitDepart();
-            
+            Maintain = new MaintainData();
             this.InitMaintain();
 
             
@@ -50,7 +53,7 @@ public partial class GamePlayer
             int randomNumber = random.Next(7);
             for (int i = 0; i < 10; i++)
             {
-                this.AddCardToDeck(CardManager.GetCard(0));
+                this.AddCardToDeck(CardManager.GetCard(card[randomNumber,i]));
             }
         }
 
@@ -60,9 +63,7 @@ public partial class GamePlayer
         public GamePlayer CloneForMonitor()
         {
             GamePlayer hidePlayer = (GamePlayer)this.MemberwiseClone();
-            hidePlayer.Card.Deck = null!;
-            hidePlayer.Card.Used = null!;
-            hidePlayer.Card.Unused = null!;
+            hidePlayer.Card = new CardData();
             return hidePlayer;
         }
         
@@ -73,7 +74,7 @@ public partial class GamePlayer
         {
             PhaseReady = false;
 
-            this.CardOnTurnEnd();
+            this.CardOnTurnStart();
             this.ResourceOnTurnStart();
             
             this.BuffOnPreheatStart();
@@ -91,7 +92,7 @@ public partial class GamePlayer
         /// <summary>
         /// 발진 페이즈 시작시 공격 후 이동거리를 늘린다
         /// </summary>
-        public void DepartStart(out CardEffectModule.Result[] attackResult)
+        public void DepartStart(out CardEffect.Result attackResult)
         {
             PhaseReady = false;
             //버프 적용

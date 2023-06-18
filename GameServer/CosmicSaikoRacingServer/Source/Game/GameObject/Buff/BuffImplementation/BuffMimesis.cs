@@ -1,5 +1,4 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
 namespace CSR.Game.GameObject;
@@ -70,7 +69,7 @@ internal class BuffMimesis : Buff
 	/// <summary>
 	/// 카드 사용 시 의태한 카드면 의태버프스택 1 감소한다
 	/// </summary>
-	public override bool BeforeUseCard(Card card, ref CardEffectModule.Result[] results)
+	public override bool BeforeUseCard(Card card, ref CardEffect.Result result)
 	{
 		if (Count > 0 && card.IsMimesis)
 		{

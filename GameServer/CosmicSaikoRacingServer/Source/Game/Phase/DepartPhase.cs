@@ -1,6 +1,5 @@
 ﻿using CSR.DataTransmission;
 using CSR.Game.GameObject;
-using CSR.Game.Player;
 using EdenNetwork;
 
 namespace CSR.Game.Phase;
@@ -9,7 +8,7 @@ public class DepartPhase
 {
     private const int INITIAL_TIME = 99;
     private readonly GameSession _parent;
-    private readonly EdenUdpServer _server;
+    private readonly IEdenNetServer _server;
 
     private Timer? _timer;
     private int _time;
@@ -17,7 +16,7 @@ public class DepartPhase
 
     private object _turnEndLock;
 
-	public DepartPhase(GameSession parent, EdenUdpServer server)
+	public DepartPhase(GameSession parent, IEdenNetServer server)
 	{
 		this._server = server;
 		this._parent = parent;
@@ -50,12 +49,12 @@ public class DepartPhase
 		
 		_time = INITIAL_TIME;
 		_turnEnd = false;
-		var attackResults = new List<CardEffectModule.Result>();
+		var attackResult = new CardEffect.Result();
 
 		foreach (var player in _parent.PlayerList)
 		{
-			player.DepartStart(out var attackResult);
-			attackResults.AddRange(attackResult);
+			player.DepartStart(out var individualAttackResult);
+			attackResult.Concat(individualAttackResult);
 		}
 
 		
@@ -65,7 +64,7 @@ public class DepartPhase
 			_server.Send("DepartStart", player.clientId, new Packet_DepartStart
 			{
 				PlayerList = _parent.GetMonitorPlayerList(),
-				AttackResults = attackResults
+				AttackResult = attackResult
 			});
 
 		}

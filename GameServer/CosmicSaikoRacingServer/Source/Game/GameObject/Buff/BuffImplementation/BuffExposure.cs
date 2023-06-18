@@ -1,5 +1,4 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
 namespace CSR.Game.GameObject;
@@ -100,7 +99,7 @@ internal class BuffExposure : Buff
 	/// <summary>
 	/// 사용한 카드가 피폭된 카드라면 피폭버프스택 1감소
 	/// </summary>
-	public override bool BeforeUseCard(Card card, ref CardEffectModule.Result[] results)
+	public override bool BeforeUseCard(Card card, ref CardEffect.Result result)
 	{
 		if (Count > 0 && card.IsExposure)
 		{

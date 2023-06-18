@@ -1,7 +1,6 @@
-﻿
-using CSR.Game.GameObject;
+﻿using CSR.Game.GameObject;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 public static class ResourceLogic
 {
@@ -13,7 +12,6 @@ public static class ResourceLogic
 
 	public static void InitResource(this GamePlayer player)
 	{
-
 		player.Resource.Reel = new List<ResourceType>();
 		player.Resource.AvailableRerollCount = INITIAL_REROLL_COUNT;
 		player.Resource.RerollCount = INITIAL_REROLL_COUNT;

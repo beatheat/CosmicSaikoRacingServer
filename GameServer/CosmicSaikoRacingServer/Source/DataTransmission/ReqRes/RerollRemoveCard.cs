@@ -1,6 +1,8 @@
 ﻿using CSR.Game.GameObject;
 using ProtoBuf;
 
+#pragma warning disable CS8618
+
 namespace CSR.DataTransmission;
 
 [ProtoContract]

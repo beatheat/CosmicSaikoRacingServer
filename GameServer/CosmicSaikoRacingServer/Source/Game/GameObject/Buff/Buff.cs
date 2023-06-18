@@ -1,18 +1,17 @@
 ﻿using CSR.Game.Phase;
-using CSR.Game.Player;
 using ProtoBuf;
 
 namespace CSR.Game.GameObject;
 
 [ProtoContract]
-[ProtoInclude(1, typeof(BuffBreakDown))]
-[ProtoInclude(2, typeof(BuffElectricLeak))]
-[ProtoInclude(3, typeof(BuffExposure))]
-[ProtoInclude(4, typeof(BuffHighDensity))]
-[ProtoInclude(5, typeof(BuffHighEfficiency))]
-[ProtoInclude(6, typeof(BuffMimesis))]
-[ProtoInclude(7, typeof(BuffProliferation))]
-[ProtoInclude(8, typeof(BuffRefine))]
+[ProtoInclude(10, typeof(BuffBreakDown))]
+[ProtoInclude(11, typeof(BuffElectricLeak))]
+[ProtoInclude(12, typeof(BuffExposure))]
+[ProtoInclude(13, typeof(BuffHighDensity))]
+[ProtoInclude(14, typeof(BuffHighEfficiency))]
+[ProtoInclude(15, typeof(BuffMimesis))]
+[ProtoInclude(16, typeof(BuffProliferation))]
+[ProtoInclude(17, typeof(BuffRefine))]
 public class Buff
 {
 
@@ -41,7 +40,7 @@ public class Buff
 	public virtual void OnPreheatStart() { }
 	public virtual void OnPreheatEnd() { Release(); }
 
-	public virtual bool BeforeUseCard(Card card, ref CardEffectModule.Result[] results) { return true;}
+	public virtual bool BeforeUseCard(Card card, ref CardEffect.Result result) { return true;}
 	public virtual void AfterUseCard(Card card){}
 	public virtual void BeforeRerollResource(ref List<int>? resourceFixed){}
 	public virtual void AfterRerollResource(List<int>? resourceFixed){ }

@@ -1,7 +1,7 @@
 ﻿using EdenNetwork;
 using ProtoBuf;
 
-namespace CSR.Game.Player;
+namespace CSR.Game;
 
 [ProtoContract]
 public partial class GamePlayer
@@ -36,17 +36,19 @@ public partial class GamePlayer
 	//경험치
 	[ProtoMember(8)] public int Exp { get; set; }
 
+	[ProtoMember(9)] public int ExpLimit { get; set; }
+	
 	//레벨
-	[ProtoMember(9)] public int Level { get; set; }
+	[ProtoMember(10)] public int Level { get; set; }
 
-	[ProtoMember(10)] public CardData Card { get; set; }
-
-	[ProtoMember(11)] public ResourceData Resource { get; set; }
-
-	[ProtoMember(12)] public BuffData Buff { get; set; }
-
-	[ProtoMember(13)] public DepartData Depart { get; set; }
-
+	[ProtoMember(11)] public CardData Card { get; set; }
+	
+	[ProtoMember(12)] public ResourceData Resource { get; set; }
+	
+	[ProtoMember(13)] public BuffData Buff { get; set; }
+	
 	[ProtoMember(14)] public MaintainData Maintain { get; set; }
 	
+	public DepartData Depart { get; set; }
+
 }
